@@ -1113,7 +1113,7 @@ extern int (*CNWSCreature__GetMaxHitPoints)(CNWSCreature *, int32_t);
 extern int (*CNWSCreature__GetMode)(CNWSCreature *, uint8_t);
 extern int (*CNWSCreature__GetModelType)(CNWSCreature *);
 extern int (*CNWSCreature__GetMovementRateFactor)(CNWSCreature *);
-extern int (*CNWSCreature__GetNearestEnemy)(CNWSCreature *, float, uint32_t, int32_t, int32_t);
+extern uint32_t (*CNWSCreature__GetNearestEnemy)(CNWSCreature *, float, uint32_t, int32_t, int32_t);
 extern int (*CNWSCreature__GetNoPermDeath)(CNWSCreature *);
 extern int (*CNWSCreature__GetNonPolymorphCONBase)(CNWSCreature *);
 extern int (*CNWSCreature__GetNonPolymorphDEXBase)(CNWSCreature *);
