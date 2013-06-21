@@ -584,6 +584,7 @@
 #include "nwn_const_feats.h"
 #include "nwn_const_spells.h"
 #include "nwn_const_vfx.h"
+#include "nwn_const_itemprop.h"
 
 #endif /* _NX_NWN_CONST_H_ */
 
