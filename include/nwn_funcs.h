@@ -717,7 +717,7 @@ extern int (*CNWSCombatRound__DecrementRoundLength)(CNWSCombatRound *, int32_t, 
 extern int (*CNWSCombatRound__EndCombatRound)(CNWSCombatRound *);
 extern int (*CNWSCombatRound__GetAction)(CNWSCombatRound *);
 extern int (*CNWSCombatRound__GetActionPending)(CNWSCombatRound *);
-extern int (*CNWSCombatRound__GetAttack)(CNWSCombatRound *, int32_t);
+extern CNWSCombatAttackData *(*CNWSCombatRound__GetAttack)(CNWSCombatRound *, int32_t);
 extern int (*CNWSCombatRound__GetAttackActionPending)(CNWSCombatRound *);
 extern int (*CNWSCombatRound__GetCombatStepRequired)(CNWSCombatRound *, uint32_t);
 extern CNWSItem *(*CNWSCombatRound__GetCurrentAttackWeapon)(CNWSCombatRound *, int32_t);
