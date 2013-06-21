@@ -128,6 +128,7 @@ struct CNWSQuickbarButton_s;              typedef struct CNWSQuickbarButton_s   
 struct CNWSScriptVarTable_s;              typedef struct CNWSScriptVarTable_s              CNWSScriptVarTable;
 struct CNWSSoundObjectTimeOfDay_s;        typedef struct CNWSSoundObjectTimeOfDay_s        CNWSSoundObjectTimeOfDay;
 struct CNWSSoundObject_s;                 typedef struct CNWSSoundObject_s                 CNWSSoundObject;
+struct CNWSSpellScriptData_s;             typedef struct CNWSSpellScriptData_s             CNWSSpellScriptData;
 struct CNWSStats_FeatUses_s;              typedef struct CNWSStats_FeatUses_s              CNWSStats_FeatUses;
 struct CNWSStats_Level_s;                 typedef struct CNWSStats_Level_s                 CNWSStats_Level;
 struct CNWSStats_SpecAbil_s;              typedef struct CNWSStats_SpecAbil_s              CNWSStats_SpecAbil;
@@ -256,6 +257,7 @@ struct Vector_s;                          typedef struct Vector_s               
 #include "structs/CNWVirtualMachineImplementation.h"
 #include "structs/CNWVisibilityNode.h"
 
+#include "structs/CNWSSpellScriptData.h"
 #include "structs/CNWSStats_FeatUses.h"
 #include "structs/CNWSStats_Level.h"
 #include "structs/CNWSStats_SpecAbil.h"
