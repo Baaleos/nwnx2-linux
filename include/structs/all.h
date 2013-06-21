@@ -121,6 +121,8 @@ struct CNWSPlayerLUOSortedObjectList_s;   typedef struct CNWSPlayerLUOSortedObje
 struct CNWSPlayerLastUpdateObject_s;      typedef struct CNWSPlayerLastUpdateObject_s      CNWSPlayerLastUpdateObject;
 struct CNWSPlayerTURD_s;                  typedef struct CNWSPlayerTURD_s                  CNWSPlayerTURD;
 struct CNWSPlayer_s;                      typedef struct CNWSPlayer_s                      CNWSPlayer;
+struct CNWSPVPEntryList_s;                typedef struct CNWSPVPEntryList_s                CNWSPVPEntryList;
+struct CNWSPVPEntry_s;                    typedef struct CNWSPVPEntry_s                    CNWSPVPEntry;
 struct CNWSQuickbarButton_s;              typedef struct CNWSQuickbarButton_s              CNWSQuickbarButton;
 struct CNWSScriptVarTable_s;              typedef struct CNWSScriptVarTable_s              CNWSScriptVarTable;
 struct CNWSSoundObjectTimeOfDay_s;        typedef struct CNWSSoundObjectTimeOfDay_s        CNWSSoundObjectTimeOfDay;
@@ -296,6 +298,8 @@ struct Vector_s;                          typedef struct Vector_s               
 #include "structs/CNWSPlayerLUOSortedObjectList.h"
 #include "structs/CNWSPlayerLastUpdateObject.h"
 #include "structs/CNWSPlayerTURD.h"
+#include "structs/CNWSPVPEntry.h"
+#include "structs/CNWSPVPEntryList.h"
 #include "structs/CNWSQuickbarButton.h"
 #include "structs/CNWSSoundObject.h"
 #include "structs/CNWSSoundObjectTimeOfDay.h"
