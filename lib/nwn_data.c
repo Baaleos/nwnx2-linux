@@ -719,7 +719,7 @@ int (*CNWSCombatRound__DecrementRoundLength)(CNWSCombatRound *, int32_t, int32_t
 int (*CNWSCombatRound__EndCombatRound)(CNWSCombatRound *) = NULL;
 int (*CNWSCombatRound__GetAction)(CNWSCombatRound *) = NULL;
 int (*CNWSCombatRound__GetActionPending)(CNWSCombatRound *) = NULL;
-int (*CNWSCombatRound__GetAttack)(CNWSCombatRound *, int32_t) = NULL;
+CNWSCombatAttackData *(*CNWSCombatRound__GetAttack)(CNWSCombatRound *, int32_t) = NULL;
 int (*CNWSCombatRound__GetAttackActionPending)(CNWSCombatRound *) = NULL;
 int (*CNWSCombatRound__GetCombatStepRequired)(CNWSCombatRound *, uint32_t) = NULL;
 CNWSItem *(*CNWSCombatRound__GetCurrentAttackWeapon)(CNWSCombatRound *, int32_t) = NULL;
