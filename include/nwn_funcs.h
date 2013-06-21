@@ -728,7 +728,7 @@ extern int (*CNWSCombatRound__GetOffHandAttack)(CNWSCombatRound *);
 extern int (*CNWSCombatRound__GetSpecialAttack)(CNWSCombatRound *, int32_t);
 extern int (*CNWSCombatRound__GetSpecialAttackID)(CNWSCombatRound *, int32_t);
 extern int (*CNWSCombatRound__GetSpellActionPending)(CNWSCombatRound *);
-extern int (*CNWSCombatRound__GetTotalAttacks)(CNWSCombatRound *);
+extern int8_t (*CNWSCombatRound__GetTotalAttacks)(CNWSCombatRound *);
 extern int (*CNWSCombatRound__GetWeaponAttackType)(CNWSCombatRound *);
 extern int (*CNWSCombatRound__HasCreatureWeapons)(CNWSCombatRound *);
 extern int (*CNWSCombatRound__IncrementTimer)(CNWSCombatRound *, int32_t);
