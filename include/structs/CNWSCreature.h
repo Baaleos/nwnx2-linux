@@ -410,7 +410,7 @@ struct CNWSCreature_s {
 
     uint32_t                    cre_activity_locked;    /* 0B1C */
 
-    uint32_t                    field_B20;
+    float                       cre_move_rate;          /* 0B20 */
 
     float                       cre_drivemode_factor;   /* 0B24 */
 
@@ -441,7 +441,7 @@ struct CNWSCreature_s {
     CExoArrayList_uint32       *cre_reputation_personal;/* 0B5C */
     CExoArrayList_uint32       *cre_reputation;         /* 0B60 */
 
-    CExoArrayList_uint32       *cre_pvp;                /* 0B64 */
+    CNWSPVPEntryList           *cre_pvp;                /* 0B64 */ /* CNWSPVPEntry */
 
     nwn_objid_t                 cre_encounter_obj;      /* 0B68 */
     uint32_t                    cre_encounter_already;  /* 0B6C */
@@ -513,25 +513,9 @@ struct CNWSCreature_s {
     uint32_t                    cre_is_polymorphing;    /* 0C20 */
     uint32_t                    cre_poly_locked;        /* 0C24 */
 
-    uint32_t                    cre_appearance;         /* 0C28 */
-
-    uint32_t                    field_C2C;
-    uint32_t                    field_C30;
-    uint32_t                    field_C34;
-    uint32_t                    field_C38;
-    uint32_t                    field_C3C;
-    uint32_t                    field_C40;
-    uint32_t                    field_C44;
-    uint32_t                    field_C48;
-    uint32_t                    field_C4C;
-    uint32_t                    field_C50;
-    uint32_t                    field_C54;
-    uint32_t                    field_C58;
-    uint32_t                    field_C5C;
-    uint32_t                    field_C60;
-    uint32_t                    field_C64;
-
-    CNWSCreatureStats          *cre_stats;              /* 0C68 */
+    CNWSCreatureAppearanceInfo  cre_appearance_info;
+    
+    CNWSCreatureStats           *cre_stats;             /* 0C68 */
 };
 
 #endif /* _NX_NWN_STRUCT_CNWSCREATURE_ */
