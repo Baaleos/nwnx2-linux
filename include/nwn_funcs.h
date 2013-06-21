@@ -420,7 +420,7 @@ extern int (*CNWMessage__WriteBOOL)(CNWMessage *, int32_t);
 extern int (*CNWMessage__WriteBYTE)(CNWMessage *, uint8_t, int32_t);
 extern int (*CNWMessage__WriteBit)(CNWMessage *, uint8_t);
 extern int (*CNWMessage__WriteBits)(CNWMessage *, uint64_t, int32_t);
-extern int (*CNWMessage__WriteCExoString)(CNWMessage *, CExoString, int32_t);
+extern int (*CNWMessage__WriteCExoString)(CNWMessage *, char **, int32_t);
 extern int (*CNWMessage__WriteCHAR)(CNWMessage *, int8_t, int32_t);
 extern int (*CNWMessage__WriteCResRef)(CNWMessage *, CResRef, int32_t);
 extern int (*CNWMessage__WriteDOUBLE_1)(CNWMessage *, double, double, double, int32_t);
