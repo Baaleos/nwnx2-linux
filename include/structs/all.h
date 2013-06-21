@@ -24,6 +24,7 @@
 #ifndef _NX_NWN_STRUCT_ALL_
 #define _NX_NWN_STRUCT_ALL_
 
+struct CResRef_s;                         typedef struct CResRef_s                         CResRef;
 struct C2DA_s;                            typedef struct C2DA_s                            C2DA;
 struct CAppManager_s;                     typedef struct CAppManager_s                     CAppManager;
 struct CBaseExoApp_s;                     typedef struct CBaseExoApp_s                     CBaseExoApp;
@@ -157,7 +158,6 @@ struct CResNCS_s;                         typedef struct CResNCS_s              
 struct CResNDB_s;                         typedef struct CResNDB_s                         CResNDB;
 struct CResNSS_s;                         typedef struct CResNSS_s                         CResNSS;
 struct CResPWK_s;                         typedef struct CResPWK_s                         CResPWK;
-struct CResRef_s;                         typedef struct CResRef_s                         CResRef;
 struct CResSET_s;                         typedef struct CResSET_s                         CResSET;
 struct CResStruct_s;                      typedef struct CResStruct_s                      CResStruct;
 struct CResTGA_s;                         typedef struct CResTGA_s                         CResTGA;
@@ -187,7 +187,7 @@ struct Vector_s;                          typedef struct Vector_s               
 
 
 #include "structs/Vector.h"
-
+#include "structs/CResRef.h"
 #include "structs/CExoString.h"
 #include "structs/CExoStringList.h"
 #include "structs/CExoLocString.h"
@@ -324,7 +324,6 @@ struct Vector_s;                          typedef struct Vector_s               
 #include "structs/CResNDB.h"
 #include "structs/CResNSS.h"
 #include "structs/CResPWK.h"
-#include "structs/CResRef.h"
 #include "structs/CResSET.h"
 #include "structs/CResStruct.h"
 #include "structs/CResTGA.h"
