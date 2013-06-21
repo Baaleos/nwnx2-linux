@@ -580,6 +580,34 @@
 #define ITEM_APPR_ARMOR_MODEL_LHAND                       17
 #define ITEM_APPR_ARMOR_MODEL_ROBE                        18
 
+#define EVENT_TIMED_EVENT                                 1
+#define EVENT_ENTERED_TRIGGER                             2
+#define EVENT_LEFT_TRIGGER                                3
+#define EVENT_REMOVE_FROM_AREA                            4
+#define EVENT_APPLY_EFFECT                                5
+#define EVENT_CLOSE_OBJECT                                6
+#define EVENT_OPEN_OBJECT                                 7
+#define EVENT_SPELL_IMPACT                                8
+#define EVENT_PLAY_ANIMATION                              9
+#define EVENT_SIGNAL_EVENT                                10
+#define EVENT_DESTROY_OBJECT                              11
+#define EVENT_UNLOCK_OBJECT                               12
+#define EVENT_LOCK_OBJECT                                 13
+#define EVENT_REMOVE_EFFECT                               14
+#define EVENT_ON_MELEE_ATTACKED                           15
+#define EVENT_DECREMENT_STACKSIZE                         16
+#define EVENT_SPAWN_BODY_BAG                              17
+#define EVENT_FORCED_ACTION                               18
+#define EVENT_ITEM_ON_HIT_SPELL_IMPACT                    19
+#define EVENT_BROADCAST_AOO                               20
+#define EVENT_BROADCAST_SAFE_PROJECTILE                   21
+#define EVENT_FEEDBACK_MESSAGE                            22
+#define EVENT_ABILITY_EFFECT_APPLIED                      23
+#define EVENT_SUMMON_CREATURE                             24
+#define EVENT_ACQUIRE_ITEM                                25
+#define EVENT_WHIRLWIND_ATTACK                            26
+#define EVENT_BOOT_PC                                     27
+
 
 #include "nwn_const_feats.h"
 #include "nwn_const_spells.h"
