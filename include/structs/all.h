@@ -168,6 +168,7 @@ struct CServerAIMaster_s;                 typedef struct CServerAIMaster_s      
 struct CServerInfo_s;                     typedef struct CServerInfo_s                     CServerInfo;
 struct CServerExoAppInternal_s;           typedef struct CServerExoAppInternal_s           CServerExoAppInternal;
 struct CServerExoApp_s;                   typedef struct CServerExoApp_s                   CServerExoApp;
+struct CSpawnPoint_s;                     typedef struct CSpawnPoint_s                       CSpawnPoint;
 struct CTlkFile_s;                        typedef struct CTlkFile_s                        CTlkFile;
 struct CTlkTableToken_s;                  typedef struct CTlkTableToken_s                  CTlkTableToken;
 struct CTlkTable_s;                       typedef struct CTlkTable_s                       CTlkTable;
@@ -274,6 +275,7 @@ struct Vector_s;                          typedef struct Vector_s               
 #include "structs/CNWSDoor.h"
 #include "structs/CNWSDungeonMaster.h"
 #include "structs/CNWSEffectListHandler.h"
+#include "structs/CSpawnPoint.h"
 #include "structs/CNWSEncounter.h"
 #include "structs/CNWSFaction.h"
 #include "structs/CNWSForcedAction.h"
