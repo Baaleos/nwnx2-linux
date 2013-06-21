@@ -61,6 +61,7 @@ struct CExoString_s;                      typedef struct CExoString_s           
 struct CExoTimers_s;                      typedef struct CExoTimers_s                      CExoTimers;
 struct CExtendedServerInfo_s;             typedef struct CExtendedServerInfo_s             CExtendedServerInfo;
 struct CFactionManager_s;                 typedef struct CFactionManager_s                 CFactionManager;
+struct CFeatUseListEntry_s;               typedef struct CFeatUseListEntry_s               CFeatUseListEntry;
 struct CGameEffectListHandler_s;          typedef struct CGameEffectListHandler_s          CGameEffectListHandler;
 struct CGameEffect_s;                     typedef struct CGameEffect_s                     CGameEffect;
 struct CGameObjectArray_s;                typedef struct CGameObjectArray_s                CGameObjectArray;
@@ -214,6 +215,7 @@ struct Vector_s;                          typedef struct Vector_s               
 #include "structs/CEvent.h"
 #include "structs/CExtendedServerInfo.h"
 #include "structs/CFactionManager.h"
+#include "structs/CFeatUseListEntry.h"
 #include "structs/CGameEffect.h"
 #include "structs/CGameEffectListHandler.h"
 #include "structs/CGameObject.h"
