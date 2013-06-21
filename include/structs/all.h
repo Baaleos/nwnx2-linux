@@ -140,6 +140,7 @@ struct CNWTileData_s;                     typedef struct CNWTileData_s          
 struct CNWTileSetManager_s;               typedef struct CNWTileSetManager_s               CNWTileSetManager;
 struct CNWVirtualMachineCommands_s;       typedef struct CNWVirtualMachineCommands_s       CNWVirtualMachineCommands;
 struct CNWVirtualMachineImplementation_s; typedef struct CNWVirtualMachineImplementation_s CNWVirtualMachineImplementation;
+struct CNWVisibilityNode_s;               typedef struct CNWVisibilityNode_s               CNWVisibilityNode;
 struct CNetLayer_s;                       typedef struct CNetLayer_s                       CNetLayer;
 struct CObjectLookupTable_s;              typedef struct CObjectLookupTable_s              CObjectLookupTable;
 struct CObjectTableManager_s;             typedef struct CObjectTableManager_s             CObjectTableManager;
@@ -250,6 +251,7 @@ struct Vector_s;                          typedef struct Vector_s               
 #include "structs/CNWTileSetManager.h"
 #include "structs/CNWVirtualMachineCommands.h"
 #include "structs/CNWVirtualMachineImplementation.h"
+#include "structs/CNWVisibilityNode.h"
 
 #include "structs/CNWSStats_FeatUses.h"
 #include "structs/CNWSStats_Level.h"
