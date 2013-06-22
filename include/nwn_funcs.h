@@ -2457,7 +2457,7 @@ extern int (*CNWSMessage__SendServerToPlayerCamera_Store)(CNWSMessage *, CNWSPla
 extern int (*CNWSMessage__SendServerToPlayerCharList)(CNWSMessage *, CNWSPlayer *);
 extern int (*CNWSMessage__SendServerToPlayerCharacterDownloadFail)(CNWSMessage *, CNWSPlayer *);
 extern int (*CNWSMessage__SendServerToPlayerCharacterDownloadReply)(CNWSMessage *, CNWSPlayer *);
-extern int (*CNWSMessage__SendServerToPlayerChatMessage)(CNWSMessage *, uint8_t, uint32_t, CExoString, uint32_t, CExoString const *);
+extern int (*CNWSMessage__SendServerToPlayerChatMessage)(CNWSMessage *msg, int8_t, uint32_t, const char **, uint32_t, const char *);
 extern int (*CNWSMessage__SendServerToPlayerChatMultiLangMessage)(CNWSMessage *, uint8_t, uint32_t, CExoLocString, uint32_t, uint8_t, uint32_t *, uint32_t, int32_t, CResRef const *, int32_t, uint32_t);
 extern int (*CNWSMessage__SendServerToPlayerChatMultiLang_Helper)(CNWSMessage *, uint32_t, uint8_t, uint32_t, CExoLocString, uint32_t, uint8_t, int32_t, CResRef const *, int32_t, uint32_t);
 extern int (*CNWSMessage__SendServerToPlayerChatStrRefMessage)(CNWSMessage *, uint8_t, uint32_t, uint32_t);
