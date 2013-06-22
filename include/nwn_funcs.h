@@ -1182,7 +1182,7 @@ extern int (*CNWSCreature__GetUpdateDisplayName)(CNWSCreature *);
 extern int (*CNWSCreature__GetUseMonkAbilities)(CNWSCreature *);
 extern int (*CNWSCreature__GetUseRange)(CNWSCreature *, uint32_t, Vector *, float *);
 extern int (*CNWSCreature__GetVisibilityList)(CNWSCreature *);
-extern int (*CNWSCreature__GetVisibleListElement)(CNWSCreature *, uint32_t);
+extern CNWVisibilityNode *(*CNWSCreature__GetVisibleListElement)(CNWSCreature *, uint32_t);
 extern int (*CNWSCreature__GetVisionType)(CNWSCreature *);
 extern int (*CNWSCreature__GetWalkAnimation)(CNWSCreature *);
 extern int (*CNWSCreature__GetWalkRate)(CNWSCreature *);
