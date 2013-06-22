@@ -3305,7 +3305,7 @@ extern int (*CNWSScriptVarTable__GetFloat)(CNWSScriptVarTable *, CExoString *);
 extern int (*CNWSScriptVarTable__GetInt)(CNWSScriptVarTable *, CExoString *);
 extern int (*CNWSScriptVarTable__GetLocation)(CNWSScriptVarTable *, CExoString *);
 extern int (*CNWSScriptVarTable__GetObject)(CNWSScriptVarTable *, CExoString *);
-extern int (*CNWSScriptVarTable__GetString)(CNWSScriptVarTable *, CExoString *);
+extern CExoString (*CNWSScriptVarTable__GetString)(CNWSScriptVarTable *, CExoString *);
 extern int (*CNWSScriptVarTable__LoadVarTable)(CNWSScriptVarTable *, CResGFF *, CResStruct *);
 extern int (*CNWSScriptVarTable__MatchIndex)(CNWSScriptVarTable *, CExoString *, uint32_t, int32_t);
 extern int (*CNWSScriptVarTable__SaveVarTable)(CNWSScriptVarTable *, CResGFF *, CResStruct *);
