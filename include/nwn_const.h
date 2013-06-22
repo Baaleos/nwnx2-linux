@@ -649,6 +649,20 @@
 #define DAMAGE_POWER_PLUS_EIGHTEEN                        19
 #define DAMAGE_POWER_PLUS_NINTEEN                         20
 #define DAMAGE_POWER_PLUS_TWENTY                          21
+// Combat Mode Defines
+#define COMBAT_MODE_INVALID                  0
+#define COMBAT_MODE_PARRY                    1
+#define COMBAT_MODE_POWER_ATTACK             2
+#define COMBAT_MODE_IMPROVED_POWER_ATTACK    3
+#define COMBAT_MODE_COUNTER_SPELL            4
+#define COMBAT_MODE_FLURRY_OF_BLOWS          5
+#define COMBAT_MODE_RAPID_SHOT               6
+#define COMBAT_MODE_EXPERTISE                7
+#define COMBAT_MODE_IMPROVED_EXPERTISE       8
+#define COMBAT_MODE_DEFENSIVE_CASTING        9
+#define COMBAT_MODE_DIRTY_FIGHTING           10
+#define COMBAT_MODE_DEFENSIVE_STANCE         11
+
 #include "nwn_const_feats.h"
 #include "nwn_const_spells.h"
 #include "nwn_const_vfx.h"
