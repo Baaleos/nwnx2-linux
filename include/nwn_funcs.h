@@ -344,6 +344,7 @@ extern int (*CNWBaseItem__SetRequiredFeat)(CNWBaseItem *, uint8_t, uint16_t);
 extern int (*CNWBaseItem__SetRequiredFeatCount)(CNWBaseItem *, uint8_t);
 extern char *(*CNWBaseItemArray__GetBaseItem)(CNWBaseItemArray *, int32_t);
 extern int (*CNWBaseItemArray__Load)(CNWBaseItemArray *);
+extern int (*CNWCCMessageData__ctor)(CNWCCMessageData *);
 extern int (*CNWCCMessageData__ClearData)(CNWCCMessageData *);
 extern int (*CNWCCMessageData__CopyTo)(CNWCCMessageData *, CNWCCMessageData *);
 extern int (*CNWCCMessageData__GetFloat)(CNWCCMessageData *, int32_t);

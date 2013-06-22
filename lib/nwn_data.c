@@ -346,6 +346,7 @@ int (*CNWBaseItem__SetRequiredFeat)(CNWBaseItem *, uint8_t, uint16_t) = NULL;
 int (*CNWBaseItem__SetRequiredFeatCount)(CNWBaseItem *, uint8_t) = NULL;
 int (*CNWBaseItemArray__GetBaseItem)(CNWBaseItemArray *, int32_t) = NULL;
 int (*CNWBaseItemArray__Load)(CNWBaseItemArray *) = NULL;
+int (*CNWCCMessageData__ctor)(CNWCCMessageData *) = NULL;
 int (*CNWCCMessageData__ClearData)(CNWCCMessageData *) = NULL;
 int (*CNWCCMessageData__CopyTo)(CNWCCMessageData *, CNWCCMessageData *) = NULL;
 int (*CNWCCMessageData__GetFloat)(CNWCCMessageData *, int32_t) = NULL;
