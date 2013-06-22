@@ -4475,7 +4475,7 @@ extern int (*CTlkTable__RemapFontName)(CTlkTable *, char *);
 extern int (*CTlkTable__SetCustomToken)(CTlkTable *, int32_t, CExoString const *);
 extern int (*CTlkTable__SetUseLargeDialogFont)(CTlkTable *, int32_t);
 extern int (*CTwoDimArrays__ClearCached2DAs)(CTwoDimArrays *);
-extern int (*CTwoDimArrays__GetCached2DA)(CTwoDimArrays *, CExoString, int32_t);
+extern C2DA *(*CTwoDimArrays__GetCached2DA)(CTwoDimArrays *, CExoString *, int32_t);
 extern int (*CTwoDimArrays__GetEpicAttackBonus)(CTwoDimArrays *, uint8_t);
 extern int (*CTwoDimArrays__GetEpicFortSaveBonus)(CTwoDimArrays *, uint8_t);
 extern int (*CTwoDimArrays__GetEpicRefSaveBonus)(CTwoDimArrays *, uint8_t);
