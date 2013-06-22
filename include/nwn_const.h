@@ -373,6 +373,7 @@
                                       DAMAGE_TYPE_NEGATIVE | \
                                        DAMAGE_TYPE_POSITIVE)
 
+#define AC_VS_DAMAGE_TYPE_ALL                          4103
 
 #define IMMUNITY_TYPE_NONE                                0
 #define IMMUNITY_TYPE_MIND_SPELLS                         1
