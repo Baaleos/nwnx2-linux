@@ -2459,7 +2459,7 @@ int (*CNWSMessage__SendServerToPlayerCamera_Store)(CNWSMessage *, CNWSPlayer *) 
 int (*CNWSMessage__SendServerToPlayerCharList)(CNWSMessage *, CNWSPlayer *) = NULL;
 int (*CNWSMessage__SendServerToPlayerCharacterDownloadFail)(CNWSMessage *, CNWSPlayer *) = NULL;
 int (*CNWSMessage__SendServerToPlayerCharacterDownloadReply)(CNWSMessage *, CNWSPlayer *) = NULL;
-int (*CNWSMessage__SendServerToPlayerChatMessage)(CNWSMessage *, uint8_t, uint32_t, CExoString, uint32_t, CExoString const *) = NULL;
+int (*CNWSMessage__SendServerToPlayerChatMessage)(CNWSMessage *msg, int8_t, uint32_t, const char **, uint32_t, const char *) = NULL;
 int (*CNWSMessage__SendServerToPlayerChatMultiLangMessage)(CNWSMessage *, uint8_t, uint32_t, CExoLocString, uint32_t, uint8_t, uint32_t *, uint32_t, int32_t, CResRef const *, int32_t, uint32_t) = NULL;
 int (*CNWSMessage__SendServerToPlayerChatMultiLang_Helper)(CNWSMessage *, uint32_t, uint8_t, uint32_t, CExoLocString, uint32_t, uint8_t, int32_t, CResRef const *, int32_t, uint32_t) = NULL;
 int (*CNWSMessage__SendServerToPlayerChatStrRefMessage)(CNWSMessage *, uint8_t, uint32_t, uint32_t) = NULL;
