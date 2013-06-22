@@ -627,6 +627,28 @@
 #define MISS_CHANCE_TRUETYPE_RANGED                       2
 #define MISS_CHANCE_TRUETYPE_MELEE                        3
 
+#define DAMAGE_POWER_NORMAL                               0
+#define DAMAGE_POWER_PLUS_ONE                             1
+#define DAMAGE_POWER_PLUS_TWO                             2
+#define DAMAGE_POWER_PLUS_THREE                           3
+#define DAMAGE_POWER_PLUS_FOUR                            4
+#define DAMAGE_POWER_PLUS_FIVE                            5
+#define DAMAGE_POWER_ENERGY                               6
+#define DAMAGE_POWER_PLUS_SIX                             7
+#define DAMAGE_POWER_PLUS_SEVEN                           8
+#define DAMAGE_POWER_PLUS_EIGHT                           9
+#define DAMAGE_POWER_PLUS_NINE                            10
+#define DAMAGE_POWER_PLUS_TEN                             11
+#define DAMAGE_POWER_PLUS_ELEVEN                          12
+#define DAMAGE_POWER_PLUS_TWELVE                          13
+#define DAMAGE_POWER_PLUS_THIRTEEN                        14
+#define DAMAGE_POWER_PLUS_FOURTEEN                        15
+#define DAMAGE_POWER_PLUS_FIFTEEN                         16
+#define DAMAGE_POWER_PLUS_SIXTEEN                         17
+#define DAMAGE_POWER_PLUS_SEVENTEEN                       18
+#define DAMAGE_POWER_PLUS_EIGHTEEN                        19
+#define DAMAGE_POWER_PLUS_NINTEEN                         20
+#define DAMAGE_POWER_PLUS_TWENTY                          21
 #include "nwn_const_feats.h"
 #include "nwn_const_spells.h"
 #include "nwn_const_vfx.h"
