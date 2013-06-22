@@ -179,6 +179,7 @@ struct CTlkFile_s;                        typedef struct CTlkFile_s             
 struct CTlkTableToken_s;                  typedef struct CTlkTableToken_s                  CTlkTableToken;
 struct CTlkTable_s;                       typedef struct CTlkTable_s                       CTlkTable;
 struct CTwoDimArrays_s;                   typedef struct CTwoDimArrays_s                   CTwoDimArrays;
+struct CVirtualMachineFile_s;             typedef struct CVirtualMachineFile_s             CVirtualMachineFile;
 struct CVirtualMachineStack_s;            typedef struct CVirtualMachineStack_s            CVirtualMachineStack;
 struct CVirtualMachineScript_s;           typedef struct CVirtualMachineScript_s           CVirtualMachineScript;
 struct CVirtualMachine_s;                 typedef struct CVirtualMachine_s                 CVirtualMachine;
@@ -345,6 +346,7 @@ struct Vector_s;                          typedef struct Vector_s               
 #include "structs/CTlkTable.h"
 #include "structs/CTlkTableToken.h"
 #include "structs/CTwoDimArrays.h"
+#include "structs/CVirtualMachineFile.h"
 #include "structs/CVirtualMachineStack.h"
 #include "structs/CVirtualMachineScript.h"
 #include "structs/CVirtualMachine.h"
