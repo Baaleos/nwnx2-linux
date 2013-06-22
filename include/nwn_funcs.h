@@ -3303,7 +3303,7 @@ extern int (*CNWSScriptVarTable__DestroyObject)(CNWSScriptVarTable *, CExoString
 extern int (*CNWSScriptVarTable__DestroyString)(CNWSScriptVarTable *, CExoString *);
 extern int (*CNWSScriptVarTable__GetFloat)(CNWSScriptVarTable *, CExoString *);
 extern int (*CNWSScriptVarTable__GetInt)(CNWSScriptVarTable *, CExoString *);
-extern int (*CNWSScriptVarTable__GetLocation)(CNWSScriptVarTable *, CExoString *);
+extern CScriptLocation (*CNWSScriptVarTable__GetLocation)(CNWSScriptVarTable *, CExoString *);
 extern int (*CNWSScriptVarTable__GetObject)(CNWSScriptVarTable *, CExoString *);
 extern CExoString (*CNWSScriptVarTable__GetString)(CNWSScriptVarTable *, CExoString *);
 extern int (*CNWSScriptVarTable__LoadVarTable)(CNWSScriptVarTable *, CResGFF *, CResStruct *);
