@@ -143,6 +143,8 @@ extern int (*CFactionManager__LoadReputations)(CFactionManager *, CResGFF *, CRe
 extern int (*CFactionManager__SaveFactions)(CFactionManager *, CResGFF *, CResList *);
 extern int (*CFactionManager__SaveReputations)(CFactionManager *, CResGFF *, CResList *);
 extern int (*CFactionManager__SetNPCFactionReputation)(CFactionManager *, int32_t, int32_t, int32_t);
+extern int (*CGameEffect__ctor)(CGameEffect *, int);
+extern int (*CGameEffect__dtor)(CGameEffect *, char a);
 extern int (*CGameEffect__CopyEffect)(CGameEffect *, CGameEffect *, int32_t);
 extern int (*CGameEffect__GetExpiryTime)(CGameEffect *, uint32_t *, uint32_t *);
 extern int (*CGameEffect__GetFloat)(CGameEffect *, int32_t);
