@@ -407,7 +407,7 @@
 #define IMMUNITY_TYPE_SNEAK_ATTACK                        30
 #define IMMUNITY_TYPE_CRITICAL_HIT                        31
 #define IMMUNITY_TYPE_DEATH                               32
-
+#define IMMUNITY_TYPE_NUM                                 33
 
 #define SKILL_ANIMAL_EMPATHY                               0    /* SKILL_00 */
 #define SKILL_CONCENTRATION                                1    /* SKILL_01 */
