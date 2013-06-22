@@ -4246,7 +4246,7 @@ extern int (*CServerExoApp__GetModuleName)(CServerExoApp *);
 extern int (*CServerExoApp__GetMoveToModulePending)(CServerExoApp *);
 extern int (*CServerExoApp__GetMoveToModuleString)(CServerExoApp *);
 extern int (*CServerExoApp__GetMultiplayerEnabled)(CServerExoApp *);
-extern int (*CServerExoApp__GetNWSMessage)(CServerExoApp *);
+extern CNWSMessage *(*CServerExoApp__GetNWSMessage)(CServerExoApp *);
 extern int (*CServerExoApp__GetNetLayer)(CServerExoApp *);
 extern int (*CServerExoApp__GetNextPCObject)(CServerExoApp *);
 extern int (*CServerExoApp__GetObjectArray)(CServerExoApp *);
