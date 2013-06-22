@@ -649,6 +649,21 @@
 #define DAMAGE_POWER_PLUS_EIGHTEEN                        19
 #define DAMAGE_POWER_PLUS_NINTEEN                         20
 #define DAMAGE_POWER_PLUS_TWENTY                          21
+
+#define DAMAGE_INDEX_BLUDGEONING                           0
+#define DAMAGE_INDEX_PIERCING                              1
+#define DAMAGE_INDEX_SLASHING                              2
+#define DAMAGE_INDEX_MAGICAL                               3
+#define DAMAGE_INDEX_ACID                                  4
+#define DAMAGE_INDEX_COLD                                  5
+#define DAMAGE_INDEX_DIVINE                                6
+#define DAMAGE_INDEX_ELECTRICAL                            7
+#define DAMAGE_INDEX_FIRE                                  8
+#define DAMAGE_INDEX_NEGATIVE                              9
+#define DAMAGE_INDEX_POSITIVE                             10
+#define DAMAGE_INDEX_SONIC                                11
+#define DAMAGE_INDEX_BASE_WEAPON                          12
+
 // Combat Mode Defines
 #define COMBAT_MODE_INVALID                  0
 #define COMBAT_MODE_PARRY                    1
