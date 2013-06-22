@@ -179,6 +179,7 @@ struct CTlkFile_s;                        typedef struct CTlkFile_s             
 struct CTlkTableToken_s;                  typedef struct CTlkTableToken_s                  CTlkTableToken;
 struct CTlkTable_s;                       typedef struct CTlkTable_s                       CTlkTable;
 struct CTwoDimArrays_s;                   typedef struct CTwoDimArrays_s                   CTwoDimArrays;
+struct CVirtualMachineStack_s;            typedef struct CVirtualMachineStack_s            CVirtualMachineStack;
 struct CVirtualMachine_s;                 typedef struct CVirtualMachine_s                 CVirtualMachine;
 struct CVirtualMachineCmdImplementer_s;   typedef struct CVirtualMachineCmdImplementer_s   CVirtualMachineCmdImplementer;
 struct CVirtualMachineDebuggingContext_s; typedef struct CVirtualMachineDebuggingContext_s CVirtualMachineDebuggingContext;
@@ -344,6 +345,7 @@ struct Vector_s;                          typedef struct Vector_s               
 #include "structs/CTlkTable.h"
 #include "structs/CTlkTableToken.h"
 #include "structs/CTwoDimArrays.h"
+#include "structs/CVirtualMachineStack.h"
 #include "structs/CVirtualMachine.h"
 #include "structs/CVirtualMachineCmdImplementer.h"
 #include "structs/CVirtualMachineDebuggingContext.h"
