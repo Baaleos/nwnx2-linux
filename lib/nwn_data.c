@@ -1204,7 +1204,7 @@ int (*CNWSCreature__LoadPersonalReputationList)(CNWSCreature *, CResGFF *, CResS
 int (*CNWSCreature__LoadPolymorphData)(CNWSCreature *, CResGFF *, CResStruct *, int32_t) = NULL;
 int (*CNWSCreature__LoadQuickBarHack)(CNWSCreature *, CExoString) = NULL;
 int (*CNWSCreature__LoadQuickButtons)(CNWSCreature *, CResGFF *, CResStruct *) = NULL;
-int (*CNWSCreature__MaxAttackRange)(CNWSCreature *, uint32_t, int32_t, int32_t) = NULL;
+float (*CNWSCreature__MaxAttackRange)(CNWSCreature *, uint32_t, int32_t, int32_t) = NULL;
 int (*CNWSCreature__MergeItem)(CNWSCreature *, CNWSItem *, CNWSItem *) = NULL;
 int (*CNWSCreature__NotifyAssociateActionToggle)(CNWSCreature *, int32_t) = NULL;
 int (*CNWSCreature__PacifyCreature_1)(CNWSCreature *, uint32_t) = NULL;

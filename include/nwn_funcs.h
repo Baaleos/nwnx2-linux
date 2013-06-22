@@ -1202,7 +1202,7 @@ extern int (*CNWSCreature__LoadPersonalReputationList)(CNWSCreature *, CResGFF *
 extern int (*CNWSCreature__LoadPolymorphData)(CNWSCreature *, CResGFF *, CResStruct *, int32_t);
 extern int (*CNWSCreature__LoadQuickBarHack)(CNWSCreature *, CExoString);
 extern int (*CNWSCreature__LoadQuickButtons)(CNWSCreature *, CResGFF *, CResStruct *);
-extern int (*CNWSCreature__MaxAttackRange)(CNWSCreature *, uint32_t, int32_t, int32_t);
+extern float (*CNWSCreature__MaxAttackRange)(CNWSCreature *, uint32_t, int32_t, int32_t);
 extern int (*CNWSCreature__MergeItem)(CNWSCreature *, CNWSItem *, CNWSItem *);
 extern int (*CNWSCreature__NotifyAssociateActionToggle)(CNWSCreature *, int32_t);
 extern int (*CNWSCreature__PacifyCreature_1)(CNWSCreature *, uint32_t);
