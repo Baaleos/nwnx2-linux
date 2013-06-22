@@ -40,7 +40,14 @@ int64_t nwn_GetWorldTime (uint32_t *time_2880s, uint32_t *time_msec);
 void nwn_UpdateQuickBar (CNWSCreature *cre);
 void nwn_ExecuteScript (const char *scr, nwn_objid_t oid);
 
-
+extern int (*C2DA__GetCExoStringEntry)(C2DA *, int, const char **, CExoString *);
+extern int (*C2DA__GetCExoStringEntry2)(C2DA *, int, int, CExoString *);
+extern int (*C2DA__GetFLOATEntry)(C2DA *, int, const char **, float *);
+extern int (*C2DA__GetFLOATEntry2)(C2DA *, int, int, float *);
+extern int (*C2DA__GetINTEntry)(C2DA *, int, const char **, int *);
+extern int (*C2DA__GetINTEntry2)(C2DA *, int, int, int *);
+extern int (*C2DA__GetNumColumns)(C2DA *);
+extern int (*C2DA__GetNumRows)(C2DA *);
 extern int (*CExoKeyTable__AddDirectoryContents)(CExoKeyTable *, int32_t);
 extern int (*CExoKeyTable__AddEncapsulatedContents)(CExoKeyTable *, int32_t);
 extern int (*CExoKeyTable__AddKey)(CExoKeyTable *, CResRef const *, uint16_t, uint32_t, int32_t);

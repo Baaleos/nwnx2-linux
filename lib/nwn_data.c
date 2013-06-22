@@ -42,7 +42,14 @@ int32_t *NWN_DebugSaves = NULL;
 int32_t *NWN_DebugSpeed = NULL;
 int32_t *NWN_DebugHitDice = NULL;
 
-
+int (*C2DA__GetCExoStringEntry)(C2DA *, int, const char **, CExoString *) = NULL;
+int (*C2DA__GetCExoStringEntry2)(C2DA *, int, int, CExoString *) = NULL;
+int (*C2DA__GetFLOATEntry)(C2DA *, int, const char **, float *) = NULL;
+int (*C2DA__GetFLOATEntry2)(C2DA *, int, int, float *) = NULL;
+int (*C2DA__GetINTEntry)(C2DA *, int, const char **, int *) = NULL;
+int (*C2DA__GetINTEntry2)(C2DA *, int, int, int *) = NULL;
+int (*C2DA__GetNumColumns)(C2DA *) = NULL;
+int (*C2DA__GetNumRows)(C2DA *) = NULL;
 int (*CExoKeyTable__AddDirectoryContents)(CExoKeyTable *, int32_t) = NULL;
 int (*CExoKeyTable__AddEncapsulatedContents)(CExoKeyTable *, int32_t) = NULL;
 int (*CExoKeyTable__AddKey)(CExoKeyTable *, CResRef const *, uint16_t, uint32_t, int32_t) = NULL;
