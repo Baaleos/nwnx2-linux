@@ -145,6 +145,8 @@ int (*CFactionManager__LoadReputations)(CFactionManager *, CResGFF *, CResList *
 int (*CFactionManager__SaveFactions)(CFactionManager *, CResGFF *, CResList *) = NULL;
 int (*CFactionManager__SaveReputations)(CFactionManager *, CResGFF *, CResList *) = NULL;
 int (*CFactionManager__SetNPCFactionReputation)(CFactionManager *, int32_t, int32_t, int32_t) = NULL;
+int (*CGameEffect__ctor)(CGameEffect *, int) = NULL;
+int (*CGameEffect__dtor)(CGameEffect *, char a) = NULL;
 int (*CGameEffect__CopyEffect)(CGameEffect *, CGameEffect *, int32_t) = NULL;
 int (*CGameEffect__GetExpiryTime)(CGameEffect *, uint32_t *, uint32_t *) = NULL;
 int (*CGameEffect__GetFloat)(CGameEffect *, int32_t) = NULL;
