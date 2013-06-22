@@ -1475,7 +1475,7 @@ extern int (*CNWSCreature__StartGuiTimingBar)(CNWSCreature *, uint32_t, uint8_t)
 extern int (*CNWSCreature__StopGuiTimingBar)(CNWSCreature *);
 extern int (*CNWSCreature__StoreCutsceneVars)(CNWSCreature *);
 extern int (*CNWSCreature__SummonAnimalCompanion)(CNWSCreature *);
-extern int (*CNWSCreature__SummonAssociate)(CNWSCreature *, CResRef, CExoString, uint16_t);
+extern int (*CNWSCreature__SummonAssociate)(CNWSCreature *, CResRef, char**, uint16_t);
 extern int (*CNWSCreature__SummonFamiliar)(CNWSCreature *);
 extern int (*CNWSCreature__TerminateClientSidePath)(CNWSCreature *, int32_t);
 extern int (*CNWSCreature__TestAIStateAsMode)(CNWSCreature *, int32_t);
