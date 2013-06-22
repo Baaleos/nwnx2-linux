@@ -608,6 +608,14 @@
 #define EVENT_WHIRLWIND_ATTACK                            26
 #define EVENT_BOOT_PC                                     27
 
+#define MISS_CHANCE_TYPE_NORMAL                           0
+#define MISS_CHANCE_TYPE_VS_RANGED                        1
+#define MISS_CHANCE_TYPE_VS_MELEE                         2
+
+#define MISS_CHANCE_TRUETYPE_NORMAL                       0
+#define MISS_CHANCE_TRUETYPE_DARKNESS                     1
+#define MISS_CHANCE_TRUETYPE_RANGED                       2
+#define MISS_CHANCE_TRUETYPE_MELEE                        3
 
 #include "nwn_const_feats.h"
 #include "nwn_const_spells.h"
