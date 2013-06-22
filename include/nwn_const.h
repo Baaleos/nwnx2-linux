@@ -608,6 +608,16 @@
 #define EVENT_WHIRLWIND_ATTACK                            26
 #define EVENT_BOOT_PC                                     27
 
+#define ATTACK_TYPE_MISC                                  0
+#define ATTACK_TYPE_ONHAND                                1
+#define ATTACK_TYPE_OFFHAND                               2
+#define ATTACK_TYPE_CWEAPON1                              3
+#define ATTACK_TYPE_CWEAPON2                              4
+#define ATTACK_TYPE_CWEAPON3                              5
+#define ATTACK_TYPE_EXTRA1                                6
+#define ATTACK_TYPE_UNARMED                               7
+#define ATTACK_TYPE_EXTRA2                                8
+
 #define MISS_CHANCE_TYPE_NORMAL                           0
 #define MISS_CHANCE_TYPE_VS_RANGED                        1
 #define MISS_CHANCE_TYPE_VS_MELEE                         2
