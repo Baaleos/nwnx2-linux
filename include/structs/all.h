@@ -142,6 +142,7 @@ struct CNWSpellArray_s;                   typedef struct CNWSpellArray_s        
 struct CNWSpell_s;                        typedef struct CNWSpell_s                        CNWSpell;
 struct CNWTileData_s;                     typedef struct CNWTileData_s                     CNWTileData;
 struct CNWTileSetManager_s;               typedef struct CNWTileSetManager_s               CNWTileSetManager;
+struct CNWVirtualMachineCommands_vtble_s; typedef struct CNWVirtualMachineCommands_vtble_s CNWVirtualMachineCommands_vtble;
 struct CNWVirtualMachineCommands_s;       typedef struct CNWVirtualMachineCommands_s       CNWVirtualMachineCommands;
 struct CNWVirtualMachineImplementation_s; typedef struct CNWVirtualMachineImplementation_s CNWVirtualMachineImplementation;
 struct CNWVisibilityNode_s;               typedef struct CNWVisibilityNode_s               CNWVisibilityNode;
@@ -255,6 +256,7 @@ struct Vector_s;                          typedef struct Vector_s               
 #include "structs/CNWSpellArray.h"
 #include "structs/CNWTileData.h"
 #include "structs/CNWTileSetManager.h"
+#include "structs/CNWVirtualMachineCommands_vtble.h"
 #include "structs/CNWVirtualMachineCommands.h"
 #include "structs/CNWVirtualMachineImplementation.h"
 #include "structs/CNWVisibilityNode.h"
