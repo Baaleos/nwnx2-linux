@@ -10,6 +10,6 @@ void Hook_SendServerToPlayerChatMessage(CNWSMessage *msg, int8_t mode, uint32_t 
         suppress = chat.Chat(mode, from, mesg, to);
         
     if(!suppress) {
-        CNWSMessage__SendServerToPlayerChatMessage(msg, mode, from, text, to, xz);
+        CNWSMessage__SendServerToPlayerChatMessage_orig(msg, mode, from, text, to, xz);
     }
 }

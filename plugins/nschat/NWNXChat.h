@@ -24,6 +24,9 @@
 #include "talib/all.h"
 #include "NWNXLib.h"
 
+extern int (*CNWSMessage__SendServerToPlayerCCMessage_orig)(CNWSMessage *, uint32_t, uint8_t, CNWCCMessageData *, CNWSCombatAttackData *);
+extern int (*CNWSMessage__SendServerToPlayerChatMessage_orig)(CNWSMessage *msg, int8_t, uint32_t, const char **, uint32_t, const char *);
+
 void Hook_SendServerToPlayerCCMessage(CNWSMessage *msg, uint32_t id, int8_t msg_id, CNWCCMessageData *msg_data, CNWSCombatAttackData *attack);
 void Hook_SendServerToPlayerChat_Party(CNWSMessage *msg, uint32_t x, uint32_t y, CExoString text);
 void Hook_SendServerToPlayerChat_Shout(CNWSMessage *msg, uint32_t x, uint32_t y, CExoString text);

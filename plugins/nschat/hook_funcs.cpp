@@ -1,5 +1,8 @@
 #include "NWNXChat.h"
 
+int (*CNWSMessage__SendServerToPlayerCCMessage_orig)(CNWSMessage *, uint32_t, uint8_t, CNWCCMessageData *, CNWSCombatAttackData *) = NULL;
+int (*CNWSMessage__SendServerToPlayerChatMessage_orig)(CNWSMessage *msg, int8_t, uint32_t, const char **, uint32_t, const char *) = NULL;
+
 #define HOOK(orig, addr, hook, bytes) \
     *(void**)&orig = nx_hook_function((void*)addr, (void*)hook, bytes, NX_HOOK_DIRECT | NX_HOOK_RETCODE)
 
@@ -30,8 +33,8 @@ bool hook_functions(){
                          NX_HOOK_DIRECT | NX_HOOK_RETCODE);
     */
 
-    HOOK(CNWSMessage__SendServerToPlayerCCMessage, 0x08078AB8, Hook_SendServerToPlayerCCMessage, 5);
-    HOOK(CNWSMessage__SendServerToPlayerChatMessage, 0x0806839C, Hook_SendServerToPlayerChatMessage, 5);
+    HOOK(CNWSMessage__SendServerToPlayerCCMessage_orig, 0x08078AB8, Hook_SendServerToPlayerCCMessage, 5);
+    HOOK(CNWSMessage__SendServerToPlayerChatMessage_orig, 0x0806839C, Hook_SendServerToPlayerChatMessage, 5);
 
     return true;
 }

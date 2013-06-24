@@ -15,5 +15,5 @@ void Hook_SendServerToPlayerCCMessage(CNWSMessage *msg, uint32_t id, int8_t msg_
     }
 
     if (!suppress)
-        CNWSMessage__SendServerToPlayerCCMessage(msg, id, msg_id, msg_data, attack);
+        CNWSMessage__SendServerToPlayerCCMessage_orig(msg, id, msg_id, msg_data, attack);
 }
