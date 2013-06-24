@@ -20,9 +20,18 @@ extern PLUGINLINK *pluginLink;
 
 CNWNXCombat::CNWNXCombat() {
     confKey = strdup("COMBAT");
+    disable_circle_kick = false;
+    disable_dev_crit = false;
+    disable_damage_mod_msg = false;
+    disable_parry = false;
+
 }
 
 CNWNXCombat::~CNWNXCombat() { }
+
+const char* CNWNXCombat::GetConf(const char* key) {
+    return (*nwnxConfig)[confKey][key].c_str();
+}
 
 bool CNWNXCombat::OnCreate(gline *config, const char *LogDir) {
     char log[128];
@@ -35,21 +44,35 @@ bool CNWNXCombat::OnCreate(gline *config, const char *LogDir) {
     Log(0, "NWNX Combat v0.1\n");
     Log(0, "(c) by jmd (jmd2028 at gmail dot com, 2011-2013)\n");
 
-    Log(0, "CreatureDefense Size: %d\n", sizeof(CreatureDefense));
-    Log(0, "CreatureOffense Size: %d\n", sizeof(CreatureOffense));
+    disable_circle_kick = !!atoi(GetConf("disable_circle_kick"));
+    disable_dev_crit = !!atoi(GetConf("disable_dev_critical"));
+    disable_damage_mod_msg = !!atoi(GetConf("disable_damage_mod_msg"));
+    disable_parry = !!atoi(GetConf("disable_parry"));
+
+    Log(0, "* Circle Kick: %s.\n",
+        disable_circle_kick ? "disabled" : "enabled");
+
+    Log(0, "* Devistating Critical: %s.\n",
+        disable_dev_crit ? "disabled" : "enabled");
+
+    Log(0, "* Damage Modification Messages: %s.\n",
+        disable_damage_mod_msg ? "disabled" : "enabled");
+
+    Log(0, "* Parry Mode: %s.\n",
+        disable_parry ? "disabled" : "enabled");
 
     // Plugin Events
     if( !pluginLink ){
-		Log (0, "Plugin link not accessible.\n");
+		Log (0, "ERROR: Plugin link not accessible.\n");
         return false;
     }
     else {
-		Log (0, "Plugin link: %08lX\n", pluginLink);
+		Log (0, "* Plugin link: %08lX\n", pluginLink);
     }
 
     HANDLE handlePluginsLoaded = HookEvent("NWNX/Core/PluginsLoaded", Handle_PluginsLoaded);
     if (!handlePluginsLoaded) {
-        Log(0, "Cannot hook plugins loaded event!\n");
+        Log(0, "ERROR: Cannot hook plugins loaded event!\n");
 		return false;
     }
 

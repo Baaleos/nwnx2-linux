@@ -47,6 +47,7 @@ public:
     char* OnRequest (char* gameObject, char* Request, char* Parameters);
     //unsigned long OnRequestObject (char *gameObject, char* Request);
     bool OnRelease();
+    const char* GetConf(const char* key);
 
     bool InitializeEventHandlers();
     bool InitializeTables();
@@ -65,6 +66,10 @@ public:
     uint32_t  *table_baseitems;
     DiceRoll  *table_dmg_rolls;
     std::map<uint32_t, CombatMod> modes;
+    bool       disable_circle_kick;
+    bool       disable_dev_crit;
+    bool       disable_damage_mod_msg;
+    bool       disable_parry;
 
 private:
     std::map< uint32_t, Creature* > cache_;

@@ -740,11 +740,12 @@ bool Attack::resolveMissOpportunities() {
     if ( !target_is_cre ) { return false; }
     if ( resolveDeflectArrow() ) { return true; }
 
-#ifdef NWNX_COMBAT_NO_PARRY
-    return false;
-#else
-    return resolveParry();
-#endif
+    if ( combat.disable_parry ) {
+        return false;
+    }
+    else {
+        return resolveParry();
+    }
 }
 
 void Attack::resolveOnhitEffect(){
@@ -809,37 +810,37 @@ void Attack::resolvePostDamage(bool is_ranged) {
 
     // Weapon Ineffective Message
 
-#ifndef NWNX_COMBAT_NO_DEVCRIT
-    // Devistating Critical
-    // If the target is already dead, don't bother dev criting...
-    if ( !is_killing                                              &&
-		 !tar->cre_is_immortal                                    &&
-		 !target_nwn->obj_is_invulnerable                         &&
-		 attack_data_.isCriticalHit()                             &&
-		 attacker_->offense.getHasDevistatingCritical(equip_num_) &&
-		 !is_crit_immune_ ) {
+    if ( !combat.disable_dev_crit ) {
+        // Devistating Critical
+        // If the target is already dead, don't bother dev criting...
+        if ( !is_killing                                              &&
+             !tar->cre_is_immortal                                    &&
+             !target_nwn->obj_is_invulnerable                         &&
+             attack_data_.isCriticalHit()                             &&
+             attacker_->offense.getHasDevistatingCritical(equip_num_) &&
+             !is_crit_immune_ ) {
 
-		if ( !CNWSCreature__SavingThrowRoll(
-				 tar, 1,
-				 attacker_nwn->cre_stats->cs_str_mod + 10 + (nwn_GetHitDice(attacker_nwn) / 2),
-				 0,
-				 attacker_nwn->obj.obj_id,
-				 1, 0, 1) ) {
+            if ( !CNWSCreature__SavingThrowRoll(
+                     tar, 1,
+                     attacker_nwn->cre_stats->cs_str_mod + 10 + (nwn_GetHitDice(attacker_nwn) / 2),
+                     0,
+                     attacker_nwn->obj.obj_id,
+                     1, 0, 1) ) {
 	    
-			CGameEffect *e = effect_death(true, true);
-			nwn_SetDurationType(e, DURATION_TYPE_INSTANT);
-			attack_data_.addEffect(e, attacker_nwn->obj.obj_id);
-			attack_data_.setResult(10);
-		}
-		else {
-			CNWCCMessageData *msg = CNWCCMessageData_create();
-			msg->type = 2;
-			CExoArrayList_int32_add(&msg->integers, 257);
-			CExoArrayList_uint32_add(&msg->objects, target_nwn->obj_id);
-			attack_data_.addCCMessage(msg);
-		}
+                CGameEffect *e = effect_death(true, true);
+                nwn_SetDurationType(e, DURATION_TYPE_INSTANT);
+                attack_data_.addEffect(e, attacker_nwn->obj.obj_id);
+                attack_data_.setResult(10);
+            }
+            else {
+                CNWCCMessageData *msg = CNWCCMessageData_create();
+                msg->type = 2;
+                CExoArrayList_int32_add(&msg->integers, 257);
+                CExoArrayList_uint32_add(&msg->objects, target_nwn->obj_id);
+                attack_data_.addCCMessage(msg);
+            }
+        }
     }
-#endif
     
     // No more ranged events...
     if ( is_ranged ) { return; }
@@ -892,34 +893,34 @@ void Attack::resolvePostDamage(bool is_ranged) {
 
     int8_t totatt = CNWSCombatRound__GetTotalAttacks(attacker_nwn->cre_combat_round);
 
-#ifndef NWNX_COMBAT_NO_CIRCLE_KICK
-    // Circle Kick
-    if ( !is_killing                                         &&
-		 !specatt == 0                                       &&
-		 totatt < 50                                         &&
-		 attack_data_.getAttackType() == ATTACK_TYPE_UNARMED &&
-		 nwn_GetHasFeat(attacker_nwn->cre_stats, FEAT_CIRCLE_KICK) ) {
+    if ( !combat.disable_circle_kick ) {
+        // Circle Kick
+        if ( !is_killing                                         &&
+             !specatt == 0                                       &&
+             totatt < 50                                         &&
+             attack_data_.getAttackType() == ATTACK_TYPE_UNARMED &&
+             nwn_GetHasFeat(attacker_nwn->cre_stats, FEAT_CIRCLE_KICK) ) {
 	
-		float maxrange = CNWSCreature__MaxAttackRange(attacker_nwn,
-													  OBJECT_INVALID,
-													  0, 1);
+            float maxrange = CNWSCreature__MaxAttackRange(attacker_nwn,
+                                                          OBJECT_INVALID,
+                                                          0, 1);
 	
-		uint32_t t = CNWSCreature__GetNearestEnemy(attacker_nwn,
-												   maxrange,
-												   target_nwn->obj_id,
-												   1, 0);
+            uint32_t t = CNWSCreature__GetNearestEnemy(attacker_nwn,
+                                                       maxrange,
+                                                       target_nwn->obj_id,
+                                                       1, 0);
 
-		combat.Log(3, "Circle Kick: Max distance %.2f, New target: %x\n",
-				   maxrange, t);
+            combat.Log(3, "Circle Kick: Max distance %.2f, New target: %x\n",
+                       maxrange, t);
 
-		if ( nwn_GetCreatureByID(t) ) {
-			attacker_nwn->cre_combat_round->cr_new_target = t;
-			CNWSCombatRound__AddCircleKickAttack(attacker_nwn->cre_combat_round, t);
-			attacker_nwn->cre_passive_attack_beh = 1;
-			--attacker_nwn->cre_combat_round->cr_num_circle_kicks;
-		}
+            if ( nwn_GetCreatureByID(t) ) {
+                attacker_nwn->cre_combat_round->cr_new_target = t;
+                CNWSCombatRound__AddCircleKickAttack(attacker_nwn->cre_combat_round, t);
+                attacker_nwn->cre_passive_attack_beh = 1;
+                --attacker_nwn->cre_combat_round->cr_num_circle_kicks;
+            }
+        }
     }
-#endif
     
     // Cleave
     if ( is_killing                         &&

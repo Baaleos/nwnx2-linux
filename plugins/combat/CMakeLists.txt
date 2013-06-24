@@ -2,10 +2,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 add_definitions( 
     -DTA
-    -DNWNX_COMBAT_NO_PARRY
-    -DNWNX_COMBAT_NO_CIRCLE_KICK
-    -DNWNX_COMBAT_NO_DEVCRIT
-    #-DNWNX_COMBAT_NO_DMGMOD_FEEDBACK
 )
 
 include_directories(

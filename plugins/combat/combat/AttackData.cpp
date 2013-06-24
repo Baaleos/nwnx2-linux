@@ -12,9 +12,9 @@ void AttackData::addEffect(CGameEffect *eff, uint32_t creator) {
 }
 
 void AttackData::addOnHitCastSpells(CNWSCreature *attacker, 
-								   CNWSObject *target,
-								   CNWSItem *item,
-								   bool from_target) {
+                                    CNWSObject *target,
+                                    CNWSItem *item,
+                                    bool from_target) {
 
 	uint32_t item_id = item->obj.obj_id;
 	for ( size_t i = 0; i < item->it_active_ip_len; ++i ) {
@@ -124,47 +124,46 @@ void AttackData::copyDamage(const DamageResult& dmg) {
 		}
     }
 
-#ifndef NWNX_COMBAT_NO_DMGMOD_FEEDBACK
-    for ( size_t i = 0; i < 13; ++i ) {
-	if ( dmg.immunity_adjust[i] > 0 ) {
-	    CNWCCMessageData* msg = CNWCCMessageData_create();
-	    CExoArrayList_int32_add(&msg->integers, 62);
-	    CExoArrayList_int32_add(&msg->integers, dmg.immunity_adjust[i]);
-	    CExoArrayList_int32_add(&msg->integers, 1 << i);
-	    CExoArrayList_uint32_add(&msg->objects, attack_->cad_target);
-	    addCCMessage(msg);
-	}
-    }
+    if ( !combat.disable_damage_mod_msg ) {
+        for ( size_t i = 0; i < 13; ++i ) {
+            if ( dmg.immunity_adjust[i] > 0 ) {
+                CNWCCMessageData* msg = CNWCCMessageData_create();
+                CExoArrayList_int32_add(&msg->integers, 62);
+                CExoArrayList_int32_add(&msg->integers, dmg.immunity_adjust[i]);
+                CExoArrayList_int32_add(&msg->integers, 1 << i);
+                CExoArrayList_uint32_add(&msg->objects, attack_->cad_target);
+                addCCMessage(msg);
+            }
+        }
 
-    for ( size_t i = 0; i < 13; ++i ) {
-	if ( dmg.resist_adjust[i] > 0 ) {
-	    CNWCCMessageData* msg = CNWCCMessageData_create();
-	    CExoArrayList_int32_add(&msg->integers, 63);
-	    CExoArrayList_int32_add(&msg->integers, dmg.resist_adjust[i]);
-	    CExoArrayList_int32_add(&msg->integers, 0);
-	    CExoArrayList_uint32_add(&msg->objects, attack_->cad_target);
-	    addCCMessage(msg);
-	}
-    }
+        for ( size_t i = 0; i < 13; ++i ) {
+            if ( dmg.resist_adjust[i] > 0 ) {
+                CNWCCMessageData* msg = CNWCCMessageData_create();
+                CExoArrayList_int32_add(&msg->integers, 63);
+                CExoArrayList_int32_add(&msg->integers, dmg.resist_adjust[i]);
+                CExoArrayList_int32_add(&msg->integers, 0);
+                CExoArrayList_uint32_add(&msg->objects, attack_->cad_target);
+                addCCMessage(msg);
+            }
+        }
 
-    if ( dmg.soak_adjust > 0 ) {
-	CNWCCMessageData* msg = CNWCCMessageData_create();
-	CExoArrayList_int32_add(&msg->integers, 67);
-	CExoArrayList_int32_add(&msg->integers, dmg.soak_adjust);
-	CExoArrayList_int32_add(&msg->integers, 0);
-	CExoArrayList_uint32_add(&msg->objects, attack_->cad_target);
-	addCCMessage(msg);
+        if ( dmg.soak_adjust > 0 ) {
+            CNWCCMessageData* msg = CNWCCMessageData_create();
+            CExoArrayList_int32_add(&msg->integers, 67);
+            CExoArrayList_int32_add(&msg->integers, dmg.soak_adjust);
+            CExoArrayList_int32_add(&msg->integers, 0);
+            CExoArrayList_uint32_add(&msg->objects, attack_->cad_target);
+            addCCMessage(msg);
+        }
     }
-    
-#endif
 
     /* TODO:
     // Any damages above the default 13 NWN damages must be
     // applied as effects.
     for ( size_t i = 13; i < DAMAGE_TYPE_NUM; ++i ) {
-	if ( dmg.damages[i] > 0 ) {
-	    attack_->cad_damage[i] = dmg.damages[i];
-	}
+        if ( dmg.damages[i] > 0 ) {
+            attack_->cad_damage[i] = dmg.damages[i];
+        }
     }
     */
 }
