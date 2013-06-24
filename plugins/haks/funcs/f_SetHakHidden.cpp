@@ -27,6 +27,11 @@ void Func_SetHakHidden(CGameObject *ob, char *value) {
     int level;
 
     temp = strchr(value, '|');
+    if ( !temp ) { 
+        haks.Log(0, "ERROR: No | seprator found in parameters (%s)!\n",
+                 value);
+        return;
+    }
     strncpy(hak, value, temp - value);
     hak[temp - value] = '\0';
 
