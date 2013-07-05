@@ -12,14 +12,14 @@ public:
     virtual bool    canUseDexAC(uint32_t state, bool is_ranged) = 0;
     virtual void    doDamageMods(DamageResult &res) = 0;
     virtual int32_t doDamageImmunity(CNWSCreature *vs, int32_t amount,
-				     uint16_t dmg_flags, bool no_feedback) = 0;
+                                     uint16_t dmg_flags, bool no_feedback) = 0;
     virtual int32_t doDamageReduction(CNWSCreature *vs, int32_t dmg,
-				      uint8_t dmg_power, bool no_feedback) = 0;
+                                      uint8_t dmg_power, bool no_feedback) = 0;
     virtual int32_t doDamageResistance(CNWSCreature *vs, int32_t amount,
-				       uint16_t dmg_flags, bool no_feedback) = 0;
+                                       uint16_t dmg_flags, bool no_feedback) = 0;
     virtual SaveResult doSavingThrow(uint32_t save_type, uint32_t dc,
-				     uint32_t save_vs_type, const VersusInfo& vs,
-				     bool feedback) = 0;
+                                     uint32_t save_vs_type, const VersusInfo& vs,
+                                     bool feedback) = 0;
 
     virtual uint32_t getArmorClass(bool dexed, uint32_t situ_flags, bool is_touch) = 0;
     virtual int32_t  getConcealment(bool is_ranged) = 0;

@@ -24,7 +24,7 @@ public:
     void     resolveAttackRoll();
     void     resolveDamage();
     uint32_t resolveAmmo(uint32_t attack_count,
-			 bool force_equip = false);
+                         bool force_equip = false);
     void     resolveNoAmmo();
     void     resolvePostDamage(bool is_ranged);
     void     resolvePreRoll();
@@ -36,7 +36,7 @@ public:
 private:
     uint32_t     resolveArmorClass();
     void         resolveCriticalRoll(int32_t ab, int32_t roll,
-				     int32_t ac);
+                                     int32_t ac);
     bool         resolveDeflectArrow();
     void         resolveItemCastspell();
     bool         resolveMissOpportunities();

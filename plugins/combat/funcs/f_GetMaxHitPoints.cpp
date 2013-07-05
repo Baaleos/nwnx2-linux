@@ -7,8 +7,8 @@ void Func_GetMaxHitPoints(CGameObject *ob, char *value) {
     Creature *c;
     
     if ( ob->type == OBJECT_TYPE_CREATURE &&
-	 (c = combat.get_creature(ob->id)) != NULL) {
-	result = c->defense.getHPMax();
+         (c = combat.get_creature(ob->id)) != NULL) {
+        result = c->defense.getHPMax();
     }
     snprintf(value, strlen(value), "%d", result);
 }

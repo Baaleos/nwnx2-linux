@@ -12,7 +12,7 @@ int32_t Hook_GetMeleeDamageBonus(CNWSCreatureStats *stats, int32_t offhand, uint
     uint32_t equip = offhand ? 1 : 0;
 
     if ( !c->offense.isEquipValid(equip) ) {
-	equip = 2;
+        equip = 2;
     }
 
     int32_t result = c->offense.getDamageBonus(equip);

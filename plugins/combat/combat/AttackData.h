@@ -1,45 +1,48 @@
+#ifndef NWNX_COMBAT_COMBAT_ATTACK_DATA_H
+#define NWNX_COMBAT_COMBAT_ATTACK_DATA_H
+
 #include "NWNXCombat.h"
 
 class AttackData {
     CNWSCombatAttackData *attack_;
-	CNWSCreature         *attacker_;
+    CNWSCreature         *attacker_;
 
 public:
     AttackData(CNWSCombatAttackData *attack = nullptr,
-			   CNWSCreature *attacker = nullptr)
-		: attack_(attack),
-		  attacker_(attacker) {}
+               CNWSCreature *attacker = nullptr)
+        : attack_(attack),
+          attacker_(attacker) {}
 
     void addCCMessage(CNWCCMessageData *msg);
     void addEffect(CGameEffect *eff, uint32_t creator);
-	void addOnHitCastSpells(CNWSCreature *attacker, 
-							CNWSObject *target,
-							CNWSItem *item,
-							bool from_target);
+    void addOnHitCastSpells(CNWSCreature *attacker, 
+                            CNWSObject *target,
+                            CNWSItem *item,
+                            bool from_target);
 
-	void addOnHitCastSpell(CNWSCreature *attacker, 
-						   CNWSObject *target,
-						   CNWItemProperty *ip,
-						   uint32_t item_id,
-						   bool from_target);
+    void addOnHitCastSpell(CNWSCreature *attacker, 
+                           CNWSObject *target,
+                           CNWItemProperty *ip,
+                           uint32_t item_id,
+                           bool from_target);
 
     void addVisual(uint32_t vfx, uint32_t creator);
     void clearSpecialAttack();
     void copyDamage(const DamageResult& dmg);
     void setAttackBonus(uint32_t ab, uint32_t roll);
     void setAttackData(CNWSCombatAttackData *attack, CNWSCreature *attacker) {
-		attack_ = attack;
-		attacker_ = attacker;
+        attack_ = attack;
+        attacker_ = attacker;
     }
 
     void setConcealment(uint32_t val);
     void setCoupDeGrace(bool val) {
-		attack_->cad_coupdegrace = val;
+        attack_->cad_coupdegrace = val;
     }
     void setCriticalResult(uint32_t threat, uint32_t result);
     void setDeflected(bool val);
     void setKillingBlow() {
-		attack_->cad_killing_blow = 1;
+        attack_->cad_killing_blow = 1;
     }
     void setMissedBy(uint32_t ab);
     void setResult(uint32_t res);
@@ -57,3 +60,5 @@ public:
     bool isSneak();
     bool isSpecialAttack();
 };
+
+#endif // NWNX_COMBAT_COMBAT_ATTACK_DATA_H

@@ -14,7 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- ***************************************************************************/
+***************************************************************************/
 
 #include "NWNXCombat.h"
 
@@ -24,7 +24,6 @@ void Hook_AddAttackOfOpportunity(CNWSCombatRound *cr, uint32_t target){
     int result = !!nwn_GetLocalInt(&cr->cr_original->obj.obj_vartable, "NWNX_COMBAT_NO_AOO");
 
     if (!result) {
-	CNWSCombatRound__AddAttackOfOpportunity(cr, target);
+        CNWSCombatRound__AddAttackOfOpportunity(cr, target);
     }
 }
-

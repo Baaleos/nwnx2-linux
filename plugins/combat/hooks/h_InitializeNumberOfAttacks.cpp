@@ -14,7 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- ***************************************************************************/
+***************************************************************************/
 
 #include "NWNXCombat.h"
 
@@ -36,8 +36,8 @@ void Hook_InitializeNumberOfAttacks(CNWSCombatRound *combat_round) {
     int lbi = lh ? lh->it_baseitem : -1;
 
     if ( ( rbi == BASE_ITEM_HEAVYCROSSBOW ||
-	   rbi == BASE_ITEM_LIGHTCROSSBOW ) &&
-	 !CNWSCreatureStats__HasFeat(pc->cre_stats, FEAT_RAPID_RELOAD) ) {
+           rbi == BASE_ITEM_LIGHTCROSSBOW ) &&
+         !CNWSCreatureStats__HasFeat(pc->cre_stats, FEAT_RAPID_RELOAD) ) {
         attacks = 1;
     }
     else if ( pc->cre_stats->cs_override_atks ) {
@@ -47,7 +47,7 @@ void Hook_InitializeNumberOfAttacks(CNWSCombatRound *combat_round) {
 
     // The default NWN code sets onhand attacks to 1
     if ( pc->cre_slowed && attacks > 1 ) {
-	attacks -= 1;
+        attacks -= 1;
     }
     
     // Dirty Fighting
@@ -59,8 +59,8 @@ void Hook_InitializeNumberOfAttacks(CNWSCombatRound *combat_round) {
     }
     // Rapid Shot
     else if ( pc->cre_mode_combat == 6  && 
-	      ( rbi == BASE_ITEM_LONGBOW ||
-		rbi == BASE_ITEM_SHORTBOW ) ){
+              ( rbi == BASE_ITEM_LONGBOW ||
+                rbi == BASE_ITEM_SHORTBOW ) ){
         combat_round->cr_additional_atks = 1;
     }
     // flurry.
@@ -77,10 +77,10 @@ void Hook_InitializeNumberOfAttacks(CNWSCombatRound *combat_round) {
     combat_round->cr_offhand_atks = offhand_attacks;
     
     combat.Log(3, "on hand: %d, off hand: %d, additonal: %d, mode: %d",
-	       combat_round->cr_onhand_atks,
-	       combat_round->cr_offhand_atks,
-	       combat_round->cr_additional_atks,
-	       pc->cre_mode_combat);
+               combat_round->cr_onhand_atks,
+               combat_round->cr_offhand_atks,
+               combat_round->cr_additional_atks,
+               pc->cre_mode_combat);
 
 }
 

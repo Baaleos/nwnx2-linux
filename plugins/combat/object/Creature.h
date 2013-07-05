@@ -14,15 +14,15 @@ class Creature {
     
 public:
     Creature (CNWSCreature *cre)
-	: offense(this, cre),
-	  defense(this, cre),
-	  mod_favored_enemy(),
-	  mod_situ(),
-	  mod_training_vs(),
-	  fe_mask(0),
-	  training_vs_mask(0),
-	  original_(cre),
-	  mode_() {
+        : offense(this, cre),
+          defense(this, cre),
+          mod_favored_enemy(),
+          mod_situ(),
+          mod_training_vs(),
+          fe_mask(0),
+          training_vs_mask(0),
+          original_(cre),
+          mode_() {
     }
     ~Creature() {}
 
@@ -37,11 +37,11 @@ public:
     void         modifiySkillEffect(uint8_t skill, int32_t amount);
 
     void         setParent(Creature *parent, CNWSCreature *cre) {
-	original_ = cre;
-	offense.parent_ = parent;
-	defense.parent_ = parent;
-	offense.original_ = cre;
-	defense.original_ = cre;
+        original_ = cre;
+        offense.parent_ = parent;
+        defense.parent_ = parent;
+        offense.original_ = cre;
+        defense.original_ = cre;
     }
     void         log();
     std::string  toString();
@@ -68,8 +68,7 @@ private:
 
 inline int8_t Creature::getAbilityModifier(uint8_t type, bool armor_check) {
     return nwn_GetAbilityModifier(original_->cre_stats,
-				  type, armor_check);
+                                  type, armor_check);
 }
-
 
 #endif // NWNX_COMBAT_OBJECT_CREATURE_H

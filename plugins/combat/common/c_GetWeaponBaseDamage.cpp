@@ -35,25 +35,24 @@ DamageAmount GetWeaponBaseDamage(CNWSCreature *cre, CNWSItem *it) {
 	bonus = 18;
     }
     else if ( (feat = nwn_Get2daInt(feat_2da, "SpecSup", wpn)) > 0 &&
-	 nwn_GetHasFeat(cre->cre_stats, feat) ) {
+              nwn_GetHasFeat(cre->cre_stats, feat) ) {
 	bonus = 12;
     }
     else if ( (feat = nwn_Get2daInt(feat_2da, "SpecEpic", wpn)) > 0 &&
-	 nwn_GetHasFeat(cre->cre_stats, feat) ) {
+              nwn_GetHasFeat(cre->cre_stats, feat) ) {
 	bonus = 8;
     }
     else if ( (feat = nwn_Get2daInt(feat_2da, "Spec", wpn)) > 0 &&
-	 nwn_GetHasFeat(cre->cre_stats, feat) ) {
+              nwn_GetHasFeat(cre->cre_stats, feat) ) {
 	bonus = 4;
     }
     roll.bonus += bonus;
 
 #if TA
-    std::pair<bool, int32_t> canuse;
+    auto canuse = CanUseClassAbilities(cre, CLASS_TYPE_WEAPON_MASTER);
     // WM Ki Strike replacement...
-    canuse = CanUseClassAbilities(cre, CLASS_TYPE_WEAPON_MASTER);
     if ( canuse.first ) {
-	roll.bonus += canuse.second / 3;
+        roll.bonus += canuse.second / 3;
     }
 
 #endif // TA

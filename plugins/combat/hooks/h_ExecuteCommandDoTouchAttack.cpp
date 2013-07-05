@@ -8,7 +8,7 @@ int32_t Hook_ExecuteCommandDoTouchAttack(CNWVirtualMachineCommands *vmc, int32_t
 
     uint32_t target_id;
     int32_t feedback = 1;
-	
+        
     if ( !CVirtualMachine__StackPopObject(*NWN_VirtualMachine, &target_id) ||
          ( args > 1 && !CVirtualMachine__StackPopInteger(*NWN_VirtualMachine, &feedback) ) ) {
         return -639;
@@ -71,7 +71,7 @@ int32_t Hook_ExecuteCommandDoTouchAttack(CNWVirtualMachineCommands *vmc, int32_t
 
         CExoArrayList_uint32_add(&msg->objects, attacker_id);
         CExoArrayList_uint32_add(&msg->objects, target_id);
-	
+        
         CNWSPlayer *client_att = CServerExoApp__GetClientObjectByObjectId((*NWN_AppManager)->app_server,
                                                                           attacker_id);
         if ( client_att ) {

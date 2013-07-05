@@ -3,9 +3,9 @@
 extern CNWNXCombat combat;
 
 uint64_t GetFavoredEnemyMask(CNWSCreature *cre) {
-#define FE(flags, feat, race) \
+#define FE(flags, feat, race)                   \
     if ( nwn_GetHasFeat(cre->cre_stats, feat) ) \
-	flags |= 1 << race
+        flags |= 1 << race
 
     uint64_t mask = 0;    
     int ranger = nwn_GetLevelByClass(cre->cre_stats, CLASS_TYPE_RANGER);

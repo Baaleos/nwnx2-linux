@@ -42,7 +42,7 @@ public:
     virtual DamageResult getDamageVersus(int32_t equip_num);
     bool getHasDevistatingCritical(int32_t equip_num);
     virtual uint32_t     getIteration(int32_t equip_num) {
-	return equips[equip_num].iter;
+        return equips[equip_num].iter;
     }
 
     virtual int32_t      getMissChance(bool is_ranged);
@@ -50,13 +50,13 @@ public:
     virtual bool         hasCreatureAttacks() { return use_cre_attacks; }
     
     bool isEquipValid(int32_t equip_num) {
-	return equips[equip_num].id != OBJECT_INVALID;
+        return equips[equip_num].id != OBJECT_INVALID;
     }
 
     void modifiyEffectAttackBonus(uint32_t type, int32_t amount);
     void modifiyEffectAttacks(int32_t amount, bool is_offhand);
     void modifiyEffectDamamge(uint32_t dmgflag, uint32_t atktype, int32_t amount, 
-			      bool is_penalty, bool remove);
+                              bool is_penalty, bool remove);
 
     CombatWeapon         getWeaponInfo(CNWSItem *it, bool unarmed);
     

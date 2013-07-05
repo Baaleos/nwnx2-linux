@@ -14,12 +14,12 @@ uint32_t GetWeaponCritRange(CNWSCreature *cre, CNWSItem *it) {
     
     int32_t feat  = nwn_Get2daInt(feats, "CritImp", wpn);
     if ( feat > 0 && nwn_GetHasFeat(cre->cre_stats, feat) ) {
-	result += base_rng;
+        result += base_rng;
     }
 
 
     if ( nwn_HasPropertyType(it, ITEM_PROPERTY_KEEN) ) {
-	result += base_rng;
+        result += base_rng;
     }
 
     // WM Ki Critical add base crit range - assume if they have the levels they have the
@@ -29,9 +29,9 @@ uint32_t GetWeaponCritRange(CNWSCreature *cre, CNWSItem *it) {
 
     combat.Log(3, "GetWeaponCritRange: WM: %d, Feat: %d\n", wm, feat);
     if ( feat > 0 && 
-	 wm >= 7  && 
-	 nwn_GetHasFeat(cre->cre_stats, feat) ) { 
-	result += 2;
+         wm >= 7  && 
+         nwn_GetHasFeat(cre->cre_stats, feat) ) { 
+        result += 2;
     }
 #if TA
     else if ( (feat = nwn_Get2daInt(feats, "CritOver", wpn)) > 0 &&

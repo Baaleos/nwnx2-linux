@@ -14,7 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- ***************************************************************************/
+***************************************************************************/
 
 #include "NWNXCombat.h"
 
@@ -22,15 +22,15 @@ CNWNXCombat combat;
 PLUGINLINK *pluginLink = 0;
 
 PLUGININFO pluginInfo={
-	sizeof(PLUGININFO),
-	"NWNXCombat",
-	PLUGIN_MAKE_VERSION(0,0,0,1),
-	"",
-	"jmd",
-	"jmd2028@gmail.com",
-	"(c) 2011-current jmd",
-	"",
-	0		//not transient
+    sizeof(PLUGININFO),
+    "NWNXCombat",
+    PLUGIN_MAKE_VERSION(0,0,0,1),
+    "",
+    "jmd",
+    "jmd2028@gmail.com",
+    "(c) 2011-current jmd",
+    "",
+    0           //not transient
 };
 
 

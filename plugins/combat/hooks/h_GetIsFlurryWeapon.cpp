@@ -10,7 +10,7 @@ static int local(CNWSItem *item){
     if ( !item || !props ) { return false; }
     
     return !!nwn_Get2daInt(props, "Monk", 
-			   combat.baseitem_to_weapon(item->it_baseitem));
+                           combat.baseitem_to_weapon(item->it_baseitem));
 }
     
 void Hook_GetIsFlurryWeapon() {

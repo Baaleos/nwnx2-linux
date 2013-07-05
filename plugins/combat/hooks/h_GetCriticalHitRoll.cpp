@@ -14,7 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- ***************************************************************************/
+***************************************************************************/
 
 #include "NWNXCombat.h"
 
@@ -31,18 +31,17 @@ int Hook_GetCriticalHitRoll(CNWSCreatureStats *attacker, int offhand){
     uint32_t equip = 2; // Default equip is unarmed...
 
     if ( offhand ) {
-	equip = 1;
+        equip = 1;
     }
     else { 
-	for ( size_t i = 0; i < 6; ++i ) {
-	    if ( c->offense.isEquipValid(i) ) {
-		equip = i;
-		break;
-	    }
-	}
+        for ( size_t i = 0; i < 6; ++i ) {
+            if ( c->offense.isEquipValid(i) ) {
+                equip = i;
+                break;
+            }
+        }
     }
 
     int32_t result = c->offense.getCritThreat(equip);
     return result;
 }
-

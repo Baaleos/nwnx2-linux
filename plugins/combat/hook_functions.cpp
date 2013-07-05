@@ -14,7 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- ***************************************************************************/
+***************************************************************************/
 
 #include "NWNXCombat.h"
 
@@ -24,7 +24,7 @@ int (*CNWSCreature__UnequipItem_orig)(CNWSCreature *, CNWSItem *, int32_t) = NUL
 int (*CNWSCreatureStats__GetSkillRank_orig)(CNWSCreatureStats *, uint8_t, CNWSObject *, int32_t) = NULL;
 
 
-#define HOOK(orig, addr, hook, bytes) \
+#define HOOK(orig, addr, hook, bytes)                                   \
     *(void**)&orig = nx_hook_function((void*)addr, (void*)hook, bytes, NX_HOOK_DIRECT | NX_HOOK_RETCODE)
     
 
@@ -56,52 +56,52 @@ bool hook_functions(){
     HOOK(CNWSCreatureStats__GetEffectImmunity, 0x0815FF10, Hook_GetEffectImmunity, 5);
 
     nx_hook_function((void*)0x0812e19c,
-		     (void*)Hook_GetArmorClass,
-		     5, NX_HOOK_DIRECT);
+                     (void*)Hook_GetArmorClass,
+                     5, NX_HOOK_DIRECT);
     
     nx_hook_function((void*)0x0814425c,
-		     (void*)Hook_GetCreatureDamageDice,
-		     5, NX_HOOK_DIRECT);
+                     (void*)Hook_GetCreatureDamageDice,
+                     5, NX_HOOK_DIRECT);
 
     nx_hook_function((void*)0x08144368,
-		     (void*)Hook_GetCreatureDamageDie,
-		     5, NX_HOOK_DIRECT);
+                     (void*)Hook_GetCreatureDamageDie,
+                     5, NX_HOOK_DIRECT);
 
     nx_hook_function((void*)0x08143068,
-		     (void*)Hook_GetMeleeAttackBonus,
-		     5, NX_HOOK_DIRECT);
+                     (void*)Hook_GetMeleeAttackBonus,
+                     5, NX_HOOK_DIRECT);
 
     nx_hook_function((void*)0x08143524,
-		     (void*)Hook_GetMeleeDamageBonus,
-		     5, NX_HOOK_DIRECT);
+                     (void*)Hook_GetMeleeDamageBonus,
+                     5, NX_HOOK_DIRECT);
 
     nx_hook_function((void*)0x0814374c,
-		     (void*)Hook_GetRangedAttackBonus,
-		     5, NX_HOOK_DIRECT);
+                     (void*)Hook_GetRangedAttackBonus,
+                     5, NX_HOOK_DIRECT);
 
     nx_hook_function((void*)0x08143b5c,
-		     (void*)Hook_GetRangedDamageBonus,
-		     5, NX_HOOK_DIRECT);
+                     (void*)Hook_GetRangedDamageBonus,
+                     5, NX_HOOK_DIRECT);
 
     nx_hook_function((void*)0x08143f88,
-		     (void*)Hook_GetUnarmedDamageDice,
-		     5, NX_HOOK_DIRECT);
+                     (void*)Hook_GetUnarmedDamageDice,
+                     5, NX_HOOK_DIRECT);
 
     nx_hook_function((void*)0x0814408c,
-		     (void*)Hook_GetUnarmedDamageDie,
-		     5, NX_HOOK_DIRECT);
+                     (void*)Hook_GetUnarmedDamageDie,
+                     5, NX_HOOK_DIRECT);
 
     nx_hook_function((void*)0x080e38dc,
-		     (void*)Hook_GetWeaponAttackType,
-		     5, NX_HOOK_DIRECT);
+                     (void*)Hook_GetWeaponAttackType,
+                     5, NX_HOOK_DIRECT);
 
     nx_hook_function((void*)0x08209e94,
-		     (void*)Hook_ExecuteCommandDoTouchAttack,
-		     5, NX_HOOK_DIRECT);
+                     (void*)Hook_ExecuteCommandDoTouchAttack,
+                     5, NX_HOOK_DIRECT);
 
     nx_hook_function((void*)0x080efcac,
-					 (void*)Hook_ResolveDamageShields,
-					 5, NX_HOOK_DIRECT);
+                     (void*)Hook_ResolveDamageShields,
+                     5, NX_HOOK_DIRECT);
 
     // Look into cleaning this up...
     unsigned char *pDM = (unsigned char *)0x080f9965;

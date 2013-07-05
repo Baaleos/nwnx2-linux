@@ -14,15 +14,15 @@ int32_t Hook_GetMeleeAttackBonus(CNWSCreatureStats *stats, int offhand, int use_
     uint32_t equip = offhand ? 1 : 0;
 
     if ( !c->offense.isEquipValid(equip) ) {
-	equip = 2;
+        equip = 2;
     }
 
     int32_t result = 0;
     
     if ( !touch ) {
-	// The engine includes base attack bonus elsewhere in case
-	// of non-touch attacks.
-	result = c->offense.getAttackBonus(equip, false, !!use_eff);
+        // The engine includes base attack bonus elsewhere in case
+        // of non-touch attacks.
+        result = c->offense.getAttackBonus(equip, false, !!use_eff);
     }
 
     return result;

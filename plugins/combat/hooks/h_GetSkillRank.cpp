@@ -14,7 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- ***************************************************************************/
+***************************************************************************/
 
 #include "NWNXCombat.h"
 
@@ -146,10 +146,10 @@ int8_t Hook_GetSkillRank(CNWSCreatureStats *stats, uint8_t skill, CNWSObject *vs
     combat.Log(3, "Hook_GetSkillRank caller = %08lX (%s)\n", addr, GetFunctionCallerName(addr));
 
     if ( CheckAddress(addr) ) {
-	CNWSCreature *cre = stats->cs_original;
-	auto c = combat.get_creature(cre->obj.obj_id);
-	if ( !c ) { return 0; }
-	return c->getSkillRank(skill, vs, !!base);
+        CNWSCreature *cre = stats->cs_original;
+        auto c = combat.get_creature(cre->obj.obj_id);
+        if ( !c ) { return 0; }
+        return c->getSkillRank(skill, vs, !!base);
     }
     return CNWSCreatureStats__GetSkillRank_orig(stats, skill, vs, base);
 }

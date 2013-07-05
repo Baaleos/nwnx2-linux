@@ -14,17 +14,17 @@ public:
     // Defense
     virtual void doDamageMods(DamageResult &res);
     virtual int32_t doDamageImmunity(CNWSCreature *vs, int32_t amount,
-				     uint16_t dmg_flags, bool no_feedback);
+                                     uint16_t dmg_flags, bool no_feedback);
     virtual int32_t doDamageReduction(CNWSCreature *vs, int32_t dmg,
-				      uint8_t dmg_power, bool no_feedback);
+                                      uint8_t dmg_power, bool no_feedback);
     virtual int32_t doDamageResistance(CNWSCreature *vs, int32_t amount,
-				       uint16_t dmg_flags, bool no_feedback);
+                                       uint16_t dmg_flags, bool no_feedback);
     virtual SaveResult doSavingThrow(uint32_t save_type, uint32_t dc,
-				     uint32_t save_vs_type, const VersusInfo& vs,
-				     bool feedback);
+                                     uint32_t save_vs_type, const VersusInfo& vs,
+                                     bool feedback);
 
     virtual bool     canUseDexAC(uint32_t state, bool is_ranged) {
-	return false;
+        return false;
     }
     virtual uint32_t getArmorClass(bool dexed, uint32_t situ_flags, bool is_touch);
     virtual int32_t  getConcealment(bool is_ranged);
@@ -34,7 +34,7 @@ public:
     virtual int32_t  getSave(uint32_t save, uint32_t save_vs, bool base);
     virtual bool     isImmune(uint32_t type);
     virtual void     modifiyDamageImmunity(uint32_t dmg_type, int32_t amount);
-	
+        
     virtual void     update() {}
 private:
     CNWSObject *obj_;

@@ -16,37 +16,37 @@ int32_t Hook_GetWeaponAttackType(CNWSCombatRound *cr) {
     // Note that use_cre_attacks is true IFF there is no
     // onhand and offhand weapon.
     if ( c->offense.hasCreatureAttacks() ) {
-	switch ( true_random(1, 3) ) {
-	case 1:
-	    if ( c->offense.isEquipValid(3) ) {
-		return ATTACK_TYPE_CWEAPON1;
-	    }
-	case 2:
-	    if ( c->offense.isEquipValid(4) ) {
-		return ATTACK_TYPE_CWEAPON2;
-	    }
-	case 3:
-	    if ( c->offense.isEquipValid(5) ) {
-		return ATTACK_TYPE_CWEAPON3;
-	    }
-	}
+        switch ( true_random(1, 3) ) {
+        case 1:
+            if ( c->offense.isEquipValid(3) ) {
+                return ATTACK_TYPE_CWEAPON1;
+            }
+        case 2:
+            if ( c->offense.isEquipValid(4) ) {
+                return ATTACK_TYPE_CWEAPON2;
+            }
+        case 3:
+            if ( c->offense.isEquipValid(5) ) {
+                return ATTACK_TYPE_CWEAPON3;
+            }
+        }
 
-	// If chanced on a invalid creature attack...
-	// take the first one found.
-	for ( int i = 3; i < EQUIP_TYPE_NUM; ++i ) {
-	    if ( c->offense.isEquipValid(i) ) {
-		return i;
-	    }
-	}
+        // If chanced on a invalid creature attack...
+        // take the first one found.
+        for ( int i = 3; i < EQUIP_TYPE_NUM; ++i ) {
+            if ( c->offense.isEquipValid(i) ) {
+                return i;
+            }
+        }
     }
 
     if ( off > 0 && next > (on + additional + effect) ) {
-	return ATTACK_TYPE_OFFHAND;
+        return ATTACK_TYPE_OFFHAND;
     }
     else if ( c->offense.isEquipValid(0) ) {
-    	return ATTACK_TYPE_ONHAND;
+        return ATTACK_TYPE_ONHAND;
     }
     else {
-	return ATTACK_TYPE_UNARMED;
+        return ATTACK_TYPE_UNARMED;
     }
 }

@@ -9,14 +9,14 @@ void GetWeaponAmmoDamage(CNWSCreature *cre, uint32_t weapon_type, std::vector<Da
     switch(weapon_type) {
     default: return;
     case WEAPON_TYPE_BOW:
-	equipslot = EQUIPMENT_SLOT_ARROWS;
-	break;
+        equipslot = EQUIPMENT_SLOT_ARROWS;
+        break;
     case WEAPON_TYPE_SLING:
-	equipslot = EQUIPMENT_SLOT_BULLETS;
-	break;
+        equipslot = EQUIPMENT_SLOT_BULLETS;
+        break;
     case WEAPON_TYPE_CROSSBOW:
-	equipslot = EQUIPMENT_SLOT_BOLTS;
-	break;
+        equipslot = EQUIPMENT_SLOT_BOLTS;
+        break;
     }
 
     CNWSItem *it = nwn_GetItemInSlot(cre, equipslot);
@@ -24,13 +24,13 @@ void GetWeaponAmmoDamage(CNWSCreature *cre, uint32_t weapon_type, std::vector<Da
 
     CNWItemProperty *ip;
     for ( size_t i = 0; i < it->it_passive_ip_len; ++i ) {
-	ip = reinterpret_cast<CNWItemProperty *>(&it->it_passive_ip[i]);
-	if ( !ip ) { continue; }
-	
-	if ( ip->ip_type == ITEM_PROPERTY_DAMAGE_BONUS ) {
-	    dmgs.push_back(DamageAmount(GetDamageIndexFromFlag(GetDamageFlagFromIPConst(ip->ip_subtype)),
-					combat.ip_dmg_to_roll(ip->ip_cost_value),
-					false));
-	}
+        ip = reinterpret_cast<CNWItemProperty *>(&it->it_passive_ip[i]);
+        if ( !ip ) { continue; }
+        
+        if ( ip->ip_type == ITEM_PROPERTY_DAMAGE_BONUS ) {
+            dmgs.push_back(DamageAmount(GetDamageIndexFromFlag(GetDamageFlagFromIPConst(ip->ip_subtype)),
+                                        combat.ip_dmg_to_roll(ip->ip_cost_value),
+                                        false));
+        }
     }
 }

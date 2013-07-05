@@ -15,9 +15,9 @@ CombatMod GetCombatModFavoredEnemey(CNWSCreature *cre) {
     DiceRoll d(0, 0, bonus);
 
     if ( nwn_GetHasFeat(cre->cre_stats, FEAT_EPIC_BANE_OF_ENEMIES) ) {
-	mod.ab += 2;
-	d.dice = 2;
-	d.sides = 6;
+        mod.ab += 2;
+        d.dice = 2;
+        d.sides = 6;
     }
 
     mod.dmg = DamageAmount(DAMAGE_INDEX_BASE_WEAPON, d, false);

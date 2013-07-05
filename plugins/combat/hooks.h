@@ -9,12 +9,12 @@ void    Hook_AddAttackOfOpportunity(CNWSCombatRound *cr, uint32_t target);
 uint8_t Hook_GetCreatureDamageDice(CNWSCreatureStats *stats, uint8_t n);
 uint8_t Hook_GetCreatureDamageDie(CNWSCreatureStats *stats, uint8_t n);
 int32_t Hook_DoDamageImmunity(CNWSObject *obj, CNWSCreature *vs, int32_t amount,
-			      uint16_t flags, int32_t no_feedback, int32_t from_attack);
+                              uint16_t flags, int32_t no_feedback, int32_t from_attack);
 int32_t Hook_DoDamageReduction(CNWSObject *obj, CNWSCreature *vs, int32_t amount,
-			       uint8_t power, int32_t no_feedback, int32_t from_attack);
+                               uint8_t power, int32_t no_feedback, int32_t from_attack);
 int32_t Hook_DoDamageResistance(CNWSObject *obj, CNWSCreature *vs, int32_t amount,
-				uint16_t flags, int32_t no_feedback, int32_t from_attack,
-				int32_t a);
+                                uint16_t flags, int32_t no_feedback, int32_t from_attack,
+                                int32_t a);
 
 int32_t Hook_EquipItem(CNWSCreature *, uint32_t, CNWSItem *, int32_t, int32_t);
 int32_t Hook_ExecuteCommandDoTouchAttack(CNWVirtualMachineCommands *vmc, int32_t cmd, int32_t args);
@@ -33,8 +33,8 @@ int32_t Hook_GetRangedAttackBonus(CNWSCreatureStats *stats, int32_t use_base_eff
 int32_t Hook_GetRangedDamageBonus(CNWSCreatureStats *stats);
 int8_t  Hook_GetSkillRank(CNWSCreatureStats *stats, uint8_t skill, CNWSObject *vs, int32_t a);
 int32_t Hook_GetTotalEffectBonus(CNWSCreature *cre, uint8_t eff_switch , CNWSObject *vs, int elemental,
-				 int32_t is_crit, uint8_t save, uint8_t save_vs, uint8_t skill, uint8_t ability,
-				 int32_t is_offhand);
+                                 int32_t is_crit, uint8_t save, uint8_t save_vs, uint8_t skill, uint8_t ability,
+                                 int32_t is_offhand);
 uint8_t Hook_GetUnarmedDamageDice(CNWSCreatureStats *stats);
 uint8_t Hook_GetUnarmedDamageDie(CNWSCreatureStats *stats);
 int32_t Hook_GetWeaponAttackType(CNWSCombatRound *cr);
@@ -44,6 +44,6 @@ void    Hook_ResolveDamageShields(CNWSCreature *target, CNWSCreature *attacker);
 void    Hook_ResolveMeleeAttack(CNWSCreature *attacker, CNWSObject *obj, int attack_count, int a);
 void    Hook_ResolveRangedAttack(CNWSCreature *attacker, CNWSObject *obj, int attack_count, int a);
 int32_t Hook_SavingThrowRoll(CNWSCreature *cre, uint8_t save_type, uint16_t dc, uint8_t save_vs_type, 
-			     uint32_t versus_id, int32_t send_feedback, uint16_t feat, int32_t from_combat);
+                             uint32_t versus_id, int32_t send_feedback, uint16_t feat, int32_t from_combat);
 
 #endif // NWNX_COMBAT_HOOKS_H

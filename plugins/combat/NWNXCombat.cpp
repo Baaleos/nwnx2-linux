@@ -63,17 +63,17 @@ bool CNWNXCombat::OnCreate(gline *config, const char *LogDir) {
 
     // Plugin Events
     if( !pluginLink ){
-		Log (0, "ERROR: Plugin link not accessible.\n");
+        Log (0, "ERROR: Plugin link not accessible.\n");
         return false;
     }
     else {
-		Log (0, "* Plugin link: %08lX\n", pluginLink);
+        Log (0, "* Plugin link: %08lX\n", pluginLink);
     }
 
     HANDLE handlePluginsLoaded = HookEvent("NWNX/Core/PluginsLoaded", Handle_PluginsLoaded);
     if (!handlePluginsLoaded) {
         Log(0, "ERROR: Cannot hook plugins loaded event!\n");
-		return false;
+        return false;
     }
 
     bHooked = hook_functions();
@@ -96,11 +96,11 @@ char* CNWNXCombat::OnRequest (char *gameObject, char* Request, char* Parameters)
 }
 
 bool CNWNXCombat::OnRelease() {
-	for ( auto it = cache_.begin(); it != cache_.end(); ++it ) {
-		delete it->second;
-	}
-	delete[] table_dmg_rolls;
-	delete[] table_baseitems;
+    for ( auto it = cache_.begin(); it != cache_.end(); ++it ) {
+        delete it->second;
+    }
+    delete[] table_dmg_rolls;
+    delete[] table_baseitems;
     Log (0, "o Shutdown..\n");
     return true;
 }
@@ -116,14 +116,14 @@ bool CNWNXCombat::InitializeEventHandlers() {
     HANDLE handleItemPropEvent = HookEvent("NWNX/Items/ItemPropEvent", Handle_ItemPropEvent);
     if ( !handleItemPropEvent ) {
         Log(0, "Cannot hook NWNX/Items/ItemPropEvent!\n");
-		result = false;
+        result = false;
     }
 
     HANDLE handleEffectEvent = HookEvent("NWNX/Effects/EffectEvent",
-										 Handle_EffectEvent);
+                                         Handle_EffectEvent);
     if ( !handleEffectEvent ) {
         Log(0, "Cannot hook NWNX/Effects/EffectEvent!\n");
-		result = false;
+        result = false;
     }
     
     return result;
@@ -133,8 +133,8 @@ bool CNWNXCombat::InitializeTables() {
     C2DA *props = nwn_GetCached2da("wpnprops");
 
     if ( props == NULL ) {
-		Log(0, "ERROR: unable to load %s.2da.\n", WEAPON_PROP_2DA);
-		return false;
+        Log(0, "ERROR: unable to load %s.2da.\n", WEAPON_PROP_2DA);
+        return false;
     }
     
     int bi_len = (*NWN_Rules)->ru_baseitems->bitemarray_len;
@@ -142,41 +142,41 @@ bool CNWNXCombat::InitializeTables() {
     std::fill_n(table_baseitems, bi_len, 0);
     
     for ( int i = 0; i < nwn_Get2daRowCount(props); ++i ) {
-		int bi = nwn_Get2daInt(props, "Baseitems", i);
-		table_baseitems[bi] = i;
+        int bi = nwn_Get2daInt(props, "Baseitems", i);
+        table_baseitems[bi] = i;
     }
 
     C2DA *dmg = nwn_GetCached2da("iprp_damagecost");
     if ( dmg == NULL ) {
-		Log(0, "ERROR: unable to load %s.2da.\n", "iprp_damagecost");
-		return false;
+        Log(0, "ERROR: unable to load %s.2da.\n", "iprp_damagecost");
+        return false;
     }
 
     int rows = nwn_Get2daRowCount(dmg);
     table_dmg_rolls = new DiceRoll[rows];
     for ( int i = 0; i < rows; ++i ) {
-		table_dmg_rolls[i] = DiceRoll(nwn_Get2daInt(dmg, "NumDice", i),
-									  nwn_Get2daInt(dmg, "Die", i),
-									  0);
+        table_dmg_rolls[i] = DiceRoll(nwn_Get2daInt(dmg, "NumDice", i),
+                                      nwn_Get2daInt(dmg, "Die", i),
+                                      0);
     }
 }
 
 
 Creature* CNWNXCombat::get_creature(uint32_t id) {
     CNWSCreature *cre = nwn_GetCreatureByID(id);
-	
+        
     auto it = cache_.find(id);
     if ( it == cache_.end() && cre ) {
-		Log(3, "Creature ID: %X.  Not found, attempting insert.\n", id);
-		auto c = new Creature(cre);
-		c->setParent(c, cre);
-		cache_.insert( make_pair(id, c) );
-		c->update();
-		return c;
+        Log(3, "Creature ID: %X.  Not found, attempting insert.\n", id);
+        auto c = new Creature(cre);
+        c->setParent(c, cre);
+        cache_.insert( make_pair(id, c) );
+        c->update();
+        return c;
     }
     else if ( !cre ) {
-		Log(3, "Creature does not exist removing: %X.\n", id);
-		return NULL;
+        Log(3, "Creature does not exist removing: %X.\n", id);
+        return NULL;
     }
     it->second->setParent(it->second, cre);
     return it->second;

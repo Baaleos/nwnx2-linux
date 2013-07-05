@@ -36,15 +36,15 @@ public:
     virtual void doDamageMods(DamageResult &res);
 
     virtual int32_t doDamageImmunity(CNWSCreature *vs, int32_t amount,
-				     uint16_t dmg_flags, bool no_feedback);
+                                     uint16_t dmg_flags, bool no_feedback);
     virtual int32_t doDamageReduction(CNWSCreature *vs, int32_t dmg,
-				      uint8_t dmg_power, bool no_feedback);
+                                      uint8_t dmg_power, bool no_feedback);
     virtual int32_t doDamageResistance(CNWSCreature *vs, int32_t amount,
-				       uint16_t dmg_flags, bool no_feedback);
+                                       uint16_t dmg_flags, bool no_feedback);
 
     virtual SaveResult doSavingThrow(uint32_t save_type, uint32_t dc,
-				     uint32_t save_vs_type, const VersusInfo& vs,
-				     bool feedback);
+                                     uint32_t save_vs_type, const VersusInfo& vs,
+                                     bool feedback);
 
     int8_t getDamageImmunityByFlags(uint16_t flags);
     
@@ -67,11 +67,11 @@ public:
     void modifiyMiscImmunity(uint32_t type, int32_t amount);
 
     virtual void     modifiyStackResist(uint32_t dmg_type, int32_t amount) {
-	resist_stack[dmg_type] += amount;
+        resist_stack[dmg_type] += amount;
     }
 
     virtual void     modifiyStackSoak(uint32_t power, int32_t amount) {
-	soak_stack[power] += amount;
+        soak_stack[power] += amount;
     }
 
     std::string      getString(uint32_t flags);    

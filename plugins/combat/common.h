@@ -27,15 +27,15 @@ DamageAmount GetUnarmedBaseDamage(CNWSCreature *cre, CNWSItem *it);
 uint32_t     GetWeaponAttackAbility(CNWSCreature *cre, CNWSItem *it);
 uint32_t     GetWeaponDamageAbility(CNWSCreature *cre, CNWSItem *it);
 void         GetWeaponAmmoDamage(CNWSCreature *cre, uint32_t weapon_type,
-				 std::vector<DamageAmount>& dmgs);
+                                 std::vector<DamageAmount>& dmgs);
 uint32_t     GetWeaponAttackBonus(CNWSCreature *cre, CNWSItem *it);
 DamageAmount GetWeaponBaseDamage(CNWSCreature *cre, CNWSItem *it);
 void         GetWeaponCritDamage(CNWSCreature *cre, CNWSItem *it,
-				 std::vector<DamageAmount>& dmgs);
+                                 std::vector<DamageAmount>& dmgs);
 std::pair<uint32_t, bool> GetWeaponCritMultiplier(CNWSCreature *cre, CNWSItem *it);
 uint32_t     GetWeaponCritRange(CNWSCreature *cre, CNWSItem *it);
 void         GetWeaponDamage(CNWSCreature *cre, CNWSItem *it,
-			     std::vector<DamageAmount>& dmgs);
+                             std::vector<DamageAmount>& dmgs);
 uint32_t     GetWeaponIteration(CNWSCreature *cre, CNWSItem *it);
 uint32_t     GetWeaponPower(CNWSCreature *cre, CNWSItem *it);
 

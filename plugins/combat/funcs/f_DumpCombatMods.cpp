@@ -8,6 +8,6 @@ void Func_DumpCombatMods(CGameObject *ob, char *value) {
 
     auto c = combat.get_creature(ob->id);
     if ( c ) {
-	c->log();
+        c->log();
     }
 }

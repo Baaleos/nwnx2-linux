@@ -7,7 +7,7 @@ int32_t Hook_GetRangedDamageBonus(CNWSCreatureStats *stats) {
     CNWSCreature *cre = stats->cs_original;
     auto c = combat.get_creature(cre->obj.obj_id);
     if ( c ) {
-	res = c->offense.getDamageBonus(0);
+        res = c->offense.getDamageBonus(0);
     }
 
     return res;

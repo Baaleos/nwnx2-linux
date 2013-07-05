@@ -14,7 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- ***************************************************************************/
+***************************************************************************/
 
 #ifndef NWNX_COMBAT_H
 #define NWNX_COMBAT_H
@@ -53,8 +53,8 @@ public:
     bool InitializeTables();
     
     uint32_t baseitem_to_weapon(uint32_t bi) {
-		if ( !table_baseitems ) { return 0; }
-		return table_baseitems[bi];
+        if ( !table_baseitems ) { return 0; }
+        return table_baseitems[bi];
     }
 
     DiceRoll ip_dmg_to_roll(uint32_t ip_dmg);

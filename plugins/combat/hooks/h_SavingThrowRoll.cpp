@@ -14,14 +14,14 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- ***************************************************************************/
+***************************************************************************/
 
 #include "NWNXCombat.h"
 
 extern CNWNXCombat combat;
 
 int32_t Hook_SavingThrowRoll(CNWSCreature *cre, uint8_t save_type, uint16_t dc, uint8_t save_vs_type, 
-			     uint32_t versus_id, int32_t send_feedback, uint16_t feat, int32_t from_combat) {
+                             uint32_t versus_id, int32_t send_feedback, uint16_t feat, int32_t from_combat) {
 
     int32_t result = 0;
     return result;

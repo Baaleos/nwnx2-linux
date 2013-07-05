@@ -17,18 +17,18 @@ std::pair<uint32_t, bool> GetWeaponCritMultiplier(CNWSCreature *cre, CNWSItem *i
     int32_t feat  = nwn_Get2daInt(feats, "Choice", wpn);
     int wm = nwn_GetLevelByClass(cre->cre_stats, CLASS_TYPE_WEAPON_MASTER);
     if ( feat > 0 && 
-	 wm >= 5  &&
-	 nwn_GetHasFeat(cre->cre_stats, feat) ) { 
-	++mult;
+         wm >= 5  &&
+         nwn_GetHasFeat(cre->cre_stats, feat) ) { 
+        ++mult;
     }
 
 
     feat = nwn_Get2daInt(feats, "CritDev", wpn);
     if ( feat > 0 && nwn_GetHasFeat(cre->cre_stats, feat) ) {
 #if TA
-	++mult;
+        ++mult;
 #endif
-	has_dev = true;
+        has_dev = true;
     }
 
 

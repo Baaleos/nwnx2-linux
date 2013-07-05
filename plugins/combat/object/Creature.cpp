@@ -9,10 +9,10 @@ extern CNWNXCombat combat;
 
 static void dump_combat_mod(std::string name, std::ostringstream& out, const CombatMod& mod) {
     out << name << '\n'
-	<< " AB: " << mod.ab
-	<< " AC: " << mod.ac
-	<< " HP: " << mod.hp
-	<< " Damage: " << mod.dmg << '\n';
+        << " AB: " << mod.ab
+        << " AC: " << mod.ac
+        << " HP: " << mod.hp
+        << " Damage: " << mod.dmg << '\n';
 }
 
 void Creature::log() {
@@ -27,7 +27,7 @@ std::string Creature::getCombatModString() {
     dump_combat_mod("Training Vs.:", out, mod_training_vs);
 
     for ( int i = 0; i < COMBAT_SITUATION_NUM; ++i ) {
-	dump_combat_mod("Situations:", out, mod_situ[i]);
+        dump_combat_mod("Situations:", out, mod_situ[i]);
     }
     return out.str();
 }
@@ -38,7 +38,7 @@ std::string Creature::toString() {
 
 CombatMod *Creature::getSituationalModifier(uint32_t index) {
     if ( index < 0 || index >= COMBAT_SITUATION_NUM ) {
-	return nullptr;
+        return nullptr;
     }
 
     return &mod_situ[index];
@@ -70,8 +70,8 @@ int8_t Creature::getSkillRank(uint8_t skill, CNWSObject *vs, bool base) {
     result += nwn_GetAbilityModifier(original_->cre_stats, sk.sk_ability, false);
 
     if ( sk.sk_armor_check ) {
-	result += original_->cre_stats->cs_acp_armor;
-	result += original_->cre_stats->cs_acp_shield;
+        result += original_->cre_stats->cs_acp_armor;
+        result += original_->cre_stats->cs_acp_shield;
     }
     
     result += CNWSCreatureStats__GetTotalNegativeLevels(original_->cre_stats);
@@ -79,7 +79,7 @@ int8_t Creature::getSkillRank(uint8_t skill, CNWSObject *vs, bool base) {
 
     // Blind creatures get a -4 to skill checks.
     if ( CNWSCreature__GetBlind(original_) ) {
-	result -= 4;
+        result -= 4;
     }
 
     return CLAMP<int8_t>(result, -127, 127);
@@ -103,9 +103,9 @@ void Creature::update() {
     
     fe_mask = GetFavoredEnemyMask(original_);
     training_vs_mask = GetTrainingVsMask(original_);
-	
+        
     for ( int i = 0; i < COMBAT_SITUATION_NUM; ++i ) {
-	mod_situ[i] = GetCombatModSituation(original_, i);
+        mod_situ[i] = GetCombatModSituation(original_, i);
     }
 }
 

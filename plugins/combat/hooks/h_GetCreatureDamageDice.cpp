@@ -4,6 +4,5 @@ extern CNWNXCombat combat;
 
 uint8_t Hook_GetCreatureDamageDice(CNWSCreatureStats *stats, uint8_t n) {
     uint8_t res = 0;
-
     return res;
 }

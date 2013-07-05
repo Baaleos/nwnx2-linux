@@ -14,7 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- ***************************************************************************/
+***************************************************************************/
 
 #include "talib/util/math.h"
 #include "NWNXCombat.h"
@@ -23,6 +23,6 @@ extern CNWNXCombat combat;
 
 int32_t Hook_GetEffectImmunity(CNWSCreatureStats *stats, uint8_t type, CNWSCreature *versus) {
     auto c = combat.get_creature(stats->cs_original->obj.obj_id);
-    if ( !c ) { return true; }					  
+    if ( !c ) { return true; }                                    
     return c->defense.isImmune(type);
 }
