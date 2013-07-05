@@ -1,17 +1,19 @@
 ## nwnx_combat
 
 This plugin is a nearly complete replacement of the NWN combat
-engine.  It's not meant as a replacement for nwnx\_weapons and
+engine.  It's not meant as a replacement per se for nwnx\_weapons and
 nwnx\_defense, tho it is incompatible with and replaces the functions
 of both.  The purpose and goal of this plugin is to give people
 complete control over the combat engine and so would require
-programming modifications in C++.
+programming modifications in C++.  So nwnx\_weapon and nwnx\_defense
+are more user friendly from NWScript.
 
 ## Status
 * Currently still in alpha stage.
 
 ## Dependencies:
 * nwnx_effects
+* nwnx_items
 * A couple new 2da files.
 * ???
 
