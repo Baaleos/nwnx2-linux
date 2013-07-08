@@ -29,6 +29,7 @@ public:
     int8_t       getAbilityEffectModifier(uint8_t ability);
     int8_t       getAbilityModifier(uint8_t type, bool armor_check = false);
     bool         hasTrainingVersus(uint16_t race);
+    bool         isFavoredEnemy(uint16_t race);
     void         modifiyAbilityEffect(uint8_t ability, int32_t amount);
     CombatMod   *getSituationalModifier(uint32_t index);
 

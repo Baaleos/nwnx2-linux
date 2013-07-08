@@ -53,6 +53,10 @@ bool Creature::hasTrainingVersus(uint16_t race) {
     return (training_vs_mask & (1 << race));
 }
 
+bool Creature::isFavoredEnemy(uint16_t race) {
+    return (fe_mask & (1 << race));
+}
+
 void Creature::modifiyAbilityEffect(uint8_t ability, int32_t amount) {
     if ( ability < 0 || ability > 5 ) { return; }
     ability_eff[ability] += amount;

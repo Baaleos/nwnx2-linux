@@ -443,8 +443,12 @@ void Attack::resolveAttackRoll() {
         : NULL;
     
     if ( tar ) {
-        if ( attacker_->hasTrainingVersus(tar->cre_stats->cs_race) ) {
+        uint16_t race = tar->cre_stats->cs_race;
+        if ( attacker_->hasTrainingVersus(race) ) {
             ab += attacker_->mod_training_vs.ab;
+        }
+        if ( attacker_->isFavoredEnemy(race) ) {
+            ab += attacker_->mod_favored_enemy.ab;
         }
     }
     
@@ -536,8 +540,12 @@ void Attack::resolveDamage() {
         : NULL;
     
     if ( tar ) {
-        if ( attacker_->hasTrainingVersus(tar->cre_stats->cs_race) ) {
+        uint16_t race = tar->cre_stats->cs_race;
+        if ( attacker_->hasTrainingVersus(race) ) {
             result.add(attacker_->mod_training_vs.dmg);
+        }
+        if ( attacker_->isFavoredEnemy(race) ) {
+            result.add(attacker_->mod_favored_enemy.dmg);
         }
     }
 
