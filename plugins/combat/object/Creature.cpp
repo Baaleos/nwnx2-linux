@@ -49,6 +49,10 @@ int8_t Creature::getAbilityEffectModifier(uint8_t ability) {
     return CLAMP<int16_t>(ability_eff[ability], -12, 12);
 }
 
+bool Creature::hasTrainingVersus(uint16_t race) {
+    return (training_vs_mask & (1 << race));
+}
+
 void Creature::modifiyAbilityEffect(uint8_t ability, int32_t amount) {
     if ( ability < 0 || ability > 5 ) { return; }
     ability_eff[ability] += amount;

@@ -391,6 +391,11 @@ uint32_t Attack::resolveArmorClass() {
     CNWSCreatureStats *stats = tar->cre_stats;
     bool dexed = defense->canUseDexAC(target_state_, attack_data_.isRanged());
 
+    uint32_t ac_vs = 0;
+    if ( target_->hasTrainingVersus(attacker_nwn->cre_stats->cs_race) ) {
+        ac_vs += target_->mod_training_vs.ac;
+    }
+    
     uint32_t dex_ac = 0;
     if ( dexed ) {
         // If this is an attack of opportunity and target has mobility there is a +4 ac bonus.
@@ -413,7 +418,7 @@ uint32_t Attack::resolveArmorClass() {
         }
     }
 
-    return defense->getArmorClass(dexed, situ_flags_, false) + dex_ac;
+    return defense->getArmorClass(dexed, situ_flags_, false) + dex_ac + ac_vs;
 }
 
 void Attack::resolveAttackRoll() {
@@ -431,6 +436,16 @@ void Attack::resolveAttackRoll() {
     ab -= getIterationPenalty();
     if ( attack_data_.isSpecialAttack() && target_is_cre ) {
         ab += resolveSpecialAttackAttackBonus();
+    }
+
+    CNWSCreature *tar = target_is_cre
+        ? reinterpret_cast<CNWSCreature *>(target_nwn)
+        : NULL;
+    
+    if ( tar ) {
+        if ( attacker_->hasTrainingVersus(tar->cre_stats->cs_race) ) {
+            ab += attacker_->mod_training_vs.ab;
+        }
     }
     
     uint32_t roll = true_random(1, 20);
@@ -516,16 +531,22 @@ void Attack::resolveDamage() {
         }
     }
 
+    CNWSCreature *tar = target_is_cre
+        ? reinterpret_cast<CNWSCreature *>(target_nwn)
+        : NULL;
+    
+    if ( tar ) {
+        if ( attacker_->hasTrainingVersus(tar->cre_stats->cs_race) ) {
+            result.add(attacker_->mod_training_vs.dmg);
+        }
+    }
+
     damage_total_ = result.get_total();
     combat.Log(3, "resolveDamage: Pre-mod Total: %d\n", damage_total_);
     result.compactPhysicals();
     defense->doDamageMods(result);
     damage_total_ = result.get_total();
     combat.Log(3, "resolveDamage: Post-mod Total: %d\n", damage_total_);
-
-    CNWSCreature *tar = target_is_cre
-        ? reinterpret_cast<CNWSCreature *>(target_nwn)
-        : NULL;
 
     result.finalize();
     
