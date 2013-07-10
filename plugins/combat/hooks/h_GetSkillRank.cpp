@@ -143,13 +143,22 @@ int8_t Hook_GetSkillRank(CNWSCreatureStats *stats, uint8_t skill, CNWSObject *vs
     asm ("movl  %eax, pESP");
     
     unsigned long addr = (unsigned long)pESP;
-    combat.Log(3, "Hook_GetSkillRank caller = %08lX (%s)\n", addr, GetFunctionCallerName(addr));
-
+    combat.Log(5, "Hook_GetSkillRank caller = %08lX (%s)\n", addr, GetFunctionCallerName(addr));
+    int8_t result = 0;
     if ( CheckAddress(addr) ) {
         CNWSCreature *cre = stats->cs_original;
         auto c = combat.get_creature(cre->obj.obj_id);
         if ( !c ) { return 0; }
-        return c->getSkillRank(skill, vs, !!base);
+        result = c->getSkillRank(skill, vs, !!base);
     }
-    return CNWSCreatureStats__GetSkillRank_orig(stats, skill, vs, base);
+    else {
+        result = CNWSCreatureStats__GetSkillRank_orig(stats, skill, vs, base);
+    }
+
+    combat.Log(3, "Hook_GetSkillRank: Creature: %x, versus: %x, skill: %d, base: %d, result: %d\n",
+               stats->cs_original->obj.obj_id,
+               vs ? vs->obj_id : OBJECT_INVALID,
+               skill, base, result);
+    
+    return result;
 }
