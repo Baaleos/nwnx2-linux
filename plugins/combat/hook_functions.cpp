@@ -33,7 +33,7 @@ bool hook_functions(){
     HOOK(CNWSCombatRound__AddAttackOfOpportunity, 0x080E31E0, Hook_AddAttackOfOpportunity, 5);
     HOOK(CNWSCombatRound__InitializeNumberOfAttacks, 0x080E2260, Hook_InitializeNumberOfAttacks, 5);
 
-    //HOOK(CNWSCreature__GetMaxHitPoints, 0x0812E25C, Hook_GetMaxHitpoints, 5);
+    HOOK(CNWSCreature__GetMaxHitPoints, 0x0812E25C, Hook_GetMaxHitpoints, 5);
     HOOK(CNWSCreature__ResolveMeleeAttack, 0x080E9930, Hook_ResolveMeleeAttack, 5);
     HOOK(CNWSCreature__ResolveRangedAttack, 0x080E6FE4, Hook_ResolveRangedAttack, 5);
 

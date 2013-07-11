@@ -9,11 +9,14 @@ extern CNWNXCombat combat;
 
 CreatureDefense::CreatureDefense(Creature *p, CNWSCreature *o)
     : parent_(nullptr),
-      original_(o) {
-
-    soak = 0;
+      original_(o),
+      concealment(0),
+      hp_eff_(0),
+      hp_max_(0),
+      soak(0) {
+    
     std::fill_n(immunity, DAMAGE_TYPE_NUM, 0);
-      }
+}
 
 std::string CreatureDefense::getString(uint32_t flags) {
     std::ostringstream out;
@@ -487,28 +490,20 @@ int32_t CreatureDefense::getHPCurrent(bool use_temp) {
 }
 
 int32_t CreatureDefense::getHPMax() {
+    if ( hp_update_ ) updateHitPoints();
     return hp_max_ + hp_eff_ + parent_->mode_.hp;
 }
 
+// NOTE: this function can run before a character is fully
+// loaded, so it's necessary to make a few concessions to that
+// fact.
 void CreatureDefense::updateHitPoints() {
     int level = nwn_GetHitDice(original_);
     int base = 0;
+    bool not_pc = ( !original_->cre_stats->cs_is_pc ||
+                    CNWSCreature__GetIsPossessedFamiliar(original_) );
 
-    // Base Hitpoints.  NOTE: Non PC characters do not have level stats.
-    if( !original_->cre_stats->cs_is_pc ||
-        CNWSCreature__GetIsPossessedFamiliar(original_) ) {
-        base = original_->obj.obj_hp_max;
-    }
-    else {
-        CNWSStats_Level *lvl;
-        for( int i = 0; i <= level; i++ ){
-            if( (lvl = nwn_GetLevelStats(original_->cre_stats, i)) ) { 
-                base += lvl->ls_hp;
-            }
-        }
-    }
-
-    int con = original_->cre_stats->cs_con_mod * level;
+    int con = std::max(0, original_->cre_stats->cs_con_mod * level);
 
     int toughness = 0;
     if( nwn_GetHasFeat(original_->cre_stats, FEAT_TOUGHNESS) ) {
@@ -538,8 +533,34 @@ void CreatureDefense::updateHitPoints() {
             pm = pmlevel * 3;
         }
     }
+    
+    // Base Hitpoints.  NOTE: Non PC characters do not have level stats.
+    if( not_pc ) {
+        base = original_->obj.obj_hp_max;
+        hp_max_ = std::max((int)original_->obj.obj_hp_max, base + con + toughness + epictough + pm);
+    }
+    else {
+        CNWSStats_Level *lvl = nullptr;
+        for( int i = 1; i <= level; i++ ){
+            if( (lvl = nwn_GetLevelStats(original_->cre_stats, i)) ) { 
+                base += lvl->ls_hp;
+            }
+        }
+        // Character not fully loaded.
+        if ( base <= 0 ) { return; }
+        
+        hp_max_ = std::max((int)original_->obj.obj_hp_max, base + con + toughness + epictough + pm);
+        original_->obj.obj_hp_max = hp_max_;
+    }
 
-    hp_max_ = std::max(1, base + con + toughness + epictough);
+    
+
+    if ( hp_max_ <= 0 ) { hp_max_ = 1; }
+
+    if ( !not_pc ) {
+
+    }
+    hp_update_ = false;
 }
 
 

@@ -27,7 +27,10 @@ int Hook_GetMaxHitpoints (CNWSCreature  *cre, int32_t dunno) {
     auto c = combat.get_creature(cre->obj.obj_id);
     if ( !c ) { return 0; }
 
-    cre->obj.obj_hp_max = c->defense.getHPMax();
+    int result = c->defense.getHPMax();
 
-    return cre->obj.obj_hp_max;
+    combat.Log(3, "Hook_GetMaxHitpoints: Creature: %x, Result: %d, Dunno: %d\n",
+               cre->obj.obj_id, result, dunno);
+    
+    return result;
 }

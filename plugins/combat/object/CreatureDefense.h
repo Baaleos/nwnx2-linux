@@ -11,7 +11,8 @@ class CreatureDefense : public Defense {
     int16_t       concealment;
     int16_t       hp_eff_;
     int16_t       hp_max_;
-
+    bool          hp_update_ = true;
+    
     uint16_t      soak;
     CGameEffect*  soak_eff[DAMAGE_POWER_NUM];
     int16_t       soak_stack[DAMAGE_POWER_NUM];    
