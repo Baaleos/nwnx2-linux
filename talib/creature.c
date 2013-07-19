@@ -609,7 +609,7 @@ void nwn_SendMessage(uint32_t mode, uint32_t id, const char *msg, uint32_t to) {
 
     CNWSMessage* message = CServerExoApp__GetNWSMessage((*NWN_AppManager)->app_server);
     if(message){
-        char xz = NULL;
+        char xz = '\0';
         CExoString s;
         s.text = strdup(msg);
 
