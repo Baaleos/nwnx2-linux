@@ -53,9 +53,9 @@ public:
         return equips[equip_num].id != OBJECT_INVALID;
     }
 
-    void modifiyEffectAttackBonus(uint32_t type, int32_t amount);
-    void modifiyEffectAttacks(int32_t amount, bool is_offhand);
-    void modifiyEffectDamamge(uint32_t dmgflag, uint32_t atktype, int32_t amount, 
+    void modifyEffectAttackBonus(uint32_t type, int32_t amount);
+    void modifyEffectAttacks(int32_t amount, bool is_offhand);
+    void modifyEffectDamamge(uint32_t dmgflag, uint32_t atktype, int32_t amount, 
                               bool is_penalty, bool remove);
 
     CombatWeapon         getWeaponInfo(CNWSItem *it, bool unarmed);

@@ -30,12 +30,12 @@ public:
     int8_t       getAbilityModifier(uint8_t type, bool armor_check = false);
     bool         hasTrainingVersus(uint16_t race);
     bool         isFavoredEnemy(uint16_t race);
-    void         modifiyAbilityEffect(uint8_t ability, int32_t amount);
+    void         modifyAbilityEffect(uint8_t ability, int32_t amount);
     CombatMod   *getSituationalModifier(uint32_t index);
 
     int8_t       getSkillRank(uint8_t skill, CNWSObject *vs, bool base);
     int8_t       getSkillEffectModifier(uint8_t skill);
-    void         modifiySkillEffect(uint8_t skill, int32_t amount);
+    void         modifySkillEffect(uint8_t skill, int32_t amount);
 
     void         setParent(Creature *parent, CNWSCreature *cre) {
         original_ = cre;

@@ -67,7 +67,7 @@ bool SituatedObject::isImmune(uint32_t type) {
     return false;
 }
 
-void SituatedObject::modifiyDamageImmunity(uint32_t dmg_type, int32_t amount) {
+void SituatedObject::modifyDamageImmunity(uint32_t dmg_type, int32_t amount) {
 
 }
 

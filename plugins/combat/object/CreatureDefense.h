@@ -60,18 +60,18 @@ public:
 
     int32_t  getSave(uint32_t save, uint32_t save_vs, bool base);
     int32_t  getSaveEffectBonus(uint32_t save, uint32_t save_vs);
-    void     modifiySave(uint32_t save, uint32_t save_vs, int32_t amount);
+    void     modifySave(uint32_t save, uint32_t save_vs, int32_t amount);
 
     virtual bool isImmune(uint32_t type);
 
-    virtual void     modifiyDamageImmunity(uint32_t dmg_type, int32_t amount);
-    void modifiyMiscImmunity(uint32_t type, int32_t amount);
+    virtual void     modifyDamageImmunity(uint32_t dmg_type, int32_t amount);
+    void modifyMiscImmunity(uint32_t type, int32_t amount);
 
-    virtual void     modifiyStackResist(uint32_t dmg_type, int32_t amount) {
+    virtual void     modifyStackResist(uint32_t dmg_type, int32_t amount) {
         resist_stack[dmg_type] += amount;
     }
 
-    virtual void     modifiyStackSoak(uint32_t power, int32_t amount) {
+    virtual void     modifyStackSoak(uint32_t power, int32_t amount) {
         soak_stack[power] += amount;
     }
 

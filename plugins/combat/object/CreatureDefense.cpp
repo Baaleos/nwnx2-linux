@@ -690,14 +690,14 @@ int32_t CreatureDefense::getSaveEffectBonus(uint32_t save, uint32_t save_vs) {
     return CLAMP<int32_t>(save_bonus, -20, 20);
 }
 
-void CreatureDefense::modifiyDamageImmunity(uint32_t dmg_type, int32_t amount) {
-    combat.Log(3, "modifiyDamageImmunity: Damage: %d; Amount: %d\n",
+void CreatureDefense::modifyDamageImmunity(uint32_t dmg_type, int32_t amount) {
+    combat.Log(3, "modifyDamageImmunity: Damage: %d; Amount: %d\n",
                dmg_type, amount);
 
     immunity[dmg_type] += amount;
 }
 
-void CreatureDefense::modifiyMiscImmunity(uint32_t type, int32_t amount) {
+void CreatureDefense::modifyMiscImmunity(uint32_t type, int32_t amount) {
     if ( amount == 0 ) { amount = 100; }
     immunity_misc[type] += amount;
 }
@@ -747,8 +747,8 @@ bool CreatureDefense::isImmune(uint32_t type) {
     return rand <= perc;
 }
     
-void CreatureDefense::modifiySave(uint32_t save, uint32_t save_vs, int32_t amount) {
-    combat.Log(3, "modifiySave: Save: %d; Save VS: %d; Amount: %d\n",
+void CreatureDefense::modifySave(uint32_t save, uint32_t save_vs, int32_t amount) {
+    combat.Log(3, "modifySave: Save: %d; Save VS: %d; Amount: %d\n",
                save, save_vs, amount);
 
     if ( save == SAVING_THROW_REFLEX || save == SAVING_THROW_ALL ) {

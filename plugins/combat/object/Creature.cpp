@@ -57,7 +57,7 @@ bool Creature::isFavoredEnemy(uint16_t race) {
     return (fe_mask & (1 << race));
 }
 
-void Creature::modifiyAbilityEffect(uint8_t ability, int32_t amount) {
+void Creature::modifyAbilityEffect(uint8_t ability, int32_t amount) {
     if ( ability < 0 || ability > 5 ) { return; }
     ability_eff[ability] += amount;
 }
@@ -98,7 +98,7 @@ int8_t Creature::getSkillEffectModifier(uint8_t skill) {
     return CLAMP<int16_t>(skill_eff[skill], -10, 50);
 }
 
-void Creature::modifiySkillEffect(uint8_t skill, int32_t amount) {
+void Creature::modifySkillEffect(uint8_t skill, int32_t amount) {
     if ( skill < 0 || skill > SKILL_LAST ) { return; }
     skill_eff[skill] += amount;
 }

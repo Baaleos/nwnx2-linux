@@ -260,14 +260,14 @@ const CombatWeapon *CreatureOffense::getWeapon(int32_t equip_num) {
     return &equips[equip_num];
 }
 
-void CreatureOffense::modifiyEffectAttackBonus(uint32_t type, int32_t amount) {
+void CreatureOffense::modifyEffectAttackBonus(uint32_t type, int32_t amount) {
     if ( type < 0 || type > 8 ) {
         return;
     }
     ab_eff[type] += amount;
 }
 
-void CreatureOffense::modifiyEffectDamamge(uint32_t dmgflag, uint32_t atktype, int32_t amount, 
+void CreatureOffense::modifyEffectDamamge(uint32_t dmgflag, uint32_t atktype, int32_t amount, 
                                            bool is_penalty, bool remove = false) {
     uint32_t idx = GetDamageIndexFromFlag(dmgflag);
     DamageAmount amt(idx, combat.ip_dmg_to_roll(amount), is_penalty);

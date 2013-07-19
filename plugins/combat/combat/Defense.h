@@ -28,7 +28,7 @@ public:
     virtual uint32_t getHardness() = 0;
     virtual int32_t  getSave(uint32_t save, uint32_t save_vs, bool base) = 0;
     virtual bool     isImmune(uint32_t type) = 0;
-    virtual void     modifiyDamageImmunity(uint32_t dmg_type, int32_t amount) = 0;
+    virtual void     modifyDamageImmunity(uint32_t dmg_type, int32_t amount) = 0;
     
     virtual void     update() = 0;
 };

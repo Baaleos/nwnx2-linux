@@ -17,7 +17,7 @@ int Handle_EffectEvent(WPARAM p, LPARAM a) {
     default: return 0;
     case EFFECT_TRUETYPE_ABILITY_INCREASE:
         if ( !ev->preapply ) {
-            c->modifiyAbilityEffect(
+            c->modifyAbilityEffect(
                 eff->eff_integers[0],
                 ev->is_remove ? -eff->eff_integers[1] : eff->eff_integers[1]);
             c->offense.updateAbility();
@@ -25,7 +25,7 @@ int Handle_EffectEvent(WPARAM p, LPARAM a) {
         break;
     case EFFECT_TRUETYPE_ABILITY_DECREASE:
         if ( !ev->preapply ) {      
-            c->modifiyAbilityEffect(
+            c->modifyAbilityEffect(
                 eff->eff_integers[0],
                 ev->is_remove ? eff->eff_integers[1] : -eff->eff_integers[1]);
             c->offense.updateAbility();
@@ -33,7 +33,7 @@ int Handle_EffectEvent(WPARAM p, LPARAM a) {
         break;
     case EFFECT_TRUETYPE_DAMAGE_IMMUNITY_INCREASE:
         if ( !ev->preapply ) {
-            c->defense.modifiyDamageImmunity(
+            c->defense.modifyDamageImmunity(
                 GetDamageIndexFromFlag(eff->eff_integers[0]),
                 ev->is_remove ? -eff->eff_integers[1] : eff->eff_integers[1]);
         }
@@ -41,7 +41,7 @@ int Handle_EffectEvent(WPARAM p, LPARAM a) {
 
     case EFFECT_TRUETYPE_DAMAGE_IMMUNITY_DECREASE:
         if ( !ev->preapply ) {
-            c->defense.modifiyDamageImmunity(
+            c->defense.modifyDamageImmunity(
                 GetDamageIndexFromFlag(eff->eff_integers[0]),
                 ev->is_remove ? eff->eff_integers[1] : -eff->eff_integers[1]);
         }
@@ -65,7 +65,7 @@ int Handle_EffectEvent(WPARAM p, LPARAM a) {
              eff->eff_integers[4] == 0                   &&
              eff->eff_integers[5] == 0 ) {
 
-            c->defense.modifiySave(
+            c->defense.modifySave(
                 eff->eff_integers[1],
                 eff->eff_integers[2],
                 ev->is_remove ? -eff->eff_integers[0] : eff->eff_integers[0]);
@@ -77,7 +77,7 @@ int Handle_EffectEvent(WPARAM p, LPARAM a) {
              eff->eff_integers[4] == 0                   &&
              eff->eff_integers[5] == 0 ) {
             
-            c->defense.modifiySave(
+            c->defense.modifySave(
                 eff->eff_integers[1],
                 eff->eff_integers[2],
                 ev->is_remove ? eff->eff_integers[0] : -eff->eff_integers[0]);
@@ -86,14 +86,14 @@ int Handle_EffectEvent(WPARAM p, LPARAM a) {
 
     case EFFECT_TRUETYPE_SKILL_INCREASE:
         if ( !ev->preapply ) {
-            c->modifiySkillEffect(
+            c->modifySkillEffect(
                 eff->eff_integers[0],
                 ev->is_remove ? -eff->eff_integers[1] : eff->eff_integers[1]);
         }
         break;
     case EFFECT_TRUETYPE_SKILL_DECREASE:
         if ( !ev->preapply ) {      
-            c->modifiySkillEffect(
+            c->modifySkillEffect(
                 eff->eff_integers[0],
                 ev->is_remove ? eff->eff_integers[1] : -eff->eff_integers[1]);
         }
@@ -105,7 +105,7 @@ int Handle_EffectEvent(WPARAM p, LPARAM a) {
              eff->eff_integers[3] == 0                   &&
              eff->eff_integers[4] == 0 ) {
             
-            c->offense.modifiyEffectAttackBonus(
+            c->offense.modifyEffectAttackBonus(
                 eff->eff_integers[1],
                 ev->is_remove ? -eff->eff_integers[0] : eff->eff_integers[0]);
         }
@@ -116,7 +116,7 @@ int Handle_EffectEvent(WPARAM p, LPARAM a) {
              eff->eff_integers[3] == 0                   &&
              eff->eff_integers[4] == 0 ) {
             
-            c->offense.modifiyEffectAttackBonus(
+            c->offense.modifyEffectAttackBonus(
                 eff->eff_integers[1],
                 ev->is_remove ? eff->eff_integers[0] : -eff->eff_integers[0]);
         }
@@ -128,7 +128,7 @@ int Handle_EffectEvent(WPARAM p, LPARAM a) {
              eff->eff_integers[3] == 0                   &&
              eff->eff_integers[4] == 0 ) {
 
-            c->offense.modifiyEffectDamamge(
+            c->offense.modifyEffectDamamge(
                 eff->eff_integers[1],
                 eff->eff_integers[5],
                 eff->eff_integers[0],
@@ -144,7 +144,7 @@ int Handle_EffectEvent(WPARAM p, LPARAM a) {
              eff->eff_integers[3] == 0                   &&
              eff->eff_integers[4] == 0 ) {
 
-            c->offense.modifiyEffectDamamge(
+            c->offense.modifyEffectDamamge(
                 eff->eff_integers[1],
                 eff->eff_integers[5],
                 eff->eff_integers[0],
@@ -160,7 +160,7 @@ int Handle_EffectEvent(WPARAM p, LPARAM a) {
              eff->eff_integers[1] == RACIAL_TYPE_INVALID &&
              eff->eff_integers[2] == 0                   &&
              eff->eff_integers[3] == 0 ) {
-            c->defense.modifiyMiscImmunity(
+            c->defense.modifyMiscImmunity(
                 eff->eff_integers[0],
                 eff->eff_integers[4]);
         }
@@ -171,7 +171,7 @@ int Handle_EffectEvent(WPARAM p, LPARAM a) {
             ev->suppress = true;
         }
         else {
-            c->defense.modifiyStackSoak(
+            c->defense.modifyStackSoak(
                 eff->eff_integers[0],
                 ev->is_remove ? -eff->eff_integers[1] : eff->eff_integers[1]);
         }
@@ -182,7 +182,7 @@ int Handle_EffectEvent(WPARAM p, LPARAM a) {
             ev->suppress = true;
         }
         else {
-            c->defense.modifiyStackSoak(
+            c->defense.modifyStackSoak(
                 eff->eff_integers[0],
                 ev->is_remove ? eff->eff_integers[1] : -eff->eff_integers[1]);
         }
@@ -193,7 +193,7 @@ int Handle_EffectEvent(WPARAM p, LPARAM a) {
             ev->suppress = true;
         }
         else {
-            c->defense.modifiyStackResist(
+            c->defense.modifyStackResist(
                 GetDamageIndexFromFlag(eff->eff_integers[0]),
                 ev->is_remove ? -eff->eff_integers[1] : eff->eff_integers[1]);
         }
@@ -203,7 +203,7 @@ int Handle_EffectEvent(WPARAM p, LPARAM a) {
             ev->suppress = true;
         }
         else {
-            c->defense.modifiyStackResist(
+            c->defense.modifyStackResist(
                 GetDamageIndexFromFlag(eff->eff_integers[0]),
                 ev->is_remove ? eff->eff_integers[1] : -eff->eff_integers[1]);
         }
