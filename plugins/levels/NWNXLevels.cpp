@@ -39,6 +39,12 @@ char *CNWNXLevels::OnRequest (char *gameObject, char *Request, char *Parameters)
     else if(strncmp(Request, "SETMAXLEVELLIMIT", 15) == 0){
         Func_SetMaxLevelLimit((CGameObject *)gameObject, Parameters);
     }
+    else if(strncmp(Request, "MODIFYXPDIRECT", 14) == 0){
+        Func_ModifyXPDirect((CGameObject *)gameObject, Parameters);
+    }
+    else if(strncmp(Request, "SETXPDIRECT", 11) == 0){
+        Func_SetXPDirect((CGameObject *)gameObject, Parameters);
+    }    
     else if(strncmp(Request, "DUMPSPELLS", 10) == 0){
         CGameObject *ob = (CGameObject *)gameObject;
         CNWSCreature *cre;

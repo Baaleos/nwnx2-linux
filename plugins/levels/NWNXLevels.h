@@ -25,7 +25,9 @@
 void Func_GetMaxLevelLimit  (CGameObject *ob, char *value);
 void Func_LevelUp           (CGameObject *ob, char *value);
 void Func_LevelDown         (CGameObject *ob, char *value);
+void Func_ModifyXPDirect    (CGameObject *ob, char *value);
 void Func_SetMaxLevelLimit  (CGameObject *ob, char *value);
+void Func_SetXPDirect       (CGameObject *ob, char *value);
 
 int8_t Hook_GetSpellGain(CNWClass *cls, uint8_t level, uint8_t spell_level);
 uint8_t Hook_GetSpellsKnownPerLevel(CNWClass *cls, uint8_t level, int8_t sp_level, int8_t class_type, uint16_t race, uint8_t cha);
