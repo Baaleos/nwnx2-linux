@@ -40,6 +40,14 @@ bool CNWNXSolstice::OnCreate(gline *config, const char *LogDir)
     if (!CNWNXBase::OnCreate(config,log))
         return false;
 
+    // Add in this hack...to make sure the lua symbols are add to the
+    // global table.  Before lua C modules were not working. 
+    void *res = dlopen("libluajit-5.1.so", RTLD_NOW | RTLD_GLOBAL);
+    if ( !res ) {
+        Log (0, "ERROR: libluajit-5.1.so not installed!\n");
+        return false;
+    }
+    
     // Plugin Events
     if(!pluginLink){
 	Log (0, "Plugin link not accessible\n");

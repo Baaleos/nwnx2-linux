@@ -46,4 +46,8 @@ add_module(solstice NWNXSolstice plugin-solstice
     ../../talib/effects/itemprop
     ../../talib/effects/creation
 )
-target_link_libraries(solstice rt luajit-5.1)
+
+target_link_libraries(solstice 
+  rt 
+  ${LUAJIT_LIBRARIES}
+  dl)
