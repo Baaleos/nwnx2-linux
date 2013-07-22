@@ -125,6 +125,12 @@ bool CNWNXCombat::InitializeEventHandlers() {
         Log(0, "Cannot hook NWNX/Effects/EffectEvent!\n");
         result = false;
     }
+
+    HANDLE handleEvent = HookEvent("NWNX/Events/Event", Handle_Event);
+    if (!handleEvent) {
+        Log(0, "Cannot hook NWNX/Events/Event!\n");
+        result = false;
+    }
     
     return result;
 }
@@ -180,4 +186,11 @@ Creature* CNWNXCombat::get_creature(uint32_t id) {
     }
     it->second->setParent(it->second, cre);
     return it->second;
+}
+
+void CNWNXCombat::removeCreature(uint32_t id) {
+    auto it = cache_.find(id);
+    if ( it == cache_.end() ) { return; }
+    delete it->second;
+    cache_.erase(it);
 }

@@ -34,6 +34,7 @@
 #include "hooks.h"
 
 #include <utility>
+#include <string>
 
 bool hook_functions();
 char* HandleRequest(CGameObject *ob, const char *request, char *value);
@@ -62,7 +63,8 @@ public:
     bool bHooked;
 
     Creature* get_creature(uint32_t id);
-
+    void      removeCreature(uint32_t id);
+    
     uint32_t  *table_baseitems;
     DiceRoll  *table_dmg_rolls;
     std::map<uint32_t, CombatMod> modes;
