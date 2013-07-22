@@ -26,6 +26,7 @@ add_module(solstice NWNXSolstice plugin-solstice
     handles/hndl_PluginsLoaded
     hooks/h_RunScript
     hooks/h_GetFeatRemainingUses
+    hooks/h_GetFeatTotalUses
     hooks/h_GetRunScriptReturnValue
     hooks/h_RunScriptSituation
     hooks/h_SetCombatMode

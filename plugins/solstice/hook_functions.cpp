@@ -25,6 +25,8 @@
 bool hook_functions(){
     HOOK(CVirtualMachine__RunScript, 0x08261F94, Hook_RunScriptStart, 5);
     HOOK(CVirtualMachine__RunScriptSituation, 0x08262534, Hook_RunScriptSituationStart, 5);
+    nx_hook_function((void *)0x0815479c,
+                     (void *)Hook_GetFeatTotalUses, 5, NX_HOOK_DIRECT);
     nx_hook_function((void *)0x08153E00,
                      (void *)Hook_GetFeatRemainingUses, 5, NX_HOOK_DIRECT);
 

@@ -66,6 +66,7 @@ void Hook_RunScriptEnd();
 void Hook_RunScriptSituationStart(CVirtualMachine *vm, void *script, uint32_t obj, int a);
 void Hook_RunScriptSituationEnd();
 int8_t Hook_GetFeatRemainingUses(CNWSCreatureStats *stats, uint16_t feat);
+int8_t Hook_GetFeatTotalUses(CNWSCreatureStats *stats, uint16_t feat);
 int Hook_GetRunScriptReturnValue(CVirtualMachine *vm, int* a, void** b);
 void    Hook_SetCombatMode(CNWSCreature *cre, int8_t mode, int32_t change);
 int32_t Hook_ToggleMode(CNWSCreature *cre, uint8_t mode);
