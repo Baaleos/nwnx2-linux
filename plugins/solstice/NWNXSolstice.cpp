@@ -19,7 +19,6 @@
 extern PLUGINLINK *pluginLink;
 
 lua_State *L = NULL;
-int (*CNWSObject_dtor)(CNWSObject *, int8_t) = NULL;
 
 CNWNXSolstice::CNWNXSolstice(){
     confKey = strdup("SOLSTICE");

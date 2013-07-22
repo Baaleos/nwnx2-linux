@@ -22,8 +22,6 @@
 #include "NWNXLib.h"
 #include "talib/all.h"
 
-extern int (*CNWSObject_dtor)(CNWSObject *, int8_t);
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -62,8 +60,6 @@ int Handle_EquipEvent(WPARAM p, LPARAM a);
 int Handle_Event(WPARAM p, LPARAM a);
 int Handle_ItemPropEvent(WPARAM p, LPARAM a);
 int Handle_PluginsLoaded(WPARAM p, LPARAM a);
-
-void Hook_CNWSObject_dtor(CNWSObject *obj, int8_t a);
 
 int Hook_RunScriptStart(CVirtualMachine *vm, CExoString *script, nwn_objid_t id, int a);
 void Hook_RunScriptEnd();

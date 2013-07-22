@@ -24,7 +24,6 @@ add_module(solstice NWNXSolstice plugin-solstice
     handles/hndl_Event
     handles/hndl_ItemPropEvent
     handles/hndl_PluginsLoaded
-    hooks/h_CNWSObject_dtor
     hooks/h_RunScript
     hooks/h_GetFeatRemainingUses
     hooks/h_GetRunScriptReturnValue
