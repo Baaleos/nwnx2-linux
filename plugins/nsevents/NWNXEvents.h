@@ -42,6 +42,8 @@
 
 #define NUM_EVENT_TYPES                 16
 
+extern int (*CNWSObject_dtor)(CNWSObject *, int8_t);
+
 bool hook_functions();
 
 void Hook_AddAttackActions(CNWSCreature *cre, nwn_objid_t target, int, int clear_actions, int attack_now);
@@ -56,6 +58,7 @@ int32_t Hook_CheckScript(CNWSDialog *dlg, CNWSObject *obj, const CResRef *resref
 int32_t Hook_HandleReply(CNWSDialog *dlg, uint32_t a, CNWSObject *obj, uint32_t node_id, int c, uint32_t d);
 void Hook_PackCreatureIntoMessage(CNWSPlayer *pl);
 void Hook_PossessFamiliar(CNWSCreature *cre);
+void Hook_CNWSObject_dtor(CNWSObject *obj, int8_t a);
 int32_t Hook_SendServerToPlayerExamineGui_CreatureData(CNWSMessage *msg, CNWSPlayer *pl, nwn_objid_t obj);
 int32_t Hook_SendServerToPlayerExamineGui_DoorData(CNWSMessage *msg, CNWSPlayer *pl, nwn_objid_t obj);
 int32_t Hook_SendServerToPlayerExamineGui_ItemData(CNWSMessage *msg, CNWSPlayer *pl, nwn_objid_t obj);

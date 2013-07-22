@@ -11,6 +11,7 @@ bool hook_functions(){
     //HOOK(CNWSCreature__AddCastSpellActions, 0x0811610C, Hook_AddCastSpellActions, 5);
     HOOK(CNWSCreature__AIActionPickPocket, 0x0810A3F4, Hook_AIActionPickPocket, 5);
     //HOOK(CNWSCreature__PossessFamiliar, 0x0810DE48, Hook_PossessFamiliar, 7);
+    HOOK(CNWSObject_dtor, 0x081C8E94, Hook_CNWSObject_dtor, 5);
 
     HOOK(CNWSCreature__UseFeat, 0x0812A004, Hook_UseFeat, 5);
     HOOK(CNWSCreature__UseItem, 0x0812B958, Hook_UseItem, 9);

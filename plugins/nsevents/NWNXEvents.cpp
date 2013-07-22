@@ -20,6 +20,7 @@
 #include "NWNXEvents.h"
 
 extern PLUGINLINK *pluginLink;
+int (*CNWSObject_dtor)(CNWSObject *, int8_t) = NULL;
 
 #define MLIT(str, lit) \
     strncmp((str), "" lit, (sizeof (lit)/sizeof(char)) - 1) == 0

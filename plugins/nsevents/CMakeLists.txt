@@ -9,6 +9,7 @@ add_module(nsevents NWNXEvents plugin-events
     hooks/h_AddCastSpellActions
     hooks/h_AIActionPickPocket
     hooks/h_CheckScript
+    hooks/h_CNWSObject_dtor
     hooks/h_HandleReply
     hooks/h_PackCreatureIntoMessage
     hooks/h_PossessFamiliar
