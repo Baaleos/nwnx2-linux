@@ -16,6 +16,12 @@
 
 #include "NWNXSolstice.h"
 
+static int dolibrary (lua_State *L, const char *name) {
+    lua_getglobal(L, "require");
+    lua_pushstring(L, name);
+    return lua_pcall(L, 1, 0, 0);
+}
+
 extern PLUGINLINK *pluginLink;
 
 lua_State *L = NULL;
@@ -27,6 +33,10 @@ CNWNXSolstice::CNWNXSolstice(){
 }
 
 CNWNXSolstice::~CNWNXSolstice(){
+}
+
+std::string CNWNXSolstice::GetConf(const char* key) {
+    return (*nwnxConfig)[confKey][key];
 }
 
 bool CNWNXSolstice::OnCreate(gline *config, const char *LogDir)
@@ -72,9 +82,15 @@ bool CNWNXSolstice::OnCreate(gline *config, const char *LogDir)
     L = lua_open();
     luaL_openlibs(L);
 
-    luaL_dostring(L, "print(\"NWNX Lua Initialized\")\n");
+    std::string dir = GetConf("script_dir");
+    if ( dir.empty() ) {
+        dir = "solstice/preload";
+    }
+    else {
+        dir += "/preload";
+    }
 
-    int status = luaL_dofile(L, "./Solstice/preload.lua");
+    int status = dolibrary(L, dir.c_str());
     if (status) {
         /* If something went wrong, error message is at the top of */
         /* the stack */

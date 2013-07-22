@@ -49,6 +49,7 @@ void           Local_NWNXLog(int level, const char* log);
 }
 
 #include "NWNXBase.h"
+#include <string>
 
 bool init_event_handles();
 
@@ -76,7 +77,8 @@ class CNWNXSolstice : public CNWNXBase
 public:
     CNWNXSolstice();
     ~CNWNXSolstice();
-
+    
+    std::string GetConf(const char* key);
     bool InitializeEventHandlers();
     bool OnCreate(gline *nwnxConfig, const char *LogDir=NULL);
     char* OnRequest (char* gameObject, char* Request, char* Parameters);
