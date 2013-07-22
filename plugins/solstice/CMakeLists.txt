@@ -2,7 +2,7 @@ find_path(LUAJIT_INCLUDE_DIR luajit.h
             NAMES luajit.h
             PATH_SUFFIXES luajit-2.0)
 
-find_library(LUAJIT_LIBRARIES luajit NAMES luajit-5.1)
+find_library(LUAJIT_LIBRARIES luajit NAMES luajit-5.1.a)
 
 # Add the user's chosen flags to the build for this directory.
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++0x -Wno-return-type")
@@ -46,8 +46,10 @@ add_module(solstice NWNXSolstice plugin-solstice
     ../../talib/effects/itemprop
     ../../talib/effects/creation
 )
+message(${CMAKE_MODULE_LINKER_FLAGS})
+set(CMAKE_MODULE_LINKER_FLAGS ${CMAKE_MODULE_LINKER_FLAGS} -Wl,-E
+CACHE STRING "Flags used by the linker during the creation.")
 
 target_link_libraries(solstice 
   rt 
-  ${LUAJIT_LIBRARIES}
-  dl)
+  libluajit-5.1.a)
