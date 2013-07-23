@@ -36,6 +36,8 @@ extern "C" {
 
 bool hook_functions();
 
+char* HandleRequest(CGameObject *ob, const char *request, char *value);
+    
 int            Local_RunLuaScript(char *script, uint32_t id);
 ChatMessage   *Local_GetLastChatMessage();
 CombatMessage *Local_GetLastCombatMessage();

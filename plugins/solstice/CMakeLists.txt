@@ -12,10 +12,17 @@ include_directories(
     ../../talib
     ${LUA_INCLUDE_DIR})
 
+set(SOLSTICE_FUNCS_SRC
+  funcs.h
+  handle_request.cpp
+  funcs/f_LoadConstants.cpp
+)
+
 add_module(solstice NWNXSolstice plugin-solstice
     lua_funcs
     hook_functions
     solstice_funcs
+    ${SOLSTICE_FUNCS_SRC}
     handles/hndl_ChatMessage
     handles/hndl_CombatMessage
     handles/hndl_ConversationEvent

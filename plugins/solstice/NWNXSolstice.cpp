@@ -49,13 +49,13 @@ bool CNWNXSolstice::OnCreate(gline *config, const char *LogDir)
     if (!CNWNXBase::OnCreate(config,log))
         return false;
 
-    // Add in this hack...to make sure the lua symbols are add to the
-    // global table.  Before lua C modules were not working. 
-    void *res = dlopen("libluajit-5.1.so", RTLD_NOW | RTLD_GLOBAL);
-    if ( !res ) {
-        Log (0, "ERROR: libluajit-5.1.so not installed!\n");
-        return false;
-    }
+    //Add in this hack...to make sure the lua symbols are add to the
+    //global table.  Before lua C modules were not working. 
+    //void *res = dlopen("libluajit-5.1.so", RTLD_NOW | RTLD_GLOBAL);
+    //if ( !res ) {
+    //     Log (0, "ERROR: libluajit-5.1.so not installed!\n");
+    //     return false;
+    //}
     
     // Plugin Events
     if(!pluginLink){
@@ -108,11 +108,15 @@ bool CNWNXSolstice::OnCreate(gline *config, const char *LogDir)
     return true;
 }
 
-char* CNWNXSolstice::OnRequest (char *gameObject, char* Request, char* Parameters)
-{
+char* CNWNXSolstice::OnRequest (char *gameObject, char* Request, char* Parameters) {
     Log(2,"(S) Request: \"%s\"\n",Request);
     Log(3,"(S) Params:  \"%s\"\n",Parameters);
 
+    if ( !gameObject ) { return NULL; }
+    
+    HandleRequest(reinterpret_cast<CGameObject*>(gameObject),
+                  Request, Parameters);
+    
     return NULL;
 }
 
