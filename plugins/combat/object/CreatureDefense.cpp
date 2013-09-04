@@ -633,13 +633,7 @@ void CreatureDefense::updateHitPoints() {
         original_->obj.obj_hp_max = hp_max_;
     }
 
-    
-
     if ( hp_max_ <= 0 ) { hp_max_ = 1; }
-
-    if ( !not_pc ) {
-
-    }
     hp_update_ = false;
 }
 
@@ -801,7 +795,6 @@ int32_t CreatureDefense::getMiscImmunity(uint32_t type) {
 
             result = str + dex;
         }
-        result;
     }
     else if ( type == IMMUNITY_TYPE_SNEAK_ATTACK ) { 
         int pm  = nwn_GetLevelByClass(stats, CLASS_TYPE_PALEMASTER);
