@@ -22,7 +22,14 @@ extern CNWNXCombat combat;
 
 int32_t Hook_SavingThrowRoll(CNWSCreature *cre, uint8_t save_type, uint16_t dc, uint8_t save_vs_type, 
                              uint32_t versus_id, int32_t send_feedback, uint16_t feat, int32_t from_combat) {
+    if(cre == NULL || cre->cre_stats == NULL)
+        return 0;
 
-    int32_t result = 0;
-    return result;
+    auto c = combat.get_creature(cre->obj.obj_id);
+    if ( !c ) { return 0; }
+
+    VersusInfo vs(nwn_GetCreatureByID(versus_id));
+    SaveResult result = c->defense.doSavingThrow(save_type, dc, save_vs_type, vs, send_feedback);
+
+    return result.first;
 }
