@@ -20,6 +20,8 @@ bool         GetIsUnarmedWeapon(CNWSItem *it);
 bool         GetIsWeaponLight(CNWSCreature *cre, CNWSItem *it, bool finesse);
 bool         GetIsWeaponIntuitable(CNWSCreature *cre, CNWSItem *it);
 bool         GetIsWeaponKensei(CNWSCreature *cre, CNWSItem *it);
+int32_t      GetSavingThrowVsBonus(CNWSCreature *cre, CNWSObject *vs,
+                                   int32_t save, int32_t save_vs);
 int8_t       GetSkillFeatBonus(CNWSCreature *cre, uint8_t skill);
 uint32_t     GetTargetState(CNWSCreature *attacker, CNWSObject *target);
 uint64_t     GetTrainingVsMask(CNWSCreature *cre);
