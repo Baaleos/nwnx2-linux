@@ -31,7 +31,8 @@ public:
     virtual int32_t  getHPCurrent(bool use_temp);
     virtual int32_t  getHPMax();
     virtual uint32_t getHardness();
-    virtual int32_t  getSave(uint32_t save, uint32_t save_vs, bool base);
+    virtual int32_t  getSave(uint32_t save, uint32_t save_vs,
+                             Attribute::selector select = Attribute::BOTH);
     virtual bool     isImmune(uint32_t type);
     virtual void     modifyDamageImmunity(uint32_t dmg_type, int32_t amount);
         

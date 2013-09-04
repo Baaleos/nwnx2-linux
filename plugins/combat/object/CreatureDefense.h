@@ -58,7 +58,8 @@ public:
     uint32_t getHardness();    
     int32_t  getMiscImmunity(uint32_t type);
 
-    int32_t  getSave(uint32_t save, uint32_t save_vs, bool base);
+    int32_t  getSave(uint32_t save, uint32_t save_vs,
+                     Attribute::selector select = Attribute::BOTH);
     int32_t  getSaveEffectBonus(uint32_t save, uint32_t save_vs);
     void     modifySave(uint32_t save, uint32_t save_vs, int32_t amount);
 

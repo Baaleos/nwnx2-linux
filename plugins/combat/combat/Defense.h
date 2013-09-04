@@ -2,6 +2,7 @@
 #define _NWNX_COMBAT_DEFENSE_H_
 
 #include "talib/accumulator/all.h"
+#include "talib/custom/attribute.h"
 
 typedef std::pair<uint32_t, CNWCCMessageData*> SaveResult;
 
@@ -26,7 +27,8 @@ public:
     virtual int32_t  getHPCurrent(bool use_temp) = 0;
     virtual int32_t  getHPMax() = 0;
     virtual uint32_t getHardness() = 0;
-    virtual int32_t  getSave(uint32_t save, uint32_t save_vs, bool base) = 0;
+    virtual int32_t  getSave(uint32_t save, uint32_t save_vs,
+                             Attribute::selector select = Attribute::BOTH) = 0;
     virtual bool     isImmune(uint32_t type) = 0;
     virtual void     modifyDamageImmunity(uint32_t dmg_type, int32_t amount) = 0;
     

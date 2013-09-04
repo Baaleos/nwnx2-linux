@@ -158,7 +158,87 @@ void CreatureDefense::doDamageMods(DamageResult &res) {
 SaveResult CreatureDefense::doSavingThrow(uint32_t save_type, uint32_t dc,
                                           uint32_t save_vs_type, const VersusInfo& vs,
                                           bool feedback) {
-    return std::make_pair(0, nullptr);
+    int32_t result = 0;
+    CNWCCMessageData *msg = nullptr;
+
+    int32_t imm = 0;
+    switch(save_vs_type) {
+    case SAVING_THROW_TYPE_MIND_SPELLS:
+        imm = IMMUNITY_TYPE_MIND_SPELLS;
+        break;
+    case SAVING_THROW_TYPE_POISON:
+        imm = IMMUNITY_TYPE_POISON;
+        break;
+    case SAVING_THROW_TYPE_DISEASE:
+        imm = IMMUNITY_TYPE_DISEASE;
+        break;
+    case SAVING_THROW_TYPE_FEAR:
+        imm = IMMUNITY_TYPE_FEAR;
+        break;
+    case SAVING_THROW_TYPE_SONIC:
+        break;
+    case SAVING_THROW_TYPE_ACID:
+        break;
+    case SAVING_THROW_TYPE_FIRE:
+        break;
+    case SAVING_THROW_TYPE_ELECTRICITY:
+        break;
+    case SAVING_THROW_TYPE_POSITIVE:
+        break;
+    case SAVING_THROW_TYPE_NEGATIVE:
+        break;
+    case SAVING_THROW_TYPE_DEATH:
+        imm = IMMUNITY_TYPE_DEATH;
+        break;
+    case SAVING_THROW_TYPE_COLD:
+        break;
+    case SAVING_THROW_TYPE_DIVINE:
+        break;
+    case SAVING_THROW_TYPE_TRAP:
+        imm = IMMUNITY_TYPE_TRAP;
+        break;
+    case SAVING_THROW_TYPE_SPELL:
+        break;
+    case SAVING_THROW_TYPE_GOOD:
+        break;
+    case SAVING_THROW_TYPE_EVIL:
+        break;
+    case SAVING_THROW_TYPE_LAW:
+        break;
+    case SAVING_THROW_TYPE_CHAOS:
+        break;
+    }
+
+    int32_t save = getSave(save_type, save_vs_type, Attribute::BOTH);
+    int32_t roll = true_random(1, 20);
+    if ( imm > 0 && isImmune(imm) ) {
+        result = 2;
+    }
+    else if ( roll == 20 || roll + save >= (int32_t)dc ) {
+        result = 1;
+    }
+    else if ( save_vs_type == SAVING_THROW_TYPE_MIND_SPELLS &&
+              nwn_GetHasFeat(original_->cre_stats, FEAT_SLIPPERY_MIND) ) {
+        roll = true_random(1, 20);
+        if ( roll == 20 || roll + save >= (int32_t)dc ) {
+            result = 1;
+        }
+    }
+
+    if ( feedback ) {
+        msg = CNWCCMessageData_create();
+        msg->type = 1;
+        CExoArrayList_int32_add(&msg->integers, dc); // 0
+        CExoArrayList_int32_add(&msg->integers, save); // 1
+        CExoArrayList_int32_add(&msg->integers, roll); // 2
+        CExoArrayList_int32_add(&msg->integers, save_type); // 3
+        CExoArrayList_int32_add(&msg->integers, save_vs_type); // 4
+        CExoArrayList_int32_add(&msg->integers, 0); // 5 - feat...
+        
+        CExoArrayList_uint32_add(&msg->objects, original_->obj.obj_id);
+    }
+    
+    return std::make_pair(result, msg);
 }
 
 // NOTE: Immunity takes the MINIMUM immunity versus multiple flags.
@@ -569,124 +649,125 @@ uint32_t CreatureDefense::getHardness() {
 }
 
 void CreatureDefense::updateSaves() {
+#define simple_feat_bonus(save, feat, amount)               \
+    if ( nwn_GetHasFeat(stats, feat) )                      \
+        saves_.modifySave(save, amount, Attribute::BASE)
+    
     CNWSCreatureStats *stats = original_->cre_stats;
 
     // Fortitude
-    saves_.fort.base = nwn_GetBaseSavingThrow(original_, SAVING_THROW_FORT);
-    saves_.fort.base += stats->cs_con_mod;
-    saves_.fort.base += stats->cs_save_fort; // TODO: Check this.
-    if ( nwn_GetHasFeat(stats, FEAT_GREAT_FORTITUDE) ) {
-        saves_.fort.base += 2;
-    }
-        
-    if ( nwn_GetHasFeat(stats, FEAT_STRONG_SOUL) ) {
-        ++saves_.fort.base;
-    }
+    saves_.setSave(Saves::FORTITUDE,
+                   nwn_GetBaseSavingThrow(original_,
+                                          SAVING_THROW_FORT),
+                   Attribute::BASE);
+    
+    saves_.modifySave(Saves::FORTITUDE, stats->cs_con_mod,
+                      Attribute::BASE);
 
-    if ( nwn_GetHasFeat(stats, FEAT_EPIC_FORTITUDE) ) {
-        saves_.fort.base += 4;
-    }
+    // TODO: Check this.
+    saves_.modifySave(Saves::FORTITUDE, stats->cs_save_fort,
+                      Attribute::BASE);
+
+    simple_feat_bonus(Saves::FORTITUDE, FEAT_GREAT_FORTITUDE, 2);
+    simple_feat_bonus(Saves::FORTITUDE, FEAT_STRONG_SOUL, 1);
+    simple_feat_bonus(Saves::FORTITUDE, FEAT_EPIC_FORTITUDE, 4);
         
     // Reflex
-    saves_.reflex.base = nwn_GetBaseSavingThrow(original_, SAVING_THROW_REFLEX);
-    saves_.reflex.base += stats->cs_save_reflex;
-    saves_.reflex.base += nwn_GetDexMod(stats, 0);
-
-    if ( nwn_GetHasFeat(stats, FEAT_LIGHTNING_REFLEXES) ) {
-        saves_.reflex.base += 2;
-    }
-        
-    if ( nwn_GetHasFeat(stats, FEAT_SNAKE_BLOOD) ) {
-        ++saves_.reflex.base;
-    }
-
-    if ( nwn_GetHasFeat(stats, FEAT_EPIC_REFLEXES) ) {
-        saves_.reflex.base += 4;
-    }
+    saves_.setSave(Saves::REFLEX,
+                   nwn_GetBaseSavingThrow(original_,
+                                          SAVING_THROW_REFLEX),
+                   Attribute::BASE);
+    
+    saves_.modifySave(Saves::REFLEX, nwn_GetDexMod(stats, 0),
+                      Attribute::BASE);
+    
+    // TODO: Check this.
+    saves_.modifySave(Saves::REFLEX, stats->cs_save_reflex,
+                      Attribute::BASE);
+    
+    simple_feat_bonus(Saves::REFLEX, FEAT_LIGHTNING_REFLEXES, 2);
+    simple_feat_bonus(Saves::REFLEX, FEAT_SNAKE_BLOOD, 1);
+    simple_feat_bonus(Saves::REFLEX, FEAT_EPIC_REFLEXES, 4);
 
     // Will
-    saves_.will.base = nwn_GetBaseSavingThrow(original_, SAVING_THROW_WILL);
-    saves_.will.base += stats->cs_save_will;
-    saves_.will.base += stats->cs_wis_mod;
+    saves_.setSave(Saves::WILL,
+                   nwn_GetBaseSavingThrow(original_,
+                                          SAVING_THROW_WILL),
+                   Attribute::BASE);
+    
+    saves_.modifySave(Saves::WILL, stats->cs_wis_mod,
+                      Attribute::BASE);
+    
+    // TODO: Check this.
+    saves_.modifySave(Saves::WILL, stats->cs_save_will,
+                      Attribute::BASE);
 
-    if ( nwn_GetHasFeat(stats, FEAT_IRON_WILL) ) {
-        saves_.will.base += 2;
-    }
-    
-    if ( nwn_GetHasFeat(stats, FEAT_BULLHEADED) ) {
-        ++saves_.will.base;
-    }
-    
-    if ( nwn_GetHasFeat(stats, FEAT_STRONG_SOUL) ) {
-        ++saves_.will.base;
-    }
-    
-    if ( nwn_GetHasFeat(stats, FEAT_EPIC_WILL) ) {
-        saves_.will.base += 4;
-    }
+    simple_feat_bonus(Saves::WILL, FEAT_IRON_WILL, 2);
+    simple_feat_bonus(Saves::WILL, FEAT_BULLHEADED, 1);
+    simple_feat_bonus(Saves::WILL, FEAT_STRONG_SOUL, 1);
+    simple_feat_bonus(Saves::WILL, FEAT_EPIC_WILL, 4);
 
     // Universal
-    if ( nwn_GetHasFeat(stats, FEAT_LUCKY) ) {
-        ++saves_.will.base;
-        ++saves_.reflex.base;
-        ++saves_.fort.base;
-    }
-    
-    if ( nwn_GetHasFeat(stats, FEAT_LUCK_OF_HEROES) ) {
-        ++saves_.will.base;
-        ++saves_.reflex.base;
-        ++saves_.fort.base;
-    }
+    simple_feat_bonus(Saves::ALL, FEAT_LUCKY, 1);
+    simple_feat_bonus(Saves::ALL, FEAT_LUCK_OF_HEROES, 1);
 
     if ( nwn_GetHasFeat(stats, FEAT_PRESTIGE_DARK_BLESSING) ||
          nwn_GetHasFeat(stats, FEAT_DIVINE_GRACE) ) {
-        
-        saves_.will.base += stats->cs_cha_mod;
-        saves_.reflex.base += stats->cs_cha_mod;
-        saves_.fort.base += stats->cs_cha_mod;
+        saves_.modifySave(Saves::ALL, stats->cs_cha_mod,
+                          Attribute::BASE);
     }
+#undef simple_feat_bonus    
 }
 
-int32_t CreatureDefense::getSave(uint32_t save, uint32_t save_vs, bool base) {
+int32_t CreatureDefense::getSave(uint32_t save, uint32_t save_vs,
+                                 Attribute::selector select) {
     int32_t result = 0;
 
     switch(save) {
-    case SAVING_THROW_REFLEX: result = saves_.reflex.base; break;
-    case SAVING_THROW_FORT:   result = saves_.fort.base;   break;
-    case SAVING_THROW_WILL:   result = saves_.will.base;   break;
+    case SAVING_THROW_REFLEX:
+        result = saves_.getSave(Saves::REFLEX, select);
+        break;
+    case SAVING_THROW_FORT:
+        result = saves_.getSave(Saves::FORTITUDE, select);
+        break;
+    case SAVING_THROW_WILL:
+        result = saves_.getSave(Saves::WILL, select);
+        break;
     }
 
-    if ( !base ) {
-        result += getSaveEffectBonus(save, save_vs);
-    }
+    //if ( !base ) {
+    //result += getSaveEffectBonus(save, save_vs);
+    //}
     return save;
 }
 
 int32_t CreatureDefense::getSaveEffectBonus(uint32_t save, uint32_t save_vs) {
     int32_t save_bonus = 0;
-
+    
     switch (save) {
     case SAVING_THROW_REFLEX:
-        save_bonus = saves_.reflex.effects[0];
+        save_bonus = saves_.getVersus(0, Attribute::BOTH);
         if ( save_vs != 0 ) {
-            save_bonus += saves_.reflex.effects[save_vs];
+            save_bonus += saves_.getVersus(save_vs, Attribute::BOTH);
         }
         break;
     case SAVING_THROW_FORT:
-        save_bonus = saves_.fort.effects[0];
+        save_bonus = saves_.getVersus(0, Attribute::BOTH);
         if ( save_vs != 0 ) {
-            save_bonus += saves_.fort.effects[save_vs];
+            save_bonus += saves_.getVersus(save_vs, Attribute::BOTH);
         }
         break;
 
     case SAVING_THROW_WILL:
-        save_bonus = saves_.will.effects[0];
+        save_bonus = saves_.getVersus(0, Attribute::BOTH);
         if ( save_vs != 0 ) {
-            save_bonus += saves_.will.effects[save_vs];
+            save_bonus += saves_.getVersus(save_vs, Attribute::BOTH);
         }
         break;
     }
 
+    save_bonus += GetSavingThrowVsBonus(original_, NULL, save, save_vs);
+    
     return CLAMP<int32_t>(save_bonus, -20, 20);
 }
 
@@ -752,15 +833,15 @@ void CreatureDefense::modifySave(uint32_t save, uint32_t save_vs, int32_t amount
                save, save_vs, amount);
 
     if ( save == SAVING_THROW_REFLEX || save == SAVING_THROW_ALL ) {
-        saves_.reflex.effects[save_vs] += amount;
+        saves_.modifyVersus(save_vs, amount, Attribute::EFFECT);
     }
     
     if ( save == SAVING_THROW_FORT || save == SAVING_THROW_ALL ) {
-        saves_.fort.effects[save_vs] += amount;
+        saves_.modifyVersus(save_vs, amount, Attribute::EFFECT);
     }
 
     if ( save == SAVING_THROW_WILL || save == SAVING_THROW_ALL ) {
-        saves_.will.effects[save_vs] += amount;
+       saves_.modifyVersus(save_vs, amount, Attribute::EFFECT);
     }
 }
 

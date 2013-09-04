@@ -59,7 +59,8 @@ uint32_t SituatedObject::getHardness() {
     return result;
 }
 
-int32_t SituatedObject::getSave(uint32_t save, uint32_t save_vs, bool base) {
+int32_t SituatedObject::getSave(uint32_t save, uint32_t save_vs,
+                                Attribute::selector select) {
     return 0;
 }
 
