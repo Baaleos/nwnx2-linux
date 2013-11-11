@@ -14,5 +14,5 @@ add_module(nschat NWNXChat plugin-chat
     local/l_GetIgnoreMask
     local/l_GetIsIgnoring
 
-    ../../talib/all
+    ../../talib/nwn/all
 )

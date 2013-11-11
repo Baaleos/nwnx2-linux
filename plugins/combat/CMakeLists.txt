@@ -126,7 +126,7 @@ add_module(combat NWNXCombat plugin-combat
   ${OBJECT_SRC}
   ${COMBAT_SRC}
 
-  ../../talib/all
+  ../../talib/nwn/all
   ../../talib/accumulator/all
   ../../talib/effects/creation
 

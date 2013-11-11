@@ -21,7 +21,7 @@
 
 #include "NWNXLib.h"
 #include "nwnx_modules_ext.h"
-#include "talib/all.h"
+#include "talib/nwn/all.h"
 #include "talib/effects/creation.h"
 
 #include "object/Creature.h"

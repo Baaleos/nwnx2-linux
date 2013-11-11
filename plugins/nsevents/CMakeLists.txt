@@ -25,5 +25,5 @@ add_module(nsevents NWNXEvents plugin-events
     hooks/h_UseSkill
     hooks/h_ValidateCharacter
 
-    ../../talib/all
+    ../../talib/nwn/all
 )

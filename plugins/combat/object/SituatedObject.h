@@ -2,7 +2,7 @@
 #define NWNX_COMBAT_OBJECT_SITUATED_H
 
 #include "NWNXLib.h"
-#include "talib/all.h"
+#include "talib/nwn/all.h"
 #include "combat/Defense.h"
 #include "talib/accumulator/all.h"
 

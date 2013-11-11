@@ -21,7 +21,7 @@
 #ifndef _NWNX_CHAT_H_
 #define _NWNX_CHAT_H_
 
-#include "talib/all.h"
+#include "talib/nwn/all.h"
 #include "NWNXLib.h"
 
 extern int (*CNWSMessage__SendServerToPlayerCCMessage_orig)(CNWSMessage *, uint32_t, uint8_t, CNWCCMessageData *, CNWSCombatAttackData *);

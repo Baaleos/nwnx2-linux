@@ -22,7 +22,7 @@ add_module(effects NWNXEffects plugin-effects
     local/l_GetEffectImmunity
     local/l_GetEffectString
 
-    ../../talib/all
+    ../../talib/nwn/all
     ../../talib/accumulator/all
     ../../talib/effects/creation
 )

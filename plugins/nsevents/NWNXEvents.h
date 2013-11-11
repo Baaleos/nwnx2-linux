@@ -20,7 +20,7 @@
 #ifndef _NWNX_EVENTS_H_
 #define _NWNX_EVENTS_H_
 
-#include "talib/all.h"
+#include "talib/nwn/all.h"
 #include "NWNXLib.h"
 
 #define EVENT_TYPE_ALL                   0
