@@ -102,6 +102,7 @@ void talib_init() {
     SET(CNWSCreatureStats__DecrementFeatRemainingUses, 0x081646EC);
     SET(CNWSCreatureStats__GetAttacksPerRound,         0x08163D18);
     SET(CNWSCreatureStats__GetBaseAttackBonus,         0x08142054);
+    SET(CNWSCreatureStats__GetCanUseSkill,             0x08152e1c);
     SET(CNWSCreatureStats__GetFeatRemainingUses,       0x08153E00);
     SET(CNWSCreatureStats__GetFeatTotalUses,           0x0815479C);
     SET(CNWSCreatureStats__GetHighestLevelOfFeat,      0x0816562C);

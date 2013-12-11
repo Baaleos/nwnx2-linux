@@ -59,6 +59,11 @@ uint32_t nwn_CalculateSpellDC(CNWSCreature *cre, uint32_t spellid){
     return CNWSCreature__CalculateSpellSaveDC(cre, spellid);
 }
 
+bool nwn_CanUseSkill(CNWSCreature* cre, uint8_t skill) {
+    if ( !cre || !cre->cre_stats ) { return false; }
+    return CNWSCreatureStats__GetCanUseSkill(cre->cre_stats, skill);
+}
+
 void nwn_DecrementFeatRemainingUses(CNWSCreatureStats *stats, uint16_t feat) {
     CNWSCreatureStats__DecrementFeatRemainingUses(stats, feat);
 }
