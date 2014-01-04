@@ -624,6 +624,7 @@ void nwn_SendMessage(uint32_t mode, uint32_t id, const char *msg, uint32_t to) {
     }
     else {
         CNWSPlayer *pl = nwn_GetPlayerByID(to);
+        if (!pl) { return; }
         to = pl->pl_id;
     }
 
