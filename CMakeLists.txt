@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 2.8)
 project(nwnx-core-2.8)
 
-set( CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/compiled )
+set(NWNX_OUTPUT_DIR ${PROJECT_BINARY_DIR}/compiled)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${NWNX_OUTPUT_DIR})
 
 # You can exclude plugins from being built here.
 set(dont_build_plugins )
@@ -40,14 +41,14 @@ add_library(nwnx2 SHARED nwnx2lib NWNXBase modules lists gline
 
 # Fake target to force recreating the compiled directory.
 add_custom_target(always_rebuild_compiled ALL
-    COMMAND ${CMAKE_COMMAND} -E remove_directory compiled
-    COMMAND ${CMAKE_COMMAND} -E make_directory compiled
+    COMMAND ${CMAKE_COMMAND} -E remove_directory ${NWNX_OUTPUT_DIR}
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${NWNX_OUTPUT_DIR}
 )
 
 add_custom_command(
     TARGET nwnx2 POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy ARGS ${PROJECT_SOURCE_DIR}/nwnx2.ini compiled/
-    COMMAND ${CMAKE_COMMAND} -E copy ARGS ${PROJECT_SOURCE_DIR}/nwnstartup.sh compiled/
+    COMMAND ${CMAKE_COMMAND} -E copy ARGS ${PROJECT_SOURCE_DIR}/nwnx2.ini ${NWNX_OUTPUT_DIR}
+    COMMAND ${CMAKE_COMMAND} -E copy ARGS ${PROJECT_SOURCE_DIR}/nwnstartup.sh ${NWNX_OUTPUT_DIR}
 )
 
 set_target_properties(nwnx2 PROPERTIES PREFIX "")
@@ -78,9 +79,9 @@ foreach(plugin ${plugins})
         if(EXISTS "${pa}/nwnx2.ini")
              add_custom_command(
                  TARGET nwnx2 POST_BUILD
-                 COMMAND echo ARGS "" >> compiled/nwnx2.ini
-                 COMMAND echo ARGS "" >> compiled/nwnx2.ini
-                 COMMAND cat ARGS ${pa}/nwnx2.ini >> compiled/nwnx2.ini
+                 COMMAND echo ARGS "" >> ${NWNX_OUTPUT_DIR}/nwnx2.ini
+                 COMMAND echo ARGS "" >> ${NWNX_OUTPUT_DIR}/nwnx2.ini
+                 COMMAND cat ARGS ${pa}/nwnx2.ini >> ${NWNX_OUTPUT_DIR}/nwnx2.ini
              )
         endif(EXISTS "${pa}/nwnx2.ini")
 
