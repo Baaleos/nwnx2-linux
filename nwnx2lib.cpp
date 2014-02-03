@@ -405,7 +405,7 @@ LoadLibraries() {
 		sprintf(fname,"%s/%s",pluginDir,d->d_name);
 
 		// load the library
-		if((handle = dlopen(fname, RTLD_NOW))==NULL) {
+		if((handle = dlopen(fname, RTLD_NOW | RTLD_GLOBAL | RTLD_DEEPBIND))==NULL) {
 			
 			Log(0, "ERROR: dlopen: %s: %s\n" ,fname, dlerror());
 			continue;
