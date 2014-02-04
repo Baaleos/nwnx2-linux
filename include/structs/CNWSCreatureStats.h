@@ -119,7 +119,10 @@ struct CNWSCreatureStats_s {
     uint32_t                    field_424;
     uint32_t                    field_428;
     uint32_t                    field_42C;
-    uint32_t                    field_430;
+    uint8_t                     cs_sr_eff_inc;
+    uint8_t                     cs_sr_eff_dec;
+    uint8_t                     field_432;
+    uint8_t                     field_433;
 
     void                       *cs_specabil;            /* 043C */
 
