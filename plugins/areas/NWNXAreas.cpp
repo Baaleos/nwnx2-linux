@@ -76,6 +76,12 @@ char* CNWNXAreas::OnRequest (char* gameObject, char* Request, char* Parameters)
 		NWNXSetAreaName((CNWSArea *)(gameObject-0xC4), Parameters);
 		return NULL;
 	}
+    else if (strncmp(Request, "FIX", 3) == 0) 	
+	{
+		FixCreature((CNWSModule *)gameObject, strtol(Parameters, (char **)NULL, 16));
+		return NULL;
+	}
+
 	return NULL;
 }
 

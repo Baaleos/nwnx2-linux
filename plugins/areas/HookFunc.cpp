@@ -67,6 +67,35 @@ CResRef *CResRef____as(CResRef *res, char *str)
 	return res;
 }
 
+void AddAreaToCreature(CNWSModule *pModule, CNWSCreature *pObject, dword nAreaID) {
+    if(pObject->AreaMiniMaps) {
+        areas.Log(3, "Adding minimap to creature '%x'\n", pObject->Object.ObjectID);
+        pObject->AreaMiniMaps = (void **) realloc(pObject->AreaMiniMaps, pModule->Areas.Count * 4);
+        void *pMinimap = new char[0x80];
+        memset(pMinimap, 0, 0x80);
+        pObject->AreaMiniMaps[pModule->Areas.Count - 1] = pMinimap;
+        CExoArrayList_unsigned_long___Add(&pObject->AreaList, nAreaID);
+        pObject->AreaCount++;
+        areas.Log(3, "Object area count: %d\n", pObject->AreaCount);
+    }
+}
+
+void FixCreature(CNWSModule* mod, dword obj_id) {
+    if(!pServThis) InitConstants();
+    if(!obj_id || obj_id == OBJECT_INVALID)
+		return;
+
+    CNWSCreature *pObject = (CNWSCreature *)CServerExoAppInternal__GetGameObject((void*)pServInternal, obj_id);
+
+    dword *as = (dword *)mod->Areas.Array;
+    areas.Log(3, "Modlue Area count: %d, Player Area Count: %d\n",
+              mod->Areas.Count,
+              pObject->AreaCount);
+    while (pObject->AreaCount < mod->Areas.Count) {
+        AddAreaToCreature(mod, pObject, as[pObject->AreaCount]);
+    }
+}
+
 void AddAreaToCreatures(CNWSModule *pModule, dword nAreaID)
 {
 	if(!pServThis) InitConstants();
@@ -83,17 +112,7 @@ void AddAreaToCreatures(CNWSModule *pModule, dword nAreaID)
 		if(!pObject) continue;
 		if(pObject->Object.ObjectType == 5)
 		{
-			if(pObject->AreaMiniMaps)
-			{
-				areas.Log(3, "Adding minimap to creature '%x'\n", pObject->Object.ObjectID);
-				pObject->AreaMiniMaps = (void **) realloc(pObject->AreaMiniMaps, pModule->Areas.Count * 4);
-				void *pMinimap = new char[0x80];
-				memset(pMinimap, 0, 0x80);
-				pObject->AreaMiniMaps[pModule->Areas.Count - 1] = pMinimap;
-				CExoArrayList_unsigned_long___Add(&pObject->AreaList, nAreaID);
-				pObject->AreaCount++;
-				areas.Log(3, "Object area count: %d\n", pObject->AreaCount);
-			}
+            AddAreaToCreature(pModule, pObject, nAreaID);
 		}
 	}
 }
