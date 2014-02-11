@@ -23,7 +23,7 @@ extern int (*CServerAIMaster__OnEffectApplied_orig)(CServerAIMaster *, CNWSObjec
 extern int (*CServerAIMaster__OnEffectRemoved_orig)(CServerAIMaster *, CNWSObject *, CGameEffect *);
 
 void Hook_CExoArrayList_CGameEffect_Insert(CExoArrayList_ptr *list, CGameEffect *eff, int location);
-int32_t Hook_ExecuteCommandApplyEffectOnObject(int32_t, int32_t);
+int32_t Hook_ExecuteCommandApplyEffectOnObject(CNWVirtualMachineCommands*, int32_t, int32_t);
 int Hook_OnEffectApplied(CServerAIMaster *ai, CNWSObject *obj, CGameEffect *eff, int a);
 int Hook_OnEffectRemoved(CServerAIMaster *ai, CNWSObject *obj, CGameEffect *eff);
 void Hook_RemoveBadEffects(CNWSCreature *cre);

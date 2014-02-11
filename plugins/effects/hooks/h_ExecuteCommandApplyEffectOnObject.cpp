@@ -21,7 +21,8 @@
 
 extern CNWNXEffects effects;
 
-int32_t Hook_ExecuteCommandApplyEffectOnObject(int cmd, int args) {
+int32_t Hook_ExecuteCommandApplyEffectOnObject(CNWVirtualMachineCommands *vm_cmds,
+                                               int cmd, int args) {
     int32_t dur_type;
     CGameEffect *eff;
     uint32_t obj_id;
@@ -33,7 +34,7 @@ int32_t Hook_ExecuteCommandApplyEffectOnObject(int cmd, int args) {
          !CVirtualMachine__StackPopFloat(*NWN_VirtualMachine, &duration) ) {
         return -639;
     }
-    
+
     if ( dur_type == 1 ) {
         eff->eff_duration = duration;
     }
@@ -44,7 +45,7 @@ int32_t Hook_ExecuteCommandApplyEffectOnObject(int cmd, int args) {
 
     CGameObject *ob = nwn_GetObjectByID(obj_id);
     if ( ob ){
-        CGameObject *eff_ob = nwn_GetObjectByID(eff->eff_creator);	
+        CGameObject *eff_ob = nwn_GetObjectByID(eff->eff_creator);
         CNWSCreature *cre = ob->vtable->AsNWSCreature(eff_ob);
         if ( cre && cre->cre_item_spell ) {
             eff->field_28 = cre->cre_item_spell_level;
