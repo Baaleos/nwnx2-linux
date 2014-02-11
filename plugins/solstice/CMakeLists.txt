@@ -14,8 +14,9 @@ include_directories(
 
 set(SOLSTICE_FUNCS_SRC
   funcs.h
-  handle_request.cpp
-  funcs/f_LoadConstants.cpp
+  handle_request
+  funcs/f_LoadConstants
+  funcs/f_RemoveObjectFromCache
 )
 
 add_module(solstice NWNXSolstice plugin-solstice
