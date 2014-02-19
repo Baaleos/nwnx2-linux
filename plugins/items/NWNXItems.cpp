@@ -95,20 +95,20 @@ bool CNWNXItems::OnCreate (gline *config, const char* LogDir)
     }
     else {
         Log (0, "Plugin link: %08lX\n", pluginLink);
-                    
+
     }
 
     hEquipEvent = CreateHookableEvent("NWNX/Items/Event");
     hOnItemPropertyEvent = CreateHookableEvent("NWNX/Items/ItemPropEvent");
 
-    HANDLE handleExamineEvent = HookEvent("NWNX/Events/ExamineEvent", Handle_ExamineEvent);
-    if (!handleExamineEvent) {
-        Log(0, "Cannot hook NWNX/Events/ExamineEvent!\n");
-    }
+    //HANDLE handleExamineEvent = HookEvent("NWNX/Events/ExamineEvent", Handle_ExamineEvent);
+    //if (!handleExamineEvent) {
+    //    Log(0, "Cannot hook NWNX/Events/ExamineEvent!\n");
+    //}
 
     talib_init();
     hook_functions();
-    
+
     return true;
 }
 
