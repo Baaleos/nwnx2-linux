@@ -5,7 +5,13 @@ set(NWNX_OUTPUT_DIR ${PROJECT_BINARY_DIR}/compiled)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${NWNX_OUTPUT_DIR})
 
 # You can exclude plugins from being built here.
-set(dont_build_plugins )
+set(dont_build_plugins
+        areas     # Broken.
+        functions # Obsoleted by nwnx_funcs
+        reset     # Obsoleted by nwnx_system
+        tmi       # Obsoleted by nwnx_system
+        tweaks    # Does nothing.
+)
 
 # Compatibility with cmake 2.8.9 and above.
 if(POLICY CMP0018)
