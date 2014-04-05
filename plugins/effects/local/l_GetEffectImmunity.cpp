@@ -24,8 +24,8 @@ extern CNWNXEffects effects;
 
 int32_t Local_GetEffectImmunity(CNWSCreatureStats *stats, uint8_t type, CNWSCreature *versus) {
     if ( !stats || !stats->cs_original ) { return 0; }
-    
-    EffectImmunityAcc acc(stats->cs_original, VersusInfo(versus), type);
+
+    EffectImmunityAcc acc(stats->cs_original, VersusInfo(versus), type, false, false);
     int32_t res = acc.get_result();
 
     return res;
