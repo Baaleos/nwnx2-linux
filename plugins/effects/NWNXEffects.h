@@ -27,9 +27,6 @@
 
 extern int (*CExoArrayList__CGameEffect_Add)(CExoArrayList_ptr *list, CGameEffect *eff);
 
-#define NWNX_EFFECTS_EVENT_APPLY          0
-#define NWNX_EFFECTS_EVENT_REMOVE         1
-
 void HandleFunc(CGameObject *ob, char *func, char* value);
 
 int32_t Local_GetEffectImmunity(CNWSCreatureStats *stats, uint8_t type, CNWSCreature *versus);
@@ -46,19 +43,17 @@ public:
     char *OnRequest (char *gameObject, char *Request, char *Parameters);
     unsigned long OnRequestObject (char *gameObject, char *Request);
 
-    void EffectEvent(CNWSObject *obj, CGameEffect *eff, bool removal, bool preapply);
+    void EffectEvent(CNWSObject *obj, CGameEffect *eff, bool removal);
+    void CustomEffectEvent(CNWSObject *obj, CGameEffect *eff, bool removal);
 
-    // script variables.    
+    // script variables.
     EventEffect effect_event;
+    EventEffect custom_effect_event;
 
-    bool in_script;
-
-    // store the impact scripts.
-    std::map<int, std::string> effect_scripts;
-    std::string fallback_script;
 
 private:
     HANDLE hOnEffectEvent;
+    HANDLE hOnCustomEffectEvent;
 };
 
 #endif /* NWNX_EFFECTS_H */

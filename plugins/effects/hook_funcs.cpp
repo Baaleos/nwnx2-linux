@@ -25,14 +25,15 @@ int (*CServerAIMaster__OnEffectRemoved_orig)(CServerAIMaster *, CNWSObject *, CG
     *(void**)&orig = nx_hook_function((void*)addr, (void*)hook, bytes, NX_HOOK_DIRECT | NX_HOOK_RETCODE)
 
 bool hook_functions() {
-    
-    HOOK(CServerAIMaster__OnEffectApplied_orig, 0x080984E4, 
-         Hook_OnEffectApplied, 6);
-    HOOK(CServerAIMaster__OnEffectRemoved_orig, 0x08098508,
-         Hook_OnEffectRemoved, 6);
-
     HOOK(CNWSCreature__RemoveBadEffects, 0x0812DFB8,
          Hook_RemoveBadEffects, 5);
+
+    nx_hook_function((void*)0x0817D22C,
+                     (void*)Hook_OnApplyModifyNumAttacks, 5, NX_HOOK_DIRECT);
+
+    nx_hook_function((void*)0x08177D00,
+                     (void*)Hook_OnRemoveModifyNumAttacks, 5, NX_HOOK_DIRECT);
+
 
     nx_hook_function((void*)0x0820db94,
                      (void*)Hook_ExecuteCommandApplyEffectOnObject, 5, NX_HOOK_DIRECT);

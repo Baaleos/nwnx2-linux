@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2013 jmd (jmd2028 at gmail dot com)
+    Copyright (C) 2011-2013 jmd ( jmd2028 at gmail dot com )
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,25 +17,10 @@
 ***************************************************************************/
 
 #include "NWNXEffects.h"
-#include <sstream>
-#include <utility>
 
 extern CNWNXEffects effects;
 
-void Func_SetEffectHandler(CGameObject *ob, char* value) {
-    std::string params(value);
-    std::string script;
-    std::stringstream s(params);
-    int effect_type;
-    s >> effect_type >> script;
-
-    if (s.fail() == true) {
-        snprintf(value, strlen(value), "%d", 0);
-    }
-    else {
-        effects.effect_scripts[effect_type] = script;
-        snprintf(value, strlen(value), "%d", 1);
-        effects.Log(0, "Effect: %d, Script: %s\n", effect_type,
-                    (char*)script.c_str());
-    }
+int Hook_OnRemoveModifyNumAttacks(CNWSEffectListHandler *ai, CNWSObject *obj, CGameEffect *eff) {
+    effects.CustomEffectEvent(obj, eff, true);
+    return 1;
 }

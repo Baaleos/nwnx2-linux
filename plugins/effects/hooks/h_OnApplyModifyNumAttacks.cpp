@@ -20,28 +20,7 @@
 
 extern CNWNXEffects effects;
 
-// NOTES:
-// * The effect being applied is NOT inserted into the effect array
-//   until AFTER this function returns.  So any event observer
-//   will have to take that fact into account.
-int Hook_OnEffectApplied(CServerAIMaster *ai, CNWSObject *obj, CGameEffect *eff, int a){
-    int result;
-
-    effects.EffectEvent(obj, eff, false, true);
-    
-    if (effects.effect_event.suppress){
-        result = effects.effect_event.delete_eff;
-    }
-    else {
-        result = CServerAIMaster__OnEffectApplied_orig(ai, obj, eff, a);
-    }
-
-    effects.Log(3, "OnEffectApplied: Type: %d, Result: %d\n",
-                eff->eff_type, result);
-
-    if ( result == 0 ) {
-        effects.EffectEvent(obj, eff, false, false);
-    }
-
-    return result;
+int Hook_OnApplyModifyNumAttacks(CNWSEffectListHandler *ai, CNWSObject *obj, CGameEffect *eff, int a) {
+    effects.CustomEffectEvent(obj, eff, false);
+    return effects.effect_event.delete_eff;
 }

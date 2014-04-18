@@ -24,34 +24,36 @@ int (*CExoArrayList__CGameEffect_Add)(CExoArrayList_ptr *list, CGameEffect *eff)
 
 CNWNXEffects::CNWNXEffects() {
     confKey = strdup("EFFECTS");
-    in_script = false;
 }
 
 CNWNXEffects::~CNWNXEffects() {}
 
-void CNWNXEffects::EffectEvent(CNWSObject *obj, CGameEffect *eff, bool removal, bool preapply) {
+void CNWNXEffects::EffectEvent(CNWSObject *obj, CGameEffect *eff, bool removal) {
     effect_event.obj = obj;
     effect_event.eff = eff;
     effect_event.is_remove = removal;
-    effect_event.preapply = preapply;
-    effect_event.suppress = false;
     effect_event.delete_eff = false;
 
-    Log(3, "Effect Event: Object: %x, Effect: %d, Removal: %d, Pre-apply: %d\n",
-        obj->obj_id, eff->eff_type, removal, preapply);
+    Log(3, "Effect Event: Object: %x, Effect: %d, Removal: %d\n",
+        obj->obj_id, eff->eff_type, removal);
 
     int notifyRet = NotifyEventHooks(hOnEffectEvent, (WPARAM)&effect_event, 0);
-    if(!notifyRet
-       && effect_scripts.find(eff->eff_type) != effect_scripts.end()
-       && !effect_scripts[eff->eff_type].empty())
-    {
-        nwn_ExecuteScript((char*)effect_scripts[eff->eff_type].c_str(), obj->obj_id);
-    }
-
-    in_script = false;
 }
 
-char *CNWNXEffects::OnRequest (char *gameObject, char *Request, char *Parameters) {    
+
+void CNWNXEffects::CustomEffectEvent(CNWSObject *obj, CGameEffect *eff, bool removal) {
+    custom_effect_event.obj = obj;
+    custom_effect_event.eff = eff;
+    custom_effect_event.is_remove = removal;
+    custom_effect_event.delete_eff = false;
+
+    Log(3, "Custom Effect Event: Object: %x, Effect: %d, Removal: %d\n",
+        obj->obj_id, eff->eff_integers[1], removal);
+
+    int notifyRet = NotifyEventHooks(hOnCustomEffectEvent, (WPARAM)&custom_effect_event, 0);
+}
+
+char *CNWNXEffects::OnRequest (char *gameObject, char *Request, char *Parameters) {
     Log(1, "StrReq: \"%s\"\nParams: \"%s\"\n", Request, Parameters);
 
     CGameObject *ob = reinterpret_cast<CGameObject *>(gameObject);
@@ -86,11 +88,10 @@ bool CNWNXEffects::OnCreate (gline *config, const char *LogDir) {
     }
     else {
         Log (0, "Plugin link: %08lX\n", pluginLink);
-	
-        hOnEffectEvent = CreateHookableEvent("NWNX/Effects/EffectEvent");
-    }
 
-    fallback_script = std::string("nwnx_effects");
+        hOnEffectEvent = CreateHookableEvent("NWNX/Effects/EffectEvent");
+        hOnCustomEffectEvent = CreateHookableEvent("NWNX/Effects/CustomEffectEvent");
+    }
 
     hook_functions();
     talib_init();
