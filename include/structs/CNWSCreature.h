@@ -87,7 +87,7 @@ struct CNWSCreature_s {
     CExoArrayList_uint32        cre_subarea_list;       /* 02F8 */
 
     nwn_objid_t                 cre_blocked_id;         /* 0304 */
-    Vector                     *cre_blocked_pos;        /* 0308 */
+    CPathfindInformation       *cre_blocked_pos;        /* 0308 */
 
     uint32_t                    field_30C;
 
@@ -460,32 +460,14 @@ struct CNWSCreature_s {
     uint32_t                    cre_last_pickup_failed; /* 0B8C */
     uint32_t                    cre_total_weight;       /* 0B90 */
 
-    uint32_t                    field_B94;
-    uint32_t                    field_B98;
-    uint32_t                    field_B9C;
-    uint32_t                    field_BA0;
-    uint32_t                    field_BA4;
-    uint32_t                    field_BA8;
-    uint32_t                    field_BAC;
-    uint32_t                    field_BB0;
-    uint32_t                    field_BB4;
-    uint32_t                    field_BB8;
-    uint32_t                    field_BBC;
-    uint32_t                    field_BC0;
-    uint32_t                    field_BC4;
-    uint32_t                    field_BC8;
-    uint32_t                    field_BCC;
-    uint32_t                    field_BD0;
-    uint32_t                    field_BD4;
-    uint32_t                    field_BD8;
-
+    uint32_t                    cre_poly_item_id[18];
     char                        cre_poly_portrait[16];  /* 0BDC */
-    uint16_t                    cre_poly_unknown_1;     /* 0BEC */
+    uint16_t                    cre_poly_portrait_id;   /* 0BEC */
     uint16_t                    cre_poly_unknown_2;     /* 0BEE */
 
     uint32_t                    cre_is_poly;            /* 0BF0 */
 
-    uint16_t                    cre_poly_unknown_3;     /* 0BF4 */
+    uint16_t                    cre_poly_appearance;    /* 0BF4 */
 
     uint8_t                     cre_poly_pre_str;       /* 0BF6 */
     uint8_t                     cre_poly_pre_con;       /* 0BF7 */
@@ -514,7 +496,7 @@ struct CNWSCreature_s {
     uint32_t                    cre_poly_locked;        /* 0C24 */
 
     CNWSCreatureAppearanceInfo  cre_appearance_info;
-    
+
     CNWSCreatureStats           *cre_stats;             /* 0C68 */
 };
 
