@@ -1,6 +1,6 @@
 /***************************************************************************
     NWNX Base class - Library for custom expansions
-    Copyright (C) 2003 Ingmar Stieger (Papillon, papillon@blackdagger.com) and 
+    Copyright (C) 2003 Ingmar Stieger (Papillon, papillon@blackdagger.com) and
 	Jeroen Broekhuizen (nwnx@jengine.nl)
 
     This program is free software; you can redistribute it and/or modify
@@ -70,18 +70,24 @@ unsigned long CNWNXBase::OnRequestObject (char *gameObject, char* Request)
 void CNWNXBase::Log(int priority, const char *pcMsg, ...)
 {
 	va_list argList;
-	char acBuffer[2048];
 
 	if (m_fFile && priority<=debuglevel)
-	{  
+	{
 		// build up the string
 		va_start(argList, pcMsg);
-		vsnprintf(acBuffer, 2047, pcMsg, argList);
-		acBuffer[2047] = 0;
+        time_t t;
+        struct tm tm;
+
+        t = time(NULL);
+        localtime_r(&t, &tm);
+
+        fprintf(m_fFile, "[%04d-%02d-%02d %02d:%02d:%02d] ",
+                (1900 + tm.tm_year), (1 + tm.tm_mon), tm.tm_mday,
+                tm.tm_hour, tm.tm_min, tm.tm_sec);
+
+        vfprintf(m_fFile, pcMsg, argList);
 		va_end(argList);
 
-		// log string in file
-		fputs (acBuffer, m_fFile);
 		fflush (m_fFile);
 	}
 }
@@ -96,7 +102,7 @@ int CNWNXBase::ParamLog(int priority, const char *msg, char *Parameters) {
 		// success
 		return 1;
 	}
-	
+
 	// not enough room
 	return 0;
 }
@@ -117,7 +123,7 @@ int CNWNXBase::SetDebugLevel(int level) {
 
 void CNWNXBase::BaseConf() {
 
-	if(confKey==NULL || !nwnxConfig->exists(confKey)) 
+	if(confKey==NULL || !nwnxConfig->exists(confKey))
 		return;
 
 	if(nwnxConfig->exists(confKey,"debuglevel")) {
