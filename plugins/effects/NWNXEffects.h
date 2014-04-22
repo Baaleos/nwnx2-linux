@@ -29,7 +29,6 @@ extern int (*CExoArrayList__CGameEffect_Add)(CExoArrayList_ptr *list, CGameEffec
 
 void HandleFunc(CGameObject *ob, char *func, char* value);
 
-int32_t Local_GetEffectImmunity(CNWSCreatureStats *stats, uint8_t type, CNWSCreature *versus);
 std::string Local_GetEffectString(CNWSObject *obj);
 
 #include "NWNXBase.h"

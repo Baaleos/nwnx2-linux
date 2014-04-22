@@ -4,7 +4,6 @@ include_directories(. ../../talib)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 add_module(effects NWNXEffects plugin-effects
-    funcs/f_GetEffectImmunity
     funcs/f_LogEffects
     funcs/f_SendEffects
 
@@ -16,12 +15,9 @@ add_module(effects NWNXEffects plugin-effects
     hooks/h_OnRemoveModifyNumAttacks
     hooks/h_RemoveBadEffects
 
-    local/l_GetEffectImmunity
     local/l_GetEffectString
 
     ../../talib/nwn/all
-    ../../talib/accumulator/all
-    ../../talib/effects/creation
 )
 
 target_link_libraries(effects rt)
