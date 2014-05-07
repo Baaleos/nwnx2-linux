@@ -25,8 +25,9 @@
 #define _NX_NWN_STRUCT_CNWSSPELLSCRIPTDATA_
 
 struct CNWSSpellScriptData_s {
-    uint32_t     spell_id;
-    uint32_t     feat_id;
+    int32_t      spell_id;        /* 00 */
+    uint16_t     feat_id;         /* 04 */
+    uint16_t     field_;          /* 06 */
     nwn_objid_t  caster_id;       /* 08 */
     nwn_objid_t  target_id;       /* 0C */
     nwn_objid_t  item_id;
