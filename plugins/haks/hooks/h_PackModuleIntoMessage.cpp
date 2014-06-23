@@ -47,7 +47,7 @@ void Hook_PackModuleIntoMessage(CNWSModule *mod, nwn_objid_t pc){
     char *cs = strchr(mod->mod_current_game.text, ':');
     temp = strdup(cs);
     CNWMessage__WriteCExoString(msg, &temp, 0x20);
-    
+
     // 84 Server Name
     CNWSMessage__WriteCExoLocStringServer((CNWSMessage *)msg, &(mod->mod_name), 0x20);
 
@@ -63,7 +63,7 @@ void Hook_PackModuleIntoMessage(CNWSModule *mod, nwn_objid_t pc){
         temp = strdup(haks.fallback_tlk);
         CNWMessage__WriteCExoString(msg, &temp, 0x20);
     }
-   
+
     // App manager stuff
     if( (*NWN_AppManager)->field_20 ){
         // Something to do with NWM files - 240h
@@ -87,9 +87,9 @@ void Hook_PackModuleIntoMessage(CNWSModule *mod, nwn_objid_t pc){
     CResRef crr;
     for ( size_t i = 0; i < mod->mod_haks.len; i++ ) {
         crr.resref[0] = '\0';
-        strncat(crr.resref, mod->mod_haks.data[i].text, 15);
-    
-        if ( haks.hak_levels[i] == 0 || 
+        strncat(crr.resref, mod->mod_haks.data[i].text, 16);
+
+        if ( haks.hak_levels[i] == 0 ||
              haks.hak_levels[i] <= haks.enhanced ) {
             CNWMessage__WriteCResRef (msg, crr, 0x10);
             haks.Log(3, "Hack Visible: %d: %s\n", i, crr.resref);
