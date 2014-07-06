@@ -72,9 +72,9 @@ endfunction()
 function(add_gperf_target target gperf v k l)
 	add_custom_command(
                 WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/plugins/${target}
-		OUTPUT "${gperf}.h"
-		COMMAND ${PROJECT_SOURCE_DIR}/plugins/gperf_gen.sh "${v}" "${k}" "${l}"
-		DEPENDS ${PROJECT_SOURCE_DIR}/plugins/gperf_gen.sh "${gperf}.gperf"
+                OUTPUT "${PROJECT_SOURCE_DIR}/plugins/${target}/${gperf}.h"
+                COMMAND ${PROJECT_SOURCE_DIR}/plugins/gperf_gen.sh "${v}" "${k}" "${l}"
+                DEPENDS ${PROJECT_SOURCE_DIR}/plugins/gperf_gen.sh "${gperf}.gperf"
 	)
 endfunction()
 
