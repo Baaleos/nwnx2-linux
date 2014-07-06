@@ -11,6 +11,7 @@ set(dont_build_plugins
         reset     # Obsoleted by nwnx_system
         tmi       # Obsoleted by nwnx_system
         tweaks    # Does nothing.
+        physfs    # needs resman update.
 )
 
 # Compatibility with cmake 2.8.9 and above.
@@ -68,8 +69,9 @@ function(add_module target)
 	set_target_properties(${target} PROPERTIES PREFIX "nwnx_")
 endfunction()
 
-function(add_gperf_target gperf v k l)
+function(add_gperf_target target gperf v k l)
 	add_custom_command(
+                WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/plugins/${target}
 		OUTPUT "${gperf}.h"
 		COMMAND ${PROJECT_SOURCE_DIR}/plugins/gperf_gen.sh "${v}" "${k}" "${l}"
 		DEPENDS ${PROJECT_SOURCE_DIR}/plugins/gperf_gen.sh "${gperf}.gperf"
