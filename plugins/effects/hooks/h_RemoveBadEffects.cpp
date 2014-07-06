@@ -25,7 +25,7 @@ void Hook_RemoveBadEffects(CNWSCreature *cre){
     uint16_t subtype = 0;
     uint16_t durtype = 0;
 
-    for ( size_t i = 0; i < cre->obj.obj_effects_len; i++ ) {
+    for ( int i = 0; i < cre->obj.obj_effects_len; i++ ) {
         eff = cre->obj.obj_effects[i];
         subtype = nwn_GetSubType(eff);
         durtype = nwn_GetDurationType(eff);
