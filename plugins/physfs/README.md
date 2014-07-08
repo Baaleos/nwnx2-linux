@@ -1,7 +1,9 @@
 ## nwnx_physfs
 This is a plugin that consumes nwnx_resman events and wraps
 [PhysFS](http://icculus.org/physfs/) which supports loading files from
-a number of package/compression formats. zip, 7z, etc.
+a number of package/compression formats and directories. zip, 7z, etc.  If using my branch
+of PhysFS: https://bitbucket.org/jmd28/physfs/branch/nwn_formats . HAK files
+can be loaded.
 
 Performance will depend on the level of compression used.  Higher levels will degrade performance.
 
@@ -15,6 +17,9 @@ Performance will depend on the level of compression used.  Higher levels will de
 [PHYSFS]
 load0 = physfs/ta_scripts.zip
 ;load1 = archive.7z
+;load2 = archive.hak
+;load3 = directory
+;
 ;...
 ;loadN = archiveN.???
 ```
