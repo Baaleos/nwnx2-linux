@@ -28,7 +28,7 @@ int HandleDemandResourceEvent(WPARAM p, LPARAM a) {
     if (size == -1) { return 0; }
     unsigned char *buffer = new unsigned char[size];
 
-    PHYSFS_sint64 res = PHYSFS_readBytes(file, buffer, size);
+    PHYSFS_sint64 res = PHYSFS_read(file, buffer, size, 1);
     if( res == -1 ) {
         physfs.Log(0, "Failed reading: %s -\n%s\n", event->resref, PHYSFS_getLastError());
         delete[] buffer;
