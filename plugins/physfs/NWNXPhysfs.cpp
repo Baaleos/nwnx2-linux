@@ -9,17 +9,28 @@ extern CNWNXPhysfs physfs;
 int HandleResourceExistsEvent(WPARAM p, LPARAM a) {
     ResManResExistsStruct *exists = reinterpret_cast<ResManResExistsStruct*>(p);
     if(PHYSFS_exists(exists->resRefWithExt)) {
-        exists->exists = true;
-        return 1;
+        PHYSFS_sint64 t = PHYSFS_getLastModTime(exists->resRefWithExt);
+        if (t != -1) {
+            exists->mtime = std::max(exists->mtime, (time_t)t);
+            exists->exists = true;
+        }
     }
     return 0;
 }
 
 int HandleDemandResourceEvent(WPARAM p, LPARAM a) {
     ResManDemandResStruct *event = reinterpret_cast<ResManDemandResStruct*>(p);
-    if(event->restype == 0x07DA && event->mtime != 0 && PHYSFS_exists(event->resref)) {
-        return 1;
+
+    // If the file doesn't exist or the minimim required last modified time
+    // is greater than what we have, we cannot service this file.
+    if (!PHYSFS_exists(event->resref)
+        || PHYSFS_getLastModTime(event->resref) == -1
+        || event->minimum_mtime > (time_t)PHYSFS_getLastModTime(event->resref)) {
+        physfs.Log(4, "Unable to service file: %s, Exists?: %d, Required mtime: %d, Our mtime: %d\n", event->resref, PHYSFS_exists(event->resref),
+                   event->minimum_mtime, PHYSFS_getLastModTime(event->resref));
+        return 0;
     }
+
 
     PHYSFS_File* file = PHYSFS_openRead(event->resref);
     if (!file) { return 0; }
@@ -38,7 +49,14 @@ int HandleDemandResourceEvent(WPARAM p, LPARAM a) {
 
     physfs.Log(4, "Read: %s : %d bytes\n", event->resref, size);
 
-    event->mtime = std::time(0);
+    // If getLastModTime returns -1 there was an error... which seems impossible.
+    // so if it happens return current time.
+    PHYSFS_sint64 t = PHYSFS_getLastModTime(event->resref);
+    if (t == -1)
+        event->mtime = std::time(0);
+    else
+        event->mtime = (time_t)t;
+
     event->pData = buffer;
     event->size = size;
     PHYSFS_close(file);
@@ -47,14 +65,14 @@ int HandleDemandResourceEvent(WPARAM p, LPARAM a) {
 }
 
 int HandlePluginsLoaded(WPARAM p, LPARAM a) {
-    HANDLE handleResourceExists = HookEvent("NWNX/ResMan/ResourceExists", HandleResourceExistsEvent);
+    HANDLE handleResourceExists = HookEvent("NWNX/Resources/ResourceExists", HandleResourceExistsEvent);
     if (!handleResourceExists) {
-        physfs.Log(0, "Cannot hook NWNX/ResMan/ResourceExists!\n");
+        physfs.Log(0, "Cannot hook NWNX/Resources/ResourceExists!\n");
     }
 
-    HANDLE handleDemandResource = HookEvent("NWNX/ResMan/DemandResource", HandleDemandResourceEvent);
+    HANDLE handleDemandResource = HookEvent("NWNX/Resources/DemandResource", HandleDemandResourceEvent);
     if (!handleDemandResource) {
-        physfs.Log(0, "Cannot hook NWNX/ResMan/DemandResource!\n");
+        physfs.Log(0, "Cannot hook NWNX/Resources/DemandResource!\n");
     }
 
     return 0;
@@ -98,11 +116,18 @@ bool CNWNXPhysfs::OnCreate(gline *nwnxConfig, const char *LogDir) {
                 Log(0, "Adding %s to search path.\n", file.c_str());
                 int res = PHYSFS_mount(file.c_str(), NULL, 1);
                 if (res == 0) {
-                    Log(0, "Failed to add archive: %s\n", PHYSFS_getLastError());
+                    Log(0, "Failed to add archive (%s): %s\n", file.c_str(), PHYSFS_getLastError());
                 }
             }
             else {
                 break;
+            }
+        }
+        std::string write = (*nwnxConfig)[confKey]["write_dir"];
+        if (write.size() > 0) {
+            int res  = PHYSFS_setWriteDir(write.c_str());
+            if (res == 0) {
+                Log(0, "Failed to add archive: %s\n", PHYSFS_getLastError());
             }
         }
     }
