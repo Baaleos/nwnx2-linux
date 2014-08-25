@@ -25,3 +25,20 @@ follow a pattern like so:
     return 0;
 }
 ```
+
+And all resource demand handlers should never override and return data unless the last modified time of one of their files
+is greater than `ResManDemandResStruct::minimum_mtime` :
+
+```c++
+    ResManDemandResStruct *event = reinterpret_cast<ResManDemandResStruct*>(p);
+
+    // If the file doesn't exist or the minimim required last modified time
+    // is greater than what we have, we cannot service this file.
+    if (!PHYSFS_exists(event->resref)
+        || PHYSFS_getLastModTime(event->resref) == -1
+        || event->minimum_mtime > (time_t)PHYSFS_getLastModTime(event->resref)) {
+        physfs.Log(4, "Unable to service file: %s, Exists?: %d, Required mtime: %d, Our mtime: %d\n", event->resref, PHYSFS_exists(event->resref),
+                   event->minimum_mtime, PHYSFS_getLastModTime(event->resref));
+        return 0;
+    }
+```
