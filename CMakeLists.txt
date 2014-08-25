@@ -11,7 +11,7 @@ set(dont_build_plugins
         reset     # Obsoleted by nwnx_system
         tmi       # Obsoleted by nwnx_system
         tweaks    # Does nothing.
-        physfs    # needs resman update.
+        resman    # Obsoleted by nwnx_resources
 )
 
 # Compatibility with cmake 2.8.9 and above.

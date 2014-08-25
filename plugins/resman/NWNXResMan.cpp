@@ -85,7 +85,7 @@ char* CNWNXResMan::DemandRes(CExoResMan *pResMan, CResStruct *cRes, char *resRef
     snprintf(resrefWithExt, 20, "%s.%s", resRef, NwnGetResTypeExtension(resType));
 
     ResManDemandResStruct demandResInfo = {
-        resrefWithExt, NULL, NULL
+        resrefWithExt, NULL, NULL, 0
     };
     int notifyRet = NotifyEventHooks(hDemandRes, (WPARAM)&demandResInfo, 0);
     if (notifyRet && demandResInfo.pData == NULL)
