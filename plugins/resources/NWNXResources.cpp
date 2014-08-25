@@ -91,6 +91,11 @@ void* CNWNXResources::DemandRes(CExoResMan *pResMan, CRes *cRes, const std::stri
     std::pair<ResourceMap::iterator, bool> lookup = resFiles.insert(ResourceMap::value_type(resrefWithExt, CResFileInfo()));
     CResFileInfo& fileInfo = lookup.first->second;
 
+    ResManResExistsStruct event = { resrefWithExt.c_str(), 0, false };
+    NotifyEventHooks(hResExists, (WPARAM)&event, 0);
+
+    if (event.exists)
+        fileInfo.latest_mtime = event.mtime;
 
     Log(4, "File: %s, Exists?: %d, mtime: %d\n", resrefWithExt.c_str(), event.exists, fileInfo.latest_mtime);
 
