@@ -27,7 +27,7 @@ follow a pattern like so:
 ```
 
 And all resource demand handlers should never override and return data unless the last modified time of one of their files
-is greater than `ResManDemandResStruct::minimum_mtime` :
+is greater than or equal to `ResManDemandResStruct::minimum_mtime` :
 
 ```c++
     ResManDemandResStruct *event = reinterpret_cast<ResManDemandResStruct*>(p);
