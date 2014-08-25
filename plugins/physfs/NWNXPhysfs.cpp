@@ -8,6 +8,7 @@ extern CNWNXPhysfs physfs;
 
 int HandleResourceExistsEvent(WPARAM p, LPARAM a) {
     ResManResExistsStruct *exists = reinterpret_cast<ResManResExistsStruct*>(p);
+    physfs.Log(4, "File: %s exists %d\n", exists->resRefWithExt, PHYSFS_exists(exists->resRefWithExt));
     if(PHYSFS_exists(exists->resRefWithExt)) {
         PHYSFS_sint64 t = PHYSFS_getLastModTime(exists->resRefWithExt);
         if (t != -1) {
@@ -20,12 +21,13 @@ int HandleResourceExistsEvent(WPARAM p, LPARAM a) {
 
 int HandleDemandResourceEvent(WPARAM p, LPARAM a) {
     ResManDemandResStruct *event = reinterpret_cast<ResManDemandResStruct*>(p);
+    PHYSFS_sint64 t = PHYSFS_getLastModTime(event->resref);
 
     // If the file doesn't exist or the minimim required last modified time
     // is greater than what we have, we cannot service this file.
     if (!PHYSFS_exists(event->resref)
-        || PHYSFS_getLastModTime(event->resref) == -1
-        || event->minimum_mtime > (time_t)PHYSFS_getLastModTime(event->resref)) {
+        || t == -1
+        || event->minimum_mtime > (time_t)t) {
         physfs.Log(4, "Unable to service file: %s, Exists?: %d, Required mtime: %d, Our mtime: %d\n", event->resref, PHYSFS_exists(event->resref),
                    event->minimum_mtime, PHYSFS_getLastModTime(event->resref));
         return 0;
@@ -47,11 +49,11 @@ int HandleDemandResourceEvent(WPARAM p, LPARAM a) {
         return 0;
     }
 
-    physfs.Log(4, "Read: %s : %d bytes\n", event->resref, size);
+    physfs.Log(4, "Read: %s : %d bytes, Last Mod Time: %ll\n", event->resref, size, t);
 
     // If getLastModTime returns -1 there was an error... which seems impossible.
     // so if it happens return current time.
-    PHYSFS_sint64 t = PHYSFS_getLastModTime(event->resref);
+
     if (t == -1)
         event->mtime = std::time(0);
     else
