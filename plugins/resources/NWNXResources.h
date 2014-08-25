@@ -55,9 +55,9 @@ public:
     void LoadConfiguration();
     void WriteLogHeader();
 
-    void *DemandRes(CExoResMan *pResMan, CRes* cRes, char* resRef, NwnResType resType);
+    void *DemandRes(CExoResMan *pResMan, CRes* cRes, const std::string& resRef, NwnResType resType);
     void DumpResStruct(CRes *cRes);
-    int ResourceExists(char *resRef, NwnResType resType);
+    int ResourceExists(const std::string& resRef, NwnResType resType);
 
 private:
     bool disableHook;

@@ -69,29 +69,34 @@ bool CNWNXResources::OnRelease ()
     return true;
 }
 
-void* CNWNXResources::DemandRes(CExoResMan *pResMan, CRes *cRes, char *resRef, NwnResType resType)
+void* CNWNXResources::DemandRes(CExoResMan *pResMan, CRes *cRes, const std::string& resRef, NwnResType resType)
 {
     unsigned long size;
 
-    if (!resRef || *resRef == '*' || strcmp(resRef, "default") == 0)
+    if (resRef.empty() || resRef == "*" || resRef == "default" )
         return NULL;
+
     if (cRes == NULL) {
-        Log(5, "o Request for internal resource = %s (type %X)\n", resRef, resType);
+        Log(5, "o Request for internal resource = %s (type %X)\n", resRef.c_str(), resType);
 
         // nothing for us to do
         return NULL;
     }
 
     const char* resExt = NwnGetResTypeExtension(resType);
-    char resrefWithExt[21];
-    snprintf(resrefWithExt, 21, "%s.%s", resRef, resExt);
+    std::string resrefWithExt = resRef + "." + resExt;
+
 
     // Insert entry, or lookup old one...
     std::pair<ResourceMap::iterator, bool> lookup = resFiles.insert(ResourceMap::value_type(resrefWithExt, CResFileInfo()));
     CResFileInfo& fileInfo = lookup.first->second;
 
+
+    Log(4, "File: %s, Exists?: %d, mtime: %d\n", resrefWithExt.c_str(), event.exists, fileInfo.latest_mtime);
+
+
     if(cRes->m_nID == 0xFFFFFFFF) {
-        Log(4, "ID: -1: %.*s\n", 16, resRef);
+        Log(4, "ID: -1: %s\n", resRef.c_str());
     }
 
     if (fileInfo.res) {
@@ -101,7 +106,7 @@ void* CNWNXResources::DemandRes(CExoResMan *pResMan, CRes *cRes, char *resRef, N
     // If the file is a script and the latest reported time is older or equal to the
     // last returned time return a file from the cache.
     if(resType == NwnResType_NCS && fileInfo.data && fileInfo.latest_mtime <= fileInfo.mtime){
-        Log(4, "Skipping %s... Data: %p\n", resrefWithExt, fileInfo.data);
+        Log(4, "Skipping %s... Data: %p\n", resrefWithExt.c_str(), fileInfo.data);
         if(resType == NwnResType_NCS){
             cRes->m_pResource = fileInfo.data;
 
@@ -131,7 +136,7 @@ void* CNWNXResources::DemandRes(CExoResMan *pResMan, CRes *cRes, char *resRef, N
         return cRes->m_pResource;
     }
     else {
-        ResManDemandResStruct demandResInfo = { resrefWithExt, resType, NULL, 0, fileInfo.mtime, fileInfo.latest_mtime };
+        ResManDemandResStruct demandResInfo = { resrefWithExt.c_str(), resType, NULL, 0, fileInfo.mtime, fileInfo.latest_mtime };
         int notifyRet = NotifyEventHooks(hDemandRes, (WPARAM)&demandResInfo, 0);
         if (!notifyRet) { return NULL; }
         if (demandResInfo.pData && demandResInfo.size) {
@@ -145,7 +150,7 @@ void* CNWNXResources::DemandRes(CExoResMan *pResMan, CRes *cRes, char *resRef, N
             fileInfo.size = size = demandResInfo.size;
             fileInfo.mtime = demandResInfo.mtime;
 
-            Log(4, "Loading external resouce: %s\n", resrefWithExt);
+            Log(4, "Loading external resouce: %s, mtime: %d\n", resrefWithExt.c_str(), fileInfo.mtime);
             Log(4, "Original Structure:\n");
             DumpResStruct(cRes);
             Log(4, "Free memory: %d\n", pResMan->TotalAvailableMemory);
@@ -237,20 +242,21 @@ void CNWNXResources::DumpResStruct(CRes *cRes)
     Log(4, "- m_pKeyEntry = %08lx\n", cRes->ResName);
 }
 
-int CNWNXResources::ResourceExists(char *resRef, NwnResType resType) {
+int CNWNXResources::ResourceExists(const std::string& resRef, NwnResType resType) {
     const char* resExt = NwnGetResTypeExtension(resType);
-    char resrefWithExt[21];
-    snprintf(resrefWithExt, 21, "%s.%s", resRef, resExt);
+    std::string resrefWithExt = resRef + "." + resExt;
 
     // Insert entry, or lookup old one...
     std::pair<ResourceMap::iterator, bool> lookup = resFiles.insert(ResourceMap::value_type(resrefWithExt, CResFileInfo()));
     CResFileInfo& fileInfo = lookup.first->second;
 
-    ResManResExistsStruct event = { resrefWithExt, 0, false };
+    ResManResExistsStruct event = { resrefWithExt.c_str(), 0, false };
     NotifyEventHooks(hResExists, (WPARAM)&event, 0);
 
     if (event.exists)
         fileInfo.latest_mtime = event.mtime;
+
+    Log(4, "File: %s, Exists?: %d\n", resrefWithExt.c_str(), event.exists);
 
     return event.exists;
 }

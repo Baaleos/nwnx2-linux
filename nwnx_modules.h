@@ -13,7 +13,7 @@ typedef struct
 
 typedef struct
 {
-    char* resref; // "whatever.uti"
+    const char* resref; // "whatever.uti"
     unsigned int restype;
     unsigned char *pData;
     int size;

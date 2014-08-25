@@ -43,7 +43,7 @@ unsigned char d_ret_code_exi[0x20];
 extern CNWNXResources resources;
 
 NwnResType lastResType;
-char lastResRef[17];
+std::string lastResRef;
 
 int (*CExoResMan__FreeChunk_int)(CExoResMan *pResMan) = (int(*)(CExoResMan *)) 0x082AFC7C;
 char *(*DemandRes_orig)(CExoResMan * pthis, CRes* cRes);
@@ -53,8 +53,9 @@ int (*CExoResMan__Exists_orig)(CExoResMan *pthis, char* resRef, unsigned short r
 int RetrieveResEntry(CExoResMan * pthis, char* resRef, NwnResType resType, void ** v1, void** v2)
 {
     lastResType = resType;
-    memcpy(lastResRef, resRef, 16);
-    lastResRef[16] = 0x0;
+    char buf[20] = {0};
+    snprintf(buf, 16, "%s", resRef);
+    lastResRef = buf;
     return RetrieveResEntry_orig(pthis, resRef, resType, v1, v2);
 }
 
@@ -69,9 +70,10 @@ void* DemandRes(CExoResMan * pthis, CRes *cRes)
 	return DemandRes_orig(pthis, cRes);
 }
 
-int CExoResMan__Exists(CExoResMan *pthis, char* resRef, unsigned short resType, int *tableType)
-{
-    if(resources.ResourceExists(resRef, (NwnResType) resType))
+int CExoResMan__Exists(CExoResMan *pthis, char* resRef, unsigned short resType, int *tableType) {
+    char buf[20] = {0};
+    snprintf(buf, 16, "%s", resRef);
+    if(resources.ResourceExists(buf, (NwnResType) resType))
 	return 1;
     else
 	return CExoResMan__Exists_orig(pthis, resRef, resType, tableType);
