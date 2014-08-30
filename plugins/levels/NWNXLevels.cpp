@@ -25,6 +25,8 @@ CNWNXLevels::CNWNXLevels() {
 CNWNXLevels::~CNWNXLevels() { }
 
 char *CNWNXLevels::OnRequest (char *gameObject, char *Request, char *Parameters) {
+#define M(str, lit)                                                     \
+    strncmp((str), "" lit, (sizeof (lit)/sizeof(char)) - 1) == 0
 
     Log(1, "StrReq: \"%s\"\nParams: \"%s\"\n", Request, Parameters);
     if(strncmp(Request, "LEVELUP", 7) == 0){
@@ -44,7 +46,10 @@ char *CNWNXLevels::OnRequest (char *gameObject, char *Request, char *Parameters)
     }
     else if(strncmp(Request, "SETXPDIRECT", 11) == 0){
         Func_SetXPDirect((CGameObject *)gameObject, Parameters);
-    }    
+    }
+    else if(M(Request, "GETMEETSFEATREQUIREMENTS")){
+        Func_GetMeetsFeatRequirements((CGameObject *)gameObject, Parameters);
+    }
     else if(strncmp(Request, "DUMPSPELLS", 10) == 0){
         CGameObject *ob = (CGameObject *)gameObject;
         CNWSCreature *cre;
@@ -68,6 +73,7 @@ char *CNWNXLevels::OnRequest (char *gameObject, char *Request, char *Parameters)
     Log(1, "Return: \"%s\"\n", Parameters);
 
     return NULL;
+#undef M
 }
 
 unsigned long CNWNXLevels::OnRequestObject (char *gameObject, char *Request) {

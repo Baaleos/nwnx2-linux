@@ -11,6 +11,7 @@ add_module(levels NWNXLevels plugin-levels
     funcs/f_ModifyXPDirect
     funcs/f_SetMaxLevelLimit
     funcs/f_SetXPDirect
+    funcs/f_GetMeetsFeatRequirements
 
     hooks/h_GetSpellGain
     hooks/h_GetSpellsKnownPerLevel
