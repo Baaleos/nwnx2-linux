@@ -36,6 +36,8 @@ CNWNXEvents::CNWNXEvents()
     conv_script_type = None;
     scriptRun = false;
     suppressForgetAggression = true;
+    last_cmd = -1;
+    last_arg_count = -1;
 }
 
 CNWNXEvents::~CNWNXEvents()

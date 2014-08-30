@@ -10,9 +10,11 @@ add_module(nsevents NWNXEvents plugin-events
     hooks/h_AIActionPickPocket
     hooks/h_CheckScript
     hooks/h_CNWSObject_dtor
+    hooks/h_ExecuteCommand
     hooks/h_HandleReply
     hooks/h_PackCreatureIntoMessage
     hooks/h_PossessFamiliar
+    hooks/h_ReportError
     hooks/h_SendServerToPlayerExamineGui_CreatureData
     hooks/h_SendServerToPlayerExamineGui_DoorData
     hooks/h_SendServerToPlayerExamineGui_ItemData
