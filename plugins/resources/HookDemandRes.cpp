@@ -53,9 +53,7 @@ int (*CExoResMan__Exists_orig)(CExoResMan *pthis, char* resRef, unsigned short r
 int RetrieveResEntry(CExoResMan * pthis, char* resRef, NwnResType resType, void ** v1, void** v2)
 {
     lastResType = resType;
-    char buf[20] = {0};
-    snprintf(buf, 16, "%s", resRef);
-    lastResRef = buf;
+    lastResRef = std::string(resRef, 16);
     return RetrieveResEntry_orig(pthis, resRef, resType, v1, v2);
 }
 
@@ -65,18 +63,16 @@ void* DemandRes(CExoResMan * pthis, CRes *cRes)
 {
     lastRet = resources.DemandRes(pthis, cRes, lastResRef, lastResType);
     if(lastRet)
-	return lastRet;
+        return lastRet;
     else
-	return DemandRes_orig(pthis, cRes);
+        return DemandRes_orig(pthis, cRes);
 }
 
 int CExoResMan__Exists(CExoResMan *pthis, char* resRef, unsigned short resType, int *tableType) {
-    char buf[20] = {0};
-    snprintf(buf, 16, "%s", resRef);
-    if(resources.ResourceExists(buf, (NwnResType) resType))
-	return 1;
+    if(resources.ResourceExists(std::string(resRef, 16), (NwnResType) resType))
+        return 1;
     else
-	return CExoResMan__Exists_orig(pthis, resRef, resType, tableType);
+        return CExoResMan__Exists_orig(pthis, resRef, resType, tableType);
 }
 
 // 55 89 e5 57 56 53 83 ec 18 8b 75 08 83 c6 1c
