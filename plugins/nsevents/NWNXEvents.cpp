@@ -79,7 +79,7 @@ bool CNWNXEvents::OnCreate (gline *config, const char* LogDir)
     }
     else {
         Log (0, "Plugin link: %08lX\n", pluginLink);
-                    
+
         hEvent = CreateHookableEvent("NWNX/Events/Event");
 	hExamineEvent = CreateHookableEvent("NWNX/Events/ExamineEvent");
         hConversationEvent = CreateHookableEvent("NWNX/Events/ConversationEvent");
@@ -110,7 +110,7 @@ char* CNWNXEvents::OnRequest (char* gameObject, char* Request, char* Parameters)
         else if (MLIT(Request, "GET_NODE_TEXT") && pConversation){
             int nLocaleID = atoi(Parameters);
             const char *pText = NULL;
-            
+
             if(nNodeType == StartingNode || nNodeType == EntryNode){
                 CDialogReply *pEntry = &pConversation->entries[nCurrentAbsoluteNodeID].info;
                 CExoLocString *pNodeText = &pEntry->text;
@@ -120,10 +120,10 @@ char* CNWNXEvents::OnRequest (char* gameObject, char* Request, char* Parameters)
                 CDialogReply *pReply = &pConversation->replies[nCurrentAbsoluteNodeID];
                 CExoLocString *pNodeText = &pReply->text;
                 pText = nwn_GetCExoLocStringText(pNodeText, nLocaleID);
-            } 
-            else 
+            }
+            else
                 return NULL;
-            
+
             if(pText)
                 return strdup(pText);
         }
@@ -141,7 +141,7 @@ char* CNWNXEvents::OnRequest (char* gameObject, char* Request, char* Parameters)
                 Log(0, "o sscanf error\n");
                 return NULL;
             }
-           
+
             if(nNodeType == StartingNode || nNodeType == EntryNode){
                 CDialogReply *pEntry = &pConversation->entries[nCurrentAbsoluteNodeID].info;
                 CExoLocString *pNodeText = &pEntry->text;
@@ -153,7 +153,7 @@ char* CNWNXEvents::OnRequest (char* gameObject, char* Request, char* Parameters)
                 CExoLocString *pNodeText = &pReply->text;
                 pLangEntry = nwn_GetCExoLocStringElement(pNodeText, nLocaleID);
             }
-            
+
             if(pLangEntry && pLangEntry->text.text){
                 free(pLangEntry->text.text);
                 pLangEntry->text.text = strdup(nLastDelimiter+1);
@@ -182,7 +182,7 @@ char* CNWNXEvents::OnRequest (char* gameObject, char* Request, char* Parameters)
     if (!scriptRun) {
         if (MLIT(Request, "SET_EVENT_HANDLER_")) {
             int nHandler = atoi(Request + 18);
-            
+
             if (nHandler < 0 || nHandler >= NUM_EVENT_TYPES) {
                 *Parameters = 0;
             }
@@ -216,7 +216,7 @@ char* CNWNXEvents::OnRequest (char* gameObject, char* Request, char* Parameters)
     }
 
     //The following functions are accessible only from event script
-    if ((MLIT(Request, "GET_EVENT_ID") || MLIT(Request, "GETEVENTID")) 
+    if ((MLIT(Request, "GET_EVENT_ID") || MLIT(Request, "GETEVENTID"))
         && strlen(Parameters) > 1){
 
         sprintf(Parameters, "%d", event.type);
@@ -225,11 +225,11 @@ char* CNWNXEvents::OnRequest (char* gameObject, char* Request, char* Parameters)
         sprintf(Parameters, "%d", event.subtype);
     }
     else if (MLIT(Request, "GET_EVENT_POSITION") && strlen(Parameters) > 24){
-        snprintf(Parameters, strlen(Parameters), "%f¬%f¬%f", event.loc.x, event.loc.y, event.loc.z);
+        snprintf(Parameters, strlen(Parameters), "%f~%f~%f", event.loc.x, event.loc.y, event.loc.z);
     }
     else if (MLIT(Request, "BYPASS")){
         int bypass, use_result;
-        int num = sscanf(Parameters, "%d¬%d", &bypass, &use_result);
+        int num = sscanf(Parameters, "%d~%d", &bypass, &use_result);
 
         if (num < 1) {
             event.bypass = false;
@@ -239,9 +239,9 @@ char* CNWNXEvents::OnRequest (char* gameObject, char* Request, char* Parameters)
         else if (num == 2){
             event.use_result == !!use_result;
         }
-            
+
         event.bypass = !!bypass;
-        
+
     }
     else if (MLIT(Request, "RETURN")){
         event.result = atoi(Parameters);
@@ -254,7 +254,7 @@ unsigned long CNWNXEvents::OnRequestObject (char *gameObject, char* Request){
 
     //The following functions are accessible only from event script
     if (!scriptRun)
-        return OBJECT_INVALID; 
+        return OBJECT_INVALID;
 
     if (MLIT(Request, "TARGET")){
         return event.target;

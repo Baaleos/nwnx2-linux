@@ -97,19 +97,19 @@ vector GetEventPosition()
     float x, y, z;
 
     //Get X
-    int nPos = FindSubString(sVector, "¬");
+    int nPos = FindSubString(sVector, "~");
     if(nPos == -1) return Vector();
     x = StringToFloat(GetStringLeft(sVector, nPos));
     sVector = GetStringRight(sVector, GetStringLength(sVector) - nPos - 1);
 
     //Get Y
-    nPos = FindSubString(sVector, "¬");
+    nPos = FindSubString(sVector, "~");
     if(nPos == -1) return Vector();
     y = StringToFloat(GetStringLeft(sVector, nPos));
     sVector = GetStringRight(sVector, GetStringLength(sVector) - nPos - 1);
 
     //Get Z
-    nPos = FindSubString(sVector, "¬");
+    nPos = FindSubString(sVector, "~");
     if(nPos == -1)
     {
         z = StringToFloat(sVector);
@@ -121,7 +121,7 @@ vector GetEventPosition()
 void BypassEvent(int bUseReturnVal = 0)
 {
     if(nUseReturnVal)
-        SetLocalString(GetModule(), "NWNX!EVENTS!BYPASS", "1¬"+ IntToString(bUseReturnVal));
+        SetLocalString(GetModule(), "NWNX!EVENTS!BYPASS", "1~"+ IntToString(bUseReturnVal));
     else
         SetLocalString(GetModule(), "NWNX!EVENTS!BYPASS", "1");
 }
