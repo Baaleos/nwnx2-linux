@@ -73,7 +73,7 @@ void AddAreaToCreature(CNWSModule *pModule, CNWSCreature *pObject, dword nAreaID
         pObject->AreaMiniMaps = (void **) realloc(pObject->AreaMiniMaps, pModule->Areas.Count * 4);
         void *pMinimap = new char[0x80];
         memset(pMinimap, 0, 0x80);
-        pObject->AreaMiniMaps[pModule->Areas.Count - 1] = pMinimap;
+        pObject->AreaMiniMaps[pObject->AreaCount] = pMinimap;
         CExoArrayList_unsigned_long___Add(&pObject->AreaList, nAreaID);
         pObject->AreaCount++;
         areas.Log(3, "Object area count: %d\n", pObject->AreaCount);
@@ -100,7 +100,7 @@ void AddAreaToCreatures(CNWSModule *pModule, dword nAreaID)
 {
 	if(!pServThis) InitConstants();
 	CGameObjectArray *pGameObjArray = CServerExoApp__GetObjectArray((void *)pServThis);
-	
+
 	areas.Log(3, "Area count: %d\n", pModule->Areas.Count);
 	if(!pGameObjArray) return;
 	for(int i=0; i<=0xFFF; i++)
@@ -121,7 +121,7 @@ void RemoveAreaForCreatures(CNWSModule *pModule, dword nAreaID)
 {
 	if(!pServThis) InitConstants();
 	CGameObjectArray *pGameObjArray = CServerExoApp__GetObjectArray((void *)pServThis);
-	
+
 	areas.Log(3, "Area count: %d\n", pModule->Areas.Count);
 	if(!pGameObjArray) return;
 	for(int i=0; i<=0xFFF; i++)
@@ -249,7 +249,7 @@ void NWNXDestroyArea(void *pModule, dword nAreaID)
 		pDestructor(pObject, 3);
 	}
 	while(CNWSArea__GetNextObjectInArea(pArea, &nTmpObj));
-	
+
 	areas.Log(0, "Destroying area %08lX\n", nAreaID);
 	if(pArea->NumPlayers > 0)
 	{
