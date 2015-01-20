@@ -71,6 +71,7 @@ bool CNWNXEvents::OnCreate (gline *config, const char* LogDir)
                 eventScripts[i][16] = 0;
             }
         }
+        allow_poly_use_item = atoi(GetConf("allow_poly_use_item"));
     }
 
     // Plugin Events

@@ -96,11 +96,11 @@ public:
     void FireEvent(nwn_objid_t obj, int type, int subtype = -1, nwn_objid_t target = OBJECT_INVALID,
                    Vector loc = default_vector, nwn_objid_t item = OBJECT_INVALID);
     void FireExamineEvent(CNWSMessage *msg, CNWSPlayer *pl, nwn_objid_t obj, int obj_type);
-    
+
     void UpdateConversationScriptType(ConvScriptType type);
 
     char *eventScripts[NUM_EVENT_TYPES];
-    
+
     Event event;
     EventExamine examine_event;
     ConvScriptType conv_script_type;
@@ -117,10 +117,11 @@ public:
     int nSelectedNodeID;
     int nSelectedAbsoluteNodeID;
     int nCurrentAbsoluteNodeID;
-    int nCurrentNodeID;	
+    int nCurrentNodeID;
     int nNodeType;
     int last_cmd;
     int last_arg_count;
+    bool allow_poly_use_item;
 
 private:
     HANDLE hEvent;

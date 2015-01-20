@@ -7,11 +7,16 @@ void Hook_UseItem(CNWSCreature *cre, nwn_objid_t item, uint8_t radial, uint8_t a
         events.Log(2,
                    "UseItem: oPC=%08lX, oTarget=%08lX, oItem=%08lX, vTarget=%f/%f/%f, nRadial=%d\n",
                    cre->obj.obj_id, target, item, loc.x, loc.y, loc.z, radial);
-        
+
         events.FireEvent(cre->obj.obj_id, EVENT_TYPE_USE_ITEM, radial, target, loc, item);
     }
 
-    if(!events.event.bypass)
+    if(!events.event.bypass) {
+        int32_t store = cre->cre_is_poly;
+        if (events.allow_poly_use_item) {
+            cre->cre_is_poly = 0;
+        }
         CNWSCreature__UseItem(cre, item, radial, a, target, loc, area);
+        cre->cre_is_poly = store;
+    }
 }
-
