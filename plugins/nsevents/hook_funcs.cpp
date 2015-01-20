@@ -29,7 +29,6 @@ bool hook_functions(){
     HOOK(CNWSPlayer__PackCreatureIntoMessage, 0x805D910, Hook_PackCreatureIntoMessage, 5);
     HOOK(CNWSPlayer__ValidateCharacter, 0x80580bc, Hook_ValidateCharacter, 5);
 
-    HOOK(CNWVirtualMachineCommands__ExecuteCommand, 0x08231A34, Hook_ExecuteCommand, 6);
     HOOK(CNWVirtualMachineCommands__ReportError, 0x081FB68C, Hook_ReportError, 5);
 
     nx_hook_function((void *)0x081125b4,

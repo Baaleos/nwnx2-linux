@@ -70,7 +70,6 @@ void Hook_UseFeat(CNWSCreature *cre, uint16_t feat, uint16_t subfeat, nwn_objid_
 void Hook_UseItem(CNWSCreature *cre, nwn_objid_t item, uint8_t radial, uint8_t a, nwn_objid_t target, Vector loc, nwn_objid_t area);
 void Hook_UseSkill(CNWSCreature *cre, uint8_t skill, uint8_t subskill, nwn_objid_t target, Vector vTarget, nwn_objid_t area, nwn_objid_t item, int arg_24);
 int Hook_ValidateCharacter(CNWSPlayer *pl, int *result);
-int Hook_ExecuteCommand(CNWVirtualMachineCommands *vm, int cmd, int args);
 int Hook_ReportError(CNWVirtualMachineCommands *vm, CExoString *str, int strref);
 
 #include "NWNXBase.h"
