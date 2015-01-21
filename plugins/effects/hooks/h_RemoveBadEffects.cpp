@@ -24,19 +24,23 @@ void Hook_RemoveBadEffects(CNWSCreature *cre){
     CGameEffect *eff;
     uint16_t subtype = 0;
     uint16_t durtype = 0;
+    int i = 0;
 
-    for ( int i = 0; i < cre->obj.obj_effects_len; i++ ) {
+    while(i < cre->obj.obj_effects_len) {
         eff = cre->obj.obj_effects[i];
         subtype = nwn_GetSubType(eff);
         durtype = nwn_GetDurationType(eff);
 
         // When resting if an effect duration type is temporary or permenant and
         // is of the subtype magical or extraordinary, the effect is remove.
-        if ( ( durtype == DURATION_TYPE_TEMPORARY || 
+        if ( ( durtype == DURATION_TYPE_TEMPORARY ||
                durtype == DURATION_TYPE_PERMANENT ) &&
-             ( subtype == SUBTYPE_MAGICAL || 
+             ( subtype == SUBTYPE_MAGICAL ||
                subtype == SUBTYPE_EXTRAORDINARY)){
             CNWSObject__RemoveEffectById(&cre->obj, eff->eff_id);
+        }
+        else {
+            ++i;
         }
     }
 }
