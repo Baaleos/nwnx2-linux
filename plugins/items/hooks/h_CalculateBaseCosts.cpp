@@ -23,9 +23,10 @@ extern CNWNXItems items;
 uint32_t Hook_CalculateBaseCosts (CNWSItem *item){
     if(item) {
         items.FireEvent(ITEMS_EVENT_CALC_BASE_COST, OBJECT_INVALID, item->obj.obj_id);
-        if (items.event.use_result)
+        if (items.event.use_result) {
             item->it_cost_ided = items.event.result;
-	    return items.event.result;
+            return items.event.result;
+        }
     }
 
     return CNWSItem__CalculateBaseCosts(item);
