@@ -427,7 +427,8 @@ struct CNWSCreature_s {
 
     CExoArrayList_uint32       *cre_associates;         /* 0B38 */
 
-    uint32_t                    cre_associate_type;     /* 0B3C */   /* 3 = familiar; 7 or 8 = dm */
+    uint16_t                    cre_associate_type;     /* 0B3C */   /* 3 = familiar; 7 or 8 = dm */
+    uint16_t                    field_0B3E;             /* 0B3E */
     uint32_t                    cre_associate_command;  /* 0B40 */
 
     uint32_t                    cre_summoned_acomp;     /* 0B44 */
