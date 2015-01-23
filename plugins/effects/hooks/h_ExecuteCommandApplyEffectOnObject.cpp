@@ -38,7 +38,7 @@ int32_t Hook_ExecuteCommandApplyEffectOnObject(CNWVirtualMachineCommands *vm_cmd
     if ( dur_type == 1 ) {
         eff->eff_duration = duration;
     }
-    else if ( dur_type < 2 && dur_type > 4 ) {
+    else if ( dur_type < 2 || dur_type > 4 ) {
         dur_type = 0;
     }
     nwn_SetDurationType(eff, dur_type);
