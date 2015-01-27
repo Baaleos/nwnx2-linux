@@ -29,10 +29,6 @@
 
 extern int (*CExoArrayList__CGameEffect_Add)(CExoArrayList_ptr *list, CGameEffect *eff);
 
-void HandleFunc(CGameObject *ob, char *func, char* value);
-
-std::string Local_GetEffectString(CNWSObject *obj);
-
 #include "NWNXBase.h"
 
 class CNWNXEffects:public CNWNXBase {

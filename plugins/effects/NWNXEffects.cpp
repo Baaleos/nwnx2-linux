@@ -56,9 +56,6 @@ void CNWNXEffects::CustomEffectEvent(CNWSObject *obj, CGameEffect *eff, bool rem
 char *CNWNXEffects::OnRequest (char *gameObject, char *Request, char *Parameters) {
     Log(1, "StrReq: \"%s\"\nParams: \"%s\"\n", Request, Parameters);
 
-    CGameObject *ob = reinterpret_cast<CGameObject *>(gameObject);
-    HandleFunc(ob, Request, Parameters);
-
     Log(1, "Return: \"%s\"\n", Parameters);
 
     return NULL;
