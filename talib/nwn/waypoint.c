@@ -2,5 +2,5 @@
 
 CNWSWaypoint *nwn_GetWaypointByID(uint32_t id) {
     CGameObject *ob = nwn_GetObjectByID(id);
-    return ob->vtable->AsNWSWaypoint(ob);
+    return ob ? ob->vtable->AsNWSWaypoint(ob) : NULL;
 }
