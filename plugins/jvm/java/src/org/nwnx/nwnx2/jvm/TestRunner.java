@@ -10,24 +10,27 @@ public class TestRunner {
 		System.out.println("You need to load a module that has at least one event firing on a creature sometime.");
 
 		NWObject.setObjectInvalidIsNull(true);
-
+		System.out.println("Passed the Object Invalid Is Null");
 		NWObject.registerObjectHandler(new NWObject.ObjectHandler() {
 		    public NWObject handleObjectClass(NWObject obj, boolean valid,
 		            int objectType, String resRef, String tag) {
 		        return obj;
 		    }
 		});
+		
+		System.out.println("Registered Object Handler");
 		NWEffect.registerEffectHandler(new NWEffect.EffectHandler() {
 		    public NWEffect handleEffectClass(NWEffect eff) {
 		        return eff;
 		    }
 		});
+		System.out.println("Registered Effect Handler");
 		NWItemProperty.registerItemPropertyHandler(new NWItemProperty.ItemPropertyHandler() {
 		    public NWItemProperty handleItemPropertyClass(NWItemProperty prp) {
 		        return prp;
 		    }
 		});
-
+		System.out.println("Registered Item Property Handler");
 		ResMan.addResManListener(new ResManListener() {
 			@Override
 			public byte[] demandRes(String resRef) {
@@ -39,7 +42,7 @@ public class TestRunner {
 				return null;
 			}
 		});
-
+		System.out.println("Registered DemandRes handler");
 
 		Scheduler.addSchedulerListener(new SchedulerListener() {
 
@@ -117,6 +120,7 @@ public class TestRunner {
 
 	@SuppressWarnings("unused")
 	private static void setup() {
+		System.out.println("Test Runner Class is running!!");
 	}
 
 	@SuppressWarnings("unused")
