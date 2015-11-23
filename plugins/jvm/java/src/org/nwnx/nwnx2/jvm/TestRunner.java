@@ -8,7 +8,8 @@ public class TestRunner {
 		System.out.println("Initializing TestRunner. This class runs various sanity tests and benchmarks.");
 		System.out.println("If anything in this class makes your server crash, something is wrong and NEEDs to be fixed!");
 		System.out.println("You need to load a module that has at least one event firing on a creature sometime.");
-
+		System.out.println("Initializing the TestRunner!!");
+		
 		NWObject.setObjectInvalidIsNull(true);
 		System.out.println("Passed the Object Invalid Is Null");
 		NWObject.registerObjectHandler(new NWObject.ObjectHandler() {
