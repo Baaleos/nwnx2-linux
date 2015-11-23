@@ -66,6 +66,7 @@ public class TestRunner {
 					public void run() {
 						// TODO Auto-generated method stub
 						NWScript.speakString("This is a test", Talkvolume.SHOUT);
+						NWScript.printString("This is a string from inside Java!");
 						} 
 
 					}
@@ -73,6 +74,7 @@ public class TestRunner {
 				);
 				int objType = NWScript.getObjectType(objSelf);
 				String name = NWScript.getName(objSelf, false);
+				NWScript.printString("This is a string from inside Java 2!");
 				System.out.println("event on " + objSelf.getObjectId() + ": " + event + ", name = " + name + ", type = " + objType);
 				
 				String testResman = NWScript.get2DAString("resmantest", "A", 1);
