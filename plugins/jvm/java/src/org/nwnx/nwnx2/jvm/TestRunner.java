@@ -1,5 +1,6 @@
 package org.nwnx.nwnx2.jvm;
 
+import org.nwnx.nwnx2.jvm.ScheduledEvery.Policy;
 import org.nwnx.nwnx2.jvm.constants.*;
 
 public class TestRunner {
@@ -10,6 +11,8 @@ public class TestRunner {
 		System.out.println("You need to load a module that has at least one event firing on a creature sometime.");
 		System.out.println("Initializing the TestRunner!!");
 		
+		
+			
 		NWObject.setObjectInvalidIsNull(true);
 		System.out.println("Passed the Object Invalid Is Null");
 		NWObject.registerObjectHandler(new NWObject.ObjectHandler() {
@@ -57,10 +60,21 @@ public class TestRunner {
 
 			@Override
 			public void event(NWObject objSelf, String event) {
+				Scheduler.assign(objSelf, new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						NWScript.speakString("This is a test", Talkvolume.SHOUT);
+						} 
+
+					}
+			
+				);
 				int objType = NWScript.getObjectType(objSelf);
 				String name = NWScript.getName(objSelf, false);
 				System.out.println("event on " + objSelf.getObjectId() + ": " + event + ", name = " + name + ", type = " + objType);
-
+				
 				String testResman = NWScript.get2DAString("resmantest", "A", 1);
 				if (!testResman.equals("a2"))
 					throw new RuntimeException("ResMan not working; expected 'a2', got '" + testResman + "'");
@@ -76,7 +90,7 @@ public class TestRunner {
 					NWEffect[] e2 = NWScript.getEffects(objSelf);
 					String ret = ""; for (NWEffect ee : e2) ret += ee.getEffectId() + " ";
 					System.out.println("The creature has " + e2.length + " effects on himself: " + ret);
-
+					
 					System.out.println("Testing retrieving all objects in that area.");
 					NWObject area = NWScript.getArea(objSelf);
 					NWObject[] objInArea = NWScript.getObjectsInArea(area);
