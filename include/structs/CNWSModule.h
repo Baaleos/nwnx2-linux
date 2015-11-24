@@ -108,6 +108,44 @@ struct CNWSModule_s {
     uint32_t                    field_1D0;                                      /* 0x01D0 */
     uint32_t                    field_1D4;                                      /* 0x01D4 */    
     uint8_t                     mod_min_per_hour;                               /* 0x01D8 */
+	uint8_t                     mod_dawnhour;                                   /* 0x01D9 */
+    uint8_t                     mod_duskhour;                                   /* 0x01DA */
+    uint8_t                     mod_start_month;                                /* 0x01DB */
+    uint8_t                     mod_start_day;                                                  /* 0x01DC */
+    uint8_t                     mod_start_hour;                                                 /* 0x01DD */    
+    uint8_t                     mod_xp_scale;                                                   /* 0x01DE */    
+    uint8_t                     field_1DF;                                                              /* 0x01DF */
+    uint32_t                    mod_start_year;                                 /* 0x01E0 */
+    uint32_t                    field_1E4;                                      /* 0x01E4 */
+    uint32_t                    field_1E8;                                      /* 0x01E8 */
+    uint32_t                    field_1EC;                                      /* 0x01EC */
+    uint32_t                    field_1F0;                                      /* 0x01F0 */
+    uint32_t                    field_1F4;                                      /* 0x01F4 */
+    uint32_t                    field_1F8;                                      /* 0x01F8 */
+    uint32_t                    field_1FC;                                      /* 0x01FC */
+    uint32_t                    field_200;                                      /* 0x0200 */
+    CExoArrayList_ptr           mod_world_journal_entry;                                /* 0x0204 */
+    uint8_t                     field_210;                                                              /* 0x0210 */    
+    uint32_t                    mod_max_henchmen;                               /* 0x0214 */
+    nwn_objid_t                 *mod_limbo_list;                                                /* 0x0218 */
+    uint32_t                    mod_limbo_list_len;                                             /* 0x021C */
+    uint32_t                    mod_limbo_list_alloc;                                   /* 0x0220 */
+    uint32_t                    field_224;                                      /* 0x0224 */
+    //  uint32_t                field_228;                                  /* 0x0228 */
+    //  uint32_t                field_22C;                                  /* 0x022C */
+    //  uint32_t                field_230;                                  /* 0x0230 */
+    CExoString                  mod_tag;                                        /* 0x0234 */
+
+    uint32_t                    mod_is_official_campaign;                       /* 0x023C */
+    CExoString                  mod_nwm_res_name;                               /* 0x0240 */
+    uint32_t                    mod_table_count;                                /* 0x0248 */
+    uint8_t                     mod_pc_pathfind_rule;                           /* 0x024C */
+    uint8_t                     mod_enable_script_debugger;                     /* 0x024D */
+    uint8_t                     field_24E;                                              /* 0x024E */
+    uint8_t                     field_24F;                                              /* 0x024F */    
+    nwn_objid_t                 mod_last_pc_chat_obj;                           /* 0x0250 */
+    CExoString                  mod_last_pc_chat;                               /* 0x0254 */
+    uint32_t                    mod_last_pc_chat_type;                          /* 0x025C */
 };
 
 #endif /* _NX_NWN_STRUCT_CNWSMODULE_ */
