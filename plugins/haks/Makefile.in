@@ -4,7 +4,7 @@ LFLAGS   = $(PLUGIN_LFLAGS)
 
 all: nwnx_haks.so
 
-nwnx_haks.so: HookFunc.o NWNXHaks.o plugin-haks.o
+nwnx_haks.so: NWNXHaks.o plugin-haks.o
 	$(CXX) $(LFLAGS) -o $@ $^ $(LIBS)
 
 clean:
