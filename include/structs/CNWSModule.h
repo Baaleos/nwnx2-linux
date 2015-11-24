@@ -43,28 +43,24 @@ struct CNWSModule_s {
     nwn_objid_t                *mod_areas;
     uint32_t                    mod_areas_len;
 
-    uint32_t                    field_40;
-    uint32_t                    field_44;
-    uint32_t                    field_48;
-    uint32_t                    field_4C;
-    uint32_t                    field_50;
-    uint32_t                    field_54;
-    uint32_t                    field_58;
-    uint32_t                    field_5C;
-    uint32_t                    field_60;
-    uint32_t                    field_64;
-    uint32_t                    field_68;
-    uint32_t                    field_6C;
-    uint32_t                    field_70;
-    uint32_t                    field_74;
-    uint32_t                    field_78;
-    uint32_t                    field_7C;
-    uint32_t                    field_80;
-    uint32_t                    field_84;
-    uint32_t                    field_88;
-    uint32_t                    field_8C;
-    uint32_t                    field_90;
-    uint32_t                    field_94;
+	uint32_t                    mod_areas_alloc;                                                /* 0x0040 */
+    uint32_t                    field_44;                                                               /* 0x0044 */
+    uint32_t                    field_48;                                                               /* 0x0048 */
+    CExoLinkedList              mod_PlayerTURDList;                                             /* 0x004C-50 */
+    
+    CExoLocString               *mod_description;                                               /* 0x0050-54 */
+    CExoString                  mod_custom_tlk;                                                 /* 0x0058-5C */
+
+    uint32_t                    field_60;                                                       /* 0x0060 */
+    uint32_t                    field_64;                                                       /* 0x0064 */
+    CExoString                  mod_current_game;                                               /* 0x0068 */
+    uint32_t                    field_70;                                                       /* 0x0070 */
+    uint32_t                    field_74;                                                       /* 0x0074 */
+    uint32_t                    field_78;                                                       /* 0x0078 */
+    uint32_t                    mod_is_demo;                                                    /* 0x007C */
+    uint32_t                    mod_1;                                                          /* 0x0080 */
+    CExoLocString               mod_name;                                                       /* 0x0084 */
+    CExoStringList              mod_haks;                                                               /* 0x008C */
     uint32_t                    field_98;
     uint32_t                    field_9C;
     uint32_t                    field_A0;
