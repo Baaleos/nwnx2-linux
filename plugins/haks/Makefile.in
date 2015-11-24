@@ -2,9 +2,18 @@ NWNXDIR  = ../..
 CPPFLAGS = $(PLUGIN_CPPFLAGS) -I$(NWNXDIR)
 LFLAGS   = $(PLUGIN_LFLAGS)
 
+OFILES  = \
+    funcs/f_DumpHiddenHaks.o                      \
+    funcs/f_SetHakHidden.o                         \
+    hooks/h_PackModuleIntoMessage.o                  \
+	../../include/NWNXLib.h							\
+    NWNXHaks.o                                    \
+    plugin-haks.o
+
+
 all: nwnx_haks.so
 
-nwnx_haks.so: NWNXHaks.o plugin-haks.o
+nwnx_haks.so: $(OFILES)
 	$(CXX) $(LFLAGS) -o $@ $^ $(LIBS)
 
 clean:
