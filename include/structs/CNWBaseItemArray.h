@@ -25,9 +25,7 @@
 #define _NX_NWN_STRUCT_CNWBASEITEMARRAY_
 
 struct CNWBaseItemArray_s {
-    uint32_t      bitemarray_len;
-    CNWBaseItem  *bitemarray_bitem;
-    CNWBaseItem  *dunno;
+    void               *unknown;
 };
 
 #endif /* _NX_NWN_STRUCT_CNWBASEITEMARRAY_ */

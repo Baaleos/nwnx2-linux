@@ -25,7 +25,7 @@
 #define _NX_NWN_STRUCT_CNWSPELLARRAY_
 
 struct CNWSpellArray_s {
-    uint32_t            spa_len;
+    void               *unknown;
     CNWSpell           *spa_spells;
 };
 

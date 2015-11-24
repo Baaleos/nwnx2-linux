@@ -24,17 +24,8 @@
 #ifndef _NX_NWN_STRUCT_CVIRTUALMACHINESCRIPT_
 #define _NX_NWN_STRUCT_CVIRTUALMACHINESCRIPT_
 
-/* jmd: ported from NWNX v2.8 api. */
-
 struct CVirtualMachineScript_s {
-	CVirtualMachineStack        *vms_stack;
-	uint32_t                     vms_stack_size;
-	uint32_t                     vms_instruction_ptr;
-	uint32_t                     vms_secondary_ptr;
-	void                        *vms_code;
-	uint32_t                     vms_code_size;
-	CExoString                   vms_name;
-	uint32_t                     field_20;
+    void                       *unknown;
 };
 
 #endif /* _NX_NWN_STRUCT_CVIRTUALMACHINESCRIPT_ */

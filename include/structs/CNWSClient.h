@@ -25,9 +25,7 @@
 #define _NX_NWN_STRUCT_CNWSCLIENT_
 
 struct CNWSClient_s {
-    uint32_t      cl_id;                        /* 0x0000 */
-    uint32_t      cl_lang;			/* 0x0004 */
-    uint32_t      vftable;			/* 0x0008 */
+    void               *unknown;
 };
 
 #endif /* _NX_NWN_STRUCT_CNWSCLIENT_ */

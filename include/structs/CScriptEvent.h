@@ -25,12 +25,7 @@
 #define _NX_NWN_STRUCT_CSCRIPTEVENT_
 
 struct CScriptEvent_s {
-    uint16_t               evt_type;            /* 00 */
-    uint16_t               field_02;            /* 02 */
-    CExoArrayList_int32    evt_integers;        /* 04 */
-    CExoArrayList_float    evt_floats;          /* 10 */
-    CExoStringList         evt_strings;         /* 1C */
-    CExoArrayList_uint32   evt_objects;         /* 28 */
+void                       *unknown;
 };
 
 #endif /* _NX_NWN_STRUCT_CSCRIPTEVENT_ */

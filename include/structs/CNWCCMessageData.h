@@ -25,11 +25,7 @@
 #define _NX_NWN_STRUCT_CNWCCMESSAGEDATA_
 
 struct CNWCCMessageData_s {
-    uint32_t                 type;
-    CExoArrayList_int32      integers;
-    CExoArrayList_float      floats;
-    CExoStringList           strings;
-    CExoArrayList_uint32     objects;
+    void               *unknown;
 };
 
 #endif /* _NX_NWN_STRUCT_CNWCCMESSAGEDATA_ */
