@@ -25,9 +25,10 @@
 #define _NX_NWN_STRUCT_CRESREF_
 
 struct CResRef_s {
-    void                *unknown;
+     char resref[16];
 };
 
-#endif /* _NX_NWN_STRUCT_CRESREF_ */
+#endif 
+//* _NX_NWN_STRUCT_CRESREF_ */
 
 /* vim: set sw=4: */
