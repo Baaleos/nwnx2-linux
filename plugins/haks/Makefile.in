@@ -2,11 +2,27 @@ NWNXDIR  = ../..
 CPPFLAGS = $(PLUGIN_CPPFLAGS) -I$(NWNXDIR)
 LFLAGS   = $(PLUGIN_LFLAGS)
 
+
+CC	 = gcc
+CXX      = gcc
+GPERF    = gperf
+RM	 = /bin/rm
+MV	 = /bin/mv
+CP	 = /bin/cp
+SED      = /bin/sed
+INSTALL	 = /usr/bin/install -c
+
+INCS	 = -I. -I.. -I../.. -I ../../include -I/usr/local/include
+LIBS	 = -L/usr/local/lib -lm -lz
+DEFS	 = -D_REENTRANT -D_THREAD_SAFE
+CFLAGS   = @CFLAGS@ -Wall -Werror $(DEFS) $(INCS)
+CPPFLAGS = @CPPFLAGS@ -Wall -Werror $(DEFS) $(INCS)
+LFLAGS   = @LDFLAGS@ -w -fPIC -shared -rdynamic
+
 OFILES  = \
     funcs/f_DumpHiddenHaks.o                      \
     funcs/f_SetHakHidden.o                         \
     hooks/h_PackModuleIntoMessage.o                  \
-	../../include/NWNXLib.h							\
     NWNXHaks.o                                    \
     plugin-haks.o
 
