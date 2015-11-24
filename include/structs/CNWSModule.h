@@ -67,6 +67,47 @@ struct CNWSModule_s {
     uint32_t                    field_A4;
 
     CNWSScriptVarTable          mod_vartable;
+	uint32_t                    field_B0;                               /* 0x00B0 */    
+    uint32_t                    field_B4;                               /* 0x00B4 */
+    CExoString                  mod_scripts[18];                        /* 0x00B8 */
+    uint32_t                    field_144;                              /* 0x0144 */    
+    uint32_t                    field_148;                              /* 0x0148 */
+    uint32_t                    field_14C;                              /* 0x014C */
+    uint32_t                    field_150;                              /* 0x0150 */
+    CExoArrayList_ptr           mod_lookuptable;                        /* 0x0154 */
+
+
+
+    uint32_t                    field_160;                              /* 0x0160 */
+    uint32_t                    field_164;                              /* 0x0164 */
+    nwn_objid_t                 mod_last_enter;                                 /* 0x016C */
+    nwn_objid_t                 mod_last_exit;                                  /* 0x0170 */    
+    nwn_objid_t                 mod_last_item_aquired;                          /* 0x0174 */    
+    nwn_objid_t                 mod_last_item_aquired_from;                     /* 0x0178 */    
+    nwn_objid_t                 mod_last_item_aquired_by;                       /* 0x017C */    
+    uint32_t                    field_180;                                      /* 0x0180 */    
+    uint32_t                    field_184;                                      /* 0x0184 */
+    uint32_t                    mod_last_item_aquired_stack_size;               /* 0x0188 */    
+    uint32_t                    field_18C;                                      /* 0x018C */
+    uint32_t                    field_190;                                      /* 0x0190 */
+    uint32_t                    field_194;                                      /* 0x0194 */
+    uint32_t                    field_198;                                      /* 0x0198 */
+    uint32_t                    field_19C;                                      /* 0x019C */
+    nwn_objid_t                 mod_last_rested;                                /* 0x01A0 */
+    uint32_t                    field_1A4;                                      /* 0x01A4 */
+    nwn_objid_t                 mod_last_player_died;                           /* 0x01A8 */
+    nwn_objid_t                 mod_last_player_dying;                          /* 0x01AC */
+    uint32_t                    field_1B0;                                      /* 0x01B0 */
+    uint32_t                    field_1B4;                                      /* 0x01B4 */
+    uint32_t                    field_1B8;                                      /* 0x01B8 */
+    uint32_t                    field_1BC;                                      /* 0x01BC */
+    uint32_t                    mod_date_year;                                                  /* 0x01C0 */
+    uint32_t                    mod_date_month;                                                 /* 0x01C4 */
+    uint32_t                    mod_date_day;                                                   /* 0x01C8 */
+    uint32_t                    mod_time_hour;                                                  /* 0x01CC */
+    uint32_t                    field_1D0;                                      /* 0x01D0 */
+    uint32_t                    field_1D4;                                      /* 0x01D4 */    
+    uint8_t                     mod_min_per_hour;                               /* 0x01D8 */
 };
 
 #endif /* _NX_NWN_STRUCT_CNWSMODULE_ */
