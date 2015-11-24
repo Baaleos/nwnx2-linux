@@ -1,6 +1,5 @@
 package org.nwnx.nwnx2.jvm;
 
-import org.nwnx.nwnx2.jvm.ScheduledEvery.Policy;
 import org.nwnx.nwnx2.jvm.constants.*;
 
 public class TestRunner {
@@ -60,21 +59,10 @@ public class TestRunner {
 
 			@Override
 			public void event(NWObject objSelf, String event) {
-				Scheduler.assign(objSelf, new Runnable() {
-
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						NWScript.speakString("This is a test", Talkvolume.SHOUT);
-						NWScript.printString("This is a string from inside Java!");
-						} 
-
-					}
-			
-				);
+				
 				int objType = NWScript.getObjectType(objSelf);
 				String name = NWScript.getName(objSelf, false);
-				NWScript.printString("This is a string from inside Java 2!");
+				NWScript.printString("This is a string from inside Java!");
 				System.out.println("event on " + objSelf.getObjectId() + ": " + event + ", name = " + name + ", type = " + objType);
 				
 				String testResman = NWScript.get2DAString("resmantest", "A", 1);
