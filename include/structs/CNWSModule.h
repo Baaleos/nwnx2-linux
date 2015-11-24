@@ -25,24 +25,22 @@
 #define _NX_NWN_STRUCT_CNWSMODULE_
 
 struct CNWSModule_s {
-    uint32_t                    field_00;
-    uint32_t                    field_04;
-    uint32_t                    field_08;
-    uint32_t                    field_0C;
-    uint32_t                    field_10;
-    uint32_t                    field_14;
-    uint32_t                    field_18;
-    uint32_t                    field_1C;
-    uint32_t                    field_20;
-    uint32_t                    field_24;
-    uint32_t                    field_28;
-    uint32_t                    field_2C;
-    uint32_t                    field_30;
-    uint32_t                    field_34;
-
-    nwn_objid_t                *mod_areas;
-    uint32_t                    mod_areas_len;
-
+    uint32_t                    obj_type;
+    nwn_objid_t                 obj_id;                                                                 /* 0x0004 */
+    uint32_t                    field_08;                                                               /* 0x0008 */
+    uint32_t                    field_0C;                                                               /* 0x000C */
+    uint32_t                    field_10;                                                               /* 0x0010 */
+    uint32_t                    field_14;                                                               /* 0x0014 */
+    uint32_t                    field_18;                                                               /* 0x0018 */
+    uint32_t                    field_1C;                                                               /* 0x001C */
+    uint32_t                    field_20;                                                               /* 0x0020 */
+    uint32_t                    field_24;                                                               /* 0x0024 */
+    uint32_t                    field_28;                                                               /* 0x0028 */
+    uint32_t                    field_2C;                                                               /* 0x002C */
+    uint32_t                    field_30;                                                       /* 0x0030 */
+    uint32_t                    field_34;                                                               /* 0x0034 */
+    nwn_objid_t                 *mod_areas;                                                     /* 0x0038 */
+    uint32_t                    mod_areas_len;                                                  /* 0x003C */
     uint32_t                    mod_areas_alloc;                                                /* 0x0040 */
     uint32_t                    field_44;                                                               /* 0x0044 */
     uint32_t                    field_48;                                                               /* 0x0048 */
@@ -142,8 +140,6 @@ struct CNWSModule_s {
     nwn_objid_t                 mod_last_pc_chat_obj;                           /* 0x0250 */
     CExoString                  mod_last_pc_chat;                               /* 0x0254 */
     uint32_t                    mod_last_pc_chat_type;                          /* 0x025C */
-
-   
 };
 
 #endif /* _NX_NWN_STRUCT_CNWSMODULE_ */
