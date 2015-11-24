@@ -23,7 +23,6 @@
 
 #ifndef _NX_NWN_STRUCT_CNWSMODULE_
 #define _NX_NWN_STRUCT_CNWSMODULE_
-
 struct CNWSModule_s {
     uint32_t                    obj_type;
     nwn_objid_t                 obj_id;                                                                 /* 0x0004 */
@@ -142,6 +141,4 @@ struct CNWSModule_s {
     uint32_t                    mod_last_pc_chat_type;                          /* 0x025C */
 };
 
-#endif /* _NX_NWN_STRUCT_CNWSMODULE_ */
-
-/* vim: set sw=4: */
+#endif
