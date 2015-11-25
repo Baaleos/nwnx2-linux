@@ -13,7 +13,7 @@ public class God {
 			throw new Exception("The object being targetted is not a creature");
 		}
 		//Check DB for anything for our character.
-		String str = NWScript.getCampaignString("NWNX", "", obj);
+		//String str = NWScript.getCampaignString("NWNX", "", obj);
 		
 	}
 	
