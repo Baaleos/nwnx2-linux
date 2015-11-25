@@ -63,6 +63,17 @@ public class TestRunner {
 				int objType = NWScript.getObjectType(objSelf);
 				String name = NWScript.getName(objSelf, false);
 				NWScript.printString("This is a string from inside Java!");
+				if(objSelf.MODULE == objSelf)
+				{
+					NWScript.printString("Executing the Module Stress Tests!");
+					long startbench = System.currentTimeMillis();
+					String modName = "";
+					for (int i = 0; i < 100000; i++){
+						modName = NWScript.getModuleName();
+					}
+					long timebench = System.currentTimeMillis() - startbench;
+					NWScript.printString("100000 times getModuleName() took " + timebench + " ms: "+ modName);
+				}
 				System.out.println("event on " + objSelf.getObjectId() + ": " + event + ", name = " + name + ", type = " + objType);
 				
 				String testResman = NWScript.get2DAString("resmantest", "A", 1);
