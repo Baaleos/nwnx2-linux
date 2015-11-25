@@ -60,72 +60,79 @@ public class TestRunner {
 			@Override
 			public void event(NWObject objSelf, String event) {
 				
-				//Scheduler.assign(objSelf, null);
-				int objType = NWScript.getObjectType(objSelf);
-				String name = NWScript.getName(objSelf, false);
-				NWScript.printString("This is a string from inside Java!");
-				
-				NWScript.printString("Executing the Module Stress Tests!");
-				long startbench = System.currentTimeMillis();
-				String modName = "";
-				for (int i = 0; i < 100000; i++){
-					modName = NWScript.getModuleName();
-				}
-				long timebench = System.currentTimeMillis() - startbench;
-				NWScript.printString("100000 times getModuleName() took " + timebench + " ms: "+ modName);
-				
-				System.out.println("event on " + objSelf.getObjectId() + ": " + event + ", name = " + name + ", type = " + objType);
-				
-				String testResman = NWScript.get2DAString("resmantest", "A", 1);
-				if (!testResman.equals("a2"))
-					throw new RuntimeException("ResMan not working; expected 'a2', got '" + testResman + "'");
-				System.out.println("Tested Resman hook: " + testResman);
-
-				if (objType == ObjectType.CREATURE) {
-					System.out.println("Testing placing a temporary effect and retrieving it.");
-					System.out.println("Creating a effect.");
-					NWEffect e = NWScript.effectDeaf();
-					System.out.println("Applying effect: " + e.getEffectId());
-					NWScript.applyEffectToObject(1, e, objSelf, 7f);
-					System.out.println("Retrieving effects.");
-					NWEffect[] e2 = NWScript.getEffects(objSelf);
-					String ret = ""; for (NWEffect ee : e2) ret += ee.getEffectId() + " ";
-					System.out.println("The creature has " + e2.length + " effects on himself: " + ret);
+				try{
+					//Scheduler.assign(objSelf, null);
+					int objType = NWScript.getObjectType(objSelf);
+					String name = NWScript.getName(objSelf, false);
+					NWScript.printString("This is a string from inside Java!");
 					
-					System.out.println("Testing retrieving all objects in that area.");
-					NWObject area = NWScript.getArea(objSelf);
-					NWObject[] objInArea = NWScript.getObjectsInArea(area);
-					System.out.println("There are " + objInArea.length + " objects in that area.");
-
-					System.out.println("Testing retrieving all faction members.");
-					NWObject[] members = NWScript.getFactionMembers(objSelf,false);
-					System.out.println("There are " + members.length + " members.");
-
-					System.out.println("Running a generic useless benchmark (Should be around 150ms, give or take)");
-					long start = System.currentTimeMillis();
-					for (int i = 0; i < 100000; i++)
-						NWScript.getPosition(objSelf);
-					long time = System.currentTimeMillis() - start;
-					System.out.println("100000 times getPosition() took " + time + " ms");
-
-					if (event.equals("creature_hb")) {
-						System.out.println("Testing SCO/RCO on oid " + objSelf.getObjectId());
-						byte[] data = SCORCO.saveObject(objSelf);
-						System.out.println("got " + data.length + " bytes.");
-						NWObject rco = SCORCO.loadObject(data, NWScript.getLocation(objSelf), null);
-
-						if (rco != null)  {
-							System.out.println("RCO worked, name of duplicated object is: " + NWScript.getName(rco, true));
-							System.out.println("RCO worked, oid of duplicated object is: " + rco.getObjectId());
-							NWScript.destroyObject(rco, 0f);
-						} else {
-							throw new RuntimeException("RCO failed.");
-						}
+					NWScript.printString("Executing the Module Stress Tests!");
+					long startbench = System.currentTimeMillis();
+					String modName = "";
+					for (int i = 0; i < 100000; i++){
+						modName = NWScript.getModuleName();
 					}
+					long timebench = System.currentTimeMillis() - startbench;
+					NWScript.printString("100000 times getModuleName() took " + timebench + " ms: "+ modName);
+					
+					System.out.println("event on " + objSelf.getObjectId() + ": " + event + ", name = " + name + ", type = " + objType);
+					
+					String testResman = NWScript.get2DAString("resmantest", "A", 1);
+					if (!testResman.equals("a2"))
+						throw new RuntimeException("ResMan not working; expected 'a2', got '" + testResman + "'");
+					System.out.println("Tested Resman hook: " + testResman);
+
+					if (objType == ObjectType.CREATURE) {
+						System.out.println("Testing placing a temporary effect and retrieving it.");
+						System.out.println("Creating a effect.");
+						NWEffect e = NWScript.effectDeaf();
+						System.out.println("Applying effect: " + e.getEffectId());
+						NWScript.applyEffectToObject(1, e, objSelf, 7f);
+						System.out.println("Retrieving effects.");
+						NWEffect[] e2 = NWScript.getEffects(objSelf);
+						String ret = ""; for (NWEffect ee : e2) ret += ee.getEffectId() + " ";
+						System.out.println("The creature has " + e2.length + " effects on himself: " + ret);
+						
+						System.out.println("Testing retrieving all objects in that area.");
+						NWObject area = NWScript.getArea(objSelf);
+						NWObject[] objInArea = NWScript.getObjectsInArea(area);
+						System.out.println("There are " + objInArea.length + " objects in that area.");
+
+						System.out.println("Testing retrieving all faction members.");
+						NWObject[] members = NWScript.getFactionMembers(objSelf,false);
+						System.out.println("There are " + members.length + " members.");
+
+						System.out.println("Running a generic useless benchmark (Should be around 150ms, give or take)");
+						long start = System.currentTimeMillis();
+						for (int i = 0; i < 100000; i++)
+							NWScript.getPosition(objSelf);
+						long time = System.currentTimeMillis() - start;
+						System.out.println("100000 times getPosition() took " + time + " ms");
+
+						if (event.equals("creature_hb")) {
+							System.out.println("Testing SCO/RCO on oid " + objSelf.getObjectId());
+							byte[] data = SCORCO.saveObject(objSelf);
+							System.out.println("got " + data.length + " bytes.");
+							NWObject rco = SCORCO.loadObject(data, NWScript.getLocation(objSelf), null);
+
+							if (rco != null)  {
+								System.out.println("RCO worked, name of duplicated object is: " + NWScript.getName(rco, true));
+								System.out.println("RCO worked, oid of duplicated object is: " + rco.getObjectId());
+								NWScript.destroyObject(rco, 0f);
+							} else {
+								throw new RuntimeException("RCO failed.");
+							}
+						}
 
 
-					System.out.println("Press Ctrl+C when you're bored. You should see the shutdown handler print a farewell message.");
+						System.out.println("Press Ctrl+C when you're bored. You should see the shutdown handler print a farewell message.");
+					}
 				}
+				catch(Exception e)
+				{
+					System.out.println(e.toString());
+				}
+				
 			}
 
 			@Override
