@@ -1,7 +1,9 @@
-package org.baaleos.systems.god;
+package org.baaleos.systems.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class DBInc {
 
@@ -10,14 +12,35 @@ public class DBInc {
 	public static final String DBName = "nwn";
 	public static final String Username = "";
 	public static final String Password = "";
-	public String doQuery()
+	public static Object doQuery(String query, String column)
 	{
-		//Class.forName("com.mysql.jdbc.Driver") ;
-		//Connection conn = DriverManager.getConnection("jdbc:mysql://"+DBHOST+":"+Port+"/"+DBName, Username, Password) ;
-		//Statement stmt = conn.createStatement() ;
-		//String query = "select columnname from tablename ;" ;
-		//ResultSet rs = stmt.executeQuery(query) ;
-		return "";
+		try
+		{
+		Class.forName("com.mysql.jdbc.Driver") ;
+		Connection conn = DriverManager.getConnection("jdbc:mysql://"+DBHOST+":"+Port+"/"+DBName, Username, Password) ;
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(query) ;
+		return rs.getObject(column);
+		}
+		catch(Exception ee)
+		{
+			return null;
+		}
 	}
+	public static void doUpdateQuery(String query)
+	{
+		try
+		{
+			Class.forName("com.mysql.jdbc.Driver") ;
+			Connection conn = DriverManager.getConnection("jdbc:mysql://"+DBHOST+":"+Port+"/"+DBName, Username, Password) ;
+			Statement stmt = conn.createStatement();
+			stmt.executeUpdate(query) ;
+		}
+		catch(Exception ee)
+		{
+			
+		}
+	}
+	
 	
 }
