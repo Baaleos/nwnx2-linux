@@ -12,6 +12,12 @@ public class IDInc {
 	{
 		String strId = "";
 		
+		if(NWScript.getIsPC(player)==false){
+			
+			return NWScript.getTag(player)+"_"+NWScript.getResRef(player)+"_"+NWScript.getName(player, false);
+		}
+		
+		
 		String localID = NWScript.getLocalString(getIDHolder(player), "PLAYER_ID");
 		if(localID.length() <= 1){
 			//Empty String - So we need a new ID

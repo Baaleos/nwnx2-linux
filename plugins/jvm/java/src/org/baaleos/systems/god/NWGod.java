@@ -1,25 +1,43 @@
 package org.baaleos.systems.god;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
+import org.baaleos.systems.god.advancedTypes.NWPlayer;
+import org.baaleos.systems.playerid.IDInc;
+import org.nwnx.nwnx2.jvm.NWEffect;
 import org.nwnx.nwnx2.jvm.NWObject;
 import org.nwnx.nwnx2.jvm.NWScript;
+import org.nwnx.nwnx2.jvm.constants.DurationType;
 import org.nwnx.nwnx2.jvm.constants.ObjectType;
 
-public class God {
+public class NWGod extends NWPlayer {
 
-	public God(NWObject obj) throws Exception
-	{
-		if(obj.objectType() != ObjectType.CREATURE)
+	
+	
+	
+	public NWGod(int oid) throws Exception {
+		super(oid);
+		
+		// TODO Auto-generated constructor stub
+		if(this.objectType() != ObjectType.CREATURE)
 		{
 			throw new Exception("The object being targetted is not a creature");
 		}
-		//Check DB for anything for our character.
-		//String str = NWScript.getCampaignString("NWNX", "", obj);
-		theGod = obj;
+		getListOfGods().put(this.getUniqueID(), this);
+	}
+
+	
+	
+	private static Hashtable<String,NWGod> ListOfGods;
+	public static Hashtable<String,NWGod> getListOfGods(){
+		if(ListOfGods == null){
+			ListOfGods = new Hashtable();
+		}
+		return ListOfGods;
 	}
 	
-	private NWObject theGod;
+	
 	private String name;
 	private String playerName;
 	private String UniqueID;
@@ -60,21 +78,28 @@ public class God {
 		return priceDatabase;
 	}
 	
-	public int doGodEnergyCalculations()
+	public void doGodEnergyCalculations()
 	{
+		if(this.IsValid() == false){ return;}
+		if(NWScript.getLocalInt(this,"IS_GOD")== 0)
+		{
+			return;
+		}
+		NWEffect effect = NWScript.effectVisualEffect(13, false);
+		NWScript.applyEffectToObject(DurationType.TEMPORARY, effect, this, 1.00f);
 		int output = 0;
 		int consumption = 0;
 		int active = 0;
 		for(String str : toggles){
 			active = 0;
-			active = NWScript.getLocalInt(this.theGod, str);
+			active = NWScript.getLocalInt(this, str);
 			if(active >= 1)
 			{
 				consumption += active * (int)getTogglePrices().get(str); //Allow multiplier for levels
 			}
 		}
 
-		return output;
+		
 	}
 	
 }
