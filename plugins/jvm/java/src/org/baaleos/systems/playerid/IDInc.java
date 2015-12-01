@@ -3,12 +3,13 @@ package org.baaleos.systems.playerid;
 import java.util.UUID;
 
 import org.baaleos.systems.db.DBInc;
+import org.baaleos.systems.god.advancedTypes.NWPlayer;
 import org.nwnx.nwnx2.jvm.NWObject;
 import org.nwnx.nwnx2.jvm.NWScript;
 
 public class IDInc {
 
-	public static String getPlayerId(NWObject player)
+	public static String getPlayerId(NWPlayer player)
 	{
 		String strId = "";
 		
