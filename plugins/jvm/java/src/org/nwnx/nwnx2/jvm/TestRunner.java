@@ -77,6 +77,11 @@ public class TestRunner {
 						if (!testResman.equals("a2"))
 							throw new RuntimeException("ResMan not working; expected 'a2', got '" + testResman + "'");
 						System.out.println("Tested Resman hook: " + testResman);
+						NWScript.executeScript("test_java", objSelf);
+						int iTest = NWScript.getLocalInt(objSelf,"TESTING_JAVA");
+						if(iTest != 1212){
+							throw new RuntimeException("Java execute script call not working; expected '1212', got '" + iTest + "'");
+						}
 					}
 					
 					String name = NWScript.getName(objSelf, false);

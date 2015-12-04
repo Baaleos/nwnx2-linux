@@ -18,11 +18,7 @@ public class StaticContainer {
 	}
 	public static void onPlayerEnter(NWObject player)
 	{
-		if(PlayerContainer == null)
-		{
-			PlayerContainer = new ArrayList<NWObject>();
-		}
-		PlayerContainer.add(player);
+		
 	}
 	
 	

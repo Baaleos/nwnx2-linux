@@ -10,7 +10,6 @@ public class NWPlayer extends NWCreature{
 	}
 
 	
-	public String getUniqueID(){
-		return IDInc.getPlayerId(this);
-	}
+	
+	
 }
