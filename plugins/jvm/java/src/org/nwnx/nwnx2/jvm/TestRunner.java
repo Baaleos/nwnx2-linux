@@ -81,6 +81,7 @@ public class TestRunner {
 						NWScript.executeScript("test_java", objSelf);
 						long timeDiff = System.currentTimeMillis() - startScriptTime;
 						System.out.println("Took "+timeDiff+" ms to complete 100000 get name calls in ncs");
+						System.out.println("100000 times getModuleName() took " + timebench + " ms: "+ modName);
 						int iTest = NWScript.getLocalInt(objSelf,"TESTING_JAVA");
 						if(iTest != 1212){
 							throw new RuntimeException("Java execute script call not working; expected '1212', got '" + iTest + "'");
