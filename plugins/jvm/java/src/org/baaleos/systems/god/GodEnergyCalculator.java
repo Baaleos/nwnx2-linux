@@ -12,14 +12,15 @@ public class GodEnergyCalculator  {
 	private static NWObject module;
 	
 	public static void askModuleToDoWork(NWObject objMod){
-		Scheduler.assign(module, new DoWork(module) {
-				
-			   public void run() { 
-			      NWScript.speakString("hi", 0); 
+		
+		Scheduler.assign(module, new Runnable() { 
+            public void run() { 
+            	  NWScript.speakString("hi", 0); 
 			      System.out.println("Testing on thread!!");
-			      NWScript.printString("This came from another threads");
-			   } 
-			});
+			      NWScript.printString("This came from another threads"); 
+            } 
+         }); 
+		
 		
 		
 	}
