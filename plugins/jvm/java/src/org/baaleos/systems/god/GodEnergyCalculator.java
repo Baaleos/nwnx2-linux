@@ -13,7 +13,7 @@ public class GodEnergyCalculator  {
 	
 	public static void askModuleToDoWork(NWObject objMod){
 		Scheduler.assign(module, new DoWork(module) {
-				@Override
+				
 			   public void run() { 
 			      NWScript.speakString("hi", 0); 
 			      System.out.println("Testing on thread!!");
