@@ -1,6 +1,7 @@
 package org.baaleos.systems.god;
 import java.util.Set;
 import org.nwnx.nwnx2.jvm.NWObject;
+import org.nwnx.nwnx2.jvm.NWScript;
 import org.nwnx.nwnx2.jvm.Scheduler;
 
 
@@ -9,31 +10,21 @@ public class GodEnergyCalculator  {
 		module = mod;
 	}
 	private static NWObject module;
-	private static DoWork worker;
+	
 	public static void askModuleToDoWork(NWObject objMod){
-		module = objMod;
-		worker = new DoWork(module);
-		new Thread(worker).start();
+		Scheduler.assign(module, new DoWork(module) { 
+			   public void e() { 
+			      NWScript.speakString("hi", 0); 
+			      System.out.println("Testing on thread!!");
+			   } 
+			});
 		
 		
 	}
 	
-	public static class DoWork implements Runnable{
-		private NWObject module;
-		public DoWork(NWObject mod){
-			module = mod;
-		}
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub
-			for(int i =0;i<=50;i++){
-				System.out.println("Running from other thread!");
-			}
-		}
-		
-	}
+}
 
 	
 	
 	
-}
+

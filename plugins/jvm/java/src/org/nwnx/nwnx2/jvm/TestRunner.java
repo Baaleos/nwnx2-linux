@@ -88,6 +88,7 @@ public class TestRunner {
 							throw new RuntimeException("Java execute script call not working; expected '1212', got '" + iTest + "'");
 						}
 					}else if(event.equals("God_Loop_Start")){
+						System.out.println("Attempting threading test");
 						GodEnergyCalculator.askModuleToDoWork(objSelf);
 					}
 					
