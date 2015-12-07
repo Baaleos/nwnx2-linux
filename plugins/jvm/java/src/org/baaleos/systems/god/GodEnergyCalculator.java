@@ -7,12 +7,12 @@ import org.nwnx.nwnx2.jvm.Scheduler;
 
 public class GodEnergyCalculator  {
 	public GodEnergyCalculator(NWObject mod){
-		module = mod;
+		//module = mod;
 	}
-	private static NWObject module;
+	private static final NWObject module = new NWObject(0);
 	
 	public static void askModuleToDoWork(NWObject objMod){
-		
+		NWScript.printString("This came from askModuleToDoWork"); 
 		Scheduler.assign(module, new Runnable() { 
             public void run() { 
             	  NWScript.speakString("hi", 0); 
