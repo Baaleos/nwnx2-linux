@@ -16,6 +16,7 @@ public class GodEnergyCalculator  {
 			   public void e() { 
 			      NWScript.speakString("hi", 0); 
 			      System.out.println("Testing on thread!!");
+			      NWScript.printString("This came from another threads");
 			   } 
 			});
 		

@@ -24,7 +24,9 @@ public class NWGod extends NWPlayer {
 		{
 			throw new Exception("The object being targetted is not a creature");
 		}
-		getListOfGods().put(this.getUniqueID(), this);
+		if(!getListOfGods().containsKey(this.getUniqueID())){
+			getListOfGods().put(this.getUniqueID(), this);
+		}
 	}
 
 	
@@ -77,7 +79,7 @@ public class NWGod extends NWPlayer {
 		priceDatabase.put("Godly Constitution",1);
 		return priceDatabase;
 	}
-	
+
 	public void doGodEnergyCalculations()
 	{
 		if(this.IsValid() == false){ return;}
