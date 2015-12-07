@@ -3,6 +3,7 @@ package org.nwnx.nwnx2.jvm;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.baaleos.systems.god.GodEnergyCalculator;
 import org.baaleos.systems.server.StaticContainer;
 import org.nwnx.nwnx2.jvm.constants.*;
 
@@ -86,6 +87,8 @@ public class TestRunner {
 						if(iTest != 1212){
 							throw new RuntimeException("Java execute script call not working; expected '1212', got '" + iTest + "'");
 						}
+					}else if(event.equals("God_Loop_Start")){
+						GodEnergyCalculator.askModuleToDoWork(objSelf);
 					}
 					
 					String name = NWScript.getName(objSelf, false);
@@ -97,11 +100,11 @@ public class TestRunner {
 					if (objType == ObjectType.CREATURE) {
 						switch(event)
 						{
-						case "client_enter":
-							
-							//Player Enter server
-							StaticContainer.onPlayerEnter(objSelf);
-							break;
+							case "client_enter":
+								
+								//Player Enter server
+								StaticContainer.onPlayerEnter(objSelf);
+								break;
 						}
 
 

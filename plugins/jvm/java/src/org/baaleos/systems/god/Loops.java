@@ -15,16 +15,5 @@ public class Loops {
 		
 	}
 	
-	private static void energyWork() throws Exception{
-		
-
-        Set<String> keys = NWGod.getListOfGods().keySet();
-        for(String key: keys){
-           NWGod god = NWGod.getListOfGods().get(key);
-           if(god.IsValid()){
-        	   god.doGodEnergyCalculations();
-           }
-        }
-
-	}
+	
 }
