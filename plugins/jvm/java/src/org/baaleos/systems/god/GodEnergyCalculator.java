@@ -20,7 +20,8 @@ public class GodEnergyCalculator  {
 			      System.out.println("Testing on thread!!");
 			      NWScript.printString("This came from another threads"); 
             } 
-         }); 
+         });
+		Scheduler.flushQueues();
 		
 		
 		
