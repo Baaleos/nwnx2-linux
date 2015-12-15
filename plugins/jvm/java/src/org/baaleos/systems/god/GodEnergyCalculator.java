@@ -6,23 +6,15 @@ import org.nwnx.nwnx2.jvm.Scheduler;
 
 
 public class GodEnergyCalculator implements Runnable  {
-	public GodEnergyCalculator(NWObject mod){
+	public GodEnergyCalculator(){
 		//module = mod;
 	}
 	
 	public void run()
 	{
 		NWScript.printString("Starting While loop");
-		int i = 0;
+	
 		while(true){
-			i++;
-			try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
 			Scheduler.assign(module, new Runnable() { 
 				@Override
 	            public void run() { 
@@ -30,9 +22,12 @@ public class GodEnergyCalculator implements Runnable  {
 	            } 
 	         });
 			Scheduler.flushQueues();
-			if(i >= 100)
-			{
-				break;
+			try {
+				Thread.sleep(30000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				System.out.println(e.toString());
+				e.printStackTrace();
 			}
 		}
 		
@@ -42,7 +37,7 @@ public class GodEnergyCalculator implements Runnable  {
 	private static final NWObject module = new NWObject(0);
 	
 	public static void askModuleToDoWork(NWObject objMod){
-		GodEnergyCalculator gCalc = new GodEnergyCalculator(objMod);
+		GodEnergyCalculator gCalc = new GodEnergyCalculator();
 		Thread t = new Thread(gCalc);
 		t.start();
 		
