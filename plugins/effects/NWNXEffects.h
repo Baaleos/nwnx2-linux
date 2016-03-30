@@ -22,7 +22,7 @@
 
 #include "NWNXLib.h"
 #include "talib/nwn/all.h"
-#include "nwnx_modules_ext.h"
+#include "talib/nwnx_modules_ext.h"
 #include "hooks.h"
 
 #include <string>
