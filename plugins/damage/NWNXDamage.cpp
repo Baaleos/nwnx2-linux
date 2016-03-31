@@ -44,11 +44,11 @@ CNWNXDamage::~CNWNXDamage() {
 
 
 char *CNWNXDamage::OnRequest (char *gameObject, char *Request, char *Parameters) {
-    const struct StructsStrCommand_s *cmd;
+    const struct DamageStrCommand_s *cmd;
 
     Log(1, "StrReq: \"%s\"\nParams: \"%s\"\n", Request, Parameters);
 
-    if ((cmd = StructsStrCommandLookup(Request, strlen(Request))) != NULL)
+    if ((cmd = DamageStrCommandLookup(Request, strlen(Request))) != NULL)
         cmd->func((CGameObject *)gameObject, Parameters);
     else
         Log(0, "Unrecognized string request: \"%s\" \"%s\"\n", Request, Parameters);
@@ -61,11 +61,11 @@ char *CNWNXDamage::OnRequest (char *gameObject, char *Request, char *Parameters)
 
 unsigned long CNWNXDamage::OnRequestObject (char *gameObject, char *Request) {
     unsigned long ret = OBJECT_INVALID;
-    const struct StructsObjCommand_s *cmd;
+    const struct DamageObjCommand_s *cmd;
 
     Log(1, "ObjReq: \"%s\"\n", Request);
 
-    if ((cmd = StructsObjCommandLookup(Request, strlen(Request))) != NULL)
+    if ((cmd = DamageObjCommandLookup(Request, strlen(Request))) != NULL)
         ret = cmd->func((CGameObject *)gameObject);
     else
         Log(0, "Unrecognized object request: \"%s\"\n", Request);
