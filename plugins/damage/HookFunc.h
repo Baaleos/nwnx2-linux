@@ -20,10 +20,6 @@
 #if !defined(HookFunc_h_)
 #define HookFunc_h_
 
-#include "typedefs.h"
-#include "NWNStructures.h"
-#include "CExoLinkedList.h"
-#include "CExoLocString.h"
 
 int HookFunctions();
 

@@ -28,13 +28,10 @@
 #endif
 
 #include "HookFunc.h"
-#include "CGameObjectArray.h"
-#include "NWNStructures.h"
 #include "NWNXDamage.h"
-#include "AssemblyHelper.cpp"
 
 extern CNWNXDamage damage;
-AssemblyHelper asmhelp;
+
 
 
 CNWSModule *(*CServerExoApp__GetModule)(void *pServerExo);
