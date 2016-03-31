@@ -27,8 +27,9 @@
 #define PAGESIZE 4096
 #endif
 
-#include "HookFunc.h"
 #include "NWNXDamage.h"
+#include "HookFunc.h"
+
 
 extern CNWNXDamage damage;
 
