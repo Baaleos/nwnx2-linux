@@ -1884,7 +1884,7 @@ int (*CNWSEffectListHandler__OnApplyConcealment)(CNWSEffectListHandler *, CNWSOb
 int (*CNWSEffectListHandler__OnApplyCurse)(CNWSEffectListHandler *, CNWSObject *, CGameEffect *, int32_t) = NULL;
 int (*CNWSEffectListHandler__OnApplyCutsceneGhost)(CNWSEffectListHandler *, CNWSObject *, CGameEffect *, int32_t) = NULL;
 int (*CNWSEffectListHandler__OnApplyCutsceneImmobile)(CNWSEffectListHandler *, CNWSObject *, CGameEffect *, int32_t) = NULL;
-int (*CNWSEffectListHandler__OnApplyDamage)(CNWSEffectListHandler *, CNWSObject *, CGameEffect *, int32_t) = NULL;
+int (*CNWSEffectListHandler__OnApplyDamage)(CNWSEffectListHandler *, CNWSObject *, CGameEffect *, int32_t) = 0x0816c7e4;
 int (*CNWSEffectListHandler__OnApplyDamageDecrease)(CNWSEffectListHandler *, CNWSObject *, CGameEffect *, int32_t) = NULL;
 int (*CNWSEffectListHandler__OnApplyDamageImmunityDecrease)(CNWSEffectListHandler *, CNWSObject *, CGameEffect *, int32_t) = NULL;
 int (*CNWSEffectListHandler__OnApplyDamageImmunityIncrease)(CNWSEffectListHandler *, CNWSObject *, CGameEffect *, int32_t) = NULL;

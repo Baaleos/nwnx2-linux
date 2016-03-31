@@ -40,7 +40,7 @@ typedef unsigned char byte;
 
 //int (*CNWSArea__GetFirstObjectInArea)(CNWSArea *pArea, dword *pObjID);
 
-int (*CNWSEffectListHandler__OnApplyDamage)(CNWSEffectListHandler *, CNWSObject *, CGameEffect *, int );
+//int (*CNWSEffectListHandler__OnApplyDamage)(CNWSEffectListHandler *, CNWSObject *, CGameEffect *, int );
 // 0816c7e4 T CNWSEffectListHandler::OnApplyDamage(CNWSObject *, CGameEffect *, int)
 
 dword ppServThis = 0;
@@ -55,7 +55,7 @@ int HookFunctions()
 	pScriptThis = pServThis - 8;
 
 //	*(dword*)&CNWSArea__GetFirstObjectInArea = 0x080D4814;
-	*(dword*)&CNWSEffectListHandler__OnApplyDamage = 0x0816c7e4;
+	//*(dword*)&CNWSEffectListHandler__OnApplyDamage = 0x0816c7e4;
 
     areas.Log(0, "pServThis = %08lX\n", pServThis);
 
