@@ -57,7 +57,7 @@ int HookFunctions()
 //	*(dword*)&CNWSArea__GetFirstObjectInArea = 0x080D4814;
 	//*(dword*)&CNWSEffectListHandler__OnApplyDamage = 0x0816c7e4;
 
-    areas.Log(0, "pServThis = %08lX\n", pServThis);
+    damage.Log(0, "pServThis = %08lX\n", pServThis);
 
 	return (ppServThis && pScriptThis);
 }
