@@ -52,7 +52,7 @@ void Hook_PushStruct (void);
 class CNWNXDamage:public CNWNXBase {
   public:
     CNWNXDamage ();
-    virtual ~ CNWNXStructs ();
+    virtual ~ CNWNXDamage ();
 
     bool OnCreate (gline *nwnxConfig, const char *LogDir = NULL);
     char *OnRequest (char *gameObject, char *Request, char *Parameters);
