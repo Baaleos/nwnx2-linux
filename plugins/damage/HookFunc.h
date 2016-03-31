@@ -23,7 +23,7 @@
 
 int HookFunctions();
 
-int CNWSEffectListHandler__OnApplyDamage(CNWSEffectListHandler *pModule, CNWSObject oObject, int i);
+//int CNWSEffectListHandler__OnApplyDamage(CNWSEffectListHandler *pModule, CNWSObject oObject, int i);
 
 
 void InitConstants();
