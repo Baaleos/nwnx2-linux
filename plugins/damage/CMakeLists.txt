@@ -6,7 +6,7 @@ add_gperf_target(DamageObjCmds DamageObj DAMAGE OBJ)
 include_directories(.)
 add_module(damage NWNXDamage plugin-damage
 	DamageStrCmds DamageObjCmds
-
+	HookFunc
 	funcs/f_GetCreator
 	funcs/f_GetDuration
 	funcs/f_GetDurationRemaining
@@ -18,7 +18,7 @@ add_module(damage NWNXDamage plugin-damage
 	funcs/f_SetInteger
 	funcs/f_SetSpellId
 	funcs/f_SetTrueType
-	hooks/h_PushStruct
+
 )
 
 endif (gperf)
