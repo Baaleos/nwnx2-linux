@@ -90,14 +90,15 @@ d_redirect (long from, long to, unsigned char *d_ret_code, long len=0)
 
 int CNWSEffectListHandler__OnApplyDamageHook(CNWSEffectListHandler *, CNWSObject *, CGameEffect *, int32_t i)
 {
-	dword oObject1 = pObject1->ObjectID;
+	/*dword oObject1 = pObject1->ObjectID;
 	dword oObject2 = pObject2->ObjectID;
 	int nResult = 0;
 	if(!visibility.TestVisibility(oObject1, oObject2, nResult)){
 		nResult = CNWSMessage__TestObjectVisible_orig(pMessage, pObject1, pObject2);
 	}
 	damage.Log(3, "Visibility check: %x - %x: %d\n", pObject1->ObjectID, pObject2->ObjectID, nResult);
-	return nResult;
+	return nResult;*/
+	return 1;
 }
 
 
