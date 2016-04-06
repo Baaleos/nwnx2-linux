@@ -178,7 +178,12 @@ public class Include {
 	    NWScript.setLocalString(oArea, "NWNX!FUNCSEXT!GETSURFACE", Float.toString(vPos.getX())+"?"+Float.toString(vPos.getY())+"?"+Float.toString(vPos.getZ()));
 	    String sRet = NWScript.getLocalString(oArea, "NWNX!FUNCSEXT!GETSURFACE");
 	    NWScript.deleteLocalString(oArea, "NWNX!FUNCSEXT!GETSURFACE");
+	    try{
 	    return Integer.valueOf(sRet);
+	    }
+	    catch(Exception ee){
+	    	return 0;
+	    }
 	}
 	
 	
