@@ -6,8 +6,9 @@ import org.nwnx.nwnx2.jvm.NWScript;
 public class Gene {
 	public Gene(int geneID){
 		
-		this.GeneID = geneID;
 		
+		this.GeneID = geneID;
+		Initialize();
 	}
 	private int GeneID;
 private static final String INHUMAN_POWER_STORAGE_NAME = "INHUMAN_POWER_STORE_NAME_";
