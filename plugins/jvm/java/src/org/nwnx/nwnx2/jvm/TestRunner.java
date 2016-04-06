@@ -69,27 +69,9 @@ public class TestRunner {
 					if(event.equals("OnModuleLoad")){
 						long startbench = System.currentTimeMillis();
 						String modName = "";
-						for (int i = 0; i < 100000; i++){
-							modName = NWScript.getModuleName();
-						}
-						long timebench = System.currentTimeMillis() - startbench;
-						NWScript.printString("100000 times getModuleName() took " + timebench + " ms: "+ modName);
-						String testResman = NWScript.get2DAString("resmantest", "A", 1);
-						if (!testResman.equals("a2"))
-							throw new RuntimeException("ResMan not working; expected 'a2', got '" + testResman + "'");
-						System.out.println("Tested Resman hook: " + testResman);
-						long startScriptTime = System.currentTimeMillis();
-						NWScript.executeScript("test_java", objSelf);
-						long timeDiff = System.currentTimeMillis() - startScriptTime;
-						System.out.println("Took "+timeDiff+" ms to complete 100000 get name calls in ncs");
-						System.out.println("100000 times getModuleName() took " + timebench + " ms: "+ modName);
-						int iTest = NWScript.getLocalInt(objSelf,"TESTING_JAVA");
-						if(iTest != 1212){
-							throw new RuntimeException("Java execute script call not working; expected '1212', got '" + iTest + "'");
-						}
-					}else if(event.equals("God_Loop_Start")){
-						System.out.println("Attempting threading test");
-						GodEnergyCalculator.askModuleToDoWork(objSelf);
+						//Start genetics Loop
+						
+						
 					}
 					
 					String name = NWScript.getName(objSelf, false);

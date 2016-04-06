@@ -86,7 +86,7 @@ public class Include {
 		}
 	}
 	public static void HeartbeatProcessGene(NWObject oPC, Gene theGene, int TimeOfDay, NWObject oArea,
-											int iIsInWater, boolean areaLocation, boolean interior, boolean natural){
+											int iIsInWater, int areaLocation, int interior, int natural){
 		
 		if(oArea == NWObject.INVALID) { return;} //Don't do anything on this heartbeat until we materialize
 		int Apply = 0;
@@ -94,9 +94,9 @@ public class Include {
 		if(theGene.getAlwaysActive()){
 			Apply = 5;
 		}else{
-			boolean geneAboveGround = theGene.getEnvironmentAboveGround();
-			boolean geneInterior = theGene.getEnvironmentInterior();
-			boolean geneNatural = theGene.getEnvironmentNatural();
+			int geneAboveGround = theGene.getEnvironmentAboveGround();
+			int geneInterior = theGene.getEnvironmentInterior();
+			int geneNatural = theGene.getEnvironmentNatural();
 			int TileType = theGene.getEnvironmentTilesetType();
 			if(geneAboveGround == CONDITION_IGNORE){
 				geneAboveGround = areaLocation;
@@ -183,41 +183,24 @@ public class Include {
 	
 	
 	
-	public static void ProcessGenome(NWObject player, int TimeOfDayCurrent){
+	public static void ProcessPlayer(NWObject player, int timeOfDayCurrent){
+		Genome genome = new Genome(player);
+		ProcessGenome(player, genome, timeOfDayCurrent);
+	}
+	
+	public static void ProcessGenome(NWObject player, Genome genome, int TimeOfDayCurrent){
 		
-		//NWObject oPC, Gene theGene, int TimeOfDay, NWObject oArea,
-		//int iIsInWater, int AreaLocation, int Interior, int Natural
-		
-		//int iTime = GetTimeStamp();
-		
-		int AmountOfGenesOnCreature = NWScript.getLocalInt(player,"creature_gene_count_");
 		int i = 1;
 		NWObject oArea = NWScript.getArea(player);
 		NWLocation l = NWScript.getLocation(player);
 		int iIsInWater = IsInWater(l);
-		boolean AreaLocation = NWScript.getIsAreaAboveGround(oArea);
-		boolean Interior = NWScript.getIsAreaInterior(oArea);
-		boolean Natural = NWScript.getIsAreaNatural(oArea);
-		for(i=1;i<=AmountOfGenesOnCreature;i++){
-			int GeneID = NWScript.getLocalInt(player,"creature_genome_storage_"+i);
-			if(GeneID != 0){
-				Gene geneToApply = new Gene(GeneID);
-				
-				HeartbeatProcessGene(player,geneToApply, TimeOfDayCurrent,oArea,iIsInWater,AreaLocation,Interior,Natural);
-			}
+		int AreaLocation = NWScript.getIsAreaAboveGround(oArea)==true ? 1:0;
+		int Interior = NWScript.getIsAreaInterior(oArea) ==true ? 1:0;
+		int Natural = NWScript.getIsAreaNatural(oArea) ==true ? 1:0;
+		for(Gene g : genome){
+			HeartbeatProcessGene(player,g, TimeOfDayCurrent,oArea,iIsInWater,AreaLocation,Interior,Natural);
 		}
-		
-		WriteTimestampedLogEntry("Creature Genome Processing took "+IntToString(iTotal)+" seconds");
-		
-		
 	}
-	
-	public static void ProcessPlayer(NWObject player, int timeOfDayCurrent){
-		ProcessGenome(player, timeOfDayCurrent);
-		
-		
-	}
-	
 	
 	public static void GeneticsLoop(){
 		

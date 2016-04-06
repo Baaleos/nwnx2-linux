@@ -38,9 +38,9 @@ private static final  String INHUMAN_POWER_STORAGE_VISUAL = "INHUMAN_POWER_VISUA
 		int Number1 = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_STORAGE_NUMBER1+GeneID);
 		int Number2 = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_STORAGE_NUMBER2+GeneID);
 		int LevelOfPower = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_STORAGE_LEVEL_OF_POWER+GeneID);
-		boolean Natural = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_STORAGE_ENVIRONMENT_NATURAL+GeneID)==1;
-		boolean Above = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_STORAGE_ENVIRONMENT_ABOVE_GROUND+GeneID)==1;
-		boolean Interior = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_STORAGE_ENVIRONMENT_INTERIOR+GeneID)==1;
+		int Natural = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_STORAGE_ENVIRONMENT_NATURAL+GeneID);
+		int Above = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_STORAGE_ENVIRONMENT_ABOVE_GROUND+GeneID);
+		int Interior = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_STORAGE_ENVIRONMENT_INTERIOR+GeneID);
 		int Surface = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_STORAGE_ENVIRONMENT_SURFACE_TYPE+GeneID);
 		boolean AlwaysActive = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_STORAGE_ALWAYS_ACTIVE+GeneID)==1;
 		int DamageAmount = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_STORAGE_DAMAGE_AMOUNT+GeneID);
@@ -106,22 +106,22 @@ private static final  String INHUMAN_POWER_STORAGE_VISUAL = "INHUMAN_POWER_VISUA
 	public void setTimeOfDayActive(int timeOfDayActive) {
 		TimeOfDayActive = timeOfDayActive;
 	}
-	public boolean getEnvironmentNatural() {
+	public int getEnvironmentNatural() {
 		return EnvironmentNatural;
 	}
-	public void setEnvironmentNatural(boolean environmentNatural) {
+	public void setEnvironmentNatural(int environmentNatural) {
 		EnvironmentNatural = environmentNatural;
 	}
-	public boolean getEnvironmentInterior() {
+	public int getEnvironmentInterior() {
 		return EnvironmentInterior;
 	}
-	public void setEnvironmentInterior(boolean environmentInterior) {
+	public void setEnvironmentInterior(int environmentInterior) {
 		EnvironmentInterior = environmentInterior;
 	}
-	public boolean getEnvironmentAboveGround() {
+	public int getEnvironmentAboveGround() {
 		return EnvironmentAboveGround;
 	}
-	public void setEnvironmentAboveGround(boolean environmentAboveGround) {
+	public void setEnvironmentAboveGround(int environmentAboveGround) {
 		EnvironmentAboveGround = environmentAboveGround;
 	}
 	public int getEnvironmentTilesetType() {
@@ -171,9 +171,9 @@ private static final  String INHUMAN_POWER_STORAGE_VISUAL = "INHUMAN_POWER_VISUA
 	private boolean IsPassive;
 	private int EffectType;
 	private int TimeOfDayActive;
-	private boolean EnvironmentNatural;
-	private boolean EnvironmentInterior;
-	private boolean EnvironmentAboveGround;
+	private int EnvironmentNatural;
+	private int EnvironmentInterior;
+	private int EnvironmentAboveGround;
 	private int EnvironmentTilesetType;
 	private boolean AlwaysActive;
 	private int ApplyDamageAmount;
