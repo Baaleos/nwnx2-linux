@@ -99,8 +99,10 @@ public class Include {
 		if(oArea == NWObject.INVALID) { return;} //Don't do anything on this heartbeat until we materialize
 		int Apply = 0;
 		
+		
 		if(theGene.getAlwaysActive()){
 			Apply = 5;
+			NWScript.printString("Always active detected!");
 		}else{
 			int geneAboveGround = theGene.getEnvironmentAboveGround();
 			int geneInterior = theGene.getEnvironmentInterior();
@@ -125,6 +127,8 @@ public class Include {
 				break;
 		}
 		Apply = (geneAboveGround == areaLocation) && (geneInterior == interior) && (geneNatural == natural) && (TileType >= 1) ? 5:0;
+		NWScript.printString("Apply is equal to "+Apply);
+		
 		}
 		
 		if(Apply == 5){
@@ -140,6 +144,7 @@ public class Include {
 				NWScript.applyEffectToObject(DurationType.INSTANT,eEffect,oPC,0.00f);
 				
 			}else{
+				NWScript.printString("Attempting to apply effect!");
 				if(!HasEffectAlready(oPC,theGene.getEffectType())){
 					//WriteTimestampedLogEntry("Does not have effect already: Applying new");
 					eEffect = GetEffectFromID(theGene.getEffectType(), theGene.getEffectNumber1(), theGene.getEffectNumber2());
