@@ -3,6 +3,7 @@ package org.nwnx.nwnx2.jvm;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.baaleos.systems.genetics.GeneticsHeartbeat;
 import org.baaleos.systems.god.GodEnergyCalculator;
 import org.baaleos.systems.server.StaticContainer;
 import org.nwnx.nwnx2.jvm.constants.*;
@@ -70,9 +71,12 @@ public class TestRunner {
 						long startbench = System.currentTimeMillis();
 						String modName = "";
 						//Start genetics Loop
-						
-						
 					}
+					if(event.equals("OnModuleLoadGenetics")){
+						(new Thread(new GeneticsHeartbeat())).start();
+					}
+					
+					
 					
 					String name = NWScript.getName(objSelf, false);
 					int objType = NWScript.getObjectType(objSelf);
