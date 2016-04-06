@@ -87,6 +87,10 @@ public class Include {
 	}
 	
 	public static void SetEffectCreator (NWEffect eEffect, NWObject oCreator) {
+		if(oCreator.equals(null)){
+			NWScript.printString("Object equals null");
+			return;
+		}
 		NWScript.printString("Attempting to set Effect Creator as "+oCreator.getObjectId());
 		NWScript.setLocalString(NWObject.MODULE, "NWNX!STRUCTS!SETCREATOR", ""+oCreator.getObjectId());
 		//NWScript.setLocalObject(NWObject.MODULE, "ARGUMENT1", oCreator);
@@ -236,7 +240,10 @@ public class Include {
 	        iCreaturesAsSimulatedPCs++;
 	        for(int i=1;i<=iCreaturesAsSimulatedPCs;i++){
 	        	NWObject npc = NWScript.getLocalObject(NWObject.MODULE,SIMULATED_PC+i );
-	        	ProcessPlayer(npc, TimeOfDayCurrent);
+	        	if(npc.valid()){
+	        		ProcessPlayer(npc, TimeOfDayCurrent);
+	        	}
+	        	
 	        }
 	       
 	        
