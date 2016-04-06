@@ -85,6 +85,11 @@ public class Include {
 			
 		}
 	}
+	
+	public static void SetEffectCreator (NWEffect eEffect, NWObject oCreator) {
+	    NWScript.setLocalString(NWObject.MODULE, "NWNX!STRUCTS!SETCREATOR", String.valueOf(oCreator.getObjectId()));
+	}
+	
 	public static void HeartbeatProcessGene(NWObject oPC, Gene theGene, int TimeOfDay, NWObject oArea,
 											int iIsInWater, int areaLocation, int interior, int natural){
 		
@@ -135,7 +140,7 @@ public class Include {
 				if(!HasEffectAlready(oPC,theGene.getEffectType())){
 					//WriteTimestampedLogEntry("Does not have effect already: Applying new");
 					eEffect = GetEffectFromID(theGene.getEffectType(), theGene.getEffectNumber1(), theGene.getEffectNumber2());
-					//SetEffectCreator (eEffect, oEffectCreator);
+					SetEffectCreator (eEffect, oEffectCreator);
 					NWScript.applyEffectToObject(DurationType.PERMANENT,eEffect,oPC,0.00f);
 				}
 			}
