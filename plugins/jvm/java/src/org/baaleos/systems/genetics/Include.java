@@ -87,7 +87,10 @@ public class Include {
 	}
 	
 	public static void SetEffectCreator (NWEffect eEffect, NWObject oCreator) {
-	    NWScript.setLocalString(NWObject.MODULE, "NWNX!STRUCTS!SETCREATOR", String.valueOf(oCreator.getObjectId()));
+		NWScript.setLocalObject(NWObject.MODULE, "ARGUMENT1", oCreator);
+	    NWScript.executeScript("jvm_seteffcre", oCreator);
+	    NWScript.deleteLocalObject(NWObject.MODULE, "ARGUMENT1");
+	    
 	}
 	
 	public static void HeartbeatProcessGene(NWObject oPC, Gene theGene, int TimeOfDay, NWObject oArea,
