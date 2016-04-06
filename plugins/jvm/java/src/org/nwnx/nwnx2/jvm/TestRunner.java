@@ -73,7 +73,8 @@ public class TestRunner {
 						//Start genetics Loop
 					}
 					if(event.equals("OnModuleLoadGenetics")){
-						objSelf.assign(new GeneticsHeartbeat());
+						NWObject objToUse = NWScript.getObjectByTag("genetic_unit_test", 1);
+						objToUse.assign(new GeneticsHeartbeat());
 						//(new Thread(new GeneticsHeartbeat())).start();
 					}
 					
