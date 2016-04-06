@@ -73,7 +73,8 @@ public class TestRunner {
 						//Start genetics Loop
 					}
 					if(event.equals("OnModuleLoadGenetics")){
-						(new Thread(new GeneticsHeartbeat())).start();
+						objSelf.assign(new GeneticsHeartbeat());
+						//(new Thread(new GeneticsHeartbeat())).start();
 					}
 					
 					
