@@ -185,6 +185,7 @@ public class Include {
 	
 	public static void ProcessPlayer(NWObject player, int timeOfDayCurrent){
 		Genome genome = new Genome(player);
+		NWScript.printString("Processing "+NWScript.getName(player, false));
 		ProcessGenome(player, genome, timeOfDayCurrent);
 	}
 	
@@ -201,7 +202,8 @@ public class Include {
 			HeartbeatProcessGene(player,g, TimeOfDayCurrent,oArea,iIsInWater,AreaLocation,Interior,Natural);
 		}
 	}
-	
+	private static final String CREATURES_AS_SIMULATED_PC_COUNT = "creature_simulated_pc";
+	private static final String SIMULATED_PC = "simulated_pc_creature_";
 	public static void GeneticsLoop(){
 		
 		while(true){
@@ -210,6 +212,16 @@ public class Include {
 			for(NWObject PC: obj){
 				ProcessPlayer(PC, TimeOfDayCurrent);
 			}
+			
+			int iCreaturesAsSimulatedPCs = NWScript.getLocalInt(NWObject.MODULE,CREATURES_AS_SIMULATED_PC_COUNT);
+	        iCreaturesAsSimulatedPCs++;
+	        for(int i=1;i<=iCreaturesAsSimulatedPCs;i++){
+	        	NWObject npc = NWScript.getLocalObject(NWObject.MODULE,SIMULATED_PC+i );
+	        	ProcessPlayer(npc, TimeOfDayCurrent);
+	        }
+	       
+	        
+			
 			
 			try {
 				Thread.sleep(7000);
