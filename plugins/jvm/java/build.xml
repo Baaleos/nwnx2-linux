@@ -24,7 +24,9 @@
 	</target>
 	
 	<target name="jar" depends="compile">
+		<fileset dir="${src}" includes="**/*.java"/>
 		<jar jarfile="${dist}/org.nwnx.nwnx2.jvm.jar"
+			
 			manifest="META-INF/MANIFEST.MF" basedir="${build}"/>
 	</target>
 
