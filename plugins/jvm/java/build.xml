@@ -12,6 +12,7 @@
 		<javac
 			srcdir="${src}"
 			destdir="${build}"
+			debug="true"
 			includeantruntime="false"
 			encoding="utf-8"/>
 	</target>
