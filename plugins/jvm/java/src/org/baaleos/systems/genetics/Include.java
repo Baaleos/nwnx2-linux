@@ -13,11 +13,7 @@ public class Include {
 
 	private static NWObject theGeneticApplier;
 	private static NWObject GetGeneticEffectCreator(){
-		//if(theGeneticApplier != null && theGeneticApplier != NWObject.INVALID){
-		//	return theGeneticApplier;
-		//}
-		theGeneticApplier = NWScript.getObjectByTag("genetic_unit_test", 1);
-		return theGeneticApplier;
+		return NWScript.getObjectByTag("genetic_unit_test", 1);
 	}
 	private static final int CONDITION_IGNORE = 2;
 	private static final int CONDITION_SURFACE_WATER = 6;
@@ -141,6 +137,9 @@ public class Include {
 			int iDamageToApply = theGene.getApplyDamageAmount();
 			NWEffect eEffect;
 			NWObject oEffectCreator = GetGeneticEffectCreator();
+			if(oEffectCreator.valid()){
+				NWScript.printString("Object is valid!");
+			}
 			if(iDamageToApply > 0){
 				//Damage effect
 				int iDamageType = theGene.getDamageType();
