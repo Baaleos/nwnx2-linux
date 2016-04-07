@@ -237,12 +237,14 @@ public class Include {
 			}
 			
 			int iCreaturesAsSimulatedPCs = NWScript.getLocalInt(NWObject.MODULE,CREATURES_AS_SIMULATED_PC_COUNT);
-	        iCreaturesAsSimulatedPCs++;
-	        for(int i=1;i<=iCreaturesAsSimulatedPCs;i++){
-	        	NWObject npc = NWScript.getLocalObject(NWObject.MODULE,SIMULATED_PC+i );
-	        	if(npc.valid()){
-	        		ProcessPlayer(npc, TimeOfDayCurrent);
-	        	}
+	        //iCreaturesAsSimulatedPCs++;
+			if(iCreaturesAsSimulatedPCs > 0){
+		        for(int i=1;i<=iCreaturesAsSimulatedPCs;i++){
+		        	NWObject npc = NWScript.getLocalObject(NWObject.MODULE,SIMULATED_PC+i );
+		        	if(npc.valid()){
+		        		ProcessPlayer(npc, TimeOfDayCurrent);
+		        	}
+		        }
 	        	
 	        }
 	       
