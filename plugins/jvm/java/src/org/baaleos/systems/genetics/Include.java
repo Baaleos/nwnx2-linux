@@ -136,9 +136,10 @@ public class Include {
 			//Conditions met!
 			int iDamageToApply = theGene.getApplyDamageAmount();
 			NWEffect eEffect;
-			NWObject oEffectCreator = GetGeneticEffectCreator();
+			NWObject oEffectCreator = oPC;
 			if(oEffectCreator.valid()){
 				NWScript.printString("Object is valid!");
+			
 			}
 			if(iDamageToApply > 0){
 				//Damage effect
