@@ -13,9 +13,9 @@ public class Include {
 
 	private static NWObject theGeneticApplier;
 	private static NWObject GetGeneticEffectCreator(){
-		if(theGeneticApplier != null && theGeneticApplier != NWObject.INVALID){
-			return theGeneticApplier;
-		}
+		//if(theGeneticApplier != null && theGeneticApplier != NWObject.INVALID){
+		//	return theGeneticApplier;
+		//}
 		theGeneticApplier = NWScript.getObjectByTag("genetic_unit_test", 1);
 		return theGeneticApplier;
 	}
