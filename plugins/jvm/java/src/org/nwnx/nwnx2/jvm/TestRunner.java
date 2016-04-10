@@ -74,9 +74,11 @@ public class TestRunner {
 						//Start genetics Loop
 					}
 					if(event.equals("OnModuleLoadGenetics")){
-						
+						NWObject.setObjectInvalidIsNull(true);
 						//objToUse.assign(new GeneticsHeartbeat());
 						//NWObject objRunner = Include.GetGeneticEffectCreator();
+						String s = NWScript.getName(objSelf, false);
+						System.out.println(s+" is running event");
 						objSelf.assign(new GeneticsHeartbeat());
 						
 					}
