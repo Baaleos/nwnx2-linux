@@ -98,12 +98,12 @@ public class Include {
 	public static void ApplyEffectByGeneticCreator(final NWEffect effect,final int dType, final float f, final NWObject target){
 		
 		NWObject obj = GetGeneticEffectCreator();
-		Scheduler.assign(obj, new Runnable() { 
+		Scheduler.assignNow(obj, new Runnable() { 
 			  public void run() { 
 				   	NWScript.applyEffectToObject(dType, effect, target, f);
 				  } 
 				});
-		Scheduler.flushQueues();
+		//Scheduler.flushQueues();
 		
 	}
 	
