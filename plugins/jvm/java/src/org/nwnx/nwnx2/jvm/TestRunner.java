@@ -7,6 +7,7 @@ import org.baaleos.systems.genetics.GeneticsHeartbeat;
 import org.baaleos.systems.genetics.Include;
 import org.baaleos.systems.god.GodEnergyCalculator;
 import org.baaleos.systems.server.StaticContainer;
+import org.nwnx.nwnx2.jvm.ScheduledEvery.Policy;
 import org.nwnx.nwnx2.jvm.constants.*;
 
 public class TestRunner {
@@ -75,11 +76,24 @@ public class TestRunner {
 					}
 					if(event.equals("OnModuleLoadGenetics")){
 						NWObject.setObjectInvalidIsNull(true);
+						//ScheduledAnon ;//anon = ScheduledAnon
+						//ScheduledEvery every = new ScheduledEvery(7000, null, Policy.AS_AVAILABLE);
+						
+						ScheduledEvery sched = new ScheduledEvery(7000, new ScheduledAnon() { 
+					         @Override 
+					         public void e(ScheduledEvery x) { 
+					        	 objSelf.assign(new GeneticsHeartbeat());
+					         } 
+					      }, Policy.AS_AVAILABLE); 
+					       
+					      Scheduler.every(sched); 
+						
+						
 						//objToUse.assign(new GeneticsHeartbeat());
 						//NWObject objRunner = Include.GetGeneticEffectCreator();
 						String s = NWScript.getName(objSelf, false);
 						System.out.println(s+" is running event");
-						objSelf.assign(new GeneticsHeartbeat());
+						//objSelf.assign(new GeneticsHeartbeat());
 						Scheduler.flushQueues();
 					}
 					

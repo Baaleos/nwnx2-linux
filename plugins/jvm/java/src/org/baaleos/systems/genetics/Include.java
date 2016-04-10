@@ -167,7 +167,7 @@ public class Include {
 				//NWScript.applyEffectToObject(DurationType.INSTANT,eEffect,oPC,0.00f);
 				
 			}else{
-				NWScript.printString("Attempting to apply effect!");
+				//NWScript.printString("Attempting to apply effect!");
 				if(!HasEffectAlready(oPC,theGene.getEffectType())){
 					//WriteTimestampedLogEntry("Does not have effect already: Applying new");
 					eEffect = GetEffectFromID(theGene.getEffectType(), theGene.getEffectNumber1(), theGene.getEffectNumber2());
@@ -270,12 +270,12 @@ public class Include {
 	        
 			
 			
-			try {
-				Thread.sleep(7000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			//try {
+			//	Thread.sleep(7000);
+			//} catch (InterruptedException e) {
+			//	// TODO Auto-generated catch block
+			//	e.printStackTrace();
+			//}
 		}
 	}
 	
