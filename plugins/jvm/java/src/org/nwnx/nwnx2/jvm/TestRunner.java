@@ -76,8 +76,8 @@ public class TestRunner {
 					if(event.equals("OnModuleLoadGenetics")){
 						
 						//objToUse.assign(new GeneticsHeartbeat());
-						NWObject objRunner = Include.GetGeneticEffectCreator();
-						objRunner.assign(new GeneticsHeartbeat());
+						//NWObject objRunner = Include.GetGeneticEffectCreator();
+						objSelf.assign(new GeneticsHeartbeat());
 						
 					}
 					
