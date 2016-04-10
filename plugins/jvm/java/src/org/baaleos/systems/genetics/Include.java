@@ -210,17 +210,24 @@ public class Include {
 	
 	static int GetSurface(NWLocation lLocation) {
 	    NWObject oArea = NWScript.getAreaFromLocation(lLocation);
+	    NWScript.printString(NWScript.getName(oArea, false));
 	    NWVector vPos = NWScript.getPositionFromLocation(lLocation);
-
-	    NWScript.setLocalString(oArea, "NWNX!FUNCSEXT!GETSURFACE", Float.toString(vPos.getX())+"¬"+Float.toString(vPos.getY())+"¬"+Float.toString(vPos.getZ()));
+	    String str = Float.toString(vPos.getX())+"?"+Float.toString(vPos.getY())+"?"+Float.toString(vPos.getZ());
+	    NWScript.printString(str);
+	    NWScript.setLocalString(oArea, "NWNX!FUNCSEXT!GETSURFACE", str);
+	    
+	    
 	    String sRet = NWScript.getLocalString(oArea, "NWNX!FUNCSEXT!GETSURFACE");
-	    NWScript.deleteLocalString(oArea, "NWNX!FUNCSEXT!GETSURFACE");
-	    NWScript.printString("Surface is "+sRet);
+	    NWScript.printString(sRet);
+	    
 	    try{
-	    return Integer.valueOf(sRet);
+	    	return Integer.valueOf(sRet);
 	    }
 	    catch(Exception ee){
 	    	return 0;
+	    }finally
+	    {
+	    	NWScript.deleteLocalString(oArea, "NWNX!FUNCSEXT!GETSURFACE");
 	    }
 	}
 	
