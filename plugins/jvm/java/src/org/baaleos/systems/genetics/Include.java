@@ -5,6 +5,7 @@ import org.nwnx.nwnx2.jvm.NWLocation;
 import org.nwnx.nwnx2.jvm.NWObject;
 import org.nwnx.nwnx2.jvm.NWScript;
 import org.nwnx.nwnx2.jvm.NWVector;
+import org.nwnx.nwnx2.jvm.Scheduler;
 import org.nwnx.nwnx2.jvm.constants.Effect;
 import org.nwnx.nwnx2.jvm.constants.DurationType;
 import com.sun.org.apache.xerces.internal.impl.Constants;
@@ -94,6 +95,20 @@ public class Include {
 	    //NWScript.deleteLocalObject(NWObject.MODULE, "ARGUMENT1");
 	}
 	
+	public static void ApplyEffectByGeneticCreator(final NWEffect effect,final int dType, final float f, final NWObject target){
+		
+		NWObject obj = GetGeneticEffectCreator();
+		Scheduler.assign(obj, new Runnable() { 
+			  public void run() { 
+				   	NWScript.applyEffectToObject(dType, effect, target, f);
+				  } 
+				});
+		Scheduler.flushQueues();
+		
+	}
+	
+	
+	
 	public static void HeartbeatProcessGene(NWObject oPC, Gene theGene, int TimeOfDay, NWObject oArea,
 											int iIsInWater, int areaLocation, int interior, int natural){
 		
@@ -144,17 +159,20 @@ public class Include {
 			if(iDamageToApply > 0){
 				//Damage effect
 				int iDamageType = theGene.getDamageType();
+				
 				eEffect = NWScript.effectDamage(iDamageToApply,iDamageType,DAMAGE_POWER_ENERGY); //IRRESISTABLE
 				//SetEffectCreator(eEffect, oEffectCreator);
-				NWScript.applyEffectToObject(DurationType.INSTANT,eEffect,oPC,0.00f);
+				ApplyEffectByGeneticCreator(eEffect,DurationType.INSTANT, 0.00f, oPC);
+				//NWScript.applyEffectToObject(DurationType.INSTANT,eEffect,oPC,0.00f);
 				
 			}else{
 				NWScript.printString("Attempting to apply effect!");
 				if(!HasEffectAlready(oPC,theGene.getEffectType())){
 					//WriteTimestampedLogEntry("Does not have effect already: Applying new");
 					eEffect = GetEffectFromID(theGene.getEffectType(), theGene.getEffectNumber1(), theGene.getEffectNumber2());
-					SetEffectCreator (eEffect, oEffectCreator);
-					NWScript.applyEffectToObject(DurationType.PERMANENT,eEffect,oPC,0.00f);
+					//SetEffectCreator (eEffect, oEffectCreator);
+					ApplyEffectByGeneticCreator(eEffect,DurationType.PERMANENT, 0.00f, oPC);
+					//NWScript.applyEffectToObject(DurationType.PERMANENT,eEffect,oPC,0.00f);
 				}
 			}
 			
