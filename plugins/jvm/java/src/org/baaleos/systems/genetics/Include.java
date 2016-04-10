@@ -227,7 +227,7 @@ public class Include {
 	
 	public static void ProcessPlayer(NWObject player, int timeOfDayCurrent){
 		Genome genome = new Genome(player);
-		NWScript.printString("Processing "+NWScript.getName(player, false));
+		//NWScript.printString("Processing "+NWScript.getName(player, false));
 		ProcessGenome(player, genome, timeOfDayCurrent);
 	}
 	
@@ -248,7 +248,7 @@ public class Include {
 	private static final String SIMULATED_PC = "simulated_pc_creature_";
 	public static void GeneticsLoop(){
 		
-		while(true){
+		//while(true){
 			NWObject[] obj = NWScript.getPCs();
 			int TimeOfDayCurrent = GetCurrentTime();
 			for(NWObject PC: obj){
@@ -276,7 +276,7 @@ public class Include {
 			//	// TODO Auto-generated catch block
 			//	e.printStackTrace();
 			//}
-		}
+		//}
 	}
 	
 }
