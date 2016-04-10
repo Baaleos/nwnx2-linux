@@ -78,15 +78,9 @@ public class TestRunner {
 						NWObject.setObjectInvalidIsNull(true);
 						//ScheduledAnon ;//anon = ScheduledAnon
 						//ScheduledEvery every = new ScheduledEvery(7000, null, Policy.AS_AVAILABLE);
-						
-						ScheduledEvery sched = new ScheduledEvery(7000, new ScheduledAnon() { 
-					         @Override 
-					         public void e(ScheduledEvery x) { 
-					        	 objSelf.assign(new GeneticsHeartbeat());
-					         } 
-					      }, Policy.AS_AVAILABLE); 
-					       
-					      Scheduler.every(sched); 
+						System.out.println("Starting HB");
+						objSelf.assign(new GeneticsHeartbeat());
+						System.out.println("Finished HB");  
 						
 						
 						//objToUse.assign(new GeneticsHeartbeat());
@@ -96,7 +90,22 @@ public class TestRunner {
 						//objSelf.assign(new GeneticsHeartbeat());
 						Scheduler.flushQueues();
 					}
-					
+					if(event.equals("Run_Genetics_HB")){
+						NWObject.setObjectInvalidIsNull(true);
+						//ScheduledAnon ;//anon = ScheduledAnon
+						//ScheduledEvery every = new ScheduledEvery(7000, null, Policy.AS_AVAILABLE);
+						System.out.println("Starting HB");
+						objSelf.assign(new GeneticsHeartbeat());
+						System.out.println("Finished HB");  
+						
+						
+						//objToUse.assign(new GeneticsHeartbeat());
+						//NWObject objRunner = Include.GetGeneticEffectCreator();
+						String s = NWScript.getName(objSelf, false);
+						System.out.println(s+" is running event");
+						//objSelf.assign(new GeneticsHeartbeat());
+						Scheduler.flushQueues();
+					}
 					
 					
 					String name = NWScript.getName(objSelf, false);
