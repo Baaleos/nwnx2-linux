@@ -13,7 +13,7 @@ import com.sun.org.apache.xerces.internal.impl.Constants;
 public class Include {
 
 	private static NWObject theGeneticApplier;
-	private static NWObject GetGeneticEffectCreator(){
+	public static NWObject GetGeneticEffectCreator(){
 		return NWScript.getObjectByTag("genetic_unit_test", 1);
 	}
 	private static final int CONDITION_IGNORE = 2;

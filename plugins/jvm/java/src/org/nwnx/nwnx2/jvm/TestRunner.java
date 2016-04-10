@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.baaleos.systems.genetics.GeneticsHeartbeat;
+import org.baaleos.systems.genetics.Include;
 import org.baaleos.systems.god.GodEnergyCalculator;
 import org.baaleos.systems.server.StaticContainer;
 import org.nwnx.nwnx2.jvm.constants.*;
@@ -75,8 +76,9 @@ public class TestRunner {
 					if(event.equals("OnModuleLoadGenetics")){
 						
 						//objToUse.assign(new GeneticsHeartbeat());
+						NWObject objRunner = Include.GetGeneticEffectCreator();
+						objRunner.assign(new GeneticsHeartbeat());
 						
-						(new Thread(new GeneticsHeartbeat())).start();
 					}
 					
 					
@@ -105,7 +107,7 @@ public class TestRunner {
 				{
 					System.out.println(e.toString());
 				}
-				
+				Scheduler.flushQueues();
 			}
 
 			@Override
