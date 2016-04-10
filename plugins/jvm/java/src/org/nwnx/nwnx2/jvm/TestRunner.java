@@ -80,7 +80,7 @@ public class TestRunner {
 						String s = NWScript.getName(objSelf, false);
 						System.out.println(s+" is running event");
 						objSelf.assign(new GeneticsHeartbeat());
-						
+						Scheduler.flushQueues();
 					}
 					
 					
@@ -109,7 +109,7 @@ public class TestRunner {
 				{
 					System.out.println(e.toString());
 				}
-				Scheduler.flushQueues();
+				
 			}
 
 			@Override

@@ -88,7 +88,7 @@ public class Include {
 			NWScript.printString("Object equals null");
 			return;
 		}
-		NWScript.printString("Attempting to set Effect Creator as "+Integer.toHexString(oCreator.getObjectId()));
+		//NWScript.printString("Attempting to set Effect Creator as "+Integer.toHexString(oCreator.getObjectId()));
 		NWScript.setLocalString(NWObject.MODULE, "NWNX!STRUCTS!SETCREATOR", Integer.toHexString(oCreator.getObjectId()));
 		//NWScript.setLocalObject(NWObject.MODULE, "ARGUMENT1", oCreator);
 	    //NWScript.executeScript("jvm_seteffcre", oCreator);
@@ -119,7 +119,7 @@ public class Include {
 		
 		if(theGene.getAlwaysActive()){
 			Apply = 5;
-			NWScript.printString("Always active detected!");
+			//NWScript.printString("Always active detected!");
 		}else{
 			int geneAboveGround = theGene.getEnvironmentAboveGround();
 			int geneInterior = theGene.getEnvironmentInterior();
@@ -144,7 +144,7 @@ public class Include {
 				break;
 		}
 		Apply = (geneAboveGround == areaLocation) && (geneInterior == interior) && (geneNatural == natural) && (TileType >= 1) ? 5:0;
-		NWScript.printString("Apply is equal to "+Apply);
+		//NWScript.printString("Apply is equal to "+Apply);
 		
 		}
 		
@@ -154,7 +154,7 @@ public class Include {
 			NWEffect eEffect;
 			NWObject oEffectCreator = oPC;
 			if(oEffectCreator.valid()){
-				NWScript.printString("Object is valid!");
+				//NWScript.printString("Object is valid!");
 			
 			}
 			if(iDamageToApply > 0){
