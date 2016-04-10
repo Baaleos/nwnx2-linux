@@ -215,6 +215,7 @@ public class Include {
 	    NWScript.setLocalString(oArea, "NWNX!FUNCSEXT!GETSURFACE", Float.toString(vPos.getX())+"?"+Float.toString(vPos.getY())+"?"+Float.toString(vPos.getZ()));
 	    String sRet = NWScript.getLocalString(oArea, "NWNX!FUNCSEXT!GETSURFACE");
 	    NWScript.deleteLocalString(oArea, "NWNX!FUNCSEXT!GETSURFACE");
+	    NWScript.printString("Surface is "+sRet);
 	    try{
 	    return Integer.valueOf(sRet);
 	    }
@@ -237,6 +238,7 @@ public class Include {
 		NWObject oArea = NWScript.getArea(player);
 		NWLocation l = NWScript.getLocation(player);
 		int iIsInWater = IsInWater(l);
+		
 		int AreaLocation = NWScript.getIsAreaAboveGround(oArea)==true ? 1:0;
 		int Interior = NWScript.getIsAreaInterior(oArea) ==true ? 1:0;
 		int Natural = NWScript.getIsAreaNatural(oArea) ==true ? 1:0;
