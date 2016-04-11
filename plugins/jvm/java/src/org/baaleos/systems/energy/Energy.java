@@ -15,20 +15,14 @@ public class Energy {
 	public static final String ENERGY_MAX_CAPACITY_PER_USER = "nrg_max_cap_usr_";
 	public static final String ENERGY_CURRENT_AMOUNT_PER_USER = "nrg_current_amount_per_usr_";
 	public Energy(String sName){
-		if(getExists(sName)){
-			//Already exists
-			int id = NWScript.getLocalInt(NWObject.MODULE, ENERGY_NAME_TO_ID+sName);
-			this.setID(id);
-			String name = NWScript.getLocalString(NWObject.MODULE, ENERGY_ID_TO_NAME+id);
-			this.setName(name);
-			return;
-		}
+		
 		int CurrentEnergies  = NWScript.getLocalInt(NWObject.MODULE, ENERGY_COUNT_MODULE);
 		CurrentEnergies++;
 		NWScript.setLocalInt(NWObject.MODULE, ENERGY_COUNT_MODULE, CurrentEnergies);
-		
 		NWScript.setLocalInt(NWObject.MODULE, ENERGY_NAME_TO_ID+sName, CurrentEnergies);
 		NWScript.setLocalString(NWObject.MODULE, ENERGY_ID_TO_NAME+CurrentEnergies, sName);	
+		this.setID(CurrentEnergies );
+		this.setName(sName);
 	}
 	
 	
