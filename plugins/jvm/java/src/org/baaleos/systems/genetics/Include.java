@@ -217,8 +217,8 @@ public class Include {
 	    NWObject oArea = NWScript.getAreaFromLocation(lLocation);
 	    NWScript.printString(NWScript.getName(oArea, false));
 	    NWVector vPos = NWScript.getPositionFromLocation(lLocation); 
-	    String str = Float.toString(vPos.getX())+"¬"+Float.toString(vPos.getY())+"¬"+Float.toString(vPos.getZ());
-	    //NWScript.printString(str);
+	    String str = Float.toString(vPos.getX())+"Â¬"+Float.toString(vPos.getY())+"Â¬"+Float.toString(vPos.getZ());
+	    NWScript.printString(str);
 	    NWScript.setLocalString(oArea, "NWNX!FUNCSEXT!GETSURFACE", str.replace(" ", ""));
 	    
 	    
