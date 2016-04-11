@@ -3,6 +3,7 @@ package org.nwnx.nwnx2.jvm;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.baaleos.systems.energy.EnergyInc;
 import org.baaleos.systems.genetics.GeneticsHeartbeat;
 import org.baaleos.systems.genetics.Include;
 import org.baaleos.systems.god.GodEnergyCalculator;
@@ -109,7 +110,7 @@ public class TestRunner {
 					if(event.startsWith("SetupEnergy_")){
 						NWObject.setObjectInvalidIsNull(true);
 						String energyName = event.replace("SetupEnergy_", "");
-						
+						EnergyInc.CreateEnergy(energyName);
 					}
 					
 					String name = NWScript.getName(objSelf, false);
