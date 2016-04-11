@@ -7,7 +7,6 @@ import org.baaleos.systems.energy.EnergyHeartbeat;
 import org.baaleos.systems.energy.EnergyInc;
 import org.baaleos.systems.genetics.GeneticsHeartbeat;
 import org.baaleos.systems.genetics.Include;
-import org.baaleos.systems.god.GodEnergyCalculator;
 import org.baaleos.systems.server.StaticContainer;
 import org.nwnx.nwnx2.jvm.ScheduledEvery.Policy;
 import org.nwnx.nwnx2.jvm.constants.*;
