@@ -112,6 +112,11 @@ public class TestRunner {
 						String energyName = event.replace("SetupEnergy_", "");
 						EnergyInc.CreateEnergy(energyName);
 					}
+					if(event.equals("ListEnergyTypes")){
+						NWObject.setObjectInvalidIsNull(true);
+						
+						EnergyInc.ListEnergyTypes();
+					}
 					
 					String name = NWScript.getName(objSelf, false);
 					int objType = NWScript.getObjectType(objSelf);

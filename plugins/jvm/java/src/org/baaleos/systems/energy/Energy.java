@@ -34,7 +34,9 @@ public class Energy {
 	}
 	
 	private static final ArrayList<Energy> moduleEnergyDefinitions = new ArrayList<Energy>();
-	
+	public static final ArrayList<Energy> getEnergyDefinitions(){
+		return moduleEnergyDefinitions;
+	}
 	public static Energy getEnergy(String name){
 		for(Energy e : moduleEnergyDefinitions){
 			if(e.getName() == name){
