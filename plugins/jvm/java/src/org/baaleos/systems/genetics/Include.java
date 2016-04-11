@@ -258,8 +258,8 @@ public class Include {
 			HeartbeatProcessGene(player,g, TimeOfDayCurrent,oArea,iIsInWater,AreaLocation,Interior,Natural, combat);
 		}
 	}
-	private static final String CREATURES_AS_SIMULATED_PC_COUNT = "creature_simulated_pc";
-	private static final String SIMULATED_PC = "simulated_pc_creature_";
+	public static final String CREATURES_AS_SIMULATED_PC_COUNT = "creature_simulated_pc";
+	public static final String SIMULATED_PC = "simulated_pc_creature_";
 	public static void GeneticsLoop(){
 		
 		//while(true){

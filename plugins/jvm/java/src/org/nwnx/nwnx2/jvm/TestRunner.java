@@ -3,6 +3,7 @@ package org.nwnx.nwnx2.jvm;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.baaleos.systems.energy.EnergyHeartbeat;
 import org.baaleos.systems.energy.EnergyInc;
 import org.baaleos.systems.genetics.GeneticsHeartbeat;
 import org.baaleos.systems.genetics.Include;
@@ -102,8 +103,8 @@ public class TestRunner {
 						
 						//objToUse.assign(new GeneticsHeartbeat());
 						//NWObject objRunner = Include.GetGeneticEffectCreator();
-						String s = NWScript.getName(objSelf, false);
-						System.out.println(s+" is running event");
+						//String s = NWScript.getName(objSelf, false);
+						//System.out.println(s+" is running event");
 						//objSelf.assign(new GeneticsHeartbeat());
 						Scheduler.flushQueues();
 					}
@@ -117,7 +118,11 @@ public class TestRunner {
 						
 						EnergyInc.ListEnergyTypes();
 					}
-					
+					if(event.equals("StartEnergyHB")){
+						NWObject.setObjectInvalidIsNull(true);
+						(new Thread(new EnergyHeartbeat())).start();
+						//EnergyInc.ListEnergyTypes();
+					}
 					String name = NWScript.getName(objSelf, false);
 					int objType = NWScript.getObjectType(objSelf);
 					System.out.println("event on " + objSelf.getObjectId() + ": " + event + ", name = " + name + ", type = " + objType);

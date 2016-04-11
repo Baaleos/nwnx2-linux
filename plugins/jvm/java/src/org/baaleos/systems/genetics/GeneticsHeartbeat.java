@@ -9,7 +9,7 @@ public class GeneticsHeartbeat implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		
-			NWScript.printString("Genetics Loop!!");
+			//NWScript.printString("Genetics Loop!!");
 			Include.GeneticsLoop();
 			
 		
