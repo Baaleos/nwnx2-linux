@@ -106,7 +106,11 @@ public class TestRunner {
 						//objSelf.assign(new GeneticsHeartbeat());
 						Scheduler.flushQueues();
 					}
-					
+					if(event.startsWith("SetupEnergy_")){
+						NWObject.setObjectInvalidIsNull(true);
+						String energyName = event.replace("SetupEnergy_", "");
+						
+					}
 					
 					String name = NWScript.getName(objSelf, false);
 					int objType = NWScript.getObjectType(objSelf);
