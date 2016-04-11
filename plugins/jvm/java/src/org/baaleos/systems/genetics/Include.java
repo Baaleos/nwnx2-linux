@@ -111,7 +111,7 @@ public class Include {
 	
 	
 	public static void HeartbeatProcessGene(NWObject oPC, Gene theGene, int TimeOfDay, NWObject oArea,
-											int iIsInWater, int areaLocation, int interior, int natural){
+											int iIsInWater, int areaLocation, int interior, int natural, boolean combat){
 		
 		if(oArea == NWObject.INVALID) { return;} //Don't do anything on this heartbeat until we materialize
 		int Apply = 0;
@@ -125,6 +125,7 @@ public class Include {
 			int geneInterior = theGene.getEnvironmentInterior();
 			int geneNatural = theGene.getEnvironmentNatural();
 			int TileType = theGene.getEnvironmentTilesetType();
+			boolean onlyInCombat = theGene.isCombatOnly();
 			if(geneAboveGround == CONDITION_IGNORE){
 				geneAboveGround = areaLocation;
 			}
@@ -134,6 +135,10 @@ public class Include {
 			if(geneNatural == CONDITION_IGNORE){
 				geneNatural = natural;
 			}
+			if(onlyInCombat == false){
+				combat = onlyInCombat;
+			}
+			
 			switch(TileType){
 				case CONDITION_IGNORE:
 					//Just set to 1
@@ -143,7 +148,7 @@ public class Include {
 					TileType = iIsInWater;//IsInWater(l);
 				break;
 		}
-		Apply = (geneAboveGround == areaLocation) && (geneInterior == interior) && (geneNatural == natural) && (TileType >= 1) ? 5:0;
+		Apply = (geneAboveGround == areaLocation) && (geneInterior == interior) && (geneNatural == natural) && (TileType >= 1) && (combat == onlyInCombat) ? 5:0;
 		//NWScript.printString("Apply is equal to "+Apply);
 		
 		}
@@ -239,18 +244,18 @@ public class Include {
 		ProcessGenome(player, genome, timeOfDayCurrent);
 	}
 	
-	public static void ProcessGenome(NWObject player, Genome genome, int TimeOfDayCurrent){
+	public static void ProcessGenome(final NWObject player, Genome genome, int TimeOfDayCurrent){
 		
 		int i = 1;
 		NWObject oArea = NWScript.getArea(player);
 		NWLocation l = NWScript.getLocation(player);
 		int iIsInWater = IsInWater(l);
-		
+		boolean combat = NWScript.getIsInCombat(player);
 		int AreaLocation = NWScript.getIsAreaAboveGround(oArea)==true ? 1:0;
 		int Interior = NWScript.getIsAreaInterior(oArea) ==true ? 1:0;
 		int Natural = NWScript.getIsAreaNatural(oArea) ==true ? 1:0;
 		for(Gene g : genome){
-			HeartbeatProcessGene(player,g, TimeOfDayCurrent,oArea,iIsInWater,AreaLocation,Interior,Natural);
+			HeartbeatProcessGene(player,g, TimeOfDayCurrent,oArea,iIsInWater,AreaLocation,Interior,Natural, combat);
 		}
 	}
 	private static final String CREATURES_AS_SIMULATED_PC_COUNT = "creature_simulated_pc";

@@ -28,7 +28,7 @@ private static final  String INHUMAN_POWER_STORAGE_LIGHT_SENSITIVE = "INHUMAN_PO
 private static final  String INHUMAN_POWER_STORAGE_DAMAGE_AMOUNT = "INHUMAN_POWER_STORE_DAMAGE_AMOUNT_";
 private static final  String INHUMAN_POWER_STORAGE_DAMAGE_TYPE = "INHUMAN_POWER_STORE_DAMAGE_TYPE_";
 private static final  String INHUMAN_POWER_STORAGE_VISUAL = "INHUMAN_POWER_VISUAL_";
-
+private static final  String INHUMAN_POWER_STORAGE_COMBAT_ONLY = "INHUMAN_POWER_COMBAT_ONLY_";
 	private void Initialize(){
 		
 		String sName = NWScript.getLocalString(NWObject.MODULE, INHUMAN_POWER_STORAGE_NAME+GeneID);
@@ -47,7 +47,7 @@ private static final  String INHUMAN_POWER_STORAGE_VISUAL = "INHUMAN_POWER_VISUA
 		int DamageAmount = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_STORAGE_DAMAGE_AMOUNT+GeneID);
 		int DamageType = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_STORAGE_DAMAGE_TYPE+GeneID);
 		int Visual = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_STORAGE_VISUAL+GeneID);
-
+		boolean InCombatOnly = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_STORAGE_COMBAT_ONLY+GeneID)==1;
 		setGeneName(sName);
 		setFeatID(Feat);
 		setIsPassive(IsPassive);
@@ -64,6 +64,7 @@ private static final  String INHUMAN_POWER_STORAGE_VISUAL = "INHUMAN_POWER_VISUA
 		setDamageType(DamageType);
 		setVisualEffect(Visual);
 		setAlwaysActive(AlwaysActive);
+		setCombatOnly(InCombatOnly);
 	}
 	
 	
@@ -167,6 +168,18 @@ private static final  String INHUMAN_POWER_STORAGE_VISUAL = "INHUMAN_POWER_VISUA
 	public void setLevelOfPower(int levelOfPower) {
 		LevelOfPower = levelOfPower;
 	}
+	public boolean isCombatOnly() {
+		return CombatOnly;
+	}
+
+
+
+
+
+
+	public void setCombatOnly(boolean combatOnly) {
+		CombatOnly = combatOnly;
+	}
 	private String GeneName;
 	private int FeatID;
 	private boolean IsPassive;
@@ -183,5 +196,6 @@ private static final  String INHUMAN_POWER_STORAGE_VISUAL = "INHUMAN_POWER_VISUA
 	private int EffectNumber2;
 	private int LevelOfPower;
 	private int VisualEffect;
+	private boolean CombatOnly;
 	
 }
