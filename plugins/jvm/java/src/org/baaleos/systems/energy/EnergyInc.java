@@ -8,9 +8,10 @@ import org.nwnx.nwnx2.jvm.NWScript;
 
 public class EnergyInc {
 
-	public static void CreateEnergy(String energyName){
+	public static int CreateEnergy(String energyName){
 		Energy e = new Energy(energyName);
 		NWScript.printString(e.getName()+" created with id "+e.getID());
+		return e.getID();
 	}
 	
 	public static void ListEnergyTypes(){

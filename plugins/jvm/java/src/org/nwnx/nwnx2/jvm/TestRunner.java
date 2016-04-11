@@ -3,6 +3,7 @@ package org.nwnx.nwnx2.jvm;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.baaleos.systems.energy.Energy;
 import org.baaleos.systems.energy.EnergyHeartbeat;
 import org.baaleos.systems.energy.EnergyInc;
 import org.baaleos.systems.genetics.GeneticsHeartbeat;
@@ -110,8 +111,22 @@ public class TestRunner {
 					if(event.startsWith("SetupEnergy_")){
 						NWObject.setObjectInvalidIsNull(true);
 						String energyName = event.replace("SetupEnergy_", "");
-						EnergyInc.CreateEnergy(energyName);
+						NWScript.setLocalInt(NWObject.MODULE,"NEW_ENERGY",0);
+						int iReturn = EnergyInc.CreateEnergy(energyName);
+						NWScript.setLocalInt(NWObject.MODULE,"NEW_ENERGY",iReturn);
 					}
+					if(event.startsWith("EnergySearch_")){
+						NWObject.setObjectInvalidIsNull(true);
+						String energyName = event.replace("EnergySearch_", "");
+						NWScript.setLocalInt(NWObject.MODULE,"SearchResponse",0);
+						for(Energy e : Energy.getEnergyDefinitions()){
+							if(e.getName() == energyName){
+								NWScript.setLocalInt(NWObject.MODULE,"SearchResponse",e.getID());
+								break;
+							}
+						}
+					}
+					
 					if(event.equals("ListEnergyTypes")){
 						NWObject.setObjectInvalidIsNull(true);
 						
