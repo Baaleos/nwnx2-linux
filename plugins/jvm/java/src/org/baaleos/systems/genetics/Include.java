@@ -51,7 +51,7 @@ public class Include {
 	      case Effect.TYPE_DAMAGE_IMMUNITY_DECREASE: iEffect = NWScript.effectDamageImmunityDecrease(Value1, Value2); break;
 	      //default: iEffect; break;
 	  }
-	  return iEffect;
+	  return NWScript.supernaturalEffect(iEffect);
 	}
 	
 	
