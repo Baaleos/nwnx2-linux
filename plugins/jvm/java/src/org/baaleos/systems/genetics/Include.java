@@ -113,14 +113,23 @@ public class Include {
 	
 	
 	
-	public static void HeartbeatProcessGene(final NWObject oPC, Gene theGene, int TimeOfDay, NWObject oArea,
+	public static void HeartbeatProcessGene(final NWObject oPC, final Gene theGene, int TimeOfDay, final NWObject oArea,
 											int iIsInWater, int areaLocation, int interior, int natural, boolean combat){
 		
 		if(oArea == NWObject.INVALID) { return;} //Don't do anything on this heartbeat until we materialize
 		int Apply = 0;
+		int Always = 0;
 		
+		try{
+			Always = theGene.getAlwaysActive() ? 1:0;
+			
+		}catch(Exception ee){
+			NWScript.printString(ee.toString());
+			System.out.println(ee.toString());
+			return;
+		}
 		
-		if(theGene.getAlwaysActive()){
+		if(Always == 1){
 			Apply = 5;
 			//NWScript.printString("Always active detected!");
 		}else{
