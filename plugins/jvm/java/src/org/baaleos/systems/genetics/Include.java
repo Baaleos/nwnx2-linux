@@ -156,23 +156,30 @@ public class Include {
 			//All Energy costs must be satisfied
 			//If there is no costs- then this should auto pass
 			if(iSuccess == costBindingList.size()){
+				NWScript.printString("Energy Condition Passed!");
 				hasEnergy = true;
 			}
 			
 			boolean onlyInCombat = theGene.isCombatOnly();
+			
+			NWScript.printString("geneAboveGround:"+geneAboveGround);
 			if(geneAboveGround == CONDITION_IGNORE){
 				geneAboveGround = areaLocation;
 			}
+			NWScript.printString("geneInterior:"+geneInterior);
 			if(geneInterior == CONDITION_IGNORE){
 				geneInterior = interior;
 			}
+			NWScript.printString("geneNatural:"+geneNatural);
 			if(geneNatural == CONDITION_IGNORE){
 				geneNatural = natural;
 			}
+			NWScript.printString("onlyInCombat:"+onlyInCombat);
 			if(onlyInCombat == false){
 				combat = onlyInCombat;
 			}
 			
+			NWScript.printString("TileType:"+TileType);
 			switch(TileType){
 				case CONDITION_IGNORE:
 					//Just set to 1
@@ -183,7 +190,7 @@ public class Include {
 				break;
 		}
 		Apply = (geneAboveGround == areaLocation) && (geneInterior == interior) && (geneNatural == natural) && (TileType >= 1) && (combat == onlyInCombat) && (hasEnergy) ? 5:0;
-		//NWScript.printString("Apply is equal to "+Apply);
+		NWScript.printString("Apply is equal to "+Apply);
 		
 		}
 		
