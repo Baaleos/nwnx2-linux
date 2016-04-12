@@ -138,6 +138,7 @@ public class Include {
 			ArrayList<EnergyCostBinding> costBindingList = theGene.getCostPerHeartbeat();
 			boolean hasEnergy = false;
 			int iSuccess = 0;
+			NWScript.printString("Gene:"+theGene.getGeneName()+" has "+costBindingList.size()+" energy requirements");
 			for(EnergyCostBinding energyCost : costBindingList){
 				Energy e = energyCost.getEnergyToCharge();
 				int AmountToCharge = energyCost.getAmountToCharge();
