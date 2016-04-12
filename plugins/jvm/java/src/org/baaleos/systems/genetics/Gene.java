@@ -73,8 +73,8 @@ private static final  String INHUMAN_POWER_STORAGE_COMBAT_ONLY = "INHUMAN_POWER_
 	}
 	
 	
-	private static final ArrayList<Gene> GeneDefinitions = new ArrayList<Gene>();
-	private static final HashMap<Integer, Gene> IdToGene = new HashMap<Integer, Gene>();
+	private static ArrayList<Gene> GeneDefinitions = new ArrayList<Gene>();
+	private static HashMap<Integer, Gene> IdToGene = new HashMap<Integer, Gene>();
 	
 	public static final Gene getGeneByID(int i){
 		return IdToGene.get(i);
