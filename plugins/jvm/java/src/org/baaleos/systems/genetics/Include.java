@@ -3,14 +3,12 @@ package org.baaleos.systems.genetics;
 import java.util.ArrayList;
 
 import org.baaleos.systems.energy.Energy;
-import org.nwnx.nwnx2.jvm.NWEffect;
-import org.nwnx.nwnx2.jvm.NWLocation;
+import org.nwnx.nwnx2.jvm.*;
 import org.nwnx.nwnx2.jvm.NWObject;
-import org.nwnx.nwnx2.jvm.NWScript;
-import org.nwnx.nwnx2.jvm.NWVector;
 import org.nwnx.nwnx2.jvm.Scheduler;
-import org.nwnx.nwnx2.jvm.constants.Effect;
 import org.nwnx.nwnx2.jvm.constants.DurationType;
+import org.nwnx.nwnx2.jvm.constants.Effect;
+
 import com.sun.org.apache.xerces.internal.impl.Constants;
 
 public class Include {

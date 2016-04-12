@@ -1,8 +1,5 @@
 package org.baaleos.systems.genetics;
 
-import org.nwnx.nwnx2.jvm.NWScript;
-import org.nwnx.nwnx2.jvm.Scheduler;
-
 public class GeneticsHeartbeat implements Runnable {
 
 	@Override
