@@ -3,7 +3,7 @@ package org.baaleos.systems.genetics;
 import java.util.ArrayList;
 
 import org.nwnx.nwnx2.jvm.NWObject;
-import org.nwnx.nwnx2.jvm.NWScript;
+
 
 public class Genome extends ArrayList<Gene>  {
 
