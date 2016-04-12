@@ -275,7 +275,7 @@ public class Include {
 		ProcessGenome(player, genome, timeOfDayCurrent);
 	}
 	
-	public static void ProcessGenome(final NWObject player, Genome genome, int TimeOfDayCurrent){
+	public static void ProcessGenome(NWObject player, Genome genome, int TimeOfDayCurrent){
 		
 		int i = 1;
 		NWObject oArea = NWScript.getArea(player);
