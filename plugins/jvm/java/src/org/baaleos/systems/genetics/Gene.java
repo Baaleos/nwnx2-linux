@@ -13,7 +13,12 @@ public class Gene {
 		this.GeneID = geneID;
 		Initialize();
 	}
-	private int GeneID;
+private int GeneID;
+
+public int getID(){
+	return GeneID;
+}
+
 private static final String INHUMAN_POWER_STORAGE_NAME = "INHUMAN_POWER_STORE_NAME_";
 private static final  String INHUMAN_POWER_STORAGE_FEATID = "INHUMAN_POWER_STORE_FEATID_";
 private static final  String INHUMAN_POWER_STORAGE_IS_PASSIVE = "INHUMAN_POWER_STORE_PASSIVE_";

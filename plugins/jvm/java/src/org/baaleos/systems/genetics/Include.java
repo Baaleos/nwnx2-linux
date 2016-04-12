@@ -138,7 +138,7 @@ public class Include {
 			ArrayList<EnergyCostBinding> costBindingList = theGene.getCostPerHeartbeat();
 			boolean hasEnergy = false;
 			int iSuccess = 0;
-			NWScript.printString("Gene:"+theGene.getGeneName()+" has "+costBindingList.size()+" energy requirements");
+			NWScript.printString("Gene:"+theGene.getID()+" has "+costBindingList.size()+" energy requirements");
 			for(EnergyCostBinding energyCost : costBindingList){
 				Energy e = energyCost.getEnergyToCharge();
 				int AmountToCharge = energyCost.getAmountToCharge();
@@ -249,15 +249,15 @@ public class Include {
 	
 	static int GetSurface(NWLocation lLocation) {
 	    NWObject oArea = NWScript.getAreaFromLocation(lLocation);
-	    NWScript.printString(NWScript.getName(oArea, false));
+	   // NWScript.printString(NWScript.getName(oArea, false));
 	    NWVector vPos = NWScript.getPositionFromLocation(lLocation); 
 	    String str = Float.toString(vPos.getX())+"¬"+Float.toString(vPos.getY())+"¬"+Float.toString(vPos.getZ());
-	    NWScript.printString(str);
+	    //NWScript.printString(str);
 	    NWScript.setLocalString(oArea, "NWNX!FUNCSEXT!GETSURFACE", str.replace(" ", ""));
 	    
 	    
 	    String sRet = NWScript.getLocalString(oArea, "NWNX!FUNCSEXT!GETSURFACE");
-	    NWScript.printString(sRet);
+	    //NWScript.printString(sRet);
 	    
 	    try{
 	    	return Integer.valueOf(sRet);
