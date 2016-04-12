@@ -165,18 +165,23 @@ public class Include {
 			NWScript.printString("geneAboveGround:"+geneAboveGround);
 			if(geneAboveGround == CONDITION_IGNORE){
 				geneAboveGround = areaLocation;
+				NWScript.printString("geneAboveGround:"+geneAboveGround);
 			}
 			NWScript.printString("geneInterior:"+geneInterior);
 			if(geneInterior == CONDITION_IGNORE){
 				geneInterior = interior;
+				NWScript.printString("geneInterior:"+geneInterior);
 			}
 			NWScript.printString("geneNatural:"+geneNatural);
 			if(geneNatural == CONDITION_IGNORE){
 				geneNatural = natural;
+				NWScript.printString("geneNatural:"+geneNatural);
 			}
 			NWScript.printString("onlyInCombat:"+onlyInCombat);
 			if(onlyInCombat == false){
+				
 				combat = onlyInCombat;
+				NWScript.printString("onlyInCombat:"+onlyInCombat);
 			}
 			
 			NWScript.printString("TileType:"+TileType);
@@ -191,6 +196,14 @@ public class Include {
 		}
 		Apply = (geneAboveGround == areaLocation) && (geneInterior == interior) && (geneNatural == natural) && (TileType >= 1) && (combat == onlyInCombat) && (hasEnergy) ? 5:0;
 		NWScript.printString("Apply is equal to "+Apply);
+		if(Apply != 5){
+			NWScript.printString("Above Ground = "+(geneAboveGround == areaLocation));
+			NWScript.printString("geneInterior = "+(geneInterior == interior));
+			NWScript.printString("geneNatural = "+(geneNatural == natural));
+			NWScript.printString("TileType = "+(TileType >= 1));
+			NWScript.printString("combat = "+(combat == onlyInCombat));
+			NWScript.printString("hasEnergy = "+(hasEnergy));
+		}
 		
 		}
 		
