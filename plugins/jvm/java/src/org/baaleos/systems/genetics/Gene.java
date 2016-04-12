@@ -87,7 +87,6 @@ private static final  String INHUMAN_POWER_STORAGE_COMBAT_ONLY = "INHUMAN_POWER_
 		if(g ==null){
 			System.out.print("Gene was not found in collection!!");
 			NWScript.printString("Gene was not found in collection!!");
-			
 		}
 		return g;
 	}

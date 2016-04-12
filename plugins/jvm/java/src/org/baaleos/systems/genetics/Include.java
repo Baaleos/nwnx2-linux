@@ -117,7 +117,7 @@ public class Include {
 		if(oArea == NWObject.INVALID) { return;} //Don't do anything on this heartbeat until we materialize
 		int Apply = 0;
 		int Always = 0;
-		
+		int FeatID = theGene.getFeatID();
 		try{
 			Always = theGene.getAlwaysActive() ? 1:0;
 			
@@ -130,7 +130,8 @@ public class Include {
 		if(Always == 1){
 			Apply = 5;
 			//NWScript.printString("Always active detected!");
-		}else{
+		}else
+		{
 			int geneAboveGround = theGene.getEnvironmentAboveGround();
 			int geneInterior = theGene.getEnvironmentInterior();
 			int geneNatural = theGene.getEnvironmentNatural();
@@ -194,17 +195,17 @@ public class Include {
 					TileType = iIsInWater;//IsInWater(l);
 				break;
 		}
-		Apply = (geneAboveGround == areaLocation) && (geneInterior == interior) && (geneNatural == natural) && (TileType >= 1) && (combat == onlyInCombat) && (hasEnergy) ? 5:0;
-		NWScript.printString("Apply is equal to "+Apply);
-		if(Apply != 5){
-			NWScript.printString("Above Ground = "+(geneAboveGround == areaLocation));
-			NWScript.printString("geneInterior = "+(geneInterior == interior));
-			NWScript.printString("geneNatural = "+(geneNatural == natural));
-			NWScript.printString("TileType = "+(TileType >= 1));
-			NWScript.printString("combat = "+(combat == onlyInCombat));
-			NWScript.printString("hasEnergy = "+(hasEnergy));
-			
-		}
+			Apply = (geneAboveGround == areaLocation) && (geneInterior == interior) && (geneNatural == natural) && (TileType >= 1) && (combat == onlyInCombat) && (hasEnergy) ? 5:0;
+			NWScript.printString("Apply is equal to "+Apply);
+			if(Apply != 5){
+				/*NWScript.printString("Above Ground = "+(geneAboveGround == areaLocation));
+				NWScript.printString("geneInterior = "+(geneInterior == interior));
+				NWScript.printString("geneNatural = "+(geneNatural == natural));
+				NWScript.printString("TileType = "+(TileType >= 1));
+				NWScript.printString("combat = "+(combat == onlyInCombat));
+				NWScript.printString("hasEnergy = "+(hasEnergy));*/
+				
+			}
 		
 		}
 		
@@ -228,7 +229,7 @@ public class Include {
 				
 			}else{
 				//NWScript.printString("Attempting to apply effect!");
-				if(!HasEffectAlready(oPC,theGene.getEffectType())){
+				if(!HasEffectAlready(oPC,theGene.getEffectType()) && theGene.getEffectType() != -1){
 					//WriteTimestampedLogEntry("Does not have effect already: Applying new");
 					eEffect = GetEffectFromID(theGene.getEffectType(), theGene.getEffectNumber1(), theGene.getEffectNumber2());
 					//SetEffectCreator (eEffect, oEffectCreator);
@@ -237,9 +238,22 @@ public class Include {
 				}
 			}
 			
+			if(FeatID >= 0){
+				if(Funcs.GetKnowsFeat(FeatID, oPC) != 1){
+					//We must apply the feat
+					Funcs.AddKnownFeat(oPC, FeatID, -1); // Add the feat with no level requirement
+				}
+			}
+			
 		}else{
 			//Inactive - maybe remove effects and feats?
 			RemoveGeneticEffect(oPC, theGene.getEffectType());
+			if(FeatID >= 0){
+				if(Funcs.GetKnowsFeat(FeatID, oPC) == 1){
+					//We must remove the feat
+					Funcs.RemoveKnownFeat(oPC, FeatID); // Add the feat with no level requirement
+				}
+			}
 		}
 		
 		
