@@ -23,7 +23,7 @@ public class Energy {
 		NWScript.setLocalInt(NWObject.MODULE, ENERGY_COUNT_MODULE, CurrentEnergies);
 		NWScript.setLocalInt(NWObject.MODULE, ENERGY_NAME_TO_ID+sName, CurrentEnergies);
 		NWScript.setLocalString(NWObject.MODULE, ENERGY_ID_TO_NAME+CurrentEnergies, sName);	
-		this.setID(CurrentEnergies );
+		this.setID(CurrentEnergies);
 		this.setName(sName);
 		moduleEnergyDefinitions.add(this);
 	}

@@ -120,7 +120,8 @@ public class TestRunner {
 						String energyName = event.replace("EnergySearch_", "");
 						NWScript.setLocalInt(NWObject.MODULE,"SearchResponse",0);
 						for(Energy e : Energy.getEnergyDefinitions()){
-							if(e.getName() == energyName){
+							NWScript.printString("Search:"+e.getID()+" - "+e.getName());
+							if(e.getName().trim() == energyName.trim()){
 								NWScript.setLocalInt(NWObject.MODULE,"SearchResponse",e.getID());
 								break;
 							}
