@@ -197,13 +197,13 @@ public class Include {
 		Apply = (geneAboveGround == areaLocation) && (geneInterior == interior) && (geneNatural == natural) && (TileType >= 1) && (combat == onlyInCombat) && (hasEnergy) ? 5:0;
 		NWScript.printString("Apply is equal to "+Apply);
 		if(Apply != 5){
-			/*NWScript.printString("Above Ground = "+(geneAboveGround == areaLocation));
+			NWScript.printString("Above Ground = "+(geneAboveGround == areaLocation));
 			NWScript.printString("geneInterior = "+(geneInterior == interior));
 			NWScript.printString("geneNatural = "+(geneNatural == natural));
 			NWScript.printString("TileType = "+(TileType >= 1));
 			NWScript.printString("combat = "+(combat == onlyInCombat));
 			NWScript.printString("hasEnergy = "+(hasEnergy));
-			*/
+			
 		}
 		
 		}
