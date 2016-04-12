@@ -114,6 +114,7 @@ public class TestRunner {
 						NWScript.setLocalInt(NWObject.MODULE,"NEW_ENERGY",0);
 						int iReturn = EnergyInc.CreateEnergy(energyName);
 						NWScript.setLocalInt(NWObject.MODULE,"NEW_ENERGY",iReturn);
+						Scheduler.flushQueues();
 					}
 					if(event.startsWith("EnergySearch_")){
 						NWObject.setObjectInvalidIsNull(true);
@@ -121,11 +122,12 @@ public class TestRunner {
 						NWScript.setLocalInt(NWObject.MODULE,"SearchResponse",0);
 						for(Energy e : Energy.getEnergyDefinitions()){
 							NWScript.printString("Search:"+e.getID()+" - "+e.getName());
-							if(e.getName().trim() == energyName.trim()){
+							if(e.getName().trim().equals(energyName.trim())){
 								NWScript.setLocalInt(NWObject.MODULE,"SearchResponse",e.getID());
 								break;
 							}
 						}
+						Scheduler.flushQueues();
 					}
 					if(event.equals("StoreEnergyCostForGenePassive")){
 						NWObject.setObjectInvalidIsNull(true);
