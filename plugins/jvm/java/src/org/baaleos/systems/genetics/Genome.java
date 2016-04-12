@@ -13,7 +13,8 @@ public class Genome extends ArrayList<Gene>  {
 		for(i=1;i<=AmountOfGenesOnCreature;i++){
 			int GeneID = NWScript.getLocalInt(player,"creature_genome_storage_"+i);
 			if(GeneID != 0){
-				Gene geneToApply = new Gene(GeneID);
+				//Gene geneToApply = new Gene(GeneID);
+				Gene geneToApply = Gene.getGeneByID(GeneID);
 				this.add(geneToApply);
 			}
 		}
@@ -29,7 +30,8 @@ public class Genome extends ArrayList<Gene>  {
 	    for(iPower = 1;iPower<=PowersForGenome;iPower++){
 	        int iGene = NWScript.getLocalInt(oMod,INHUMAN_ABILITY_ROSTER+genomeID+"_"+iPower);
 	        if(iGene != 0){
-	        	Gene geneToApply = new Gene(iGene);
+	        	//Gene geneToApply = new Gene(iGene);
+	        	Gene geneToApply = Gene.getGeneByID(iGene);
 				this.add(geneToApply);
 	        }
 	    }

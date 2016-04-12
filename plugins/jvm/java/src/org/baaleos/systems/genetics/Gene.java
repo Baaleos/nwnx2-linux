@@ -1,5 +1,8 @@
 package org.baaleos.systems.genetics;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.nwnx.nwnx2.jvm.NWObject;
 import org.nwnx.nwnx2.jvm.NWScript;
 
@@ -65,12 +68,17 @@ private static final  String INHUMAN_POWER_STORAGE_COMBAT_ONLY = "INHUMAN_POWER_
 		setVisualEffect(Visual);
 		setAlwaysActive(AlwaysActive);
 		setCombatOnly(InCombatOnly);
+		GeneDefinitions.add(this);
+		IdToGene.put(GeneID, this);
 	}
 	
 	
+	private static final ArrayList<Gene> GeneDefinitions = new ArrayList<Gene>();
+	private static final HashMap<Integer, Gene> IdToGene = new HashMap<Integer, Gene>();
 	
-	
-	
+	public static final Gene getGeneByID(int i){
+		return IdToGene.get(i);
+	}
 	
 	public int getVisualEffect() {
 		return VisualEffect;
@@ -172,6 +180,7 @@ private static final  String INHUMAN_POWER_STORAGE_COMBAT_ONLY = "INHUMAN_POWER_
 		return CombatOnly;
 	}
 
+	
 
 
 
@@ -180,6 +189,14 @@ private static final  String INHUMAN_POWER_STORAGE_COMBAT_ONLY = "INHUMAN_POWER_
 	public void setCombatOnly(boolean combatOnly) {
 		CombatOnly = combatOnly;
 	}
+	public ArrayList<EnergyCostBinding> getCostPerHeartbeat() {
+		return CostPerHeartbeat;
+	}
+
+	//public void setCostPerHeartbeat(ArrayList<EnergyCostBinding> costPerHeartbeat) {
+	//	CostPerHeartbeat = costPerHeartbeat;
+	//}
+	
 	private String GeneName;
 	private int FeatID;
 	private boolean IsPassive;
@@ -197,5 +214,6 @@ private static final  String INHUMAN_POWER_STORAGE_COMBAT_ONLY = "INHUMAN_POWER_
 	private int LevelOfPower;
 	private int VisualEffect;
 	private boolean CombatOnly;
+	private ArrayList<EnergyCostBinding> CostPerHeartbeat = new ArrayList<EnergyCostBinding>();
 	
 }

@@ -126,7 +126,17 @@ public class TestRunner {
 							}
 						}
 					}
-					
+					if(event.equals("StoreEnergyCostForGenePassive")){
+						NWObject.setObjectInvalidIsNull(true);
+						
+						int GeneID = NWScript.getLocalInt(NWObject.MODULE,"GENEID");
+						int EnergyID = NWScript.getLocalInt(NWObject.MODULE,"ENERGYID");
+						int Amount = NWScript.getLocalInt(NWObject.MODULE,"AMOUNT");
+						Include.AddEnergyCostToGenePassive(GeneID,EnergyID, Amount);
+						NWScript.deleteLocalInt(NWObject.MODULE, "GENEID");
+						NWScript.deleteLocalInt(NWObject.MODULE, "ENERGYID");
+						NWScript.deleteLocalInt(NWObject.MODULE, "AMOUNT");
+					}
 					if(event.equals("ListEnergyTypes")){
 						NWObject.setObjectInvalidIsNull(true);
 						

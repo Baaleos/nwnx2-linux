@@ -1,5 +1,8 @@
 package org.baaleos.systems.genetics;
 
+import java.util.ArrayList;
+
+import org.baaleos.systems.energy.Energy;
 import org.nwnx.nwnx2.jvm.NWEffect;
 import org.nwnx.nwnx2.jvm.NWLocation;
 import org.nwnx.nwnx2.jvm.NWObject;
@@ -110,7 +113,7 @@ public class Include {
 	
 	
 	
-	public static void HeartbeatProcessGene(NWObject oPC, Gene theGene, int TimeOfDay, NWObject oArea,
+	public static void HeartbeatProcessGene(final NWObject oPC, Gene theGene, int TimeOfDay, NWObject oArea,
 											int iIsInWater, int areaLocation, int interior, int natural, boolean combat){
 		
 		if(oArea == NWObject.INVALID) { return;} //Don't do anything on this heartbeat until we materialize
@@ -125,6 +128,29 @@ public class Include {
 			int geneInterior = theGene.getEnvironmentInterior();
 			int geneNatural = theGene.getEnvironmentNatural();
 			int TileType = theGene.getEnvironmentTilesetType();
+			ArrayList<EnergyCostBinding> costBindingList = theGene.getCostPerHeartbeat();
+			boolean hasEnergy = false;
+			int iSuccess = 0;
+			for(EnergyCostBinding energyCost : costBindingList){
+				Energy e = energyCost.getEnergyToCharge();
+				int AmountToCharge = energyCost.getAmountToCharge();
+				int CurrentEnergy = e.getCurrentAmount(oPC);
+				int AfterSub = CurrentEnergy - AmountToCharge;
+				if(AfterSub >= 0){
+					e.setCurrentAmount(oPC, AfterSub);
+					NWScript.printString("Satisfied cost for "+e.getName()+" energy.");
+					iSuccess++;
+				}else{
+					NWScript.printString("NOT Satisfied cost for "+e.getName()+" energy.");
+				}
+			}
+			
+			//All Energy costs must be satisfied
+			//If there is no costs- then this should auto pass
+			if(iSuccess == costBindingList.size()){
+				hasEnergy = true;
+			}
+			
 			boolean onlyInCombat = theGene.isCombatOnly();
 			if(geneAboveGround == CONDITION_IGNORE){
 				geneAboveGround = areaLocation;
@@ -148,7 +174,7 @@ public class Include {
 					TileType = iIsInWater;//IsInWater(l);
 				break;
 		}
-		Apply = (geneAboveGround == areaLocation) && (geneInterior == interior) && (geneNatural == natural) && (TileType >= 1) && (combat == onlyInCombat) ? 5:0;
+		Apply = (geneAboveGround == areaLocation) && (geneInterior == interior) && (geneNatural == natural) && (TileType >= 1) && (combat == onlyInCombat) && (hasEnergy) ? 5:0;
 		//NWScript.printString("Apply is equal to "+Apply);
 		
 		}
@@ -236,7 +262,12 @@ public class Include {
 	    }
 	}
 	
-	
+	public static void AddEnergyCostToGenePassive(int gene, int energy, int amount){
+		EnergyCostBinding costbinding = new EnergyCostBinding(Energy.getEnergy(energy), amount);
+		Gene thegene = Gene.getGeneByID(gene);
+		thegene.getCostPerHeartbeat().add(costbinding);
+		NWScript.printString(thegene.getGeneName()+" now costs "+amount+" "+energy+" per hb");
+	}
 	
 	public static void ProcessPlayer(NWObject player, int timeOfDayCurrent){
 		Genome genome = new Genome(player);
