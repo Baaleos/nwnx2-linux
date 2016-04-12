@@ -6,6 +6,7 @@ import java.util.List;
 import org.baaleos.systems.energy.Energy;
 import org.baaleos.systems.energy.EnergyHeartbeat;
 import org.baaleos.systems.energy.EnergyInc;
+import org.baaleos.systems.genetics.Gene;
 import org.baaleos.systems.genetics.GeneticsHeartbeat;
 import org.baaleos.systems.genetics.Include;
 import org.baaleos.systems.server.StaticContainer;
@@ -127,6 +128,13 @@ public class TestRunner {
 								break;
 							}
 						}
+						Scheduler.flushQueues();
+					}
+					if(event.startsWith("InitGene_")){
+						NWObject.setObjectInvalidIsNull(true);
+						String energyName = event.replace("InitGene_", "");
+						Gene g = new Gene(Integer.valueOf(energyName));
+						
 						Scheduler.flushQueues();
 					}
 					if(event.equals("StoreEnergyCostForGenePassive")){
