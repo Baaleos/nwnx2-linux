@@ -140,32 +140,31 @@ public class Include {
 			NWScript.printString("Removing Skin"+GeneColorSkin+" back to "+OriginalSkin);
 		}
 	}
+	
+	
 	public static void ApplyAppearanceData(final NWObject oPC, final  Gene theGene){
 		
 		
-		
+		int iHairStored = NWScript.getLocalInt(oPC, "HAIR_COLOR_DEFAULT_DONE");
+		int iSkinStored = NWScript.getLocalInt(oPC, "SKIN_COLOR_DEFAULT_DONE");
+		int iAppearanceStored = NWScript.getLocalInt(oPC, "APPEARANCE_DEFAULT_DONE");
 		int CurrentAppearance = NWScript.getAppearanceType(oPC);
 		int HairColor = NWScript.getColor(oPC, ColorChannel.HAIR);
 		int SkinColor = NWScript.getColor(oPC,ColorChannel.SKIN);
 		
 		int i = NWScript.getLocalInt(oPC, "ORIGINAL_COLOR_"+ColorChannel.HAIR);
-		if(NWScript.getLocalInt(oPC, "ORIGINAL_COLOR_"+ColorChannel.HAIR)==0){
+		if(iHairStored==0){
+			NWScript.setLocalInt(oPC, "HAIR_COLOR_DEFAULT_DONE",1);
 			//Set the original color
-			
-			NWScript.printString("==============");
-			NWScript.printString("Setting Original Hair storage to "+HairColor);
-			NWScript.printString("==============");
 			NWScript.setLocalInt(oPC, "ORIGINAL_COLOR_"+ColorChannel.HAIR, HairColor);
-		}else{
-			NWScript.printString("==============");
-			NWScript.printString("Original Hair Stored as "+i);
-			NWScript.printString("==============");
 		}
-		if(NWScript.getLocalInt(oPC, "ORIGINAL_COLOR_"+ColorChannel.SKIN)==0){
+		if(iSkinStored==0){
+			NWScript.setLocalInt(oPC, "SKIN_COLOR_DEFAULT_DONE",1);
 			//Set the original color
 			NWScript.setLocalInt(oPC, "ORIGINAL_COLOR_"+ColorChannel.SKIN, SkinColor);
 		}
-		if(NWScript.getLocalInt(oPC, "ORIGINAL_APPEARANCE_")==0){
+		if(iAppearanceStored==0){
+			NWScript.setLocalInt(oPC, "APPEARANCE_DEFAULT_DONE",1);
 			//Set the original color
 			NWScript.setLocalInt(oPC, "ORIGINAL_APPEARANCE_", CurrentAppearance);
 		}
