@@ -6,6 +6,7 @@ import org.baaleos.systems.energy.Energy;
 import org.nwnx.nwnx2.jvm.*;
 import org.nwnx.nwnx2.jvm.NWObject;
 import org.nwnx.nwnx2.jvm.Scheduler;
+import org.nwnx.nwnx2.jvm.constants.ColorChannel;
 import org.nwnx.nwnx2.jvm.constants.DurationType;
 import org.nwnx.nwnx2.jvm.constants.Effect;
 
@@ -109,7 +110,63 @@ public class Include {
 		
 	}
 	
-	
+	public static void RemoveGeneAppearanceData(final NWObject oPC, final Gene theGene){
+		int CurrentAppearance = NWScript.getAppearanceType(oPC);
+		int HairColor = NWScript.getColor(oPC, ColorChannel.HAIR);
+		int SkinColor = NWScript.getColor(oPC,ColorChannel.SKIN);
+		
+		int OriginalAppearance = NWScript.getLocalInt(oPC, "ORIGINAL_APPEARANCE_");
+		int OriginalHair = NWScript.getLocalInt(oPC, "ORIGINAL_COLOR_"+ColorChannel.HAIR);
+		int OriginalSkin = NWScript.getLocalInt(oPC, "ORIGINAL_COLOR_"+ColorChannel.SKIN);
+		
+		int GeneColorSkin = theGene.getSkinColor();
+		int GeneColorHair = theGene.getHairColor();
+		int GeneAppearance = theGene.getAppearance();
+		
+		if(CurrentAppearance == GeneAppearance){
+			NWScript.setCreatureAppearanceType(oPC,OriginalAppearance);
+		}
+		if(HairColor == GeneColorHair){
+			NWScript.setColor(oPC, ColorChannel.HAIR, OriginalHair);
+		}
+		if(SkinColor == GeneColorSkin){
+			NWScript.setColor(oPC, ColorChannel.SKIN, OriginalSkin);
+		}
+	}
+	public static void ApplyAppearanceData(final NWObject oPC, final  Gene theGene){
+		
+		
+		
+		int CurrentAppearance = NWScript.getAppearanceType(oPC);
+		int HairColor = NWScript.getColor(oPC, ColorChannel.HAIR);
+		int SkinColor = NWScript.getColor(oPC,ColorChannel.SKIN);
+		
+		if(NWScript.getLocalInt(oPC, "ORIGINAL_COLOR_"+ColorChannel.HAIR)==0){
+			//Set the original color
+			NWScript.setLocalInt(oPC, "ORIGINAL_COLOR_"+ColorChannel.HAIR, HairColor);
+		}
+		if(NWScript.getLocalInt(oPC, "ORIGINAL_COLOR_"+ColorChannel.SKIN)==0){
+			//Set the original color
+			NWScript.setLocalInt(oPC, "ORIGINAL_COLOR_"+ColorChannel.SKIN, SkinColor);
+		}
+		if(NWScript.getLocalInt(oPC, "ORIGINAL_APPEARANCE_")==0){
+			//Set the original color
+			NWScript.setLocalInt(oPC, "ORIGINAL_APPEARANCE_", CurrentAppearance);
+		}
+		//Set appearance
+		if(theGene.getAppearance() > 0 && theGene.getAppearance() != CurrentAppearance){
+			NWScript.setCreatureAppearanceType(oPC, theGene.getAppearance());
+		}
+		
+		//Set HairColor
+		if(theGene.getHairColor() > 0 && theGene.getHairColor() != HairColor){
+			NWScript.setColor(oPC, ColorChannel.HAIR, theGene.getHairColor());
+		}
+		//Set HairColor
+		if(theGene.getSkinColor() > 0 && theGene.getSkinColor() != SkinColor){
+			NWScript.setColor(oPC, ColorChannel.SKIN, theGene.getSkinColor());
+		}
+	}
 	
 	public static void HeartbeatProcessGene(final NWObject oPC, final Gene theGene, int TimeOfDay, final NWObject oArea,
 											int iIsInWater, int areaLocation, int interior, int natural, boolean combat){
@@ -244,10 +301,15 @@ public class Include {
 					Funcs.AddKnownFeat(oPC, FeatID, -1); // Add the feat with no level requirement
 				}
 			}
+			//Apply genetic appearance related stuff
+			ApplyAppearanceData(oPC, theGene);
 			
 		}else{
 			//Inactive - maybe remove effects and feats?
 			RemoveGeneticEffect(oPC, theGene.getEffectType());
+			
+			//Remove the genetic appearance related stuff
+			RemoveGeneAppearanceData(oPC, theGene);
 			if(FeatID >= 0){
 				if(Funcs.GetKnowsFeat(FeatID, oPC) == 1){
 					//We must remove the feat

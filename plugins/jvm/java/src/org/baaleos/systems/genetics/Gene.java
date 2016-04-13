@@ -32,11 +32,22 @@ private static final  String INHUMAN_POWER_STORAGE_ENVIRONMENT_ABOVE_GROUND = "I
 private static final  String INHUMAN_POWER_STORAGE_ENVIRONMENT_INTERIOR = "INHUMAN_POWER_STORE_INTERIOR_";
 private static final  String INHUMAN_POWER_STORAGE_ENVIRONMENT_SURFACE_TYPE = "INHUMAN_POWER_STORE_SURFACE_TYPE_";
 private static final  String INHUMAN_POWER_STORAGE_ALWAYS_ACTIVE = "INHUMAN_POWER_STORE_ALWAYS_ACTIVE_";
-private static final  String INHUMAN_POWER_STORAGE_LIGHT_SENSITIVE = "INHUMAN_POWER_STORE_LIGHT_SENSITIVE_";
+//private static final  String INHUMAN_POWER_STORAGE_LIGHT_SENSITIVE = "INHUMAN_POWER_STORE_LIGHT_SENSITIVE_";
 private static final  String INHUMAN_POWER_STORAGE_DAMAGE_AMOUNT = "INHUMAN_POWER_STORE_DAMAGE_AMOUNT_";
 private static final  String INHUMAN_POWER_STORAGE_DAMAGE_TYPE = "INHUMAN_POWER_STORE_DAMAGE_TYPE_";
 private static final  String INHUMAN_POWER_STORAGE_VISUAL = "INHUMAN_POWER_VISUAL_";
 private static final  String INHUMAN_POWER_STORAGE_COMBAT_ONLY = "INHUMAN_POWER_COMBAT_ONLY_";
+
+private static final  String INHUMAN_POWER_APPEARANCE_CHANGE = "INHUMAN_POWER_APPEARANCE_";
+private static final  String INHUMAN_POWER_APPEARANCE_HAIR_COLOR = "INHUMAN_POWER_APPEARANCE_HAIR_";
+private static final  String INHUMAN_POWER_APPEARANCE_SKIN_COLOR = "INHUMAN_POWER_APPEARANCE_SKIN_";
+
+
+
+	private int SkinColor;
+	private int HairColor;
+	private int Appearance;
+
 	private void Initialize(){
 		
 		String sName = NWScript.getLocalString(NWObject.MODULE, INHUMAN_POWER_STORAGE_NAME+GeneID);
@@ -56,6 +67,9 @@ private static final  String INHUMAN_POWER_STORAGE_COMBAT_ONLY = "INHUMAN_POWER_
 		int DamageType = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_STORAGE_DAMAGE_TYPE+GeneID);
 		int Visual = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_STORAGE_VISUAL+GeneID);
 		boolean InCombatOnly = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_STORAGE_COMBAT_ONLY+GeneID)==1;
+		int AppearanceChange = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_APPEARANCE_CHANGE+GeneID);
+		int AppearanceChangeHair = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_APPEARANCE_HAIR_COLOR+GeneID);
+		int AppearanceChangeSkin = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_APPEARANCE_SKIN_COLOR+GeneID);
 		setGeneName(sName);
 		setFeatID(Feat);
 		setIsPassive(IsPassive);
@@ -73,6 +87,9 @@ private static final  String INHUMAN_POWER_STORAGE_COMBAT_ONLY = "INHUMAN_POWER_
 		setVisualEffect(Visual);
 		setAlwaysActive(AlwaysActive);
 		setCombatOnly(InCombatOnly);
+		setAppearance(AppearanceChange);
+		setHairColor(AppearanceChangeHair);
+		setSkinColor(AppearanceChangeSkin);
 		//GeneDefinitions.add(this);
 		IdToGene.put(GeneID, this);
 		NWScript.printString("Stored gene "+this.getGeneName()+" with gene id "+GeneID);
@@ -208,6 +225,27 @@ private static final  String INHUMAN_POWER_STORAGE_COMBAT_ONLY = "INHUMAN_POWER_
 	//	CostPerHeartbeat = costPerHeartbeat;
 	//}
 	
+	public int getSkinColor() {
+		return SkinColor;
+	}
+
+	public void setSkinColor(int skinColor) {
+		SkinColor = skinColor;
+	}
+	public int getHairColor() {
+		return HairColor;
+	}
+
+	public void setHairColor(int hairColor) {
+		HairColor = hairColor;
+	}
+	public int getAppearance() {
+		return Appearance;
+	}
+
+	public void setAppearance(int appearance) {
+		Appearance = appearance;
+	}
 	private String GeneName;
 	private int FeatID;
 	private boolean IsPassive;
