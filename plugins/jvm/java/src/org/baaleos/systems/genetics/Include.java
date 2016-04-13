@@ -169,6 +169,11 @@ public class Include {
 		}
 	}
 	
+	
+	//private static final int  GENE_TIME_DAY = 1;
+	//private static final int  GENE_TIME_NIGHT = 2;
+	//private static final int  GENE_TIME_BOTH = 0;
+	//
 	public static void HeartbeatProcessGene(final NWObject oPC, final Gene theGene, int TimeOfDay, final NWObject oArea,
 											int iIsInWater, int areaLocation, int interior, int natural, boolean combat){
 		
@@ -194,10 +199,11 @@ public class Include {
 			int geneInterior = theGene.getEnvironmentInterior();
 			int geneNatural = theGene.getEnvironmentNatural();
 			int TileType = theGene.getEnvironmentTilesetType();
+			int DayNight = theGene.getTimeOfDayActive();
 			ArrayList<EnergyCostBinding> costBindingList = theGene.getCostPerHeartbeat();
 			boolean hasEnergy = false;
 			int iSuccess = 0;
-			NWScript.printString("Gene:"+theGene.getID()+" has "+costBindingList.size()+" energy requirements");
+			//NWScript.printString("Gene:"+theGene.getID()+" has "+costBindingList.size()+" energy requirements");
 			for(EnergyCostBinding energyCost : costBindingList){
 				Energy e = energyCost.getEnergyToCharge();
 				int AmountToCharge = energyCost.getAmountToCharge();
@@ -205,17 +211,17 @@ public class Include {
 				int AfterSub = CurrentEnergy - AmountToCharge;
 				if(AfterSub >= 0){
 					e.setCurrentAmount(oPC, AfterSub);
-					NWScript.printString("Satisfied cost for "+e.getName()+" energy.");
+					//NWScript.printString("Satisfied cost for "+e.getName()+" energy.");
 					iSuccess++;
 				}else{
-					NWScript.printString("NOT Satisfied cost for "+e.getName()+" energy.");
+					//NWScript.printString("NOT Satisfied cost for "+e.getName()+" energy.");
 				}
 			}
 			
 			//All Energy costs must be satisfied
 			//If there is no costs- then this should auto pass
 			if(iSuccess == costBindingList.size()){
-				NWScript.printString("Energy Condition Passed!");
+				//NWScript.printString("Energy Condition Passed!");
 				hasEnergy = true;
 			}
 			
@@ -225,6 +231,10 @@ public class Include {
 			if(geneAboveGround == CONDITION_IGNORE){
 				geneAboveGround = areaLocation;
 				//NWScript.printString("geneAboveGround:"+geneAboveGround);
+			}
+			boolean timeSatisfied = false;
+			if(DayNight == TimeOfDay || DayNight ==0){
+				timeSatisfied = true;
 			}
 			//NWScript.printString("geneInterior:"+geneInterior);
 			if(geneInterior == CONDITION_IGNORE){
@@ -243,7 +253,7 @@ public class Include {
 				//NWScript.printString("onlyInCombat:"+onlyInCombat);
 			}
 			
-			NWScript.printString("TileType:"+TileType);
+			//NWScript.printString("TileType:"+TileType);
 			switch(TileType){
 				case CONDITION_IGNORE:
 					//Just set to 1
@@ -253,7 +263,7 @@ public class Include {
 					TileType = iIsInWater;//IsInWater(l);
 				break;
 		}
-			Apply = (geneAboveGround == areaLocation) && (geneInterior == interior) && (geneNatural == natural) && (TileType >= 1) && (combat == onlyInCombat) && (hasEnergy) ? 5:0;
+			Apply = (timeSatisfied) && (geneAboveGround == areaLocation) && (geneInterior == interior) && (geneNatural == natural) && (TileType >= 1) && (combat == onlyInCombat) && (hasEnergy) ? 5:0;
 			NWScript.printString("Apply is equal to "+Apply);
 			if(Apply != 5){
 				/*NWScript.printString("Above Ground = "+(geneAboveGround == areaLocation));
