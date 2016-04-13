@@ -112,6 +112,7 @@ public class Include {
 	}
 	
 	public static void RemoveGeneAppearanceData(final NWObject oPC, final Gene theGene){
+		
 		int CurrentAppearance = NWScript.getAppearanceType(oPC);
 		int HairColor = NWScript.getColor(oPC, ColorChannel.HAIR);
 		int SkinColor = NWScript.getColor(oPC,ColorChannel.SKIN);
@@ -124,14 +125,19 @@ public class Include {
 		int GeneColorHair = theGene.getHairColor();
 		int GeneAppearance = theGene.getAppearance();
 		
-		if(CurrentAppearance == GeneAppearance){
+		
+		
+		if(CurrentAppearance == GeneAppearance && GeneAppearance > 0){
 			NWScript.setCreatureAppearanceType(oPC,OriginalAppearance);
+			NWScript.printString("Removing Appearance"+GeneAppearance+" back to "+OriginalAppearance);
 		}
-		if(HairColor == GeneColorHair){
+		if(HairColor == GeneColorHair && GeneColorHair > 0){
 			NWScript.setColor(oPC, ColorChannel.HAIR, OriginalHair);
+			NWScript.printString("Removing Hair"+GeneColorHair+" back to "+OriginalHair);
 		}
-		if(SkinColor == GeneColorSkin){
+		if(SkinColor == GeneColorSkin && GeneColorSkin > 0){
 			NWScript.setColor(oPC, ColorChannel.SKIN, OriginalSkin);
+			NWScript.printString("Removing Skin"+GeneColorSkin+" back to "+OriginalSkin);
 		}
 	}
 	public static void ApplyAppearanceData(final NWObject oPC, final  Gene theGene){
