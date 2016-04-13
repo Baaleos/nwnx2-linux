@@ -51,7 +51,8 @@ public class Include {
 	      case Effect.TYPE_VISUALEFFECT: iEffect = NWScript.effectVisualEffect(Value1, Value2==1); break;
 	      case Effect.TYPE_DAMAGE_IMMUNITY_INCREASE: iEffect = NWScript.effectDamageImmunityIncrease(Value1, Value2); break;
 	      case Effect.TYPE_DAMAGE_IMMUNITY_DECREASE: iEffect = NWScript.effectDamageImmunityDecrease(Value1, Value2); break;
-	      //default: iEffect; break;
+	      //default: iEffect = -1; break;
+	      default: return null;
 	  }
 	  return NWScript.supernaturalEffect(iEffect);
 	}
@@ -290,7 +291,9 @@ public class Include {
 					//WriteTimestampedLogEntry("Does not have effect already: Applying new");
 					eEffect = GetEffectFromID(theGene.getEffectType(), theGene.getEffectNumber1(), theGene.getEffectNumber2());
 					//SetEffectCreator (eEffect, oEffectCreator);
-					ApplyEffectByGeneticCreator(eEffect,DurationType.PERMANENT, 0.00f, oPC);
+					if(eEffect != null){
+						ApplyEffectByGeneticCreator(eEffect,DurationType.PERMANENT, 0.00f, oPC);
+					}
 					//NWScript.applyEffectToObject(DurationType.PERMANENT,eEffect,oPC,0.00f);
 				}
 			}
