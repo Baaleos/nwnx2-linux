@@ -148,9 +148,18 @@ public class Include {
 		int HairColor = NWScript.getColor(oPC, ColorChannel.HAIR);
 		int SkinColor = NWScript.getColor(oPC,ColorChannel.SKIN);
 		
+		int i = NWScript.getLocalInt(oPC, "ORIGINAL_COLOR_"+ColorChannel.HAIR);
 		if(NWScript.getLocalInt(oPC, "ORIGINAL_COLOR_"+ColorChannel.HAIR)==0){
 			//Set the original color
+			
+			NWScript.printString("==============");
+			NWScript.printString("Setting Original Hair storage to "+HairColor);
+			NWScript.printString("==============");
 			NWScript.setLocalInt(oPC, "ORIGINAL_COLOR_"+ColorChannel.HAIR, HairColor);
+		}else{
+			NWScript.printString("==============");
+			NWScript.printString("Original Hair Stored as "+i);
+			NWScript.printString("==============");
 		}
 		if(NWScript.getLocalInt(oPC, "ORIGINAL_COLOR_"+ColorChannel.SKIN)==0){
 			//Set the original color
