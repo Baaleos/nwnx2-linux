@@ -116,7 +116,10 @@ public class Odbc {
 	    //oModule = GetModule();
 	    NWScript.setLocalString(oModule, "NWNX!ODBC!FETCH", "-2147483647");
 	    String str = NWScript.getLocalString(oModule, "NWNX!ODBC!FETCH");
-	    NWScript.printString("'"+str+"'");
+	    if(str.isEmpty() || str == null){
+	    	return 0;
+	    }
+	    //NWScript.printString("'"+str+"'");
 	    return Integer.valueOf(str);
 	}
 	
