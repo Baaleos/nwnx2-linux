@@ -213,6 +213,8 @@ public class Include {
 				Odbc.setPersistentInt(oPC, "HAIR_COLOR_DEFAULT_DONE",1, 0, "pwdata");
 				Odbc.setPersistentInt(oPC, "ORIGINAL_COLOR_"+ColorChannel.HAIR,HairColor,0, "pwdata");
 				i = HairColor;
+			}else{
+				i =  Odbc.getPersistentInt(oPC, "ORIGINAL_COLOR_"+ColorChannel.HAIR, "pwdata");
 			}
 			//Set the original color
 			NWScript.setLocalInt(oPC, "ORIGINAL_COLOR_"+ColorChannel.HAIR, i);
@@ -225,6 +227,8 @@ public class Include {
 				Odbc.setPersistentInt(oPC, "SKIN_COLOR_DEFAULT_DONE",1, 0, "pwdata");
 				Odbc.setPersistentInt(oPC, "ORIGINAL_COLOR_"+ColorChannel.SKIN,SkinColor,0, "pwdata");
 				i = SkinColor;
+			}else{
+				i =  Odbc.getPersistentInt(oPC, "ORIGINAL_COLOR_"+ColorChannel.SKIN, "pwdata");
 			}
 			//Set the original color
 			NWScript.setLocalInt(oPC, "ORIGINAL_COLOR_"+ColorChannel.SKIN, i);
@@ -237,6 +241,8 @@ public class Include {
 				Odbc.setPersistentInt(oPC, "APPEARANCE_DEFAULT_DONE",1, 0, "pwdata");
 				Odbc.setPersistentInt(oPC, "ORIGINAL_APPEARANCE_",CurrentAppearance,0, "pwdata");
 				i = CurrentAppearance;
+			}else{
+				i =  Odbc.getPersistentInt(oPC, "ORIGINAL_APPEARANCE_", "pwdata");
 			}
 			//Set the original color
 			NWScript.setLocalInt(oPC, "ORIGINAL_APPEARANCE_", i);
