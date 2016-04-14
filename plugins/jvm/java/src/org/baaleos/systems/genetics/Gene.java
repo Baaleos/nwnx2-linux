@@ -99,6 +99,11 @@ private static final  String INHUMAN_POWER_APPEARANCE_SKIN_COLOR = "INHUMAN_POWE
 	//private static ArrayList<Gene> GeneDefinitions = new ArrayList<Gene>();
 	private static HashMap<Integer, Gene> IdToGene = new HashMap<Integer, Gene>();
 	
+	/**
+	 * Specify an int value for the Gene you are trying to retrieve
+	 * @param i
+	 * @return
+	 */
 	public static final Gene getGeneByID(int i){
 		Gene g = (Gene)IdToGene.get(i);
 		if(g ==null){
@@ -108,102 +113,304 @@ private static final  String INHUMAN_POWER_APPEARANCE_SKIN_COLOR = "INHUMAN_POWE
 		return g;
 	}
 	
+	/**
+	 * Applies a visual effect to the creature when the gene is active.
+	 * Set to -1 to disable vfx on the particular gene
+	 * Be careful, as it could become easy to stack too many vfx on the creature
+	 * Eg: Make the player translucent during the night, like they are phasing through matter.
+	 * @return
+	 */
 	public int getVisualEffect() {
 		return VisualEffect;
 	}
+	
+	/**
+	 * Applies a visual effect to the creature when the gene is active.
+	 * Set to -1 to disable vfx on the particular gene
+	 * Be careful, as it could become easy to stack too many vfx on the creature
+	 * Eg: Make the player translucent during the night, like they are phasing through matter.
+	 * @return
+	 */
 	public void setVisualEffect(int visualEffect) {
 		VisualEffect = visualEffect;
 	}
+	
+	/**
+	 * Returns the name for the gene
+	 * @return
+	 */
 	public String getGeneName() {
 		return GeneName;
 	}
+	
+	/**
+	 * Sets the gene name
+	 * Eg: OCF-Fire Delta (if you are in a Sci-Fi module)
+	 * or Simply: Immunity to Fire - 20% if you are in a less science setting
+	 * @return
+	 */
 	public void setGeneName(String geneName) {
 		GeneName = geneName;
 	}
+	
+	/**
+	 * Adds a feat when the creature does not know the feat and the gene is active
+	 * Removes the feat when the creature has the feat, but the gene is inactive
+	 * Eg: Immune to Fire during the day etc
+	 * @return
+	 */
 	public int getFeatID() {
 		return FeatID;
 	}
+	
+	/**
+	 * Adds a feat when the creature does not know the feat and the gene is active
+	 * Removes the feat when the creature has the feat, but the gene is inactive
+	 * Eg: Immune to Fire during the day etc
+	 * @return
+	 */
 	public void setFeatID(int featID) {
 		FeatID = featID;
 	}
+	
+	/**
+	 * Currently Unused
+	 * @return
+	 */
 	public boolean getIsPassive() {
 		return IsPassive;
 	}
+	
+	/**
+	 * Currently Unused
+	 * @return
+	 */
 	public void setIsPassive(boolean isPassive) {
 		IsPassive = isPassive;
 	}
+	
+	
 	public int getEffectType() {
 		return EffectType;
 	}
 	public void setEffectType(int effectType) {
 		EffectType = effectType;
 	}
+	
+	
+	/**
+	 * Currently allows gene to be active at following times,
+	 * All the time, (0), Day (1), Night (2)
+	 * Day is considered: Dawn, Day
+	 * Night is Dusk, Night
+	 * @return
+	 */
 	public int getTimeOfDayActive() {
 		return TimeOfDayActive;
 	}
+	
+	/**
+	 * Currently allows gene to be active at following times,
+	 * All the time, (0), Day (1), Night (2)
+	 * Day is considered: Dawn, Day
+	 * Night is Dusk, Night
+	 * @return
+	 */
 	public void setTimeOfDayActive(int timeOfDayActive) {
 		TimeOfDayActive = timeOfDayActive;
 	}
+	
+	/**
+	 * For this gene to be active, should it be Natural(1) or Artifical (0), or Ignore (2)
+	 * @return
+	 */
 	public int getEnvironmentNatural() {
 		return EnvironmentNatural;
 	}
+	
+	/**
+	 * For this gene to be active, should it be Natural(1) or Artifical (0), or Ignore (2)
+	 * @return
+	 */
 	public void setEnvironmentNatural(int environmentNatural) {
 		EnvironmentNatural = environmentNatural;
 	}
+	
+	/**
+	 * For this gene to be active, should it be Interior (1) or Exterior (0), or Ignore (2)
+	 * @return
+	 */
 	public int getEnvironmentInterior() {
 		return EnvironmentInterior;
 	}
+	/**
+	 * For this gene to be active, should it be Interior (1) or Exterior (0), or Ignore (2)
+	 * @return
+	 */
 	public void setEnvironmentInterior(int environmentInterior) {
 		EnvironmentInterior = environmentInterior;
 	}
+	
+	/**
+	 * For this gene to be active, should it be Above Ground (1) or Underground (0), or Ignore (2)
+	 * @return
+	 */
 	public int getEnvironmentAboveGround() {
 		return EnvironmentAboveGround;
 	}
+	
+	/**
+	 * For this gene to be active, should it be Above Ground (1) or Underground (0), or Ignore (2)
+	 * @return
+	 */
 	public void setEnvironmentAboveGround(int environmentAboveGround) {
 		EnvironmentAboveGround = environmentAboveGround;
 	}
+	
+	/**
+	 * Activates the gene when the player is standing on a specific tiletype:
+	 * For things like 'Water' damage, you need to use a Constant value of 6
+	 * This covers the following tiletypes:
+	 * 6, 11, 17  : All of which are a type of water.
+	 * For custom tilesets, that use different surface types, you must modify the IsInWater method in Include.java
+	 * Possible cases where you might want to use this is:
+	 * +Concealment when in the Snow
+	 * or
+	 * +Skin changes to White, when standing on snow. (eg: camoflage)
+	 * @return
+	 */
 	public int getEnvironmentTilesetType() {
 		return EnvironmentTilesetType;
 	}
+	
+	/**
+	 * Activates the gene when the player is standing on a specific tiletype:
+	 * For things like 'Water' damage, you need to use a Constant value of 6
+	 * This covers the following tiletypes:
+	 * 6, 11, 17  : All of which are a type of water.
+	 * For custom tilesets, that use different surface types, you must modify the IsInWater method in Include.java
+	 * Possible cases where you might want to use this is:
+	 * +Concealment when in the Snow
+	 * or
+	 * +Skin changes to White, when standing on snow. (eg: camoflage)
+	 * @return
+	 */
 	public void setEnvironmentTilesetType(int environmentTilesetType) {
 		EnvironmentTilesetType = environmentTilesetType;
 	}
+	
+	/**
+	 * Overrides all other conditions - ensures the gene is always active.
+	 * @return
+	 */
 	public boolean getAlwaysActive() {
 		return AlwaysActive;
 	}
+	
+	/**
+	 * Overrides all other conditions - ensures the gene is always active.
+	 * @return
+	 */
 	public void setAlwaysActive(boolean alwaysActive) {
 		AlwaysActive = alwaysActive;
 	}
+	
+	/**
+	 * If a damage amount is specified, then the gene will apply damage instead of a duration effect
+	 * @return
+	 */
 	public int getApplyDamageAmount() {
 		return ApplyDamageAmount;
 	}
+	
+	/**
+	 * If a damage amount is specified, then the gene will apply damage instead of a duration effect
+	 * @return
+	 */
 	public void setApplyDamageAmount(int applyDamageAmount) {
 		ApplyDamageAmount = applyDamageAmount;
 	}
+	
+	/**
+	 * If a damage amount is specified, then the gene will apply damage instead of a duration effect
+	 * the type determined by this setting
+	 * @return
+	 */
 	public int getDamageType() {
 		return DamageType;
 	}
+	
+	/**
+	 * If a damage amount is specified, then the gene will apply damage instead of a duration effect
+	 * the type determined by this setting
+	 * @return
+	 */
 	public void setDamageType(int damageType) {
 		DamageType = damageType;
 	}
+	
+	/**
+	 * If a damage amount is NOT specified, then the gene will apply an effect constructed with
+	 * this number used as the first argument for its constructor
+	 * @return
+	 */
 	public int getEffectNumber1() {
 		return EffectNumber1;
 	}
+	
+	/**
+	 * If a damage amount is NOT specified, then the gene will apply an effect constructed with
+	 * this number used as the first argument for its constructor
+	 * @return
+	 */
 	public void setEffectNumber1(int effectNumber1) {
 		EffectNumber1 = effectNumber1;
 	}
+	
+	/**
+	 * If a damage amount is NOT specified, then the gene will apply an effect constructed with
+	 * this number used as the second argument for its constructor
+	 * @return
+	 */
 	public int getEffectNumber2() {
 		return EffectNumber2;
 	}
+	
+	/**
+	 * If a damage amount is NOT specified, then the gene will apply an effect constructed with
+	 * this number used as the second argument for its constructor
+	 * @return
+	 */
 	public void setEffectNumber2(int effectNumber2) {
 		EffectNumber2 = effectNumber2;
 	}
+	
+	/**
+	 * Unknown - Consider for removal?
+	 * May use this as part of the randomisation for levelling.
+	 * Eg: If you are entitled to one level 4 power, then that power is chosen at random from all Level 4 powers of a type.
+	 * @return
+	 */
 	public int getLevelOfPower() {
 		return LevelOfPower;
 	}
+	
+	/**
+	 * Unknown - Consider for removal?
+	 * May use this as part of the randomisation for levelling.
+	 * Eg: If you are entitled to one level 4 power, then that power is chosen at random from all Level 4 powers of a type.
+	 * @return
+	 */
 	public void setLevelOfPower(int levelOfPower) {
 		LevelOfPower = levelOfPower;
 	}
+	
+	/**
+	 * Allows the gene to only be active during combat.
+	 * Eg: Allow combat regeneration that consumes large Bio Energy etc
+	 * (Accumulate Bio-Energy when not in combat, then use it during comat)
+	 * @return
+	 */
 	public boolean isCombatOnly() {
 		return CombatOnly;
 	}
@@ -213,10 +420,22 @@ private static final  String INHUMAN_POWER_APPEARANCE_SKIN_COLOR = "INHUMAN_POWE
 
 
 
-
+	/**
+	 * Allows the gene to only be active during combat.
+	 * Eg: Allow combat regeneration that consumes large Bio Energy etc
+	 * (Accumulate Bio-Energy when not in combat, then use it during comat)
+	 * @return
+	 */
 	public void setCombatOnly(boolean combatOnly) {
 		CombatOnly = combatOnly;
 	}
+	
+	/**
+	 * Returns a list of EnergyCostBindings that this gene has.
+	 * Eg: How much Energy is consumed per 7 second tick for this gene.
+	 * Note: AlwaysActive genes do not consume energy
+	 * @return
+	 */
 	public ArrayList<EnergyCostBinding> getCostPerHeartbeat() {
 		return CostPerHeartbeat;
 	}
@@ -225,24 +444,51 @@ private static final  String INHUMAN_POWER_APPEARANCE_SKIN_COLOR = "INHUMAN_POWE
 	//	CostPerHeartbeat = costPerHeartbeat;
 	//}
 	
+	
+	/**
+	 * What skin color does the player have when the gene is active
+	 * @return
+	 */
 	public int getSkinColor() {
 		return SkinColor;
 	}
 
+	/**
+	 * What skin color does the player have when the gene is active
+	 * @return
+	 */
 	public void setSkinColor(int skinColor) {
 		SkinColor = skinColor;
 	}
+	
+	/**
+	 * What hair color does the player have when the gene is active
+	 * @return
+	 */
 	public int getHairColor() {
 		return HairColor;
 	}
 
+	/**
+	 * What hair color does the player have when the gene is active
+	 * @return
+	 */
 	public void setHairColor(int hairColor) {
 		HairColor = hairColor;
 	}
+	
+	/**
+	 * What appearance does the player have when the gene is active
+	 * @return
+	 */
 	public int getAppearance() {
 		return Appearance;
 	}
 
+	/**
+	 * What appearance does the player have when the gene is active
+	 * @return
+	 */
 	public void setAppearance(int appearance) {
 		Appearance = appearance;
 	}

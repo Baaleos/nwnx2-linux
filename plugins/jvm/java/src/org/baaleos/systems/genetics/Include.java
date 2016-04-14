@@ -188,8 +188,28 @@ public class Include {
 	//private static final int  GENE_TIME_NIGHT = 2;
 	//private static final int  GENE_TIME_BOTH = 0;
 	//
+	
+	/**
+	 * For every gene in the genome, we process it individually.
+	 * This allows for certain genes to be active and others inactive.
+	 * We process based of things like
+	 * TimeOfDay, Area Attributes, is the player in water 
+	 * (Note: Determining if is in water, is an expensive call: Only do this once per player)
+	 * areaAboveGroundOrNot - determine if the player is currently aboveground or not.
+	 * Interior - inside or not
+	 * Natural or not
+	 * @param oPC
+	 * @param theGene
+	 * @param TimeOfDay
+	 * @param oArea
+	 * @param iIsInWater
+	 * @param areaAboveGroundOrNot
+	 * @param interior
+	 * @param natural
+	 * @param combat
+	 */
 	public static void HeartbeatProcessGene(final NWObject oPC, final Gene theGene, int TimeOfDay, final NWObject oArea,
-											int iIsInWater, int areaLocation, int interior, int natural, boolean combat){
+											int iIsInWater, int areaAboveGroundOrNot, int interior, int natural, boolean combat){
 		
 		if(oArea == NWObject.INVALID) { return;} //Don't do anything on this heartbeat until we materialize
 		int Apply = 0;
@@ -243,7 +263,7 @@ public class Include {
 			
 			//NWScript.printString("geneAboveGround:"+geneAboveGround);
 			if(geneAboveGround == CONDITION_IGNORE){
-				geneAboveGround = areaLocation;
+				geneAboveGround = areaAboveGroundOrNot;
 				//NWScript.printString("geneAboveGround:"+geneAboveGround);
 			}
 			boolean timeSatisfied = false;
@@ -277,7 +297,7 @@ public class Include {
 					TileType = iIsInWater;//IsInWater(l);
 				break;
 		}
-			Apply = (timeSatisfied) && (geneAboveGround == areaLocation) && (geneInterior == interior) && (geneNatural == natural) && (TileType >= 1) && (combat == onlyInCombat) && (hasEnergy) ? 5:0;
+			Apply = (timeSatisfied) && (geneAboveGround == areaAboveGroundOrNot) && (geneInterior == interior) && (geneNatural == natural) && (TileType >= 1) && (combat == onlyInCombat) && (hasEnergy) ? 5:0;
 			NWScript.printString("Apply is equal to "+Apply);
 			if(Apply != 5){
 				/*NWScript.printString("Above Ground = "+(geneAboveGround == areaLocation));
@@ -401,12 +421,25 @@ public class Include {
 		NWScript.printString(thegene.getGeneName()+" now costs "+amount+" "+energy+" per hb");
 	}
 	
+	
+	/**
+	 * Process player, or a Creature, treating them as a player
+	 * Include timeOfDay, since this is global to the server : no need to grab it per player
+	 * @param player
+	 * @param timeOfDayCurrent
+	 */
 	public static void ProcessPlayer(NWObject player, int timeOfDayCurrent){
 		Genome genome = new Genome(player);
 		//NWScript.printString("Processing "+NWScript.getName(player, false));
 		ProcessGenome(player, genome, timeOfDayCurrent);
 	}
 	
+	/**
+	 * Feed in the Player, the genome we grabbed for them, and the time of day
+	 * @param player
+	 * @param genome
+	 * @param TimeOfDayCurrent
+	 */
 	public static void ProcessGenome(NWObject player, Genome genome, int TimeOfDayCurrent){
 		
 		int i = 1;
@@ -423,6 +456,15 @@ public class Include {
 	}
 	public static final String CREATURES_AS_SIMULATED_PC_COUNT = "creature_simulated_pc";
 	public static final String SIMULATED_PC = "simulated_pc_creature_";
+	
+	
+	
+	/**
+	 * Kicked off via NWScript calls to JVM Run_Genetics_HB
+	 * In order to keep this method stable, it is kept on the MainLoop thread
+	 * It also does not recurse anymore with a while loop
+	 * Each invocation of this will cover all players, and all NPC's designated to be included in the genetics system
+	 */
 	public static void GeneticsLoop(){
 		
 		//while(true){

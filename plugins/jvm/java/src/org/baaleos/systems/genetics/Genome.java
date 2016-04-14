@@ -8,6 +8,12 @@ import org.nwnx.nwnx2.jvm.NWScript;
 
 public class Genome extends ArrayList<Gene>  {
 
+	
+	/**
+	 * Returns a collection of Genes for the object used in the constructor
+	 * Will work for players, creatures and potentially placeables.
+	 * @param player
+	 */
 	public Genome(NWObject player){
 		int AmountOfGenesOnCreature = NWScript.getLocalInt(player,"creature_gene_count_");
 		int i;
@@ -23,6 +29,15 @@ public class Genome extends ArrayList<Gene>  {
 	private static final String INHUMAN_ID_TO_NAME = "inhuman_id_to_name";
 	private static final String INHUMAN_ABILITY_ROSTER = "INHUMAN_ABILITY_MAPPING_";
 	
+	
+	/**
+	 * Returns a collection of Genes, that belong to a cached Genome defined on the module.
+	 * This is for when you have defined a Genome in NSS, and wish it to be applied to multiple creatures
+	 * or even creation of a subrace engine.
+	 * Eg: All Vampires have this genome
+	 * All Drow have this genome etc
+	 * @param genomeID
+	 */
 	public Genome(int genomeID){
 		NWObject oMod = NWObject.MODULE;
 		String genomeName = NWScript.getLocalString(oMod, INHUMAN_ID_TO_NAME+"_"+genomeID);
