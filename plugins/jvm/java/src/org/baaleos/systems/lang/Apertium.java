@@ -21,7 +21,7 @@ public class Apertium {
 			try {
 				String command = "echo \""+strQuery+"\" | apertium "+from+"-"+to;
 				s = Command.exec(command);
-			} catch (IOException e) {
+			} catch (IOException | InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
