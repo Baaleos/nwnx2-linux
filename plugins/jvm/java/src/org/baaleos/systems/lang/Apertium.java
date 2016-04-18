@@ -6,18 +6,32 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+
+import org.baaleos.systems.ubuntu.Command;
+
 import com.google.gson.*;
 
 public class Apertium {
 
 	//https://www.apertium.org/apy/translate?langpair=eng|spa&q=Hello+my+name+is+Jonathan
 	@SuppressWarnings("deprecation")
-	public static String getTranslation(String from, String to, String strQuery){
+	public static String getTranslation(String from, String to, String strQuery, boolean local){
+		String s = "";
+		if(local){
+			try {
+				String command = "echo \""+strQuery+"\" | apertium "+from+"-"+to;
+				s = Command.exec(command);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return s;
+		}
 		strQuery = URLEncoder.encode(strQuery);
 		String url = "https://www.apertium.org/apy/translate?langpair="+from+"|"+to+"&q="+strQuery;
 		try {
 			TranslationResponse t = sendGet(url);
-			String s = t.getResponseData().getTranslatedText();
+			s = t.getResponseData().getTranslatedText();
 			return s;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

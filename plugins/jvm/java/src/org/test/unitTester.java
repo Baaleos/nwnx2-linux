@@ -1,12 +1,12 @@
 package org.test;
 
 import org.baaleos.systems.lang.AncientLanguage;
+import org.baaleos.systems.lang.Apertium;
 
 public class unitTester {
 
 	public static void main(String[] args){
-		AncientLanguage a = new AncientLanguage();
-		String s = a.toLanguage("Hello my name is Jonathan");
-		System.out.println(s);;
+		String spanish = Apertium.getTranslation("eng", "spa","Hello my name is Samuel", true);
+		System.out.println(spanish);
 	}
 }
