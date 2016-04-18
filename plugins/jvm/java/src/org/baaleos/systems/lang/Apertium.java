@@ -56,6 +56,7 @@ public class Apertium {
 		try {
 			TranslationResponse t = sendGet(url);
 			s = t.getResponseData().getTranslatedText();
+			cache.put(hash, s);
 			return s;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

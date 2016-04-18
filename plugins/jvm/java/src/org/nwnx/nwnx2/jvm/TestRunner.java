@@ -115,7 +115,7 @@ public class TestRunner {
 						
 						String strIn = NWScript.getLocalString(NWObject.MODULE, "TRANSLATE_THIS");
 						System.out.println("Received request to translate:"+strIn);
-						String sOut = Apertium.getTranslation("en", "es", strIn, true);
+						String sOut = Apertium.getTranslation("en", "es", strIn, false);
 						System.out.println("Translate library returned:"+sOut);
 						NWScript.setLocalString(NWObject.MODULE, "TRANSLATE_THIS", sOut);
 						Scheduler.flushQueues();
