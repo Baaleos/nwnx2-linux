@@ -9,6 +9,7 @@ import java.net.URLEncoder;
 import java.util.Hashtable;
 
 import org.baaleos.systems.ubuntu.Command;
+import org.nwnx.nwnx2.jvm.NWScript;
 
 import com.google.gson.*;
 
@@ -31,9 +32,10 @@ public class Apertium {
 				String arg = from+"-"+to;
 				s = Command.exec(command,arg,strQuery);
 				cache.put(hash, s);
-			} catch (IOException | InterruptedException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				NWScript.printString(s.toString());
 			}
 			return s;
 		}
