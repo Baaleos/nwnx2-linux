@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Hashtable;
 
 import org.baaleos.systems.ubuntu.Command;
 
@@ -13,15 +14,23 @@ import com.google.gson.*;
 
 public class Apertium {
 
+	
+	private static Hashtable<Integer,String> cache = new Hashtable<Integer,String>();
+	
 	//https://www.apertium.org/apy/translate?langpair=eng|spa&q=Hello+my+name+is+Jonathan
 	@SuppressWarnings("deprecation")
 	public static String getTranslation(String from, String to, String strQuery, boolean local){
 		String s = "";
+		int hash = strQuery.hashCode();
+		if(cache.containsKey(hash)){
+			return cache.get(hash);
+		}
 		if(local){
 			try {
 				String command = "apertium";
 				String arg = from+"-"+to;
 				s = Command.exec(command,arg,strQuery);
+				cache.put(hash, s);
 			} catch (IOException | InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
