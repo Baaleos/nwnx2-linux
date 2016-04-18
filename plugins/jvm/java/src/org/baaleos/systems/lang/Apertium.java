@@ -22,20 +22,32 @@ public class Apertium {
 	@SuppressWarnings("deprecation")
 	public static String getTranslation(String from, String to, String strQuery, boolean local){
 		String s = "";
+		System.out.println("Translate from:"+from);
+		System.out.println("Translate to:"+to);
+		System.out.println("Translate :"+strQuery);
+		System.out.println("Local? :"+local);
 		int hash = strQuery.hashCode();
+		
+		System.out.println("Hash is :"+hash);
 		if(cache.containsKey(hash)){
+			System.out.println("Cache contains hash");
 			return cache.get(hash);
 		}
-		if(local){
+		if(local)
+		{
+			System.out.println("Starting local");
 			try {
 				String command = "apertium";
 				String arg = from+"-"+to;
+				System.out.println("Running "+command+" with arg "+arg+" with query"+strQuery);
 				s = Command.exec(command,arg,strQuery);
+				System.out.println("s = "+s);
 				cache.put(hash, s);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				NWScript.printString(s.toString());
+				return e.toString();
 			}
 			return s;
 		}
@@ -48,8 +60,8 @@ public class Apertium {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return e.toString();
 		}
-		return null;
 		
 	}
 	
