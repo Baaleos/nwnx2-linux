@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class Command {
 
 	public static String exec(String command, String strQuery) throws IOException, InterruptedException{
-		ProcessBuilder builder = new ProcessBuilder(command);
+		ProcessBuilder builder = new ProcessBuilder("/usr/bin/"+command);
         String out = "";
         Process process = builder.start();
 
