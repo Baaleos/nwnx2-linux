@@ -14,7 +14,11 @@
 			destdir="${build}"
 			debug="true"
 			includeantruntime="false"
-			encoding="utf-8"/>
+			encoding="utf-8">
+			<classpath>
+			        <pathelement path="lib/gson-2.6.2.jar"/>
+			</classpath>
+		</javac>
 	</target>
 
 	<target name="doc">

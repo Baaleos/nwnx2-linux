@@ -1,5 +1,7 @@
 package org.nwnx.nwnx2.jvm;
 
+
+
 public class FuncsExt {
 
 	public static int GetSurface(NWLocation lLocation) {
