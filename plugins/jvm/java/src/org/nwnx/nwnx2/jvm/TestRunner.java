@@ -110,7 +110,7 @@ public class TestRunner {
 						//objSelf.assign(new GeneticsHeartbeat());
 						Scheduler.flushQueues();
 					}
-					if(event.equals("english_to_spanish")){
+					if(event.equals("en-es")){
 						NWObject.setObjectInvalidIsNull(true);
 						
 						String strIn = NWScript.getLocalString(NWObject.MODULE, "TRANSLATE_THIS");
