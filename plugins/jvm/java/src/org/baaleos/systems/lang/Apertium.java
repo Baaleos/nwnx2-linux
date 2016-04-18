@@ -19,7 +19,7 @@ public class Apertium {
 		String s = "";
 		if(local){
 			try {
-				String command = "echo \""+strQuery+"\" | apertium "+from+"-"+to;
+				String command = "\"echo \""+strQuery+"\" | apertium "+from+"-"+to+"\"";
 				s = Command.exec(command);
 			} catch (IOException | InterruptedException e) {
 				// TODO Auto-generated catch block
