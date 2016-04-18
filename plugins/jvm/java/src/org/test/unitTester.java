@@ -51,8 +51,8 @@ public class unitTester {
 	public static void main(String[] args){
 		Date dStart = new Date();
 		for(int i=0;i<=100000;i++){
-			String spanish = Apertium.getTranslation("en", "es",randomPhrase(), true);
-			System.out.println(spanish);
+			Apertium.getTranslation("en", "es",randomPhrase(), true);
+			//System.out.println(spanish);
 		}
 		Date dEnd = new Date();
 		long time = dEnd.getTime()-dStart.getTime();
