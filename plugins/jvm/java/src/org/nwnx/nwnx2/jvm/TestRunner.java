@@ -9,6 +9,7 @@ import org.baaleos.systems.energy.EnergyInc;
 import org.baaleos.systems.genetics.Gene;
 import org.baaleos.systems.genetics.GeneticsHeartbeat;
 import org.baaleos.systems.genetics.Include;
+import org.baaleos.systems.lang.Apertium;
 import org.baaleos.systems.server.StaticContainer;
 import org.nwnx.nwnx2.jvm.ScheduledEvery.Policy;
 import org.nwnx.nwnx2.jvm.constants.*;
@@ -107,6 +108,14 @@ public class TestRunner {
 						//String s = NWScript.getName(objSelf, false);
 						//System.out.println(s+" is running event");
 						//objSelf.assign(new GeneticsHeartbeat());
+						Scheduler.flushQueues();
+					}
+					if(event.equals("english_to_spanish")){
+						NWObject.setObjectInvalidIsNull(true);
+						
+						String strIn = NWScript.getLocalString(NWObject.MODULE, "TRANSLATE_THIS");
+						String sOut = Apertium.getTranslation("en", "es", strIn, true);
+						NWScript.setLocalString(NWObject.MODULE, "TRANSLATE_THIS", sOut);
 						Scheduler.flushQueues();
 					}
 					if(event.startsWith("SetupEnergy_")){
