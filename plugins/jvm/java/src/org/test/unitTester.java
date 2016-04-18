@@ -42,7 +42,7 @@ public class unitTester {
 			strReturn = "Sometimes it makes me upset.";
 			break;
 		case 10:
-			strReturn = "Sometimes it makes me upset.";
+			strReturn = "My therapist says I should try to not think about him.";
 			break;
 		}
 		return strReturn;
@@ -50,7 +50,7 @@ public class unitTester {
 	
 	public static void main(String[] args){
 		Date dStart = new Date();
-		for(int i=0;i<=1000;i++){
+		for(int i=0;i<=100000;i++){
 			String spanish = Apertium.getTranslation("en", "es",randomPhrase(), true);
 			System.out.println(spanish);
 		}
