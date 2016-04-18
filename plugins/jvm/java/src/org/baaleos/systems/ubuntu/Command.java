@@ -12,8 +12,8 @@ import java.util.Scanner;
 
 public class Command {
 
-	public static String exec(String command, String strQuery) throws IOException, InterruptedException{
-		ProcessBuilder builder = new ProcessBuilder("/usr/bin/"+command);
+	public static String exec(String command,String arg, String strQuery) throws IOException, InterruptedException{
+		ProcessBuilder builder = new ProcessBuilder("/usr/bin/"+command,arg);
         String out = "";
         Process process = builder.start();
 
