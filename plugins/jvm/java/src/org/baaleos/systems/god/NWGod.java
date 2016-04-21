@@ -3,8 +3,8 @@ package org.baaleos.systems.god;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import org.baaleos.systems.god.advancedTypes.NWPlayer;
 import org.baaleos.systems.playerid.IDInc;
+import org.baaleos.systems.types.NWPlayer;
 import org.nwnx.nwnx2.jvm.NWEffect;
 import org.nwnx.nwnx2.jvm.NWObject;
 import org.nwnx.nwnx2.jvm.NWScript;

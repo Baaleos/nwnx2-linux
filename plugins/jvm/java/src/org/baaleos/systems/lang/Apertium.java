@@ -22,15 +22,15 @@ public class Apertium {
 	@SuppressWarnings("deprecation")
 	public static String getTranslation(String from, String to, String strQuery, boolean local){
 		String s = "";
-		System.out.println("Translate from:"+from);
-		System.out.println("Translate to:"+to);
-		System.out.println("Translate :"+strQuery);
-		System.out.println("Local? :"+local);
+		//System.out.println("Translate from:"+from);
+		//System.out.println("Translate to:"+to);
+		//System.out.println("Translate :"+strQuery);
+		//System.out.println("Local? :"+local);
 		int hash = strQuery.hashCode();
 		
-		System.out.println("Hash is :"+hash);
+		//System.out.println("Hash is :"+hash);
 		if(cache.containsKey(hash)){
-			System.out.println("Cache contains hash");
+			//System.out.println("Cache contains hash");
 			return cache.get(hash);
 		}
 		if(local)
@@ -39,9 +39,9 @@ public class Apertium {
 			try {
 				String command = "apertium";
 				String arg = from+"-"+to;
-				System.out.println("Running "+command+" with arg "+arg+" with query"+strQuery);
+				//System.out.println("Running "+command+" with arg "+arg+" with query"+strQuery);
 				s = Command.exec(command,arg,strQuery);
-				System.out.println("s = "+s);
+				//System.out.println("s = "+s);
 				cache.put(hash, s);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -82,8 +82,8 @@ public class Apertium {
 			con.setRequestProperty("User-Agent", USER_AGENT);
 
 			int responseCode = con.getResponseCode();
-			System.out.println("\nSending 'GET' request to URL : " + url);
-			System.out.println("Response Code : " + responseCode);
+			//System.out.println("\nSending 'GET' request to URL : " + url);
+			//System.out.println("Response Code : " + responseCode);
 
 			BufferedReader in = new BufferedReader(
 			        new InputStreamReader(con.getInputStream()));
@@ -96,7 +96,7 @@ public class Apertium {
 			in.close();
 
 			//print result
-			System.out.println(response.toString());
+			//System.out.println(response.toString());
 
 			Gson gson = new GsonBuilder().create();
             TranslationResponse p = gson.fromJson(response.toString(), TranslationResponse.class);

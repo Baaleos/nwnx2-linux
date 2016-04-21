@@ -145,7 +145,6 @@ public class TestRunner {
 						NWObject.setObjectInvalidIsNull(true);
 						String energyName = event.replace("InitGene_", "");
 						Gene g = new Gene(Integer.valueOf(energyName));
-						
 						Scheduler.flushQueues();
 					}
 					if(event.equals("StoreEnergyCostForGenePassive")){
@@ -161,14 +160,13 @@ public class TestRunner {
 					}
 					if(event.equals("ListEnergyTypes")){
 						NWObject.setObjectInvalidIsNull(true);
-						
 						EnergyInc.ListEnergyTypes();
 					}
 					if(event.equals("StartEnergyHB")){
 						NWObject.setObjectInvalidIsNull(true);
 						(new Thread(new EnergyHeartbeat())).start();
-						//EnergyInc.ListEnergyTypes();
 					}
+					
 					String name = NWScript.getName(objSelf, false);
 					int objType = NWScript.getObjectType(objSelf);
 					System.out.println("event on " + objSelf.getObjectId() + ": " + event + ", name = " + name + ", type = " + objType);

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 import org.baaleos.systems.god.NWGod;
-import org.baaleos.systems.god.advancedTypes.NWCreature;
 import org.baaleos.systems.playerid.*;
+import org.baaleos.systems.types.NWCreature;
 import org.nwnx.nwnx2.jvm.NWObject;
 import org.nwnx.nwnx2.jvm.NWScript;
 

@@ -1,4 +1,4 @@
-package org.baaleos.systems.god.advancedTypes;
+package org.baaleos.systems.types;
 
 import org.baaleos.systems.playerid.IDInc;
 import org.nwnx.nwnx2.jvm.NWEffect;
@@ -15,7 +15,10 @@ public class NWCreature extends NWObject {
 		super(oid);
 		// TODO Auto-generated constructor stub
 	}
-
+	public NWCreature(NWObject ob) {
+		super(ob.oid());
+		// TODO Auto-generated constructor stub
+	}
 	
 	public boolean IsValid(){
 		return NWScript.getIsObjectValid(this);
@@ -25,8 +28,19 @@ public class NWCreature extends NWObject {
 		NWEffect effect = NWScript.effectDamage(amount, type, power);
 		NWScript.applyEffectToObject(DurationType.INSTANT, effect, this, 0.00f);
 	}
+	
+	public void applyDamage(int type, int amount, int power, NWObject creator ){
+		NWEffect effect = NWScript.effectDamage(amount, type, power);
+		NWScript.setLocalString(NWObject.MODULE, "NWNX!STRUCTS!SETCREATOR", Integer.toHexString(creator.getObjectId()));
+		NWScript.applyEffectToObject(DurationType.INSTANT, effect, this, 0.00f);
+	}
+	
 	public String getUniqueID(){
 		return IDInc.getPlayerId(this);
 	}
+	
+	
+	
+	
 	
 }
