@@ -17,6 +17,7 @@
 			encoding="utf-8">
 			<classpath>
 			        <pathelement path="lib/gson-2.6.2.jar"/>
+					<pathelement path="lib/cucumber-java.jar" />
 			</classpath>
 		</javac>
 	</target>
