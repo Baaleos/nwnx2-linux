@@ -31,16 +31,39 @@
 extern "C" {
 #endif
 
-int nx_hook_enable_exec (const void *addr, size_t len);
-int nx_hook_enable_write (const void *addr, size_t len);
+int nx_hook_enable_exec(const void *addr, size_t len);
+int nx_hook_enable_write(const void *addr, size_t len);
 
-void *nx_hook_function (void *addr, void *func, size_t len, uint32_t flags);
+void *nx_hook_function(void *addr, void *func, size_t len, uint32_t flags);
+void nx_hook_function_call(void *addr, void *func);
 
-void nwn_hook_init (void);
+void nwn_hook_init(void);
 
 #ifdef __cplusplus
 }
 #endif
+
+/**
+ * Macro: NX_HOOK
+ *
+ * Helper macro to that wraps nx_hook_function in order to remove user specified casting.
+ *
+ * Parameters:
+ *     orig  - Function pointer for the trampoline.
+ *     addr  - Address of the function to hook.
+ *     hook  - Hook function.
+ *     bytes - Number of bytes to copy into the trampoline.
+ */
+#define NX_HOOK(orig, addr, hook, bytes) \
+    *(void**)&orig = nx_hook_function((void*)addr, (void*)hook, bytes, NX_HOOK_DIRECT | NX_HOOK_RETCODE)
+
+/**
+ * Macro: NX_HOOK_CALL
+ *
+ * Helper macro to hook mid-function calls without having to apply user casts.
+ */
+#define NX_HOOK_CALL(addr,hook) \
+    nx_hook_function_call((void*) addr, (void*) hook)
 
 #endif /* _NX_HOOK_H_ */
 

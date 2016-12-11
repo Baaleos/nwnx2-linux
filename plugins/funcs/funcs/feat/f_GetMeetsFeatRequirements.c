@@ -21,7 +21,8 @@
 #include "NWNXFuncs.h"
 
 
-void Func_GetMeetsFeatRequirements (CGameObject *ob, char *value) {
+void Func_GetMeetsFeatRequirements(CGameObject *ob, char *value)
+{
     int ret;
     const CNWSCreature *cre;
 
@@ -35,7 +36,7 @@ void Func_GetMeetsFeatRequirements (CGameObject *ob, char *value) {
         char buf[512], *p, *end;
         uint16_t ls_feat;
         uint8_t ls_skills[SKILL_LAST + 1] = { [0] = 0 };
-        CNWSStats_Level ls = {
+        CNWLevelStats ls = {
             .ls_featlist.data  = &ls_feat,
             .ls_featlist.len   = 1,
             .ls_featlist.alloc = 1,
@@ -43,7 +44,7 @@ void Func_GetMeetsFeatRequirements (CGameObject *ob, char *value) {
         };
 
         if (sscanf(value, ">%d %d %d %510s", &fr_feat, &fr_class, &fr_ability, buf) != 4 ||
-            strlen(buf) < (SKILL_LAST * 2)) {
+                strlen(buf) < (SKILL_LAST * 2)) {
             snprintf(value, strlen(value), "0");
             return;
         }

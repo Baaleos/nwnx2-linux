@@ -24,20 +24,24 @@
 #include <string>
 #include "NWNXBase.h"
 
+#include "pluginlink.h"
+
 class CNWNXConnect : public CNWNXBase
 {
 public:
-	CNWNXConnect();
-	virtual ~CNWNXConnect();
+    CNWNXConnect();
+    virtual ~CNWNXConnect();
 
-	bool OnCreate(gline *nwnxConfig, const char *LogDir=NULL);
-	char* OnRequest (char* gameObject, char* Request, char* Parameters);
-	unsigned long OnRequestObject (char *gameObject, char* Request);
-	int GetConfInteger(const char *key);
-	bool bHooked;
+    bool OnCreate(gline *nwnxConfig, const char *LogDir = NULL);
+    char* OnRequest(char* gameObject, char* Request, char* Parameters);
+    unsigned long OnRequestObject(char *gameObject, char* Request);
+    int GetConfInteger(const char *key);
+    bool bHooked;
 
-	StringMap pluginConfig;
+    StringMap pluginConfig;
 
+    HANDLE hPlayerConnect;
+    HANDLE hPlayerDisconnectBefore, hPlayerDisconnectAfter;
 private:
 
 };

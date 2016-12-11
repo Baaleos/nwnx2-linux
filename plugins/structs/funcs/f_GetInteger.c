@@ -23,13 +23,14 @@
 extern volatile CGameEffect *Hook_Struct_Last;
 
 
-void Func_GetInteger (CGameObject *ob, char *value) {
+void Func_GetInteger(CGameObject *ob, char *value)
+{
     int idx;
     CGameEffect *eff = (CGameEffect *)Hook_Struct_Last;
 
     idx = atoi(value);
 
-    if (idx < 0 || idx > 15) {
+    if (idx < 0 || idx >= eff->eff_num_integers) {
         snprintf(value, strlen(value), "%d", -1);
         return;
     }

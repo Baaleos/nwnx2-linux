@@ -1,7 +1,7 @@
 if (gperf)
 
-add_gperf_target(StructsStrCmds StructsStr STRUCTS STR)
-add_gperf_target(StructsObjCmds StructsObj STRUCTS OBJ)
+add_gperf_target(structs StructsStrCmds StructsStr STRUCTS STR)
+add_gperf_target(structs StructsObjCmds StructsObj STRUCTS OBJ)
 
 include_directories(.)
 add_module(structs NWNXStructs plugin-structs
@@ -12,6 +12,7 @@ add_module(structs NWNXStructs plugin-structs
 	funcs/f_GetDurationRemaining
 	funcs/f_GetHasEffect
 	funcs/f_GetInteger
+	funcs/f_GetNumIntegers
 	funcs/f_GetSpellId
 	funcs/f_GetTrueType
 	funcs/f_SetCreator
@@ -20,5 +21,7 @@ add_module(structs NWNXStructs plugin-structs
 	funcs/f_SetTrueType
 	hooks/h_PushStruct
 )
+
+set_target_properties(structs PROPERTIES COMPILE_FLAGS "-O0")
 
 endif (gperf)

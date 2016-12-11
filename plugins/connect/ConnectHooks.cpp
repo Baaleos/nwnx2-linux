@@ -23,11 +23,12 @@
 #include <dlfcn.h>
 #include <stdarg.h>
 
-#include <limits.h>		/* for PAGESIZE */
+#include <limits.h>     /* for PAGESIZE */
 #ifndef PAGESIZE
 #define PAGESIZE 4096
 #endif
 
+#include "NWNXApi.h"
 #include "ConnectHooks.h"
 #include "NWNXConnect.h"
 
@@ -44,40 +45,72 @@ void SendHakList(CNWSMessage *pMessage, int nPlayerID);
 
 int CNWSMessage__HandlePlayerToServerMessage_Hook(CNWSMessage *pMessage, int nPlayerID, char *pData, int nLen)
 {
-	int nType = pData[1];
-	int nSubtype = pData[2];
-	plugin.Log(0, "Message: PID %d, type %x, subtype %x\n", nPlayerID, nType, nSubtype);
-	if(nType == 1)
-	{
-		SendHakList(pMessage, nPlayerID);
-	}
-	return CNWSMessage__HandlePlayerToServerMessage(pMessage, nPlayerID, pData, nLen);
+    int nType = pData[1];
+    int nSubtype = pData[2];
+    plugin.Log(0, "Message: PID %d, type %x, subtype %x\n", nPlayerID, nType, nSubtype);
+    if (nType == 1) {
+        ConnectPlayerConnectEvent ev = {
+            (const uint32_t) nPlayerID,
+            10294 /* Your player name has been refused by the server. */
+        };
+        if (NotifyEventHooks(plugin.hPlayerConnect, (uintptr_t) &ev)) {
+            g_pAppManager->ServerExoApp->GetNetLayer()->
+            DisconnectPlayer(nPlayerID, ev.disconnect_strref, 1);
+            return 0;
+        }
+
+        SendHakList(pMessage, nPlayerID);
+    }
+    return CNWSMessage__HandlePlayerToServerMessage(pMessage, nPlayerID, pData, nLen);
 }
 
 void SendHakList(CNWSMessage *pMessage, int nPlayerID)
 {
-	unsigned char *pData;
-	long unsigned int nSize;
+    unsigned char *pData;
+    long unsigned int nSize;
 
-	CNWSModule *pModule = (CNWSModule *) g_pAppManager->ServerExoApp->GetModule();
-	if(pModule)
-	{
-		plugin.Log(0, "Sending hak list...\n");
-		pMessage->CreateWriteMessage(80, -1, 1);
-		pMessage->WriteINT(pModule->HakList.nAllocatedSize, 32);
-		for(int i = pModule->HakList.nAllocatedSize - 1; i >= 0; --i)
-		{
-			pMessage->WriteCExoString(pModule->HakList[i], 32);
-			plugin.Log(0, "%s\n", pModule->HakList[i].Text);
-		}
-		pMessage->WriteCExoString(pModule->m_sCustomTLK, 32);
-		plugin.Log(0, "%s\n", pModule->m_sCustomTLK.Text);
-		pMessage->GetWriteMessage(&pData, &nSize);
-		pMessage->SendServerToPlayerMessage(nPlayerID, 100, 1, pData, nSize);
-	}
+    CNWSModule *pModule = (CNWSModule *) g_pAppManager->ServerExoApp->GetModule();
+    if (pModule) {
+        plugin.Log(0, "Sending hak list...\n");
+        pMessage->CreateWriteMessage(80, -1, 1);
+        pMessage->WriteINT(pModule->HakList.Length, 32);
+        for (int i = pModule->HakList.Length - 1; i >= 0; --i) {
+            pMessage->WriteCExoString(pModule->HakList[i], 32);
+            plugin.Log(0, "%s\n", pModule->HakList[i].Text);
+        }
+        pMessage->WriteCExoString(pModule->m_sCustomTLK, 32);
+        plugin.Log(0, "%s\n", pModule->m_sCustomTLK.Text);
+        pMessage->GetWriteMessage(&pData, &nSize);
+        pMessage->SendServerToPlayerMessage(nPlayerID, 100, 1, pData, nSize);
+    }
 }
+
+static int (*CNetLayerInternal__DisconnectPlayer)(void *nl,
+        const unsigned int playerId, const unsigned int strref, int sendBNDP, int a5);
+
+static int CNetLayerInternal__DisconnectPlayer_Hook(void *nl,
+        const unsigned int playerId, const unsigned int strref, int sendBNDP, int a5)
+{
+    ConnectPlayerDisconnectEvent ev = {
+        playerId, strref
+    };
+
+    NotifyEventHooksNotAbortable(plugin.hPlayerDisconnectBefore, (uintptr_t) &ev);
+
+    int ret = CNetLayerInternal__DisconnectPlayer(nl,
+              playerId, strref, sendBNDP, a5);
+
+    NotifyEventHooksNotAbortable(plugin.hPlayerDisconnectAfter, (uintptr_t) &ev);
+
+    return ret;
+}
+
 
 int HookFunctions()
 {
-	*(void**)&CNWSMessage__HandlePlayerToServerMessage = nx_hook_function((void *) 0x08196544, (void *) CNWSMessage__HandlePlayerToServerMessage_Hook, 5, NX_HOOK_DIRECT | NX_HOOK_RETCODE);
+    NX_HOOK(CNWSMessage__HandlePlayerToServerMessage, 0x08196544,
+            CNWSMessage__HandlePlayerToServerMessage_Hook, 5);
+
+    NX_HOOK(CNetLayerInternal__DisconnectPlayer, 0x082a9f68,
+            CNetLayerInternal__DisconnectPlayer_Hook, 5);
 }

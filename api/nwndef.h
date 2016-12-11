@@ -1,6 +1,7 @@
 #ifndef _NWNDEF_H_
 #define _NWNDEF_H_
 #include"custom/nwndef_custom.h"
+#include "../typedef.h"
 class CNWSCreature;
 class CNWSPlaceable;
 class CNWSObject;
@@ -205,33 +206,29 @@ class CExtendedServerInfo;
 class MS_RSAPublicKey;
 class Matrix;
 struct CServerExoAppConfig;
-struct CNWSObjectMethods;
 struct CNWSCreatureAppearanceInfo;
 struct CResStruct;
 struct CNWSActionNode;
-struct CExoLinkedListElement;
+struct CExoLinkedListNode;
 struct ExoLocString_st;
 struct CGameObjectArrayElement;
-struct CNWVirtualMachineCommands_vtbl;
 struct CVirtualMachineCommand;
 struct CNWSVector;
-struct CServerExoApp_vt;
-struct CRes_vtbl;
 struct CActionParam;
 struct CNWModule;
 struct CAppManager_ModuleInfo;
 struct CVirtualMachineScript;
-struct CResHelper;
+template<typename RES> struct CResHelper;
 struct CKeyTableEntry;
 struct CDialogEntry;
 struct CDialogReply;
 struct CDialogEntryReply;
 struct CDialogReplyEntry;
 struct CActionParams;
+struct CNWSScriptVar;
 struct CNWItemProperty;
 struct CNWSQuickbarButton;
 struct CNWVisibilityNode;
-struct CExoLinkedListNode;
 struct CEncounterListEntry;
 struct CNWSSoundObjectTimeOfDay;
 struct CNWSAreaGridSuccessors;
@@ -257,7 +254,6 @@ struct CScriptParseTreeNode;
 struct NWPlayerCharacterList_st;
 struct CNWSTagNode;
 struct CNWSPVPEntry;
-struct CNWSScriptVar;
 struct SJournalEntry;
 struct SGameSpyRoomEntry;
 struct CWorldJournalEntry;
@@ -298,4 +294,7 @@ struct CTlkTableToken;
 struct CNWTilePathNode;
 struct CVirtualMachineDebuggingContext;
 struct Quaternion;
+
+#include "vptr.h"
+
 #endif

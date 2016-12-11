@@ -1,7 +1,7 @@
 if (gperf)
 
-add_gperf_target(FuncsStrCmds FuncsStr FUNCS STR)
-add_gperf_target(FuncsObjCmds FuncsObj FUNCS OBJ)
+add_gperf_target(funcs FuncsStrCmds FuncsStr FUNCS STR)
+add_gperf_target(funcs FuncsObjCmds FuncsObj FUNCS OBJ)
 
 include_directories(.)
 add_module(funcs NWNXFuncs plugin-funcs
@@ -131,5 +131,7 @@ add_module(funcs NWNXFuncs plugin-funcs
 	funcs/var/f_GetLocalVariableCount
 	funcs/vfx/f_BroadcastProjectile
 )
+
+set_target_properties(funcs PROPERTIES COMPILE_FLAGS "-O0")
 
 endif (gperf)

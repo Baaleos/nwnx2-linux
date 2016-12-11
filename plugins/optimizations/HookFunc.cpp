@@ -59,132 +59,135 @@ void (*CNWVirtualMachineCommands__RunScriptCallback)(void *pCommands, void *sScr
 
 int GetAverageTime()
 {
-	dword sum = 0, count = 0;
-	for(int i=0; i<HIST_LENGTH; i++)
-	{
-		if(aLoopTimes[i])
-		{
-			sum += aLoopTimes[i];
-			count++;
-		}
-	}
-	if(count == 0)
-		return 0;
-	return sum/count;
+    dword sum = 0, count = 0;
+    for (int i = 0; i < HIST_LENGTH; i++) {
+        if (aLoopTimes[i]) {
+            sum += aLoopTimes[i];
+            count++;
+        }
+    }
+    if (count == 0)
+        return 0;
+    return sum / count;
 }
 
 void SetDynamicDelay()
 {
-	int nAverageTime = GetAverageTime();
-	int nDelay = OPTIMAL_TIME - nAverageTime;
-	if(nDelay <= 0) nDelay = 0;
-	*pMainLoopDelay = nDelay * 1000;
-	plugin.Log(5, "Adjusted delay: %d\n", *pMainLoopDelay);
+    int nAverageTime = GetAverageTime();
+    int nDelay = OPTIMAL_TIME - nAverageTime;
+    if (nDelay <= 0) nDelay = 0;
+    *pMainLoopDelay = nDelay * 1000;
+    plugin.Log(5, "Adjusted delay: %d\n", *pMainLoopDelay);
 }
 
 int64_t CExoTimers__GetHighResolutionTimer_hook(void *pTimer)
 {
-	asm ("push %ebx");
-	asm ("movl 0x4(%ebp), %ebx");
-	asm ("movl  %ebx, nESP");
-	asm ("pop %ebx");
+    asm("push %ebx");
+    asm("movl 0x4(%ebp), %ebx");
+    asm("movl  %ebx, nESP");
+    asm("pop %ebx");
 
-	if(nESP > 0x08095D60 && nESP < 0x080962A4 && nCachedTime)
-	{
-		return nCachedTime;
-	}
-	else
-	{
-		nCachedTime = CExoTimers__GetHighResolutionTimer(pTimer);
-		return nCachedTime;
-	}
+    if (nESP > 0x08095D60 && nESP < 0x080962A4 && nCachedTime) {
+        return nCachedTime;
+    } else {
+        nCachedTime = CExoTimers__GetHighResolutionTimer(pTimer);
+        return nCachedTime;
+    }
 }
 
-int CServerExoApp__MainLoop_hook(void *pServer)
+struct timeval start;
+
+int eventMainLoopBefore(uintptr_t p)
 {
-	struct timeval start, finish;
-	dword msec;
-	
-	gettimeofday (&start, NULL);
-	int ret = CServerExoApp__MainLoop(pServer);
-	gettimeofday (&finish, NULL);
+    gettimeofday(&start, NULL);
+    return 0;
+}
 
-	msec = finish.tv_sec * 1000 + finish.tv_usec / 1000;
-	msec -= start.tv_sec * 1000 + start.tv_usec / 1000;
+int eventMainLoopAfter(uintptr_t p)
+{
+    struct timeval finish;
+    dword msec;
 
-	plugin.Log(4, "%d;%d\n", msec, GetAverageTime());
+    gettimeofday(&finish, NULL);
 
-	aLoopTimes[nPosition] = msec;
-	nPosition++;
-	if(nPosition>=HIST_LENGTH)
-		nPosition=0;
+    msec = finish.tv_sec * 1000 + finish.tv_usec / 1000;
+    msec -= start.tv_sec * 1000 + start.tv_usec / 1000;
 
-	SetDynamicDelay();
+    plugin.Log(4, "%d;%d\n", msec, GetAverageTime());
 
-	return ret;
+    aLoopTimes[nPosition] = msec;
+    nPosition++;
+    if (nPosition >= HIST_LENGTH)
+        nPosition = 0;
+
+    SetDynamicDelay();
+    return 0;
 }
 
 void CNWVirtualMachineCommands__RunScriptCallback_hook(void *pCommands, void *sScriptName)
 {
-	//This function is useless: do nothing
-	return;
+    //This function is useless: do nothing
+    return;
 }
 
 void
-d_enable_write (unsigned long location)
+d_enable_write(unsigned long location)
 {
     char *page;
     page = (char *) location;
-    page = (char *) (((int) page + PAGESIZE - 1) & ~(PAGESIZE - 1));
+    page = (char *)(((int) page + PAGESIZE - 1) & ~(PAGESIZE - 1));
     page -= PAGESIZE;
 
-    if (mprotect (page, PAGESIZE, PROT_WRITE | PROT_READ | PROT_EXEC))
-	perror ("mprotect");
+    if (mprotect(page, PAGESIZE, PROT_WRITE | PROT_READ | PROT_EXEC))
+        perror("mprotect");
 }
 
 int intlen = -1;
 
 void
-d_redirect (long from, long to, unsigned char *d_ret_code, long len=0)
+d_redirect(long from, long to, unsigned char *d_ret_code, long len = 0)
 {
     // enable write to code pages
-    d_enable_write (from);
+    d_enable_write(from);
     // copy orig code stub to our "ret_code"
-    len = len ? len : sizeof(d_jmp_code)-1; // - trailing 0x00
+    len = len ? len : sizeof(d_jmp_code) - 1; // - trailing 0x00
     intlen = len;
-    memcpy ((void *) d_ret_code, (const void *) from, len);
+    memcpy((void *) d_ret_code, (const void *) from, len);
     // make ret code
     *(long *)(d_jmp_code + 1) = from + len;
-    memcpy ((char *) d_ret_code + len, (const void *) d_jmp_code, 6);
+    memcpy((char *) d_ret_code + len, (const void *) d_jmp_code, 6);
     // make hook code
     *(long *)(d_jmp_code + 1) = to;
-    memcpy ((void *) from, (const void *) d_jmp_code, 6);
+    memcpy((void *) from, (const void *) d_jmp_code, 6);
 }
 
 int HookFunctions()
 {
-	memset(aLoopTimes, 0, sizeof(dword)*HIST_LENGTH);
-	*(dword*)&pMainLoopDelay = 0x0804BBF2;
-	d_enable_write((dword)pMainLoopDelay);
-	
-	*(dword*)&CExoTimers__GetHighResolutionTimer = 0x082CC7A8;
-	d_redirect((unsigned long)CExoTimers__GetHighResolutionTimer, (unsigned long)CExoTimers__GetHighResolutionTimer_hook, d_ret_code_hrtimer, 9);
-	*(dword*)&CExoTimers__GetHighResolutionTimer = (dword)&d_ret_code_hrtimer;
+    HookEvent(EVENT_CORE_PLUGINSLOADED, [](uintptr_t) -> int
+    {
+        HookEvent(EVENT_CORE_MAINLOOP_BEFORE, eventMainLoopBefore);
+        HookEvent(EVENT_CORE_MAINLOOP_AFTER, eventMainLoopAfter);
+        return 0;
+    });
 
-	*(dword*)&CServerExoApp__MainLoop = 0x080B2050;
-	d_redirect((unsigned long)CServerExoApp__MainLoop, (unsigned long)CServerExoApp__MainLoop_hook, d_ret_code_loop, 9);
-	*(dword*)&CServerExoApp__MainLoop = (dword)&d_ret_code_loop;
+    memset(aLoopTimes, 0, sizeof(dword)*HIST_LENGTH);
+    *(dword*)&pMainLoopDelay = 0x0804BBF2;
+    d_enable_write((dword)pMainLoopDelay);
 
-	*(dword*)&CNWVirtualMachineCommands__RunScriptCallback = 0x081FB558;
-	d_redirect((unsigned long)CNWVirtualMachineCommands__RunScriptCallback, (unsigned long)CNWVirtualMachineCommands__RunScriptCallback_hook, d_ret_code_scallback, 9);
-	*(dword*)&CNWVirtualMachineCommands__RunScriptCallback = (dword)&d_ret_code_scallback;
+    *(dword*)&CExoTimers__GetHighResolutionTimer = 0x082CC7A8;
+    d_redirect((unsigned long)CExoTimers__GetHighResolutionTimer, (unsigned long)CExoTimers__GetHighResolutionTimer_hook, d_ret_code_hrtimer, 9);
+    *(dword*)&CExoTimers__GetHighResolutionTimer = (dword)&d_ret_code_hrtimer;
 
-	return 1;
+    *(dword*)&CNWVirtualMachineCommands__RunScriptCallback = 0x081FB558;
+    d_redirect((unsigned long)CNWVirtualMachineCommands__RunScriptCallback, (unsigned long)CNWVirtualMachineCommands__RunScriptCallback_hook, d_ret_code_scallback, 9);
+    *(dword*)&CNWVirtualMachineCommands__RunScriptCallback = (dword)&d_ret_code_scallback;
+
+    return 1;
 }
 
 void TestRequest()
 {
-	
+
 
 }
 

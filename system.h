@@ -1,43 +1,36 @@
 #ifndef SYSTEM_H__
 #define SYSTEM_H__ 1
 
-//nwnx/core/pluginsloaded
-//called after all plugins have been successfully initialised
-//wParam=lParam=0
-//used to resolve double-dependencies in the plugin load order
-#define EV_CORE_PLUGINSLOADED  "NWNX/Core/PluginsLoaded"
+#include <stdint.h>
 
+typedef int (*FSortFunc)(void*, void*);
 
-typedef int ( *FSortFunc )( void*, void* );
+typedef struct {
+    void**		items;
+    int			realCount;
+    int			limit;
+    int			increment;
 
-typedef struct
-{
-	void**		items;
-	int			realCount;
-	int			limit;
-	int			increment;
-
-	FSortFunc	sortFunc;
+    FSortFunc	sortFunc;
 }
-	SortedList;
+SortedList;
 
-struct LIST_INTERFACE
-{
-	int    cbSize;
+struct LIST_INTERFACE {
+    int    cbSize;
 
-   SortedList* ( *List_Create )( int, int );
-	void        ( *List_Destroy )( SortedList* );
+    SortedList* (*List_Create)(int, int);
+    void (*List_Destroy)(SortedList*);
 
-	void*	( *List_Find )( SortedList*, void* );
-	int	( *List_GetIndex )( SortedList*, void*, int* );
-	int   ( *List_Insert )( SortedList*, void*, int );
-	int   ( *List_Remove )( SortedList*, int );
-	int   ( *List_IndexOf )( SortedList*, void* );
+    void*	(*List_Find)(SortedList*, void*);
+    int	(*List_GetIndex)(SortedList*, void*, int*);
+    int (*List_Insert)(SortedList*, void*, int);
+    int (*List_Remove)(SortedList*, int);
+    int (*List_IndexOf)(SortedList*, void*);
 
-	#if MIRANDA_VER >= 0x0600
-	int   ( *List_InsertPtr)( SortedList* list, void* p );
-	int   ( *List_RemovePtr)( SortedList* list, void* p );
-	#endif
+#if MIRANDA_VER >= 0x0600
+    int (*List_InsertPtr)(SortedList* list, void* p);
+    int (*List_RemovePtr)(SortedList* list, void* p);
+#endif
 };
 
 /* Missing service catcher
@@ -49,13 +42,11 @@ The event handler takes 0 as wParam and TMissingServiceParams* as lParam.
 0.4.3+ addition (2006/03/27)
 */
 
-typedef struct
-{
-	const char* name;
-	WPARAM      wParam;
-	LPARAM      lParam;
+typedef struct {
+    const char* name;
+    uintptr_t pParam;
 }
-	MISSING_SERVICE_PARAMS;
+MISSING_SERVICE_PARAMS;
 
 #define ME_SYSTEM_MISSINGSERVICE "System/MissingService"
 

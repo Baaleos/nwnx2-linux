@@ -1,7 +1,7 @@
 if (gperf)
 
-add_gperf_target(WeaponsStrCmds WeaponsStr WEAPONS STR)
-add_gperf_target(WeaponsObjCmds WeaponsObj WEAPONS OBJ)
+add_gperf_target(weapons WeaponsStrCmds WeaponsStr WEAPONS STR)
+add_gperf_target(weapons WeaponsObjCmds WeaponsObj WEAPONS OBJ)
 
 include_directories(.)
 add_module(weapons NWNXWeapons plugin-weapons
@@ -95,5 +95,7 @@ add_module(weapons NWNXWeapons plugin-weapons
 	tables/t_WeaponSpecialization
 	tables/t_WeaponSuperiorCritical
 )
+
+set_target_properties(weapons PROPERTIES COMPILE_FLAGS "-O0")
 
 endif (gperf)
