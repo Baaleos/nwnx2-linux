@@ -12,7 +12,7 @@ if (JNI_FOUND AND JAVA_FOUND)
 		DEPENDS
 			build/funcs.nss build/gen_java.rb
 		COMMAND
-			${ruby} ./build/gen_java.rb ./build/funcs.nss
+			${ruby} /build/gen_java.rb /build/funcs.nss
 	)
 
 	add_custom_command(OUTPUT nwnxjvm_NWScript.h
