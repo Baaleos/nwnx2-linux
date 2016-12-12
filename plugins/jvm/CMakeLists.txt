@@ -20,10 +20,12 @@ if (JNI_FOUND AND JAVA_FOUND)
 	)
 
 	include_directories(${JNI_INCLUDE_DIRS})
-	add_module(jvm FunctionHooks NWNXJVM plugin-jvm
+	add_module(jvm NWNXJVM plugin-jvm
 		org_nwnx_nwnx2_jvm_NWScript
 		org_nwnx_nwnx2_jvm_NWScript_addon)
 	target_link_libraries(jvm ${JAVA_JVM_LIBRARY})
+
+    set_target_properties(jvm PROPERTIES COMPILE_FLAGS "-O0")
 
 	add_subdirectory(java)
 else (JNI_FOUND AND JAVA_FOUND)
