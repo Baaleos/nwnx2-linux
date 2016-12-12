@@ -29,7 +29,7 @@ public class Scheduler {
 	private static List<ScheduledEvery> scheduledEvery =
 		Collections.synchronizedList(new LinkedList<ScheduledEvery>());
 
-	public static Set<SchedulerListener> scheduleListeners =
+	private static Set<SchedulerListener> scheduleListeners =
 		Collections.synchronizedSet(new HashSet<SchedulerListener>());
 
 	private static List<ExceptionHandler> exceptionHandlers =
