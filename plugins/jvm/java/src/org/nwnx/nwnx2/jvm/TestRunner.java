@@ -1,6 +1,18 @@
 package org.nwnx.nwnx2.jvm;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.baaleos.systems.energy.Energy;
+import org.baaleos.systems.energy.EnergyHeartbeat;
+import org.baaleos.systems.energy.EnergyInc;
+import org.baaleos.systems.genetics.Gene;
+import org.baaleos.systems.genetics.GeneticsHeartbeat;
+import org.baaleos.systems.genetics.Include;
+import org.baaleos.systems.lang.Apertium;
+import org.baaleos.systems.server.StaticContainer;
 import org.nwnx.nwnx2.jvm.constants.*;
+import org.baaleos.systems.lang.Apertium;
 
 public class TestRunner {
 
@@ -8,29 +20,35 @@ public class TestRunner {
 		System.out.println("Initializing TestRunner. This class runs various sanity tests and benchmarks.");
 		System.out.println("If anything in this class makes your server crash, something is wrong and NEEDs to be fixed!");
 		System.out.println("You need to load a module that has at least one event firing on a creature sometime.");
-
+		System.out.println("Initializing the TestRunner!!");
+		
+		
+			
 		NWObject.setObjectInvalidIsNull(true);
-
+		System.out.println("Passed the Object Invalid Is Null");
 		NWObject.registerObjectHandler(new NWObject.ObjectHandler() {
 		    public NWObject handleObjectClass(NWObject obj, boolean valid,
 		            int objectType, String resRef, String tag) {
 		        return obj;
 		    }
 		});
+		
+		System.out.println("Registered Object Handler");
 		NWEffect.registerEffectHandler(new NWEffect.EffectHandler() {
 		    public NWEffect handleEffectClass(NWEffect eff) {
 		        return eff;
 		    }
 		});
+		System.out.println("Registered Effect Handler");
 		NWItemProperty.registerItemPropertyHandler(new NWItemProperty.ItemPropertyHandler() {
 		    public NWItemProperty handleItemPropertyClass(NWItemProperty prp) {
 		        return prp;
 		    }
 		});
-
+		System.out.println("Registered Item Property Handler");
 		ResMan.addResManListener(new ResManListener() {
 			@Override
-			public byte[] demand(String resRef) {
+			public byte[] demandRes(String resRef) {
 				System.out.println("Demand ResRef: " + resRef);
 				if (resRef.equals("resmantest.2da")) {
 					System.out.println("Returning our own 2da table!");
@@ -38,13 +56,8 @@ public class TestRunner {
 				}
 				return null;
 			}
-
-			@Override
-			public int exists(String resRef) {
-				return resRef.equals("resmantest.2da") ? 1 : -1;
-			}
 		});
-
+		System.out.println("Registered DemandRes handler");
 
 		Scheduler.addSchedulerListener(new SchedulerListener() {
 
@@ -58,60 +71,127 @@ public class TestRunner {
 
 			@Override
 			public void event(NWObject objSelf, String event) {
-				int objType = NWScript.getObjectType(objSelf);
-				String name = NWScript.getName(objSelf, false);
-				System.out.println("event on " + objSelf.getObjectId() + ": " + event + ", name = " + name + ", type = " + objType);
-
-				String testResman = NWScript.get2DAString("resmantest", "A", 1);
-				if (!testResman.equals("a2"))
-					throw new RuntimeException("ResMan not working; expected 'a2', got '" + testResman + "'");
-				System.out.println("Tested Resman hook: " + testResman);
-
-				if (objType == ObjectType.CREATURE) {
-					System.out.println("Testing placing a temporary effect and retrieving it.");
-					System.out.println("Creating a effect.");
-					NWEffect e = NWScript.effectDeaf();
-					System.out.println("Applying effect: " + e.getEffectId());
-					NWScript.applyEffectToObject(1, e, objSelf, 7f);
-					System.out.println("Retrieving effects.");
-					NWEffect[] e2 = NWScript.getEffects(objSelf);
-					String ret = ""; for (NWEffect ee : e2) ret += ee.getEffectId() + " ";
-					System.out.println("The creature has " + e2.length + " effects on himself: " + ret);
-
-					System.out.println("Testing retrieving all objects in that area.");
-					NWObject area = NWScript.getArea(objSelf);
-					NWObject[] objInArea = NWScript.getObjectsInArea(area);
-					System.out.println("There are " + objInArea.length + " objects in that area.");
-
-					System.out.println("Testing retrieving all faction members.");
-					NWObject[] members = NWScript.getFactionMembers(objSelf,false);
-					System.out.println("There are " + members.length + " members.");
-
-					System.out.println("Running a generic useless benchmark (Should be around 150ms, give or take)");
-					long start = System.currentTimeMillis();
-					for (int i = 0; i < 100000; i++)
-						NWScript.getPosition(objSelf);
-					long time = System.currentTimeMillis() - start;
-					System.out.println("100000 times getPosition() took " + time + " ms");
-
-					if (event.equals("creature_hb")) {
-						System.out.println("Testing SCO/RCO on oid " + objSelf.getObjectId());
-						byte[] data = SCORCO.saveObject(objSelf);
-						System.out.println("got " + data.length + " bytes.");
-						NWObject rco = SCORCO.loadObject(data, NWScript.getLocation(objSelf), null);
-
-						if (rco != null)  {
-							System.out.println("RCO worked, name of duplicated object is: " + NWScript.getName(rco, true));
-							System.out.println("RCO worked, oid of duplicated object is: " + rco.getObjectId());
-							NWScript.destroyObject(rco, 0f);
-						} else {
-							throw new RuntimeException("RCO failed.");
-						}
+				
+				try{
+					if(event.equals("OnModuleLoad")){
+						long startbench = System.currentTimeMillis();
+						String modName = "";
+						//Start genetics Loop
 					}
+					if(event.equals("OnModuleLoadGenetics")){
+						NWObject.setObjectInvalidIsNull(true);
+						//ScheduledAnon ;//anon = ScheduledAnon
+						//ScheduledEvery every = new ScheduledEvery(7000, null, Policy.AS_AVAILABLE);
+						System.out.println("Starting HB");
+						objSelf.assign(new GeneticsHeartbeat());
+						System.out.println("Finished HB");  
+						
+						
+						//objToUse.assign(new GeneticsHeartbeat());
+						//NWObject objRunner = Include.GetGeneticEffectCreator();
+						String s = NWScript.getName(objSelf, false);
+						System.out.println(s+" is running event");
+						//objSelf.assign(new GeneticsHeartbeat());
+						Scheduler.flushQueues();
+					}
+					if(event.equals("Run_Genetics_HB")){
+						NWObject.setObjectInvalidIsNull(true);
+						//ScheduledAnon ;//anon = ScheduledAnon
+						//ScheduledEvery every = new ScheduledEvery(7000, null, Policy.AS_AVAILABLE);
+						System.out.println("Starting HB");
+						objSelf.assign(new GeneticsHeartbeat());
+						System.out.println("Finished HB");  
+						
+						
+						//objToUse.assign(new GeneticsHeartbeat());
+						//NWObject objRunner = Include.GetGeneticEffectCreator();
+						//String s = NWScript.getName(objSelf, false);
+						//System.out.println(s+" is running event");
+						//objSelf.assign(new GeneticsHeartbeat());
+						Scheduler.flushQueues();
+					}
+					if(event.equals("en-es")){
+						NWObject.setObjectInvalidIsNull(true);
+						
+						String strIn = NWScript.getLocalString(NWObject.MODULE, "TRANSLATE_THIS");
+						System.out.println("Received request to translate:"+strIn);
+						String sOut = Apertium.getTranslation("en", "es", strIn, false);
+						System.out.println("Translate library returned:"+sOut);
+						NWScript.setLocalString(NWObject.MODULE, "TRANSLATE_THIS", sOut);
+						Scheduler.flushQueues();
+					}
+					if(event.startsWith("SetupEnergy_")){
+						NWObject.setObjectInvalidIsNull(true);
+						String energyName = event.replace("SetupEnergy_", "");
+						NWScript.setLocalInt(NWObject.MODULE,"NEW_ENERGY",0);
+						int iReturn = EnergyInc.CreateEnergy(energyName);
+						NWScript.setLocalInt(NWObject.MODULE,"NEW_ENERGY",iReturn);
+						Scheduler.flushQueues();
+					}
+					if(event.startsWith("EnergySearch_")){
+						NWObject.setObjectInvalidIsNull(true);
+						String energyName = event.replace("EnergySearch_", "");
+						NWScript.setLocalInt(NWObject.MODULE,"SearchResponse",0);
+						for(Energy e : Energy.getEnergyDefinitions()){
+							NWScript.printString("Search:"+e.getID()+" - "+e.getName());
+							if(e.getName().trim().equals(energyName.trim())){
+								NWScript.setLocalInt(NWObject.MODULE,"SearchResponse",e.getID());
+								break;
+							}
+						}
+						Scheduler.flushQueues();
+					}
+					if(event.startsWith("InitGene_")){
+						NWObject.setObjectInvalidIsNull(true);
+						String energyName = event.replace("InitGene_", "");
+						Gene g = new Gene(Integer.valueOf(energyName));
+						Scheduler.flushQueues();
+					}
+					if(event.equals("StoreEnergyCostForGenePassive")){
+						NWObject.setObjectInvalidIsNull(true);
+						
+						int GeneID = NWScript.getLocalInt(NWObject.MODULE,"GENEID");
+						int EnergyID = NWScript.getLocalInt(NWObject.MODULE,"ENERGYID");
+						int Amount = NWScript.getLocalInt(NWObject.MODULE,"AMOUNT");
+						Include.AddEnergyCostToGenePassive(GeneID,EnergyID, Amount);
+						NWScript.deleteLocalInt(NWObject.MODULE, "GENEID");
+						NWScript.deleteLocalInt(NWObject.MODULE, "ENERGYID");
+						NWScript.deleteLocalInt(NWObject.MODULE, "AMOUNT");
+					}
+					if(event.equals("ListEnergyTypes")){
+						NWObject.setObjectInvalidIsNull(true);
+						EnergyInc.ListEnergyTypes();
+					}
+					if(event.equals("StartEnergyHB")){
+						NWObject.setObjectInvalidIsNull(true);
+						(new Thread(new EnergyHeartbeat())).start();
+					}
+					
+					String name = NWScript.getName(objSelf, false);
+					int objType = NWScript.getObjectType(objSelf);
+					System.out.println("event on " + objSelf.getObjectId() + ": " + event + ", name = " + name + ", type = " + objType);
+					
+					
+
+					if (objType == ObjectType.CREATURE) {
+						switch(event)
+						{
+							case "client_enter":
+								
+								//Player Enter server
+								StaticContainer.onPlayerEnter(objSelf);
+								break;
+						}
 
 
-					System.out.println("Press Ctrl+C when you're bored. You should see the shutdown handler print a farewell message.");
+						
+					}
 				}
+				catch(Exception e)
+				{
+					System.out.println(e.toString());
+				}
+				
 			}
 
 			@Override
@@ -122,6 +202,7 @@ public class TestRunner {
 
 	@SuppressWarnings("unused")
 	private static void setup() {
+		System.out.println("Test Runner Class is running!!");
 	}
 
 	@SuppressWarnings("unused")
