@@ -42,17 +42,14 @@
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CNWNXServerlist::CNWNXServerlist()
-{
-    confKey = "SERVERLIST";
+CNWNXServerlist::CNWNXServerlist() {
+    confKey = "TMI";
 }
 
-CNWNXServerlist::~CNWNXServerlist()
-{
+CNWNXServerlist::~CNWNXServerlist() {
 }
 
-bool CNWNXServerlist::OnCreate(gline *config, const char *LogDir)
-{
+bool CNWNXServerlist::OnCreate(gline *config, const char *LogDir) {
     char log[128];
 
     sprintf(log, "%s/nwnx_serverlist.txt", LogDir);
@@ -60,13 +57,12 @@ bool CNWNXServerlist::OnCreate(gline *config, const char *LogDir)
     // call the base class function
     if (!CNWNXBase::OnCreate(config, log))
         return false;
-    HookFunctions();
+	HookFunctions();
 
     return true;
 }
 
-char *CNWNXServerlist::OnRequest(char *gameObject, char *Request, char *Parameters)
-{
+char *CNWNXServerlist::OnRequest(char *gameObject, char *Request, char *Parameters) {
     Log(1, "Request: \"%s\"\n", Request);
     Log(1, "Params:  \"%s\"\n", Parameters);
 

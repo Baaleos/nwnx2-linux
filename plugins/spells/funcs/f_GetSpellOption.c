@@ -21,15 +21,14 @@
 #include "NWNXSpells.h"
 
 
-void Func_GetSpellOption(CGameObject *ob, char *value)
-{
+void Func_GetSpellOption (CGameObject *ob, char *value) {
     int opt, val = -1;
 
     opt = atoi(value);
     if (opt >= 0 && opt < NWNX_SPELLS_OPTIONS_TABLE_SIZE)
         val = Table_SpellOptions[opt];
 
-    snprintf(value, strlen(value), "%d", val);
+    snprintf(value, sizeof(value), "%d", val);
 }
 
 

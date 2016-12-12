@@ -21,8 +21,7 @@
 #include "NWNXDefenses.h"
 
 
-void Func_GetEffectDamageReduction(CGameObject *ob, char *value)
-{
+void Func_GetEffectDamageReduction (CGameObject *ob, char *value) {
     snprintf(value, strlen(value), "0");
 }
 

@@ -26,8 +26,7 @@ static volatile uint32_t Hook_GetMonsterDamageReturn;
 
 
 __attribute__((noinline))
-static uint32_t Hook_GetMonsterDamageHandlerReturn(void)
-{
+static uint32_t Hook_GetMonsterDamageHandlerReturn (void) {
     if (Hook_GetMonsterDamageExists)
         return 0x0814AB07;
 
@@ -37,8 +36,7 @@ static uint32_t Hook_GetMonsterDamageHandlerReturn(void)
     return 0x0814B049;
 }
 
-void Hook_GetMonsterDamageHandler(void)
-{
+void Hook_GetMonsterDamageHandler (void) {
     asm("leave");
 
     asm("pushl %ebx");

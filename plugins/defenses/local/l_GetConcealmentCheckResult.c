@@ -21,15 +21,14 @@
 #include "NWNXDefenses.h"
 
 
-int Local_GetConcealmentCheckResult(CNWSCreature *attacker, CNWSCreature *target, int concealment, int misschance)
-{
+int Local_GetConcealmentCheckResult (CNWSCreature *attacker, CNWSCreature *target, int concealment, int misschance) {
 #ifdef NWNX_DEFENSES_HG
     double conc, lis = 0.0;
 
     if (attacker == NULL            ||
-            target == NULL              ||
-            attacker->cre_stats == NULL ||
-            target->cre_stats == NULL)
+        target == NULL              ||
+        attacker->cre_stats == NULL ||
+        target->cre_stats == NULL)
         return 0;
 
     if (concealment < 1 && misschance < 1)
@@ -112,10 +111,10 @@ int Local_GetConcealmentCheckResult(CNWSCreature *attacker, CNWSCreature *target
         for (i = 0; i < target->obj.obj_effects_len; i++) {
             if ((eff = target->obj.obj_effects[i]) == NULL)
                 continue;
-
+    
             if (eff->eff_type != EFFECT_TRUETYPE_SPELL_IMMUNITY)
                 continue;
-
+    
             if (eff->eff_integers[0] >= 3220 && eff->eff_integers[0] <= 3229) {
                 int effred = eff->eff_integers[0] - 3219;
 
@@ -125,9 +124,9 @@ int Local_GetConcealmentCheckResult(CNWSCreature *attacker, CNWSCreature *target
         }
 
         if (reduction >= concealment)
-            concealment = 1;
+             concealment = 1;
         else
-            concealment -= reduction;
+             concealment -= reduction;
     }
 
 

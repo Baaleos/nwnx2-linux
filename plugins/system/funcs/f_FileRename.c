@@ -21,8 +21,7 @@
 #include "NWNXSystem.h"
 
 
-void Func_FileRename(CGameObject *ob, char *value)
-{
+void Func_FileRename (CGameObject *ob, char *value) {
     int ret;
     char *to = strchr(value, '\n');
 

@@ -21,8 +21,7 @@
 #include "NWNXSpells.h"
 
 
-int Hook_GetSpellMinAbilityMet(CNWSCreatureStats *stats, int clpos, int level)
-{
+int Hook_GetSpellMinAbilityMet (CNWSCreatureStats *stats, int clpos, int level) {
     int abil, val;
     uint8_t cl;
 

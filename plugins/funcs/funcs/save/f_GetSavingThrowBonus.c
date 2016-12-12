@@ -21,8 +21,7 @@
 #include "NWNXFuncs.h"
 
 
-void Func_GetSavingThrowBonus(CGameObject *ob, char *value)
-{
+void Func_GetSavingThrowBonus (CGameObject *ob, char *value) {
     int save = 0;
     const CNWSCreature *cre;
 

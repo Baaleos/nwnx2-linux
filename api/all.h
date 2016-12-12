@@ -1,7 +1,5 @@
 #ifndef _NWN_ALL_H_
 #define _NWN_ALL_H_
-#include "static_asserts.h"
-
 #include "CNWSCreature.h"
 #include "CNWSPlaceable.h"
 #include "CNWSObject.h"

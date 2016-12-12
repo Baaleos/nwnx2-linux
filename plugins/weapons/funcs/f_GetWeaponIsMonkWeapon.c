@@ -21,8 +21,7 @@
 #include "NWNXWeapons.h"
 
 
-void Func_GetWeaponIsMonkWeapon(CGameObject *ob, char *value)
-{
+void Func_GetWeaponIsMonkWeapon (CGameObject *ob, char *value) {
     int baseitem, level = -1;
 
     baseitem = atoi(value);

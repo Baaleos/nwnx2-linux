@@ -21,8 +21,7 @@
 #include "NWNXFuncs.h"
 
 
-void Func_GetSoundset(CGameObject *ob, char *value)
-{
+void Func_GetSoundset (CGameObject *ob, char *value) {
     const CNWSCreature *cre;
 
     if (ob == NULL || (cre = ob->vtable->AsNWSCreature(ob)) == NULL) {

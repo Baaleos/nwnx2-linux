@@ -21,8 +21,7 @@
 #include "NWNXSystem.h"
 
 
-void Func_FileLink(CGameObject *ob, char *value)
-{
+void Func_FileLink (CGameObject *ob, char *value) {
     int ret;
     char *to = strchr(value, '\n');
 

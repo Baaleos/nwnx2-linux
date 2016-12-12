@@ -21,8 +21,7 @@
 #include "NWNXFuncs.h"
 
 
-void Func_BootPCWithMessage(CGameObject *ob, char *value)
-{
+void Func_BootPCWithMessage (CGameObject *ob, char *value) {
     CNWSPlayer *pl;
 
     pl = CServerExoApp__GetClientObjectByObjectId((*NWN_AppManager)->app_server, ob->id);

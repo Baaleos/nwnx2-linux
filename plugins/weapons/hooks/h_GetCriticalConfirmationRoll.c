@@ -27,8 +27,7 @@ volatile int32_t Hook_CCR_Roll;
 
 
 __attribute__((noinline))
-static int Hook_GetCriticalConfirmationAdjustment(CNWSCreature *attacker, CNWSCreature *target, int roll)
-{
+static int Hook_GetCriticalConfirmationAdjustment (CNWSCreature *attacker, CNWSCreature *target, int roll) {
     int baseitem, bonus = 0;
     CNWSItem *weapon;
 
@@ -39,23 +38,23 @@ static int Hook_GetCriticalConfirmationAdjustment(CNWSCreature *attacker, CNWSCr
     baseitem = (weapon == NULL ? BASE_ITEM_GLOVES : weapon->it_baseitem);
 
     if (Table_WeaponOptions[NWNX_WEAPONS_OPT_OVERCRIT_CONF_BONUS] > bonus &&
-            Table_WeaponOverwhelmingCritical[baseitem] > 0                    &&
-            CNWSCreatureStats__HasFeat(attacker->cre_stats, Table_WeaponOverwhelmingCritical[baseitem]))
+        Table_WeaponOverwhelmingCritical[baseitem] > 0                    &&
+        CNWSCreatureStats__HasFeat(attacker->cre_stats, Table_WeaponOverwhelmingCritical[baseitem]))
         bonus = Table_WeaponOptions[NWNX_WEAPONS_OPT_OVERCRIT_CONF_BONUS];
 
     if (Table_WeaponOptions[NWNX_WEAPONS_OPT_DEVCRIT_CONF_BONUS] > bonus &&
-            Table_WeaponDevastatingCritical[baseitem] > 0                    &&
-            CNWSCreatureStats__HasFeat(attacker->cre_stats, Table_WeaponDevastatingCritical[baseitem]))
+        Table_WeaponDevastatingCritical[baseitem] > 0                    &&
+        CNWSCreatureStats__HasFeat(attacker->cre_stats, Table_WeaponDevastatingCritical[baseitem]))
         bonus = Table_WeaponOptions[NWNX_WEAPONS_OPT_DEVCRIT_CONF_BONUS];
 
     if (Table_WeaponOptions[NWNX_WEAPONS_OPT_POWCRIT_CONF_BONUS] > bonus &&
-            Table_WeaponPowerCritical[baseitem] > 0                          &&
-            CNWSCreatureStats__HasFeat(attacker->cre_stats, Table_WeaponPowerCritical[baseitem]))
+        Table_WeaponPowerCritical[baseitem] > 0                          &&
+        CNWSCreatureStats__HasFeat(attacker->cre_stats, Table_WeaponPowerCritical[baseitem]))
         bonus = Table_WeaponOptions[NWNX_WEAPONS_OPT_POWCRIT_CONF_BONUS];
 
     if (Table_WeaponOptions[NWNX_WEAPONS_OPT_SUPCRIT_CONF_BONUS] > bonus &&
-            Table_WeaponSuperiorCritical[baseitem] > 0                       &&
-            CNWSCreatureStats__HasFeat(attacker->cre_stats, Table_WeaponSuperiorCritical[baseitem]))
+        Table_WeaponSuperiorCritical[baseitem] > 0                       &&
+        CNWSCreatureStats__HasFeat(attacker->cre_stats, Table_WeaponSuperiorCritical[baseitem]))
         bonus = Table_WeaponOptions[NWNX_WEAPONS_OPT_SUPCRIT_CONF_BONUS];
 
     /* apply local adjustments (if any) */
@@ -63,8 +62,7 @@ static int Hook_GetCriticalConfirmationAdjustment(CNWSCreature *attacker, CNWSCr
 }
 
 
-void Hook_GetCriticalConfirmationRoll(void)
-{
+void Hook_GetCriticalConfirmationRoll (void) {
     asm("leave");
 
     /* duplicate the work originally done, copying the roll out */

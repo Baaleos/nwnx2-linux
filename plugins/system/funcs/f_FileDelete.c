@@ -21,8 +21,7 @@
 #include "NWNXSystem.h"
 
 
-void Func_FileDelete(CGameObject *ob, char *value)
-{
+void Func_FileDelete (CGameObject *ob, char *value) {
     int ret = unlink(value);
 
     if (ret < 0)

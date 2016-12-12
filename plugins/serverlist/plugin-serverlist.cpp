@@ -22,7 +22,6 @@
 
 CNWNXServerlist plugin;
 
-extern "C" CNWNXBase *GetClassObject()
-{
+extern "C" CNWNXBase *GetClassObject() {
     return &plugin;
 }

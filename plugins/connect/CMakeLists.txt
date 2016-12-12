@@ -1,5 +1,10 @@
 include_directories(../../api)
 
-add_module(connect ConnectHooks NWNXConnect plugin-connect)
+# Ignore no return errors.
+SET(CONNECT_CXX_FLAGS "-Wno-return-type" CACHE STRING
+    "plugins/connect specific compiler flags.")
 
-set_target_properties(connect PROPERTIES COMPILE_FLAGS "-O0")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CONNECT_CXX_FLAGS}")
+
+add_module(connect ../../api/nwnsyms.S ../../api/all
+	ConnectHooks NWNXConnect plugin-connect)

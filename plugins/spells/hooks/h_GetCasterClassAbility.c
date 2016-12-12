@@ -29,8 +29,7 @@ static volatile int Hook_SCA_Ability, Hook_SCA_Modifier;
 
 
 __attribute__((noinline))
-static int Hook_GetCasterClassAbility(CNWSCreatureStats *stats, int cl)
-{
+static int Hook_GetCasterClassAbility (CNWSCreatureStats *stats, int cl) {
     int abil, force = 0;
 
     if (cl < 0 || cl > 255)
@@ -90,8 +89,7 @@ static int Hook_GetCasterClassAbility(CNWSCreatureStats *stats, int cl)
 }
 
 
-void Hook_GetCasterClassAbility1(void)
-{
+void Hook_GetCasterClassAbility1 (void) {
     asm("leave");
 
     asm("movzbl %dl, %eax");
@@ -99,7 +97,7 @@ void Hook_GetCasterClassAbility1(void)
     asm("movl %edi, Hook_SCA_Stats");
 
     Hook_SCA_Value = Hook_GetCasterClassAbility(
-                         (CNWSCreatureStats *)Hook_SCA_Stats, Hook_SCA_Class);
+        (CNWSCreatureStats *)Hook_SCA_Stats, Hook_SCA_Class);
 
     asm("movl Hook_SCA_Ability, %eax");
     asm("movl Hook_SCA_Modifier, %esi");

@@ -20,8 +20,7 @@
 
 #include "NWNXDefenses.h"
 
-void Local_AdjustCombatHitDamage(CNWSCreature *attacker, CNWSCreature *target, int16_t *damages, int crit)
-{
+void Local_AdjustCombatHitDamage (CNWSCreature *attacker, CNWSCreature *target, int16_t *damages, int crit) {
 #ifdef NWNX_DEFENSES_HG
 
 #define HGFEAT_Y_CRITICAL_REDUCTION               3000
@@ -30,15 +29,15 @@ void Local_AdjustCombatHitDamage(CNWSCreature *attacker, CNWSCreature *target, i
     int i, parry, reduce;
 
     if (target == NULL            ||
-            target->cre_stats == NULL ||
-            target->obj.obj_type != 5)
+        target->cre_stats == NULL ||
+        target->obj.obj_type != 5)
         return;
 
     if (!crit)
         return;
 
     if (CNWSCreatureStats__HasFeat(target->cre_stats, HGFEAT_Y_CRITICAL_REDUCTION) ||
-            CNWSCreatureStats__HasFeat(target->cre_stats, HGFEAT_Z_CRITICAL_REDUCTION)) {
+        CNWSCreatureStats__HasFeat(target->cre_stats, HGFEAT_Z_CRITICAL_REDUCTION)) {
 
         parry = 50;
     } else {

@@ -21,8 +21,7 @@
 #include "NWNXSystem.h"
 
 
-void Func_GetSystemTime(CGameObject *ob, char *value)
-{
+void Func_GetSystemTime (CGameObject *ob, char *value) {
     snprintf(value, strlen(value), "%ld", (long)time(NULL));
 }
 

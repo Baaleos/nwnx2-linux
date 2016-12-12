@@ -22,7 +22,6 @@
 
 CNWNXWeapons weapons;
 
-extern "C" CNWNXBase *GetClassObject()
-{
+extern "C" CNWNXBase *GetClassObject() {
     return &weapons;
 }

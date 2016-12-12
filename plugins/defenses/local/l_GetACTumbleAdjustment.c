@@ -21,8 +21,7 @@
 #include "NWNXDefenses.h"
 
 
-int Local_GetACTumbleAdjustment(CNWSCreatureStats *stats, int adj)
-{
+int Local_GetACTumbleAdjustment (CNWSCreatureStats *stats, int adj) {
 #ifdef NWNX_DEFENSES_HG
     int other = 0;
 

@@ -21,8 +21,7 @@
 #include "NWNXFuncs.h"
 
 
-void Func_RemoveKnownFeatByLevel(CGameObject *ob, char *value)
-{
+void Func_RemoveKnownFeatByLevel (CGameObject *ob, char *value) {
     /* TODO */
 }
 

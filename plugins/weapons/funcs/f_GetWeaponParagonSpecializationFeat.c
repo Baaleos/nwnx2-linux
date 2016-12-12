@@ -21,8 +21,7 @@
 #include "NWNXWeapons.h"
 
 
-void Func_GetWeaponParagonSpecializationFeat(CGameObject *ob, char *value)
-{
+void Func_GetWeaponParagonSpecializationFeat (CGameObject *ob, char *value) {
     int baseitem, feat = -1;
 
     baseitem = atoi(value);

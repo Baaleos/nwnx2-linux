@@ -1,5 +1,9 @@
 include_directories(../../api)
 
-add_module(fixes FixesHooks FixesHooksNewApi NWNXFixes plugin-fixes)
+# Ignore no return errors from v2.8 api.
+SET(FIXES_CXX_FLAGS "-Wno-return-type" CACHE STRING
+    "plugins/fixes specific compiler flags.")
 
-set_target_properties(fixes PROPERTIES COMPILE_FLAGS "-O0")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${FIXES_CXX_FLAGS}")
+
+add_module(fixes ../../api/all ../../api/nwnsyms.S ../../include/nx_hook FixesHooks FixesHooksNewApi NWNXFixes plugin-fixes)

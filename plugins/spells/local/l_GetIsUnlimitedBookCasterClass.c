@@ -21,8 +21,7 @@
 #include "NWNXSpells.h"
 
 
-int Local_GetIsUnlimitedBookCasterClass(int cl)
-{
+int Local_GetIsUnlimitedBookCasterClass (int cl) {
     switch (cl) {
         case CLASS_TYPE_WIZARD:
             return 1;

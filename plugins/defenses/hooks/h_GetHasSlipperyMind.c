@@ -21,8 +21,7 @@
 #include "NWNXDefenses.h"
 
 
-int Hook_GetHasSlipperyMind(CNWSCreatureStats *stats, uint32_t savedata)
-{
+int Hook_GetHasSlipperyMind (CNWSCreatureStats *stats, uint32_t savedata) {
     int ret = Local_GetHasSlipperyMind(stats, savedata);
 
     if (ret >= 0)

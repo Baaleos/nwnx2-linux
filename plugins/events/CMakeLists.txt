@@ -1,7 +1,2 @@
-add_module(events
-    HookFunc
-    NWNXEvents
-    plugin-events
-)
-
-set_target_properties(events PROPERTIES COMPILE_FLAGS "-O0")
+add_module(events CExoLinkedList CExoLocString HookFunc NWNXEvents
+	plugin-events)

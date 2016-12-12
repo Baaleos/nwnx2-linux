@@ -1,53 +1,78 @@
-#ifndef NWNX_RESMAN_H
-#define NWNX_RESMAN_H
+/***************************************************************************
+    NWNXResMan.h - Interface for the CNWNXResMan class.
+    Copyright (C) 2005 Ingmar Stieger (papillon@nwnx.org)
+    copyright (c) 2006 dumbo (dumbo@nm.ru) & virusman (virusman@virusman.ru)
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ ***************************************************************************/
+
+#if !defined(_NWNXResMan_H_)
+#define _NWNXResMan_H_
 
 #include <string>
-#include <unordered_map>
-
+#include <sys/stat.h>
+#ifdef __GNUC__
+#include <ext/hash_map>
+#else
+#include <hash_map>
+#endif
 #include "NWNXBase.h"
+
 #include "NwnDefines.h"
-#include "api/all.h"
+#include "HookDemandRes.h"
 
 #define MAXPATH 512
 
-int HookFunctions();
-bool RegisterDirectoryHandlers();
+namespace std
+{
+ using namespace __gnu_cxx;
+}
 
-struct CResFileInfo {
-    CResFileInfo() : size(0), mtime(0), latest_mtime(0), key(NULL) {}
-    off_t size;
-    time_t mtime;
-    time_t latest_mtime;
-    CKeyTableEntry *key;
+struct CResFileInfo
+{
+	char ResName[17];
+	NwnResType resType;
+	unsigned int size;
+	unsigned int mtime;
 };
-
-typedef std::unordered_map<std::string, CResFileInfo> ResourceMap;
 
 class CNWNXResMan : public CNWNXBase
 {
-    void WriteLogHeader();
-    void LoadConfiguration();
-
+	
 public:
-    CNWNXResMan();
-    virtual ~CNWNXResMan();
-    bool OnCreate(gline *config, const char* LogDir);
-    char* OnRequest(char* gameObject, char* Request, char* Parameters);
-    bool OnRelease();
+	CNWNXResMan();
+	virtual ~CNWNXResMan();
+  bool OnCreate (gline *config, const char* LogDir);
+	char* OnRequest(char* gameObject, char* Request, char* Parameters);
+	bool OnRelease();
+	void LoadConfiguration();
+	void WriteLogHeader();
 
-    void *DemandRes(CExoResMan *pResMan, CRes* cRes, const CResRef& resRef, NwnResType resType);
-    void DumpResStruct(CRes *cRes);
-    bool ResourceExists(const CResRef& resRef, NwnResType resType, CKeyTableEntry **original);
-    CKeyTableEntry *CreateKeyTableEntry(const CResRef& resRef, NwnResType resType);
-    const char* GetSourcePath();
-    bool debugCRes;
+	char* DemandRes(CExoResMan *pResMan, CResStruct* cRes, char* resRef, NwnResType resType);
+	unsigned long LoadResource(char* resPath);
+	void DumpResStruct(CResStruct *cRes);
+	int ResourceExists(char *resRef, NwnResType resType);
+
 private:
-    char *pScriptBuffer;
-    bool warnMissing;
-    HANDLE hDemandRes;
-    HANDLE hResExists;
-    ResourceMap resFiles;
-    std::string m_sourcePath;
+	bool disableHook;
+	char *pScriptBuffer;
+	char *saveName;
+	int bufferSize;
+	char m_sourcePath[MAXPATH];
+	HANDLE hDemandRes;
+	std::hash_map<const char*, CResFileInfo> resFiles;
 };
 
-#endif // NWNX_RESMAN_H
+#endif 

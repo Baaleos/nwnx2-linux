@@ -21,8 +21,7 @@
 #include "NWNXFuncs.h"
 
 
-void Func_GetTotalFeatUses(CGameObject *ob, char *value)
-{
+void Func_GetTotalFeatUses (CGameObject *ob, char *value) {
     int uses = 0;
     CNWSCreature *cre;
 
