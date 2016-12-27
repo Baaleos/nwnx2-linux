@@ -32,13 +32,13 @@ void Local_AdjustCombatHitDamage (CNWSCreature *attacker, CNWSCreature *target, 
 
 	//char * cData = new char[25];
 	char * cData = malloc(50 * sizeof(char));
+	CExoString script = CExoString("nwnx_damages");
 	for (i = 0; i < 13; i++) {
 		sprintf( cData, "damage_%d", i );
 		iDmg = damages[11+i];
-		nwn_SetLocalInt((CNWSObject *)target)->obj_vartable, cData, iDmg);
-		
+		nwn_SetLocalInt(target->obj.obj_vartable, cData, iDmg);
     }	
-	nwn_ExecuteScript(&CExoString("nwnx_damages"),(CNWSObject *)target)->obj_id);	
+	nwn_ExecuteScript(script,target->obj.obj_id);	
 		
     
 
@@ -47,7 +47,7 @@ void Local_AdjustCombatHitDamage (CNWSCreature *attacker, CNWSCreature *target, 
     for (i = 0; i < 13; i++) {
         sprintf( cData, "damage_%d", i );
 		iDmg = damages[11+i];
-		iChangedDamage = nwn_GetLocalInt((CNWSObject *)target)->obj_vartable, cData);
+		iChangedDamage = nwn_GetLocalInt(target->obj.obj_vartable, cData);
 		if(iDmg != iChangedDamage){
 				damages[11+i] = iChangedDamage;
 		}
