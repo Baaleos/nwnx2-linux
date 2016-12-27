@@ -153,6 +153,8 @@ class CNWNXDefenses:public CNWNXBase {
 
 #endif
 extern void nwn_ExecuteScript(const char *scr, nwn_objid_t oid);
+extern void nwn_SetLocalInt(CNWSScriptVarTable *vt, const char *var_name, int32_t value);
+extern int nwn_GetLocalInt(CNWSScriptVarTable *vt, const char *var_name);
 #endif /* NWNX_DEFENSES_H */
 
 /* vim: set sw=4: */
