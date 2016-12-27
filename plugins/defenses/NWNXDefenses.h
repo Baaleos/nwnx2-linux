@@ -23,7 +23,6 @@
 
 
 #include "NWNXLib.h"
-#include "NWNXBase.h"
 #include "typedefs.h"
 
 
