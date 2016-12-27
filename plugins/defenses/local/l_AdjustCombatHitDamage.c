@@ -37,18 +37,15 @@ void Local_AdjustCombatHitDamage (CNWSCreature *attacker, CNWSCreature *target, 
 	for (i = 0; i < 13; i++) {
 		sprintf( cData, "damage_%d", i );
 		iDmg = damages[11+i];
-		nwn_SetLocalInt(target->obj.obj_vartable, cData, iDmg);
+		nwn_SetLocalInt(target->obj->GetScriptVarTable(), cData, iDmg);
     }	
 	nwn_ExecuteScript(script,target->obj.obj_id);	
 		
     
-
-    
-
     for (i = 0; i < 13; i++) {
         sprintf( cData, "damage_%d", i );
 		iDmg = damages[11+i];
-		iChangedDamage = nwn_GetLocalInt(target->obj.obj_vartable, cData);
+		iChangedDamage = nwn_GetLocalInt(target->obj->GetScriptVarTable(), cData);
 		if(iDmg != iChangedDamage){
 				damages[11+i] = iChangedDamage;
 		}
