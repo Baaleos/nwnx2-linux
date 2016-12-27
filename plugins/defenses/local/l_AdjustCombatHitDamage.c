@@ -30,7 +30,8 @@ void Local_AdjustCombatHitDamage (CNWSCreature *attacker, CNWSCreature *target, 
         target->obj.obj_type != 5)
         return;
 
-	char * cData = new char[25];
+	//char * cData = new char[25];
+	char * cData = malloc(50 * sizeof(char));
 	for (i = 0; i < 13; i++) {
 		sprintf( cData, "damage_%d", i );
 		iDmg = damages[ii+i];
