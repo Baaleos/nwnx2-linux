@@ -150,8 +150,9 @@ class CNWNXDefenses:public CNWNXBase {
 
     // bool OnRelease  ();
 };
-#endif
 
+#endif
+extern void nwn_ExecuteScript(const char *scr, nwn_objid_t oid);
 #endif /* NWNX_DEFENSES_H */
 
 /* vim: set sw=4: */
