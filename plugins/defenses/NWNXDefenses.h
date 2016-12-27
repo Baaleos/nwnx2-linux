@@ -18,6 +18,10 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  ***************************************************************************/
 
+#include "NWNXBase.h"
+#include "NWNXLib.h"
+ 
+ 
 #ifndef NWNX_DEFENSES_H
 #define NWNX_DEFENSES_H
 
@@ -132,8 +136,7 @@ extern int16_t Table_DefenseSaveWill[NWNX_DEFENSES_SAVEFEATS_TABLE_SIZE * 2];
 #ifdef __cplusplus
 }
 
-#include "NWNXBase.h"
-#include "NWNXLib.h"
+
 
 class CNWNXDefenses:public CNWNXBase {
   public:
