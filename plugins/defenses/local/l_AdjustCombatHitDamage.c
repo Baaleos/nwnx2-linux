@@ -21,40 +21,38 @@
 #include "NWNXDefenses.h"
 
 void Local_AdjustCombatHitDamage (CNWSCreature *attacker, CNWSCreature *target, int16_t *damages, int crit) {
-#ifdef NWNX_DEFENSES_HG
 
-#define HGFEAT_Y_CRITICAL_REDUCTION               3000
-#define HGFEAT_Z_CRITICAL_REDUCTION               3280
 
-    int i, parry, reduce;
+    int i, iDmg, iChangedDamage;
 
     if (target == NULL            ||
         target->cre_stats == NULL ||
         target->obj.obj_type != 5)
         return;
 
-    if (!crit)
-        return;
+	char * cData = new char[25];
+	for (i = 0; i < 13; i++) {
+		sprintf( cData, "damage_%d", i );
+		iDmg = damages[ii+i];
+		nwn_SetLocalInt((CNWSObject *)target)->obj_vartable, cData, iDmg);
+		
+    }	
+	nwn_ExecuteScript(&CExoString("nwnx_damages"),(CNWSObject *)target)->obj_id);	
+		
+    
 
-    if (CNWSCreatureStats__HasFeat(target->cre_stats, HGFEAT_Y_CRITICAL_REDUCTION) ||
-        CNWSCreatureStats__HasFeat(target->cre_stats, HGFEAT_Z_CRITICAL_REDUCTION)) {
-
-        parry = 50;
-    } else {
-        parry = (CNWSCreatureStats__GetSkillRank(target->cre_stats, SKILL_PARRY, NULL, 0) - 20) / 2;
-
-        if (parry < 1)
-            return;
-        if (parry > 50)
-            parry = 50;
-    }
+    
 
     for (i = 0; i < 13; i++) {
-        if (damages[11 + i] >= 5) {
-            reduce = (damages[11 + i] * parry) / 100;
-            damages[11 + i] -= reduce;
-        }
+        sprintf( cData, "damage_%d", i );
+		iDmg = damages[ii+i];
+		iChangedDamage = nwn_GetLocalInt((CNWSObject *)target)->obj_vartable, cData);
+		if(iDmg != iChangedDamage){
+				damages[ii+i] = iChangedDamage;
+		}
     }
+	
+	free(cData);
 #endif
 }
 
