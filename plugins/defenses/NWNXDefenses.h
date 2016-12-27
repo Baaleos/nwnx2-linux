@@ -23,6 +23,10 @@
 
 
 #include "NWNXLib.h"
+#include "NWNXBase.h"
+#include "typedefs.h"
+
+
 
 #define NWNX_DEFENSES_BASE_ITEM_TABLE_SIZE              512
 #define NWNX_DEFENSES_OPTIONS_TABLE_SIZE                 64
