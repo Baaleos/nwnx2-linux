@@ -34,7 +34,7 @@ void Local_AdjustCombatHitDamage (CNWSCreature *attacker, CNWSCreature *target, 
 	char * cData = malloc(50 * sizeof(char));
 	for (i = 0; i < 13; i++) {
 		sprintf( cData, "damage_%d", i );
-		iDmg = damages[ii+i];
+		iDmg = damages[11+i];
 		nwn_SetLocalInt((CNWSObject *)target)->obj_vartable, cData, iDmg);
 		
     }	
@@ -46,10 +46,10 @@ void Local_AdjustCombatHitDamage (CNWSCreature *attacker, CNWSCreature *target, 
 
     for (i = 0; i < 13; i++) {
         sprintf( cData, "damage_%d", i );
-		iDmg = damages[ii+i];
+		iDmg = damages[11+i];
 		iChangedDamage = nwn_GetLocalInt((CNWSObject *)target)->obj_vartable, cData);
 		if(iDmg != iChangedDamage){
-				damages[ii+i] = iChangedDamage;
+				damages[11+i] = iChangedDamage;
 		}
     }
 	
