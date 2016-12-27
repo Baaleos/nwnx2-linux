@@ -21,12 +21,6 @@
 #ifndef NWNX_DEFENSES_H
 #define NWNX_DEFENSES_H
 
-
-#include "NWNXLib.h"
-#include "typedefs.h"
-
-
-
 #define NWNX_DEFENSES_BASE_ITEM_TABLE_SIZE              512
 #define NWNX_DEFENSES_OPTIONS_TABLE_SIZE                 64
 #define NWNX_DEFENSES_SAVEFEATS_TABLE_SIZE               10
@@ -139,6 +133,7 @@ extern int16_t Table_DefenseSaveWill[NWNX_DEFENSES_SAVEFEATS_TABLE_SIZE * 2];
 }
 
 #include "NWNXBase.h"
+#include "NWNXLib.h"
 
 class CNWNXDefenses:public CNWNXBase {
   public:
