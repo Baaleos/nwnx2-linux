@@ -17,16 +17,14 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  ***************************************************************************/
-#include <string.h>
-#include <string>
-#include <stdlib.h>
 
-#include "NWNXBase.h"
-#include "NWNXLib.h"
- 
  
 #ifndef NWNX_DEFENSES_H
 #define NWNX_DEFENSES_H
+
+#include "NWNXLib.h"
+
+
 
 #define NWNX_DEFENSES_BASE_ITEM_TABLE_SIZE              512
 #define NWNX_DEFENSES_OPTIONS_TABLE_SIZE                 64
@@ -139,7 +137,7 @@ extern int16_t Table_DefenseSaveWill[NWNX_DEFENSES_SAVEFEATS_TABLE_SIZE * 2];
 #ifdef __cplusplus
 }
 
-
+#include "NWNXBase.h"
 
 class CNWNXDefenses:public CNWNXBase {
   public:
