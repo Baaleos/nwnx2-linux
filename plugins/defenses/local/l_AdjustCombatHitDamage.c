@@ -32,7 +32,8 @@ void Local_AdjustCombatHitDamage (CNWSCreature *attacker, CNWSCreature *target, 
 
 	//char * cData = new char[25];
 	char * cData = malloc(50 * sizeof(char));
-	CExoString script = CExoString("nwnx_damages");
+	char * script = malloc(12 * sizeof(char));
+	script= "nwnx_damages";
 	for (i = 0; i < 13; i++) {
 		sprintf( cData, "damage_%d", i );
 		iDmg = damages[11+i];
@@ -54,7 +55,7 @@ void Local_AdjustCombatHitDamage (CNWSCreature *attacker, CNWSCreature *target, 
     }
 	
 	free(cData);
-#endif
+	free(script);
 }
 
 
