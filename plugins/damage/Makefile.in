@@ -36,9 +36,8 @@ CPPFLAGS = @CPPFLAGS@ -Wall -Werror $(DEFS) $(INCS)
 LFLAGS   = @LDFLAGS@ -w -fPIC -shared -rdynamic
 
 OFILES  = \
-
     funcs/f_DoDamageCalc.o                 \
-    hooks/h_AddDamageImmunity.o                  \
+    hooks/h_DamageCalcs.o                  \
     NWNXDamage.o                               \
     plugin-damage.o
 
