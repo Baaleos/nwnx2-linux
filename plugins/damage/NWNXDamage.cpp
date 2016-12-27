@@ -19,8 +19,7 @@
  ***************************************************************************/
 
 #include "NWNXDamage.h"
-#include "DamageStrCmds.h"
-#include "DamageObjCmds.h"
+
 
 
 //////////////////////////////////////////////////////////////////////
@@ -44,33 +43,14 @@ CNWNXDamage::~CNWNXDamage() {
 
 
 char *CNWNXDamage::OnRequest (char *gameObject, char *Request, char *Parameters) {
-    const struct DamageStrCommand_s *cmd;
-
-    Log(1, "StrReq: \"%s\"\nParams: \"%s\"\n", Request, Parameters);
-
-    if ((cmd = DamageStrCommandLookup(Request, strlen(Request))) != NULL)
-        cmd->func((CGameObject *)gameObject, Parameters);
-    else
-        Log(0, "Unrecognized string request: \"%s\" \"%s\"\n", Request, Parameters);
-
-    Log(1, "Return: \"%s\"\n", Parameters);
+    
 
     return NULL;
 }
 
 
 unsigned long CNWNXDamage::OnRequestObject (char *gameObject, char *Request) {
-    unsigned long ret = OBJECT_INVALID;
-    const struct DamageObjCommand_s *cmd;
-
-    Log(1, "ObjReq: \"%s\"\n", Request);
-
-    if ((cmd = DamageObjCommandLookup(Request, strlen(Request))) != NULL)
-        ret = cmd->func((CGameObject *)gameObject);
-    else
-        Log(0, "Unrecognized object request: \"%s\"\n", Request);
-
-    Log(1, "Return: %08X\n", ret);
+    
 
     return ret;
 }
