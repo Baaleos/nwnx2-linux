@@ -65,18 +65,13 @@ bool CNWNXDamage::OnCreate (gline *config, const char *LogDir) {
     if (!CNWNXBase::OnCreate(config, log))
         return false;
 
-    /* find hook signatures */
-    //StructsSearchSignatures();
+    
 
-   /* if (Ref_PushStruct != NULL) {
-        unsigned char *p = Ref_PushStruct;
-        extern volatile uintptr_t Hook_Struct_Return;
-
-        nx_hook_function(p, (void *)Hook_PushStruct, 5, NX_HOOK_DIRECT);
-
-        Hook_Struct_Return = (uintptr_t)(p + 9);
-    }
-	*/
+    
+		nx_hook_function((int *) 0x0816C7E4,(int *)Hook_DamageEffectListHandler, 5, NX_HOOK_DIRECT);
+        //Hook_Struct_Return = (uintptr_t)(p + 9);
+    
+	
     return true;
 }
 
