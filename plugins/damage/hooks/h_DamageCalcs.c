@@ -25,24 +25,24 @@ int Hook_DamageEffectListHandler (CNWSEffectListHandler *pThis, CNWSObject *obj,
     
 	int i, iDmg, iChangedDamage;
 
-	if(obj == NULL) ||
+	if(obj == NULL ||
 		obj->obj_type != 5){
 				return CNWSEffectListHandler__OnApplyDamage(pThis, obj,effect,iArg);
 		}
 	CNWSCreature *cre;
-	cre = ob->vtable->AsNWSCreature(ob);
+	cre = obj->vtable->AsNWSCreature(ob);
 	
 	
     if (cre == NULL            ||
         cre->cre_stats == NULL ||
         cre->obj.obj_type != 5)
-        return CNWSEffectListHandler__OnApplyDamage(obj,effect,iArg);
+        return CNWSEffectListHandler__OnApplyDamage(pThis, obj,effect,iArg);
 
 	//char * cData = new char[25];
 	char * cData = malloc(50 * sizeof(char));
 	char * script = malloc(12 * sizeof(char));
 	char * damager = malloc(11 * sizeof(char));
-	CNWSObject *creator = effect->eff_creator;
+	CNWSObject *creator = (CNWSObject *)effect->eff_creator;
 	CNWSScriptVarTable *vt;
 	vt = &(((CNWSObject *)cre)->obj_vartable);
 	script= "nwnx_damages";
