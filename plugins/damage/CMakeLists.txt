@@ -1,5 +1,4 @@
 add_module(damage NWNXDamage plugin-damage
-	HookFunc
 	funcs/f_DoDamageCalc
 	hooks/h_DamageCalcs)
 
