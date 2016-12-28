@@ -21,13 +21,13 @@
 #include "NWNXDamage.h"
 
 
-int Hook_DamageEffectListHandler (CNWSEffectListHandler *this, CNWSObject *obj, CGameEffect *effect, int iArg) {
+int Hook_DamageEffectListHandler (CNWSEffectListHandler *pThis, CNWSObject *obj, CGameEffect *effect, int iArg) {
     
 	int i, iDmg, iChangedDamage;
 
 	if(obj == NULL) ||
 		obj->obj_type != 5){
-				return CNWSEffectListHandler__OnApplyDamage(obj,effect,iArg);
+				return CNWSEffectListHandler__OnApplyDamage(pThis, obj,effect,iArg);
 		}
 	CNWSCreature *cre;
 	cre = ob->vtable->AsNWSCreature(ob);
@@ -67,7 +67,7 @@ int Hook_DamageEffectListHandler (CNWSEffectListHandler *this, CNWSObject *obj, 
 	free(cData);
 	free(script);
 	free(damager);
-    return CNWSEffectListHandler__OnApplyDamage(cre,effect,iArg);
+    return CNWSEffectListHandler__OnApplyDamage(pThis,obj,effect,iArg);
 }
 
 
