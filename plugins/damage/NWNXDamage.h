@@ -21,9 +21,6 @@
 #ifndef NWNX_DAMAGE_H
 #define NWNX_DAMAGE_H
 
-
-#include <map>
-#include <string>
 #include "NWNXBase.h"
 #include "NWNXLib.h"
 
