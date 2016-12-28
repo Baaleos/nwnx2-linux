@@ -22,30 +22,9 @@
 
 
 void Hook_DamageEffectListHandler (CNWSCreature *cre, int damtype, int percent) {
-    int idx = 0;
+    
 
-    if (cre->obj.obj_damage_immunities == NULL)
-        return;
-
-    while (damtype && !(damtype & 1)) {
-        idx++;
-        damtype >>= 1;
-    }
-
-    if (idx >= DAMAGE_TYPE_LAST)
-        return;
-
-    if (percent < -1000)
-        percent = -1000;
-    else if (percent > 1000)
-        percent = 1000;
-
-    cre->obj.obj_damage_immunities[idx] += percent;
-
-    if (cre->obj.obj_damage_immunities[idx] < -20000)
-        cre->obj.obj_damage_immunities[idx] = -20000;
-    else if (cre->obj.obj_damage_immunities[idx] > 20000)
-        cre->obj.obj_damage_immunities[idx] = 20000;
+    
 }
 
 
