@@ -21,25 +21,15 @@
 #include "NWNXDamage.h"
 
 
-int Hook_DamageEffectListHandler (CNWSEffectListHandler *pThis, CNWSObject *ob, CGameEffect *effect, int iArg) {
+int Hook_DamageEffectListHandler (CNWSEffectListHandler *pThis, CGameObject *ob, CGameEffect *effect, int iArg) {
     
-	int i, iDmg, iChangedDamage;
-	CGameObject *obj = (CGameObject)ob;
+	int i;
+	CNWSCreature *cre;
 	
-	if(obj == NULL ||
-		obj->type != 5){
-				return CNWSEffectListHandler__OnApplyDamage(pThis, ob,effect,iArg);
-		}
+	if (ob == NULL || (cre = ob->vtable->AsNWSCreature(ob)) == NULL || cre->cre_stats == NULL) {
+        return CNWSEffectListHandler__OnApplyDamage(pThis, (CNWSObject *)ob,effect,iArg);
+    }
 	
-	
-	CNWSCreature *cre = (CNWSCreature *)ob;
-	cre = obj->vtable->AsNWSCreature(obj);
-	
-	
-    if (cre == NULL            ||
-        cre->cre_stats == NULL ||
-        cre->obj.obj_type != 5)
-        return CNWSEffectListHandler__OnApplyDamage(pThis, ob,effect,iArg);
 
 	//char * cData = new char[25];
 	char * cData = malloc(50 * sizeof(char));
@@ -47,7 +37,7 @@ int Hook_DamageEffectListHandler (CNWSEffectListHandler *pThis, CNWSObject *ob, 
 	char * damager = malloc(11 * sizeof(char));
 	CNWSObject *creator = (CNWSObject *)effect->eff_creator;
 	CNWSScriptVarTable *vt;
-	vt = &(((CNWSObject *)cre)->obj_vartable);
+	vt = ((CNWSObject *)cre)->obj_vartable;
 	script= "nwnx_damages";
 	damager= "dmg_creator";
 	vt.SetObject(CExoString( damager ),effect->eff_creator.obj_id);
@@ -70,7 +60,7 @@ int Hook_DamageEffectListHandler (CNWSEffectListHandler *pThis, CNWSObject *ob, 
 	free(cData);
 	free(script);
 	free(damager);
-    return CNWSEffectListHandler__OnApplyDamage(pThis,ob,effect,iArg);
+    return CNWSEffectListHandler__OnApplyDamage(pThis,(CNWSObject *)ob,effect,iArg);
 }
 
 
