@@ -21,7 +21,7 @@
 #include "NWNXDamage.h"
 
 
-int Hook_DamageEffectListHandler (CNWSObject *cre, CGameEffect *effect, int iArg) {
+int Hook_DamageEffectListHandler (CNWSEffectListHandler *, CNWSObject *cre, CGameEffect *effect, int iArg) {
     
 	int i, iDmg, iChangedDamage;
 
