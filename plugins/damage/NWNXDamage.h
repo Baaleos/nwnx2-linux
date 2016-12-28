@@ -46,7 +46,7 @@ class CNWNXDamage:public CNWNXBase {
     // bool OnRelease  ();
 };
 #endif
-extern void nwn_ExecuteScript(const char *scr, nwn_objid_t oid);
+/*extern void nwn_ExecuteScript(const char *scr, nwn_objid_t oid);
 extern void             nwn_DeleteLocalFloat(CNWSScriptVarTable *vt, const char *var_name);
 extern void             nwn_DeleteLocalInt(CNWSScriptVarTable *vt, const char *var_name);
 extern void             nwn_DeleteLocalLocation(CNWSScriptVarTable *vt, const char *var_name);
@@ -64,7 +64,7 @@ extern void             nwn_SetLocalInt(CNWSScriptVarTable *vt, const char *var_
 extern void             nwn_SetLocalLocation(CNWSScriptVarTable *vt, const char *var_name, CScriptLocation * value);
 extern void             nwn_SetLocalObject(CNWSScriptVarTable *vt, const char *var_name, uint32_t id);
 extern void             nwn_SetLocalString(CNWSScriptVarTable *vt, const char *var_name, const char *value);
-
+*/
 #endif /* NWNX_DAMAGE_H */
 
 /* vim: set sw=4: */
