@@ -47,6 +47,24 @@ class CNWNXDamage:public CNWNXBase {
     // bool OnRelease  ();
 };
 #endif
+extern void nwn_ExecuteScript(const char *scr, nwn_objid_t oid);
+extern void             nwn_DeleteLocalFloat(CNWSScriptVarTable *vt, const char *var_name);
+extern void             nwn_DeleteLocalInt(CNWSScriptVarTable *vt, const char *var_name);
+extern void             nwn_DeleteLocalLocation(CNWSScriptVarTable *vt, const char *var_name);
+extern void             nwn_DeleteLocalObject(CNWSScriptVarTable *vt, const char *var_name);
+extern void             nwn_DeleteLocalString(CNWSScriptVarTable *vt, const char *var_name);
+
+extern int32_t          nwn_GetLocalInt(CNWSScriptVarTable *vt, const char *var_name);
+extern float            nwn_GetLocalFloat(CNWSScriptVarTable *vt, const char *var_name);
+extern CScriptLocation  nwn_GetLocalLocation(CNWSScriptVarTable *vt, const char *var_name);
+extern uint32_t         nwn_GetLocalObject(CNWSScriptVarTable *vt, const char *var_name);
+extern const char      *nwn_GetLocalString(CNWSScriptVarTable *vt, const char *var_name);
+
+extern void             nwn_SetLocalFloat(CNWSScriptVarTable *vt, const char *var_name, float value);
+extern void             nwn_SetLocalInt(CNWSScriptVarTable *vt, const char *var_name, int32_t value);
+extern void             nwn_SetLocalLocation(CNWSScriptVarTable *vt, const char *var_name, CScriptLocation * value);
+extern void             nwn_SetLocalObject(CNWSScriptVarTable *vt, const char *var_name, uint32_t id);
+extern void             nwn_SetLocalString(CNWSScriptVarTable *vt, const char *var_name, const char *value);
 
 #endif /* NWNX_DAMAGE_H */
 

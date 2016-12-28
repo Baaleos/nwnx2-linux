@@ -37,10 +37,10 @@ int Hook_DamageEffectListHandler (CNWSEffectListHandler *pThis, CGameObject *ob,
 	char * damager = malloc(11 * sizeof(char));
 	CNWSObject *creator = (CNWSObject *)effect->eff_creator;
 	CNWSScriptVarTable *vt;
-	vt = &(((CNWSObject *)target)->obj_vartable);
+	vt = &(((CNWSObject *)cre)->obj_vartable);
 	script= "nwnx_damages";
 	damager= "dmg_creator";
-	nwn_SetLocalObject(vt,damager,effect->eff_creator.obj_id)
+	nwn_SetLocalObject(vt,damager,creator.obj_id)
 	
 	for (i=0; i< 12; i++) 
 		{
