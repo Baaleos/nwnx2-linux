@@ -35,7 +35,7 @@ int Hook_DamageEffectListHandler (CNWSEffectListHandler *pThis, CGameObject *ob,
 	char * cData = malloc(50 * sizeof(char));
 	char * script = malloc(12 * sizeof(char));
 	char * damager = malloc(11 * sizeof(char));
-	nwn_objid_t creator = effect->eff_creator
+	nwn_objid_t creator = effect->eff_creator;
 	
 	CNWSScriptVarTable *vt;
 	vt = &(((CNWSObject *)cre)->obj_vartable);
