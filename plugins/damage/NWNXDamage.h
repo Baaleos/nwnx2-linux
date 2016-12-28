@@ -21,7 +21,6 @@
 #ifndef NWNX_DAMAGE_H
 #define NWNX_DAMAGE_H
 
-#include "NWNXBase.h"
 #include "NWNXLib.h"
 
 
@@ -34,7 +33,7 @@ int Hook_DamageEffectListHandler (CNWSEffectListHandler *pThis, CGameObject *ob,
 }
 
 
-
+#include "NWNXBase.h"
 class CNWNXDamage:public CNWNXBase {
   public:
     CNWNXDamage ();
