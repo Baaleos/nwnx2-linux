@@ -50,7 +50,7 @@ char *CNWNXDamage::OnRequest (char *gameObject, char *Request, char *Parameters)
 
 
 unsigned long CNWNXDamage::OnRequestObject (char *gameObject, char *Request) {
-    
+    unsigned long ret = OBJECT_INVALID;
 
     return ret;
 }
