@@ -36,24 +36,24 @@ int Hook_DamageEffectListHandler (CNWSEffectListHandler *pThis, CGameObject *ob,
 	char * script = malloc(12 * sizeof(char));
 	char * damager = malloc(11 * sizeof(char));
 	CNWSObject *creator = (CNWSObject *)effect->eff_creator;
-	CNWSScriptVarTable vt;
-	vt = ((CNWSObject *)cre)->obj_vartable;
+	CNWSScriptVarTable *vt;
+	vt = &(((CNWSObject *)target)->obj_vartable);
 	script= "nwnx_damages";
 	damager= "dmg_creator";
-	vt.SetObject(CExoString( damager ),effect->eff_creator.obj_id);
+	nwn_SetLocalObject(vt,damager,effect->eff_creator.obj_id)
+	
 	for (i=0; i< 12; i++) 
 		{
 			sprintf( cData, "damage_%d", i );
 			int iNum = effect->eff_integers[i];
-			vt.SetInt(CExoString( cData ),iNum,0);
-						
+			nwn_SetLocalInt(vt, cData, iNum);			
 		}
 	nwn_ExecuteScript(script,cre->obj.obj_id);
-	vt.DestroyObject(CExoString( damager ));
+	nwn_DeleteLocalObject(vt, damager);
 	for (i=0; i< 12; i++) 
 		{
 			sprintf( cData, "damage_%d", i );
-			int nDamAmount = vt.GetInt( CExoString( cData ) );
+			int nDamAmount = nwn_GetLocalInt(vt,cData);
 			effect->eff_integers[i] = nDamAmount;
 		}
 	
