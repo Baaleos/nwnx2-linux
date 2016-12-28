@@ -21,19 +21,16 @@
 #ifndef NWNX_DAMAGE_H
 #define NWNX_DAMAGE_H
 
+#include <map>
+#include <string>
+#include "NWNXBase.h"
 #include "NWNXLib.h"
 
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 int Hook_DamageEffectListHandler (CNWSEffectListHandler *pThis, CGameObject *ob, CGameEffect *effect, int iArg);
 
-#ifdef __cplusplus
-}
 
 
-#include "NWNXBase.h"
 class CNWNXDamage:public CNWNXBase {
   public:
     CNWNXDamage ();
@@ -45,7 +42,7 @@ class CNWNXDamage:public CNWNXBase {
 
     // bool OnRelease  ();
 };
-#endif
+
 /*extern void nwn_ExecuteScript(const char *scr, nwn_objid_t oid);
 extern void             nwn_DeleteLocalFloat(CNWSScriptVarTable *vt, const char *var_name);
 extern void             nwn_DeleteLocalInt(CNWSScriptVarTable *vt, const char *var_name);
