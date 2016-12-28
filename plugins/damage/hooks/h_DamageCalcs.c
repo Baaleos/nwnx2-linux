@@ -21,22 +21,25 @@
 #include "NWNXDamage.h"
 
 
-int Hook_DamageEffectListHandler (CNWSEffectListHandler *pThis, CNWSObject *obj, CGameEffect *effect, int iArg) {
+int Hook_DamageEffectListHandler (CNWSEffectListHandler *pThis, CNWSObject *ob, CGameEffect *effect, int iArg) {
     
 	int i, iDmg, iChangedDamage;
-
+	CGameObject *obj = (CGameObject)ob;
+	
 	if(obj == NULL ||
-		obj->obj_type != 5){
-				return CNWSEffectListHandler__OnApplyDamage(pThis, obj,effect,iArg);
+		obj->type != 5){
+				return CNWSEffectListHandler__OnApplyDamage(pThis, ob,effect,iArg);
 		}
-	CNWSCreature *cre;
-	cre = obj->vtable->AsNWSCreature(ob);
+	
+	
+	CNWSCreature *cre = (CNWSCreature *)ob;
+	cre = obj->vtable->AsNWSCreature(obj);
 	
 	
     if (cre == NULL            ||
         cre->cre_stats == NULL ||
         cre->obj.obj_type != 5)
-        return CNWSEffectListHandler__OnApplyDamage(pThis, obj,effect,iArg);
+        return CNWSEffectListHandler__OnApplyDamage(pThis, ob,effect,iArg);
 
 	//char * cData = new char[25];
 	char * cData = malloc(50 * sizeof(char));
@@ -67,7 +70,7 @@ int Hook_DamageEffectListHandler (CNWSEffectListHandler *pThis, CNWSObject *obj,
 	free(cData);
 	free(script);
 	free(damager);
-    return CNWSEffectListHandler__OnApplyDamage(pThis,obj,effect,iArg);
+    return CNWSEffectListHandler__OnApplyDamage(pThis,ob,effect,iArg);
 }
 
 
