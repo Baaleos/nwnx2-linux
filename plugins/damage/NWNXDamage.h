@@ -22,6 +22,9 @@
 #define NWNX_DAMAGE_H
 
 
+#include <map>
+#include <string>
+#include "NWNXBase.h"
 #include "NWNXLib.h"
 
 
@@ -33,7 +36,7 @@ int Hook_DamageEffectListHandler (CNWSEffectListHandler *pThis, CGameObject *ob,
 #ifdef __cplusplus
 }
 
-#include "NWNXBase.h"
+
 
 class CNWNXDamage:public CNWNXBase {
   public:

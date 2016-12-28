@@ -69,7 +69,7 @@ bool CNWNXDamage::OnCreate (gline *config, const char *LogDir) {
 
     
 		nx_hook_function((int *) 0x0816C7E4,(int *)Hook_DamageEffectListHandler, 5, NX_HOOK_DIRECT);
-        //Hook_Struct_Return = (uintptr_t)(p + 9);
+        
     
 	
     return true;
