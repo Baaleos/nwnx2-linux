@@ -120,6 +120,13 @@ public class TestRunner {
 						NWScript.setLocalString(NWObject.MODULE, "TRANSLATE_THIS", sOut);
 						Scheduler.flushQueues();
 					}
+					if(event.equals("ListEnergyTypes")){
+						NWObject.setObjectInvalidIsNull(true);
+						
+
+						Scheduler.flushQueues();
+					}
+					
 					if(event.startsWith("SetupEnergy_")){
 						NWObject.setObjectInvalidIsNull(true);
 						String energyName = event.replace("SetupEnergy_", "");

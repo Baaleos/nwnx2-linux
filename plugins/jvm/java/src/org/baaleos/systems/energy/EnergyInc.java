@@ -22,6 +22,14 @@ public class EnergyInc {
 		
 	}
 	
+	public static void ConstructEnergyListMenuForPlayer(final NWObject obj){
+		string str = "";
+		for(Energy e : Energy.getEnergyDefinitions()){
+			
+		}
+		
+	}
+	
 	
 	
 	public static ArrayList<NWObject> getAllPlayersAndNPCForEnergySystem(){
