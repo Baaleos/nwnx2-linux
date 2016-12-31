@@ -164,7 +164,7 @@ void Hook_GetMeetsPrestigeClassRequirements(void) {
 
 
 
-
+/* 
 int Hook_DamageEffectListHandler (CNWSEffectListHandler *pThis, CGameObject *ob, CGameEffect *effect, int iArg) {
     
 	int i;
@@ -206,7 +206,7 @@ int Hook_DamageEffectListHandler (CNWSEffectListHandler *pThis, CGameObject *ob,
 	free(script);
 	free(damager);
     return CNWSEffectListHandler__OnApplyDamage(pThis,(CNWSObject *)ob,effect,iArg);
-}
+} */
 
 
 
@@ -374,7 +374,7 @@ int InitHooks() {
 	*(unsigned long*)&CNWSItem__GetPropertyByTypeExists = 0x081a2a6c;
 
 	
-	nx_hook_function((int *) 0x0816C7E4,(int *)Hook_DamageEffectListHandler, 5, NX_HOOK_DIRECT);
+	//nx_hook_function((int *) 0x0816C7E4,(int *)Hook_DamageEffectListHandler, 5, NX_HOOK_DIRECT);
 	
 	if(extend.GetConfInteger("examine_cr_npc_only")) {
 		/* EXAMINE CR ON NPC ONLY */
