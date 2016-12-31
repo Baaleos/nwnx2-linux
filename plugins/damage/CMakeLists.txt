@@ -1,5 +1,4 @@
 add_module(damage NWNXDamage plugin-damage
-	funcs/f_DoDamageCalc
 	hooks/h_DamageCalcs)
 
 #if (gperf)

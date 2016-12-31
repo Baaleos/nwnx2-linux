@@ -1,13 +1,5 @@
-
 CC	 = gcc
 CXX      = gcc
-GPERF    = gperf
-RM	 = /bin/rm
-MV	 = /bin/mv
-CP	 = /bin/cp
-SED      = /bin/sed
-INSTALL	 = /usr/bin/install -c
-
 INCS	 = -I. -I.. -I../.. -I ../../include -I/usr/local/include
 LIBS	 = -L/usr/local/lib -lm -lz
 DEFS	 = -D_REENTRANT -D_THREAD_SAFE
@@ -15,26 +7,18 @@ CFLAGS   = @CFLAGS@ -Werror $(DEFS) $(INCS)
 CPPFLAGS = @CPPFLAGS@ -Werror $(DEFS) $(INCS)
 LFLAGS   = @LDFLAGS@ -w -fPIC -shared -rdynamic
 
-OFILES  = \
-    funcs/f_DoDamageCalc.o                 \
-    hooks/h_DamageCalcs.o                  \
-    NWNXDamage.o                               \
-    plugin-damage.o
-
 all: nwnx_damage.so
 
-
-
-
-NWNXDamage.o: NWNXDamage.h
-
-nwnx_damage.so: $(OFILES)
+nwnx_damage.so: HookFunc.o hooks/h_DamageCalcs.o NWNXDamage.o plugin-damage.o
 	$(CXX) $(LFLAGS) -o $@ $^ $(LIBS)
 
-depend:
-	$(CC) -MM $(CFLAGS) *.c > .depend
-
 clean:
-	$(RM) -f *.o */*.o *.so
+	/bin/rm -f *.o *.so *~
 
 distclean: clean
+	/bin/rm -f Makefile
+
+install: nwnx_extend.so
+	mkdir -p @prefix@/ ; install nwnx_chult.so @prefix@/
+
+
