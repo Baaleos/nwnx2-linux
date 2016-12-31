@@ -20,8 +20,8 @@
 #include <map>
 #include <string>
 #include "NWNXBase.h"
-#include "object.h"
 #include "NWNXLib.h"
+#include "typedefs.h"
 
 class CNWNXextend : public CNWNXBase
 {
@@ -40,5 +40,8 @@ private:
 	char* pGameObject;
 	StringMap pluginConfig;
 };
+
+extern void nwn_ExecuteScript(const char *scr, nwn_objid_t oid);
+
 
 #endif
