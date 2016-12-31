@@ -162,6 +162,56 @@ void Hook_GetMeetsPrestigeClassRequirements(void) {
     asm("ret");
 }
 
+
+
+
+int Hook_DamageEffectListHandler (CNWSEffectListHandler *pThis, CGameObject *ob, CGameEffect *effect, int iArg) {
+    
+	int i;
+	CNWSCreature *cre;
+	
+	if (ob == NULL || (cre = ob->vtable->AsNWSCreature(ob)) == NULL || cre->cre_stats == NULL) {
+        return CNWSEffectListHandler__OnApplyDamage(pThis, (CNWSObject *)ob,effect,iArg);
+    }
+	
+
+	//char * cData = new char[25];
+	char * cData = malloc(50 * sizeof(char));
+	char * script = malloc(12 * sizeof(char));
+	char * damager = malloc(11 * sizeof(char));
+	nwn_objid_t creator = effect->eff_creator;
+	
+	CNWSScriptVarTable *vt;
+	vt = &(((CNWSObject *)cre)->obj_vartable);
+	script= "nwnx_damages";
+	damager= "dmg_creator";
+	nwn_SetLocalObject(vt,damager,creator);
+	
+	for (i=0; i< 12; i++) 
+		{
+			sprintf( cData, "damage_%d", i );
+			int iNum = effect->eff_integers[i];
+			nwn_SetLocalInt(vt, cData, iNum);			
+		}
+	nwn_ExecuteScript(script,cre->obj.obj_id);
+	nwn_DeleteLocalObject(vt, damager);
+	for (i=0; i< 12; i++) 
+		{
+			sprintf( cData, "damage_%d", i );
+			int nDamAmount = nwn_GetLocalInt(vt,cData);
+			effect->eff_integers[i] = nDamAmount;
+		}
+	
+	free(cData);
+	free(script);
+	free(damager);
+    return CNWSEffectListHandler__OnApplyDamage(pThis,(CNWSObject *)ob,effect,iArg);
+}
+
+
+
+
+
 volatile CNWMessage *WGOU_pMsg;
 volatile CNWSPlayer *WGOU_pPlayer;
 volatile CNWSObject *WGOU_pObject;
@@ -323,6 +373,9 @@ int InitHooks() {
 
 	*(unsigned long*)&CNWSItem__GetPropertyByTypeExists = 0x081a2a6c;
 
+	
+	nx_hook_function((int *) 0x0816C7E4,(int *)Hook_DamageEffectListHandler, 5, NX_HOOK_DIRECT);
+	
 	if(extend.GetConfInteger("examine_cr_npc_only")) {
 		/* EXAMINE CR ON NPC ONLY */
 		nx_hook_function((void *)0x08073d15, (void *)hook_ExamineCR_NPC_Only, 8, NX_HOOK_DIRECT);
