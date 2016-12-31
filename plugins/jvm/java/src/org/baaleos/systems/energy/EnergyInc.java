@@ -3,7 +3,6 @@ package org.baaleos.systems.energy;
 import java.util.ArrayList;
 
 import org.baaleos.systems.genetics.Include;
-import org.nwnx.nwnx2.jvm.NWObject;
 import org.nwnx.nwnx2.jvm.*;
 
 public class EnergyInc {
@@ -23,10 +22,18 @@ public class EnergyInc {
 	}
 	
 	public static void ConstructEnergyListMenuForPlayer(final NWObject obj){
-		string str = "";
-		for(Energy e : Energy.getEnergyDefinitions()){
-			
+		String str = "";
+		ArrayList<Energy> energies = Energy.getEnergyDefinitions();
+		if(energies.size() == 0){
+			str = "You cannot harness any energies at present.";
+		}else{
+			for(Energy e : energies){
+				if(e.getPlayerCanUse(obj)){
+					str += e.getName()+" "+e.getCurrentAmount(obj)+"/"+e.getMaxCapacity(obj)+" ("+e.getPlayerRechargeRate(obj)+" per 5 seconds)"+System.getProperty("line.separator");
+				}
+			}
 		}
+		NWScript.setCustomToken(6660, str);
 		
 	}
 	

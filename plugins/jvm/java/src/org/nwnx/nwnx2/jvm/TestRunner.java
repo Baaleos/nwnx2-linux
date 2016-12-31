@@ -122,7 +122,7 @@ public class TestRunner {
 					}
 					if(event.equals("ListEnergyTypes")){
 						NWObject.setObjectInvalidIsNull(true);
-						
+						EnergyInc.ConstructEnergyListMenuForPlayer(objSelf);
 
 						Scheduler.flushQueues();
 					}
