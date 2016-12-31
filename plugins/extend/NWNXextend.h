@@ -20,6 +20,7 @@
 #include <map>
 #include <string>
 #include "NWNXBase.h"
+#include "object.h"
 #include "NWNXLib.h"
 
 class CNWNXextend : public CNWNXBase
