@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.baaleos.systems.energy.Energy;
+import org.nwnx.nwnx2.jvm.Color;
 import org.nwnx.nwnx2.jvm.NWObject;
 import org.nwnx.nwnx2.jvm.NWScript;
 
@@ -490,8 +491,8 @@ private static final  String INHUMAN_POWER_APPEARANCE_SKIN_COLOR = "INHUMAN_POWE
 		String str = "";
 
 		for(EnergyCostBinding ecb: CostPerHeartbeat){
-			String token = ecb.getEnergyToCharge().getColorString();
-			str += ecb.getAmountToCharge()+" "+token+ecb.getEnergyToCharge().getName()+"</c> per heartbeat."+System.getProperty("line.separator");
+			Color col = ecb.getEnergyToCharge().getColor();
+			str += ecb.getAmountToCharge()+" "+col.color(ecb.getEnergyToCharge().getName())+" per heartbeat."+System.getProperty("line.separator");
 		}
 		if(str.equals("")){
 			str = "No Energy Cost";

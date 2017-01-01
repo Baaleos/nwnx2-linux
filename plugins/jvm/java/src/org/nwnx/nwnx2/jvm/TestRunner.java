@@ -143,6 +143,8 @@ public class TestRunner {
 						String energyName = event.replace("SetupEnergy_", "");
 						NWScript.setLocalInt(NWObject.MODULE,"NEW_ENERGY",0);
 						int iReturn = EnergyInc.CreateEnergy(energyName);
+						Energy nrg = Energy.getEnergy(iReturn);
+						nrg.setColor(iR, iG,iB);
 						NWScript.setLocalInt(NWObject.MODULE,"NEW_ENERGY",iReturn);
 						NWScript.deleteLocalInt(NWObject.MODULE, "NRG_R");
 						NWScript.deleteLocalInt(NWObject.MODULE, "NRG_G");

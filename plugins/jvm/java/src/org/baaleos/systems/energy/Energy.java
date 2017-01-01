@@ -109,8 +109,8 @@ public class Energy {
 		this.name = name;
 	}
 	
-	public String getColorString(){
-		return new Color(Red,Green,Blue).stringRep;
+	public Color getColor(){
+		return new Color(Red,Green,Blue);
 	}
 	
 	public void setColor(int r,int g, int b){
