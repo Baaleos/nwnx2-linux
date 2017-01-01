@@ -490,7 +490,7 @@ private static final  String INHUMAN_POWER_APPEARANCE_SKIN_COLOR = "INHUMAN_POWE
 		String str = "";
 
 		for(EnergyCostBinding ecb: CostPerHeartbeat){
-			str += ecb.getAmountToCharge()+" "+ecb.getEnergyToCharge().getName()+" per heartbeat."+System.getProperty("line.separator");
+			str += ecb.getAmountToCharge()+" "+ecb.getEnergyToCharge().getName()+" per heartbeat./n";
 		}
 		if(str.equals("")){
 			str = "No Energy Cost";
