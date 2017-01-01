@@ -79,12 +79,12 @@ public class Include {
 	private static boolean HasEffectAlready(NWObject oPC, Gene theGene){
 		
 		NWEffect[] ee = NWScript.getEffects(oPC);
-		NWObject effectCreator = GetGeneticEffectCreator();
+
 		for(NWEffect e : ee){
 			String tagOfCreator = NWScript.getTag(e.creator());
 			int effType = NWScript.getEffectType(e);
 			int subType = NWScript.getEffectSubType(e);
-			boolean IsGenetic = (tagOfCreator.equals("genetic_unit_test"));
+			boolean IsGenetic = tagOfCreator.equals("genetic_unit_test");
 			if(IsGenetic && effType == theGene.getEffectType() && subType == Subtype.SUPERNATURAL){
 				return true;
 			}
@@ -101,18 +101,16 @@ public class Include {
 	 */
 	private static void RemoveGeneticEffect(NWObject oPC, Gene theGene){
 		
-		if(!HasEffectAlready(oPC,theGene)){
-			return;
-		}
+		//if(!HasEffectAlready(oPC,theGene)){
+		//	return;
+		//}
 		NWEffect[] ee = NWScript.getEffects(oPC);
-		NWObject effectCreator = GetGeneticEffectCreator();
-		String tagOfCreatorObject = NWScript.getTag(effectCreator);
 		for(NWEffect e : ee){
 			String tagOfCreator = NWScript.getTag(e.creator());
 			
 			int effType = NWScript.getEffectType(e);
 			int subType = NWScript.getEffectSubType(e);
-			boolean IsGenetic = (tagOfCreator.equals("genetic_unit_test"));
+			boolean IsGenetic = tagOfCreator.equals("genetic_unit_test");
 			NWScript.sendMessageToPC(oPC,"IsGenetic was "+IsGenetic);
 			NWScript.sendMessageToPC(oPC,"Type found: "+effType+" Subtype found:"+subType+" needed was :"+theGene.getEffectType()+" and "+subType);
 			
