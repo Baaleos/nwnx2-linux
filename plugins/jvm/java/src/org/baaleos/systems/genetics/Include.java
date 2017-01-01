@@ -104,7 +104,7 @@ public class Include {
 		
 		NWEffect[] ee = NWScript.getEffects(oPC);
 		NWObject effectCreator = GetGeneticEffectCreator();
-		String tagOfCreatorObject = NWScript.getTag(effectCreator.creator());
+		String tagOfCreatorObject = NWScript.getTag(effectCreator);
 		for(NWEffect e : ee){
 			String tagOfCreator = NWScript.getTag(e.creator());
 			NWScript.sendMessageToPC(oPC,tagOfCreator+" was the creator of this effect");
