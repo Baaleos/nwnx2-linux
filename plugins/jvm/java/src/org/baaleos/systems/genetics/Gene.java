@@ -490,14 +490,15 @@ private static final  String INHUMAN_POWER_APPEARANCE_SKIN_COLOR = "INHUMAN_POWE
 		String str = "";
 
 		for(EnergyCostBinding ecb: CostPerHeartbeat){
-			str += ecb.getAmountToCharge()+" "+ecb.getEnergyToCharge().getName()+" per heartbeat./n";
+			string token = ecb.getEnergyToCharge().getColorString();
+			str += ecb.getAmountToCharge()+" "+token+ecb.getEnergyToCharge().getName()+"</c> per heartbeat."+System.getProperty("line.separator");
 		}
 		if(str.equals("")){
 			str = "No Energy Cost";
 		}
 		
-		NWObject oPC = NWScript.getPCs()[0];
-		NWScript.sendMessageToPC(oPC, str);
+		//NWObject oPC = NWScript.getPCs()[0];
+		//NWScript.sendMessageToPC(oPC, str);
 		NWScript.setCustomToken(7003, str);
 		
 	}

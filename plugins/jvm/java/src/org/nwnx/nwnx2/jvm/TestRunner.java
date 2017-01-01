@@ -136,10 +136,18 @@ public class TestRunner {
 					}
 					if(event.startsWith("SetupEnergy_")){
 						NWObject.setObjectInvalidIsNull(true);
+						int iR,iG,iB;
+						iR = NWScript.getLocalInt(NWObject.MODULE, "NRG_R");
+						iG = NWScript.getLocalInt(NWObject.MODULE, "NRG_G");
+						iB = NWScript.getLocalInt(NWObject.MODULE, "NRG_B");
 						String energyName = event.replace("SetupEnergy_", "");
 						NWScript.setLocalInt(NWObject.MODULE,"NEW_ENERGY",0);
 						int iReturn = EnergyInc.CreateEnergy(energyName);
 						NWScript.setLocalInt(NWObject.MODULE,"NEW_ENERGY",iReturn);
+						NWScript.deleteLocalInt(NWObject.MODULE, "NRG_R");
+						NWScript.deleteLocalInt(NWObject.MODULE, "NRG_G");
+						NWScript.deleteLocalInt(NWObject.MODULE, "NRG_B");
+						
 						Scheduler.flushQueues();
 					}
 					if(event.startsWith("EnergySearch_")){

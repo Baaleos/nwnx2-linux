@@ -2,6 +2,7 @@ package org.baaleos.systems.energy;
 
 import java.util.ArrayList;
 
+import org.nwnx.nwnx2.jvm.Color;
 import org.nwnx.nwnx2.jvm.NWObject;
 import org.nwnx.nwnx2.jvm.NWScript;
 
@@ -63,7 +64,9 @@ public class Energy {
 	
 	private int ID;
 	private String name;
-	
+	private int Red;
+	private int Green;
+	private int Blue;
 	public static boolean getExists(String name){
 		return NWScript.getLocalInt(NWObject.MODULE, ENERGY_NAME_TO_ID+name) != 0;
 	}
@@ -82,7 +85,7 @@ public class Energy {
 		if(iCurrent >= iMax){
 			iCurrent = iMax;
 		}
-		NWScript.printString(NWScript.getName(player, false)+" is regenerating "+this.getName());
+		//NWScript.printString(NWScript.getName(player, false)+" is regenerating "+this.getName());
 		setCurrentAmount(player,iCurrent);
 	}
 	
@@ -106,6 +109,14 @@ public class Energy {
 		this.name = name;
 	}
 	
+	public String getColorString(){
+		return new Color(Red,Green,Blue).stringRep;
+	}
 	
+	public void setColor(int r,int g, int b){
+		Red = r;
+		Green = g;
+		Blue = b;
+	}
 	
 }
