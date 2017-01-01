@@ -7,7 +7,7 @@ import org.nwnx.nwnx2.jvm.*;
 import org.nwnx.nwnx2.jvm.constants.ColorChannel;
 import org.nwnx.nwnx2.jvm.constants.DurationType;
 import org.nwnx.nwnx2.jvm.constants.Effect;
-
+import org.nwnx.nwnx2.jvm.constants.*;
 import com.sun.org.apache.xerces.internal.impl.Constants;
 
 public class Include {
@@ -435,7 +435,7 @@ public class Include {
 				
 			}else{
 				//NWScript.printString("Attempting to apply effect!");
-				if(!HasEffectAlready(oPC,theGene.getEffectType()) && theGene.getEffectType() != -1){
+				if(!HasEffectAlready(oPC,theGene) && theGene.getEffectType() != -1){
 					//NWScript.sendMessageToPC(oPC, "Applying Genetic Effect!");
 					//WriteTimestampedLogEntry("Does not have effect already: Applying new");
 					eEffect = GetEffectFromID(theGene.getEffectType(), theGene.getEffectNumber1(), theGene.getEffectNumber2());
