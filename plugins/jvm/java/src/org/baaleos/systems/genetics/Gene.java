@@ -496,7 +496,8 @@ private static final  String INHUMAN_POWER_APPEARANCE_SKIN_COLOR = "INHUMAN_POWE
 			str = "No Energy Cost";
 		}
 		
-		
+		NWObject oPC = NWScript.getPCs()[0];
+		NWScript.sendMessageToPC(oPC, str);
 		NWScript.setCustomToken(7003, str);
 		
 	}
