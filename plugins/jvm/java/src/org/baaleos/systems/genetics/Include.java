@@ -82,8 +82,9 @@ public class Include {
 		for(NWEffect e : ee){
 			
 			int effType = NWScript.getEffectType(e);
+			int subType = NWScript.getEffectSubType(e);
 			NWObject oCreator = e.creator();
-			if(effType == EffectType && oCreator == GetGeneticEffectCreator()){
+			if(effType == EffectType && oCreator == GetGeneticEffectCreator() && subType == Subtype.SUPERNATURAL){
 				return true;
 			}
 		}
@@ -103,8 +104,10 @@ public class Include {
 		for(NWEffect e : ee){
 			
 			int effType = NWScript.getEffectType(e);
+			int subType = NWScript.getEffectSubType(e);
 			boolean IsGenetic = (GetGeneticEffectCreator() == e.creator());
-			if(IsGenetic && effType == EffectType){
+			if(IsGenetic && effType == EffectType && subType == Subtype.SUPERNATURAL){
+				NWScript.sendMessageToPC(oPC,"A genetic effect has turned off.");
 				NWScript.removeEffect(oPC,e);
 			}
 			
@@ -140,6 +143,7 @@ public class Include {
 	 * @param target
 	 */
 	private static void ApplyEffectByGeneticCreator(final NWEffect effect,final int dType, final float f, final NWObject target){
+		NWEffect effectSupernatural = NWScript.supernaturalEffect(effect);
 		NWScript.applyEffectToObject(dType, effect, target, f);
 	}
 	
