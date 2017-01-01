@@ -425,7 +425,7 @@ public class Include {
 					if(eEffect != null){
 						//NWScript.sendMessageToPC(oPC, "Effect was not null");
 						if(visual > 0){
-							NWEffect visual = NWScript.effectVisualEffect(visual);
+							NWEffect visual = NWScript.effectVisualEffect(visual,false);
 							eEffect = NWScript.effectLinkEffects(visual,eEffect);
 						}
 						ApplyEffectByGeneticCreator(eEffect,DurationType.PERMANENT, 0.00f, oPC);
