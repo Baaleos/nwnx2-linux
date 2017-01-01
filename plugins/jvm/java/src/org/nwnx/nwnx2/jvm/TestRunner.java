@@ -129,7 +129,7 @@ public class TestRunner {
 					if(event.startsWith("GetGeneEnergyCostString_")){
 						NWObject.setObjectInvalidIsNull(true);
 						String geneId = event.replace("GetGeneEnergyCostString_", "");
-						Gene g = Gene.getGeneByID(geneId);
+						Gene g = Gene.getGeneByID(Integer.parseInt(geneId));
 						g.ConstructEnergyCostStringForGene();
 						
 						Scheduler.flushQueues();
