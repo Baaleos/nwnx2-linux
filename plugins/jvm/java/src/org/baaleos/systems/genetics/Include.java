@@ -45,6 +45,7 @@ public class Include {
 	      case Effect.TYPE_CONCEALMENT: iEffect = NWScript.effectConcealment(Value1, Value2); break;
 	      case Effect.TYPE_CONFUSED: iEffect = NWScript.effectConfused(); break;
 	      case Effect.TYPE_CUTSCENEGHOST: iEffect = NWScript.effectCutsceneGhost(); break;
+	      case Effect.TYPE_DAMAGE_INCREASE: iEffect = NWScript.effectDamageIncrease(Value1, Value2);
 	      case Effect.TYPE_HASTE: iEffect = NWScript.effectHaste(); break;
 	      case Effect.TYPE_IMMUNITY: iEffect = NWScript.effectImmunity(Value1); break;
 	      case Effect.TYPE_IMPROVEDINVISIBILITY: iEffect = NWScript.effectInvisibility(Effect.TYPE_IMPROVEDINVISIBILITY); break;
@@ -314,10 +315,15 @@ public class Include {
 			int geneNatural = theGene.getEnvironmentNatural();
 			int TileType = theGene.getEnvironmentTilesetType();
 			int DayNight = theGene.getTimeOfDayActive();
+			int visual = theGene.getVisualEffect();
 			ArrayList<EnergyCostBinding> costBindingList = theGene.getCostPerHeartbeat();
 			boolean hasEnergy = false;
 			int iSuccess = 0;
 			//NWScript.printString("Gene:"+theGene.getID()+" has "+costBindingList.size()+" energy requirements");
+			boolean onlyInCombat = theGene.isCombatOnly();
+			if(onlyInCombat && !combat){
+				return; //Save energy for when we are not in combat!
+			}
 			for(EnergyCostBinding energyCost : costBindingList){
 				Energy e = energyCost.getEnergyToCharge();
 				int AmountToCharge = energyCost.getAmountToCharge();
@@ -339,7 +345,7 @@ public class Include {
 				hasEnergy = true;
 			}
 			
-			boolean onlyInCombat = theGene.isCombatOnly();
+			
 			
 			//NWScript.printString("geneAboveGround:"+geneAboveGround);
 			if(geneAboveGround == CONDITION_IGNORE){
@@ -412,12 +418,16 @@ public class Include {
 			}else{
 				//NWScript.printString("Attempting to apply effect!");
 				if(!HasEffectAlready(oPC,theGene.getEffectType()) && theGene.getEffectType() != -1){
-					NWScript.sendMessageToPC(oPC, "Applying Genetic Effect!");
+					//NWScript.sendMessageToPC(oPC, "Applying Genetic Effect!");
 					//WriteTimestampedLogEntry("Does not have effect already: Applying new");
 					eEffect = GetEffectFromID(theGene.getEffectType(), theGene.getEffectNumber1(), theGene.getEffectNumber2());
 					
 					if(eEffect != null){
-						NWScript.sendMessageToPC(oPC, "Effect was not null");
+						//NWScript.sendMessageToPC(oPC, "Effect was not null");
+						if(visual > 0){
+							NWEffect visual = effectVisualEffect(visual);
+							eEffect = effectLinkEffects(visual,eEffect);
+						}
 						ApplyEffectByGeneticCreator(eEffect,DurationType.PERMANENT, 0.00f, oPC);
 					}
 					//NWScript.applyEffectToObject(DurationType.PERMANENT,eEffect,oPC,0.00f);
