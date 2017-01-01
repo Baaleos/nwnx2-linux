@@ -412,10 +412,12 @@ public class Include {
 			}else{
 				//NWScript.printString("Attempting to apply effect!");
 				if(!HasEffectAlready(oPC,theGene.getEffectType()) && theGene.getEffectType() != -1){
+					NWScript.sendMessageToPC(oPC, "Applying Genetic Effect!");
 					//WriteTimestampedLogEntry("Does not have effect already: Applying new");
 					eEffect = GetEffectFromID(theGene.getEffectType(), theGene.getEffectNumber1(), theGene.getEffectNumber2());
-					//SetEffectCreator (eEffect, oEffectCreator);
+					
 					if(eEffect != null){
+						NWScript.sendMessageToPC(oPC, "Effect was not null");
 						ApplyEffectByGeneticCreator(eEffect,DurationType.PERMANENT, 0.00f, oPC);
 					}
 					//NWScript.applyEffectToObject(DurationType.PERMANENT,eEffect,oPC,0.00f);
