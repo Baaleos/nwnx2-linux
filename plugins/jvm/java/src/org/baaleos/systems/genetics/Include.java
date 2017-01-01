@@ -76,15 +76,16 @@ public class Include {
 	 * @param EffectType
 	 * @return
 	 */
-	private static boolean HasEffectAlready(NWObject oPC, int EffectType){
+	private static boolean HasEffectAlready(NWObject oPC, Gene theGene){
 		
 		NWEffect[] ee = NWScript.getEffects(oPC);
+		NWObject effectCreator = GetGeneticEffectCreator();
 		for(NWEffect e : ee){
 			
 			int effType = NWScript.getEffectType(e);
 			int subType = NWScript.getEffectSubType(e);
 			NWObject oCreator = e.creator();
-			if(effType == EffectType && oCreator == GetGeneticEffectCreator() && subType == Subtype.SUPERNATURAL){
+			if(effType == theGene.getEffectType() && oCreator == effectCreator && subType == Subtype.SUPERNATURAL){
 				return true;
 			}
 		}
@@ -98,15 +99,24 @@ public class Include {
 	 * @param oPC
 	 * @param EffectType
 	 */
-	private static void RemoveGeneticEffect(NWObject oPC, int EffectType){
+	private static void RemoveGeneticEffect(NWObject oPC, Gene theGene){
+		
 		
 		NWEffect[] ee = NWScript.getEffects(oPC);
+		NWObject effectCreator = GetGeneticEffectCreator();
+		String tagOfCreatorObject = NWScript.getTag(e.creator());
 		for(NWEffect e : ee){
-			
+			String tagOfCreator = NWScript.getTag(e.creator());
+			NWScript.sendMessageToPC(oPC,tagOfCreator+" was the creator of this effect");
+			NWScript.sendMessageToPC(oPC,effectCreator+" is what it needed to be");
 			int effType = NWScript.getEffectType(e);
 			int subType = NWScript.getEffectSubType(e);
-			boolean IsGenetic = (GetGeneticEffectCreator() == e.creator());
-			if(IsGenetic && effType == EffectType && subType == Subtype.SUPERNATURAL){
+			boolean IsGenetic = (effectCreator == e.creator());
+			NWScript.sendMessageToPC(oPC,"IsGenetic was "+IsGenetic);
+			NWScript.sendMessageToPC(oPC,"Type found: "+effType+" Subtype found:"+subType+" needed was :"+theGene.getEffectType()+" and "+subType);
+			
+			
+			if(IsGenetic && effType == theGene.getEffectType() && subType == Subtype.SUPERNATURAL){
 				NWScript.sendMessageToPC(oPC,"A genetic effect has turned off.");
 				NWScript.removeEffect(oPC,e);
 			}
@@ -404,7 +414,8 @@ public class Include {
 		
 		}
 		
-		if(Apply == 5){
+		if(Apply == 5)
+		{
 			//Conditions met!
 			int iDamageToApply = theGene.getApplyDamageAmount();
 			NWEffect eEffect;
@@ -430,7 +441,7 @@ public class Include {
 					eEffect = GetEffectFromID(theGene.getEffectType(), theGene.getEffectNumber1(), theGene.getEffectNumber2());
 					
 					if(eEffect != null){
-						//NWScript.sendMessageToPC(oPC, "Effect was not null");
+						NWScript.sendMessageToPC(oPC, "A genetic effect has been activated!");
 						if(visual > 0){
 							NWEffect visualEffect = NWScript.effectVisualEffect(visual,false);
 							eEffect = NWScript.effectLinkEffects(visualEffect,eEffect);
@@ -452,7 +463,7 @@ public class Include {
 			
 		}else{
 			//Inactive - maybe remove effects and feats?
-			RemoveGeneticEffect(oPC, theGene.getEffectType());
+			RemoveGeneticEffect(oPC, theGene);
 			
 			//Remove the genetic appearance related stuff
 			RemoveGeneAppearanceData(oPC, theGene);
