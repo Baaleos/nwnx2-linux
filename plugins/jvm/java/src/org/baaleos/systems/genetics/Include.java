@@ -81,11 +81,11 @@ public class Include {
 		NWEffect[] ee = NWScript.getEffects(oPC);
 		NWObject effectCreator = GetGeneticEffectCreator();
 		for(NWEffect e : ee){
-			
+			String tagOfCreator = NWScript.getTag(e.creator());
 			int effType = NWScript.getEffectType(e);
 			int subType = NWScript.getEffectSubType(e);
-			NWObject oCreator = e.creator();
-			if(effType == theGene.getEffectType() && oCreator == effectCreator && subType == Subtype.SUPERNATURAL){
+			boolean IsGenetic = (tagOfCreator.equals("genetic_unit_test"));
+			if(IsGenetic && effType == theGene.getEffectType() && subType == Subtype.SUPERNATURAL){
 				return true;
 			}
 		}
@@ -101,17 +101,18 @@ public class Include {
 	 */
 	private static void RemoveGeneticEffect(NWObject oPC, Gene theGene){
 		
-		
+		if(!HasEffectAlready(oPC,theGene)){
+			return;
+		}
 		NWEffect[] ee = NWScript.getEffects(oPC);
 		NWObject effectCreator = GetGeneticEffectCreator();
 		String tagOfCreatorObject = NWScript.getTag(effectCreator);
 		for(NWEffect e : ee){
 			String tagOfCreator = NWScript.getTag(e.creator());
-			NWScript.sendMessageToPC(oPC,tagOfCreator+" was the creator of this effect");
-			NWScript.sendMessageToPC(oPC,effectCreator+" is what it needed to be");
+			
 			int effType = NWScript.getEffectType(e);
 			int subType = NWScript.getEffectSubType(e);
-			boolean IsGenetic = (effectCreator == e.creator());
+			boolean IsGenetic = (tagOfCreator.equals("genetic_unit_test"));
 			NWScript.sendMessageToPC(oPC,"IsGenetic was "+IsGenetic);
 			NWScript.sendMessageToPC(oPC,"Type found: "+effType+" Subtype found:"+subType+" needed was :"+theGene.getEffectType()+" and "+subType);
 			
@@ -444,7 +445,7 @@ public class Include {
 						NWScript.sendMessageToPC(oPC, "A genetic effect has been activated!");
 						if(visual > 0){
 							NWEffect visualEffect = NWScript.effectVisualEffect(visual,false);
-							eEffect = NWScript.effectLinkEffects(visualEffect,eEffect);
+							eEffect = NWScript.effectLinkEffects(eEffect, visualEffect);
 						}
 						ApplyEffectByGeneticCreator(eEffect,DurationType.PERMANENT, 0.00f, oPC);
 					}
