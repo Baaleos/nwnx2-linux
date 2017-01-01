@@ -296,6 +296,7 @@ public class Include {
 		int Apply = 0;
 		int Always = 0;
 		int FeatID = theGene.getFeatID();
+		int visual = -1;
 		try{
 			Always = theGene.getAlwaysActive() ? 1:0;
 			
@@ -315,7 +316,7 @@ public class Include {
 			int geneNatural = theGene.getEnvironmentNatural();
 			int TileType = theGene.getEnvironmentTilesetType();
 			int DayNight = theGene.getTimeOfDayActive();
-			int visual = theGene.getVisualEffect();
+			visual = theGene.getVisualEffect();
 			ArrayList<EnergyCostBinding> costBindingList = theGene.getCostPerHeartbeat();
 			boolean hasEnergy = false;
 			int iSuccess = 0;
