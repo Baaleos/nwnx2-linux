@@ -45,7 +45,7 @@ public class Include {
 	      case Effect.TYPE_CONCEALMENT: iEffect = NWScript.effectConcealment(Value1, Value2); break;
 	      case Effect.TYPE_CONFUSED: iEffect = NWScript.effectConfused(); break;
 	      case Effect.TYPE_CUTSCENEGHOST: iEffect = NWScript.effectCutsceneGhost(); break;
-	      case Effect.TYPE_DAMAGE_INCREASE: iEffect = NWScript.effectDamageIncrease(Value1, Value2);
+	      case Effect.TYPE_DAMAGE_INCREASE: iEffect = NWScript.effectDamageIncrease(Value1, Value2);break;
 	      case Effect.TYPE_HASTE: iEffect = NWScript.effectHaste(); break;
 	      case Effect.TYPE_IMMUNITY: iEffect = NWScript.effectImmunity(Value1); break;
 	      case Effect.TYPE_IMPROVEDINVISIBILITY: iEffect = NWScript.effectInvisibility(Effect.TYPE_IMPROVEDINVISIBILITY); break;
@@ -297,6 +297,7 @@ public class Include {
 		int Always = 0;
 		int FeatID = theGene.getFeatID();
 		int visual = -1;
+		boolean combatSatisfied = true;
 		try{
 			Always = theGene.getAlwaysActive() ? 1:0;
 			
@@ -323,22 +324,23 @@ public class Include {
 			//NWScript.printString("Gene:"+theGene.getID()+" has "+costBindingList.size()+" energy requirements");
 			boolean onlyInCombat = theGene.isCombatOnly();
 			if(onlyInCombat && !combat){
-				return; //Save energy for when we are not in combat!
+				combatSatisfied = false; //Save energy for when we are not in combat!
 			}
-			for(EnergyCostBinding energyCost : costBindingList){
-				Energy e = energyCost.getEnergyToCharge();
-				int AmountToCharge = energyCost.getAmountToCharge();
-				int CurrentEnergy = e.getCurrentAmount(oPC);
-				int AfterSub = CurrentEnergy - AmountToCharge;
-				if(AfterSub >= 0){
-					e.setCurrentAmount(oPC, AfterSub);
-					//NWScript.printString("Satisfied cost for "+e.getName()+" energy.");
-					iSuccess++;
-				}else{
-					//NWScript.printString("NOT Satisfied cost for "+e.getName()+" energy.");
+			if(combatSatisfied){
+				for(EnergyCostBinding energyCost : costBindingList){
+					Energy e = energyCost.getEnergyToCharge();
+					int AmountToCharge = energyCost.getAmountToCharge();
+					int CurrentEnergy = e.getCurrentAmount(oPC);
+					int AfterSub = CurrentEnergy - AmountToCharge;
+					if(AfterSub >= 0){
+						e.setCurrentAmount(oPC, AfterSub);
+						//NWScript.printString("Satisfied cost for "+e.getName()+" energy.");
+						iSuccess++;
+					}else{
+						//NWScript.printString("NOT Satisfied cost for "+e.getName()+" energy.");
+					}
 				}
 			}
-			
 			//All Energy costs must be satisfied
 			//If there is no costs- then this should auto pass
 			if(iSuccess == costBindingList.size()){
