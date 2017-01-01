@@ -126,7 +126,14 @@ public class TestRunner {
 
 						Scheduler.flushQueues();
 					}
-					
+					if(event.startsWith("GetGeneEnergyCostString_")){
+						NWObject.setObjectInvalidIsNull(true);
+						String geneId = event.replace("GetGeneEnergyCostString_", "");
+						Gene g = Gene.getGeneByID(geneId);
+						g.ConstructEnergyCostStringForGene();
+						
+						Scheduler.flushQueues();
+					}
 					if(event.startsWith("SetupEnergy_")){
 						NWObject.setObjectInvalidIsNull(true);
 						String energyName = event.replace("SetupEnergy_", "");

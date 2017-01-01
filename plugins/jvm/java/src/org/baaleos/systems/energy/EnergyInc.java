@@ -21,6 +21,9 @@ public class EnergyInc {
 		
 	}
 	
+	
+	
+	
 	public static void ConstructEnergyListMenuForPlayer(final NWObject obj){
 		String str = "";
 		ArrayList<Energy> energies = Energy.getEnergyDefinitions();

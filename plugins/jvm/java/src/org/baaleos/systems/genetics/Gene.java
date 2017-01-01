@@ -3,6 +3,7 @@ package org.baaleos.systems.genetics;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.baaleos.systems.energy.Energy;
 import org.nwnx.nwnx2.jvm.NWObject;
 import org.nwnx.nwnx2.jvm.NWScript;
 
@@ -485,6 +486,22 @@ private static final  String INHUMAN_POWER_APPEARANCE_SKIN_COLOR = "INHUMAN_POWE
 		return Appearance;
 	}
 
+	public void ConstructEnergyCostStringForGene(){
+		String str = "";
+
+		for(EnergyCostBinding ecb: CostPerHeartbeat){
+			str += ecb.getAmountToCharge()+" "+ecb.getEnergyToCharge().getName()+" per heartbeat."+System.getProperty("line.separator");
+		}
+		if(str.equals("")){
+			str = "No Energy Cost";
+		}
+		
+		
+		NWScript.setCustomToken(7003, str);
+		
+	}
+	
+	
 	/**
 	 * What appearance does the player have when the gene is active
 	 * @return
