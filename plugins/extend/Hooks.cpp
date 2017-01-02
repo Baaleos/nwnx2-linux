@@ -369,6 +369,8 @@ int Hook_CheckUseMagicDeviceSkill(CNWSCreature *pCreature, CNWSItem *pItem, int 
 
 
 int (*CServerExoAppInternal__RemovePCFromWorld_orig)(CServerExoAppInternal *app,  CNWSPlayer *player) = NULL;
+int (*CNWSEffectListHandler__OnApplyDamage_orig)(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *eff, int arg) = NULL;
+
 
 
 int Hook_OnPlayerLeave(CServerExoAppInternal *app,  CNWSPlayer *player){
@@ -384,7 +386,51 @@ int Hook_OnPlayerLeave(CServerExoAppInternal *app,  CNWSPlayer *player){
 	return CServerExoAppInternal__RemovePCFromWorld_orig(app,player);
 }
 	
+int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *ob, CGameEffect *eff, int arg){
+	
+	int i;
+	CNWSCreature *cre;
+	
+	if (ob == NULL || (cre = ob->vtable->AsNWSCreature(ob)) == NULL || cre->cre_stats == NULL) {
+        return CNWSEffectListHandler__OnApplyDamage_orig(handler, ob,eff,arg);
+    }
+	
 
+	//char * cData = new char[25];
+	char * cData = (char*)malloc(50 * sizeof(char));
+	
+	CNWSScriptVarTable *vt;
+	vt = &(((CNWSObject *)cre)->obj_vartable);
+	
+	
+	CNWSScriptVarTable__SetObject(vt,(char*)"dmg_creator",effect->eff_creator);
+	
+	for (i=0; i< 12; i++) 
+		{
+			sprintf( cData, "damage_%d", i );
+			CExoString name = {
+				.text = (char*)cData,
+				.len  = 0
+			};
+			int iNum = effect->eff_integers[i];
+			CNWSScriptVarTable__SetInt(vt, &name, iNum,0);			
+		}
+	nwn_ExecuteScript((char*)"nwnx_damages",ob->obj_id);
+	CNWSScriptVarTable__DestroyObject(vt, (char*)"dmg_creator");
+	for (i=0; i< 12; i++) 
+		{
+			sprintf( cData, "damage_%d", i );
+			CExoString name = {
+				.text = (char*)cData,
+				.len  = 0
+			};
+			int nDamAmount = CNWSScriptVarTable__GetInt(vt,&name);
+			effect->eff_integers[i] = nDamAmount;
+		}
+	
+	free(cData);
+	return CNWSEffectListHandler__OnApplyDamage_orig(handler, ob,eff,arg);
+}
 
 
 int InitHooks() {
@@ -397,7 +443,9 @@ int InitHooks() {
 	*(unsigned long*)&CNWSItem__GetPropertyByTypeExists = 0x081a2a6c;
 
 	*(unsigned long*)&CServerExoAppInternal__RemovePCFromWorld = 0x080a4c94;
+	*(unsigned long*)&CNWSEffectListHandler__OnApplyDamage = 0x0816c7e4;
 	
+	HOOK(CNWSEffectListHandler__OnApplyDamage_orig, CNWSEffectListHandler__OnApplyDamage, Hook_OnDamage, 6);
 	HOOK(CServerExoAppInternal__RemovePCFromWorld_orig, CServerExoAppInternal__RemovePCFromWorld, Hook_OnPlayerLeave, 6);
 	
 	//CServerExoAppInternal__RemovePCFromWorld_orig = nx_hook_function((int *)CServerExoAppInternal__RemovePCFromWorld, (int *)Hook_OnPlayerLeave, 6, NX_HOOK_DIRECT);
