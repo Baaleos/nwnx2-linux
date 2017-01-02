@@ -369,7 +369,7 @@ int Hook_CheckUseMagicDeviceSkill(CNWSCreature *pCreature, CNWSItem *pItem, int 
 
 
 int (*CServerExoAppInternal__RemovePCFromWorld_orig)(CServerExoAppInternal *app,  CNWSPlayer *player) = NULL;
-int (*CNWSEffectListHandler__OnApplyDamage_orig)(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *eff, int arg) = NULL;
+int (*CNWSEffectListHandler__OnApplyDamage_orig)(CNWSEffectListHandler *handler, CGameObject *obj, CGameEffect *eff, int arg) = NULL;
 
 
 
@@ -386,7 +386,7 @@ int Hook_OnPlayerLeave(CServerExoAppInternal *app,  CNWSPlayer *player){
 	return CServerExoAppInternal__RemovePCFromWorld_orig(app,player);
 }
 	
-int Hook_OnDamage(CNWSEffectListHandler *handler, CGameObject *ob, CGameEffect *eff, int arg){
+int Hook_OnDamage(CNWSEffectListHandler *handler, CGameObject *ob, CGameEffect *effect, int arg){
 	
 	int i;
 	CNWSCreature *cre;
@@ -400,9 +400,9 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CGameObject *ob, CGameEffect *
 	
 	CNWSScriptVarTable *vt;
 	vt = &(((CNWSObject *)cre)->obj_vartable);
-	CExoString name;
-	CExoString dmg_creator;
-	dmg_creator.Text = (char*)"dmg_creator";
+	CExoString* name;
+	CExoString* dmg_creator;
+	dmg_creator.text = (char*)"dmg_creator";
 	
 	
 	CNWSScriptVarTable__SetObject(vt,dmg_creator,effect->eff_creator);
@@ -410,17 +410,17 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CGameObject *ob, CGameEffect *
 	for (i=0; i< 12; i++) 
 		{
 			sprintf( cData, "damage_%d", i );
-			name.Text = (char*)cData;
+			name.text = (char*)cData;
 				
 			int iNum = effect->eff_integers[i];
 			CNWSScriptVarTable__SetInt(vt, &name, iNum,0);			
 		}
-	nwn_ExecuteScript((char*)"nwnx_damages",cre->Object.ObjectID);
+	nwn_ExecuteScript((char*)"nwnx_damages",cre->obj_id);
 	CNWSScriptVarTable__DestroyObject(vt, dmg_creator);
 	for (i=0; i< 12; i++) 
 		{
 			sprintf( cData, "damage_%d", i );
-			name.Text = (char*)cData;
+			name.text = (char*)cData;
 			int nDamAmount = CNWSScriptVarTable__GetInt(vt,&name);
 			effect->eff_integers[i] = nDamAmount;
 		}
