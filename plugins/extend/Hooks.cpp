@@ -431,7 +431,7 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CGameObject *ob, CGameEffect *
 		}
 	
 	free(cData);
-	return CNWSEffectListHandler__OnApplyDamage_orig(handler, obj,eff,arg);
+	return CNWSEffectListHandler__OnApplyDamage_orig(handler, ob,eff,arg);
 }
 
 
