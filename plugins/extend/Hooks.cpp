@@ -393,23 +393,31 @@ int Hook_OnPlayerLeave(CServerExoAppInternal *app,  CNWSPlayer *player){
 	
 int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *effect, int arg){
 	
+	extend.Log(0,"Entered OnDamage Hook\n");
 	int i;
 	CNWSCreature *cre;
 	CGameObject *ob = (CGameObject *)CServerExoAppInternal__GetGameObject((*NWN_AppManager)->app_server->srv_internal,obj->obj_id);
+	
+	extend.Log(0,"We have ob : 401\n");
 	
 	//if (obj == NULL || (cre = obj.obj_vartable->AsNWSCreature(obj)) == NULL || cre->cre_stats == NULL) {
 	if (ob == NULL || (cre = ob->vtable->AsNWSCreature(ob)) == NULL || cre->cre_stats == NULL) {
         return CNWSEffectListHandler__OnApplyDamage_orig(handler, obj,effect,arg);
     }
 	
-
+	extend.Log(0,"408\n");
+	
+	
 	//char * cData = new char[25];
-	char * cData = (char*)malloc(50 * sizeof(char));
+	//char * cData = (char*)malloc(50 * sizeof(char));
+	
+	
+	extend.Log(0,"415\n");
 	
 	CNWSScriptVarTable *vt;
 	vt = &(((CNWSObject *)cre)->obj_vartable);
 	
-	
+	extend.Log(0,"420\n");
 	
 	CExoString *dmgr;
 	dmgr->text = (char*)"dmg_creator";
@@ -417,29 +425,31 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *
 	
 	CExoString *dmgVar;
 	
+	extend.Log(0,"428\n");
 	
 	CNWSScriptVarTable__SetObject(vt,(CExoString *)dmgr,effect->eff_creator);
 	
 	for (i=0; i< 12; i++) 
 		{
-			sprintf( cData, "damage_%d", i );
-			dmgVar->text = (char*)cData;
+			//sprintf( cData, "damage_%d", i );
+			dmgVar->text = (char*)"damage_"+i;
 			dmgVar->len = 0;
 			int iNum = effect->eff_integers[i];
 			CNWSScriptVarTable__SetInt(vt, (CExoString *)dmgVar, iNum,0);			
 		}
+	extend.Log(0,"440\n");
 	nwn_ExecuteScript((char*)"nwnx_damages",cre->obj.obj_id);
 	CNWSScriptVarTable__DestroyObject(vt, (CExoString *)dmgr);
 	for (i=0; i< 12; i++) 
 		{
-			sprintf( cData, "damage_%d", i );
-			dmgVar->text = (char*)cData;
+			//sprintf( cData, "damage_%d", i );
+			dmgVar->text = (char*)"damage_"+i;
 			dmgVar->len = 0;
 			int nDamAmount = CNWSScriptVarTable__GetInt(vt,(CExoString *)dmgVar);
 			effect->eff_integers[i] = nDamAmount;
 		}
-	
-	free(cData);
+	extend.Log(0,"451\n");
+	//free(cData);
 	return CNWSEffectListHandler__OnApplyDamage_orig(handler, obj,effect,arg);
 }
 
