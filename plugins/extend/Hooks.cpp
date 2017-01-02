@@ -405,36 +405,31 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CGameObject *ob, CGameEffect *
 	
 	CNWSScriptVarTable *vt;
 	vt = &(((CNWSObject *)cre)->obj_vartable);
-
-	CExoString dmg_creator = {
-			.text = (char*)"dmg_creator",
-			.len  = 0
-		};
+	CExoString dmgr;
+	dmgr.text = (char*)"dmg_creator";
+	dmgr.len = 0;
+	
+	CExoString dmgVar;
 	
 	
-	
-	CNWSScriptVarTable__SetObject(vt,dmg_creator,effect->eff_creator);
+	CNWSScriptVarTable__SetObject(vt,dmgr,effect->eff_creator);
 	
 	for (i=0; i< 12; i++) 
 		{
 			sprintf( cData, "damage_%d", i );
-				CExoString name = {
-				.text = (char*)cData,
-				.len  = 0
-			};
+			dmgVar.text = (char*)cData;
+			dmgVar.len = 0;
 			int iNum = effect->eff_integers[i];
-			CNWSScriptVarTable__SetInt(vt, &name, iNum,0);			
+			CNWSScriptVarTable__SetInt(vt, &dmgVar, iNum,0);			
 		}
 	nwn_ExecuteScript((char*)"nwnx_damages",cre->obj.obj_id);
-	CNWSScriptVarTable__DestroyObject(vt, dmg_creator);
+	CNWSScriptVarTable__DestroyObject(vt, dmgr);
 	for (i=0; i< 12; i++) 
 		{
 			sprintf( cData, "damage_%d", i );
-			CExoString name = {
-				.text = (char*)cData,
-				.len  = 0
-			};
-			int nDamAmount = CNWSScriptVarTable__GetInt(vt,&name);
+			dmgVar.text = (char*)cData;
+			dmgVar.len = 0;
+			int nDamAmount = CNWSScriptVarTable__GetInt(vt,&dmgVar);
 			effect->eff_integers[i] = nDamAmount;
 		}
 	
