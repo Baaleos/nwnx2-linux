@@ -386,13 +386,13 @@ int Hook_OnPlayerLeave(CServerExoAppInternal *app,  CNWSPlayer *player){
 	return CServerExoAppInternal__RemovePCFromWorld_orig(app,player);
 }
 	
-int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *ob, CGameEffect *eff, int arg){
+int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *eff, int arg){
 	
 	int i;
 	CNWSCreature *cre;
-	
+	CGameObject *ob = &(CNWSObject *)obj;
 	if (ob == NULL || (cre = ob->vtable->AsNWSCreature(ob)) == NULL || cre->cre_stats == NULL) {
-        return CNWSEffectListHandler__OnApplyDamage_orig(handler, ob,eff,arg);
+        return CNWSEffectListHandler__OnApplyDamage_orig(handler, obj,eff,arg);
     }
 	
 
@@ -401,9 +401,12 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *ob, CGameEffect *e
 	
 	CNWSScriptVarTable *vt;
 	vt = &(((CNWSObject *)cre)->obj_vartable);
+	CExoString dmg_creator = {
+				.text = (char*)"dmg_creator",
+				.len  = 0
+			};
 	
-	
-	CNWSScriptVarTable__SetObject(vt,(char*)"dmg_creator",effect->eff_creator);
+	CNWSScriptVarTable__SetObject(vt,dmg_creator,effect->eff_creator);
 	
 	for (i=0; i< 12; i++) 
 		{
@@ -416,7 +419,7 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *ob, CGameEffect *e
 			CNWSScriptVarTable__SetInt(vt, &name, iNum,0);			
 		}
 	nwn_ExecuteScript((char*)"nwnx_damages",ob->obj_id);
-	CNWSScriptVarTable__DestroyObject(vt, (char*)"dmg_creator");
+	CNWSScriptVarTable__DestroyObject(vt, dmg_creator);
 	for (i=0; i< 12; i++) 
 		{
 			sprintf( cData, "damage_%d", i );
@@ -429,7 +432,7 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *ob, CGameEffect *e
 		}
 	
 	free(cData);
-	return CNWSEffectListHandler__OnApplyDamage_orig(handler, ob,eff,arg);
+	return CNWSEffectListHandler__OnApplyDamage_orig(handler, obj,eff,arg);
 }
 
 
