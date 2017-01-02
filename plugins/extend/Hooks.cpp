@@ -377,7 +377,7 @@ int Hook_OnPlayerLeave(CServerExoAppInternal *app,  CNWSPlayer *player){
                 nwn_ExecuteScript(script, pPlayerObject->obj_id);
 		}
 	//free(script);
-	return CServerExoAppInternal__RemovePCFromWorld(app, player);
+	
 }
 	
 
