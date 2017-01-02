@@ -20,7 +20,7 @@
 
 extern int (*CServerExoAppInternal__RemovePCFromWorld_orig)(CServerExoAppInternal *app,  CNWSPlayer *player);
 extern int (*CNWSEffectListHandler__OnApplyDamage_orig)(CNWSEffectListHandler *handler, CGameObject *obj, CGameEffect *eff, int arg);
-CExoString *NewCExoString(char *str);
+
 int InitHooks();
 
 #endif

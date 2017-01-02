@@ -387,13 +387,7 @@ int Hook_OnPlayerLeave(CServerExoAppInternal *app,  CNWSPlayer *player){
 }
 
 
-CExoString *NewCExoString(char *str)
-{
-	CExoString *ret = (CExoString *) malloc(sizeof(CExoString));
-	ret->text = strdup(str);
-	ret->len = strlen(str)+1;
-	return ret;
-}
+
 
 
 	
@@ -411,9 +405,12 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CGameObject *ob, CGameEffect *
 	
 	CNWSScriptVarTable *vt;
 	vt = &(((CNWSObject *)cre)->obj_vartable);
-	CExoString name;
-	CExoString dmg_creator;
-	dmg_creator = NewCExoString((char*)"dmg_creator");
+
+	CExoString dmg_creator = {
+			.text = (char*)"dmg_creator",
+			.len  = 0
+		};
+	
 	
 	
 	CNWSScriptVarTable__SetObject(vt,dmg_creator,effect->eff_creator);
@@ -421,8 +418,10 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CGameObject *ob, CGameEffect *
 	for (i=0; i< 12; i++) 
 		{
 			sprintf( cData, "damage_%d", i );
-			name = NewCExoString((char*)cData);
-				
+				CExoString name = {
+				.text = (char*)cData,
+				.len  = 0
+			};
 			int iNum = effect->eff_integers[i];
 			CNWSScriptVarTable__SetInt(vt, &name, iNum,0);			
 		}
@@ -431,7 +430,10 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CGameObject *ob, CGameEffect *
 	for (i=0; i< 12; i++) 
 		{
 			sprintf( cData, "damage_%d", i );
-			name = NewCExoString((char*)cData);
+			CExoString name = {
+				.text = (char*)cData,
+				.len  = 0
+			};
 			int nDamAmount = CNWSScriptVarTable__GetInt(vt,&name);
 			effect->eff_integers[i] = nDamAmount;
 		}
