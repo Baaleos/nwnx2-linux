@@ -391,12 +391,14 @@ int Hook_OnPlayerLeave(CServerExoAppInternal *app,  CNWSPlayer *player){
 
 
 	
-int Hook_OnDamage(CNWSEffectListHandler *handler, CGameObject *ob, CGameEffect *effect, int arg){
+int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *effect, int arg){
 	
 	int i;
 	CNWSCreature *cre;
+	CGameObject *ob = CServerExoAppInternal__GetGameObject(obj->ObjectID);
+	CServerExoAppInternal__GetGameObject
 	if (ob == NULL || (cre = ob->vtable->AsNWSCreature(ob)) == NULL || cre->cre_stats == NULL) {
-        return CNWSEffectListHandler__OnApplyDamage_orig(handler, ob,effect,arg);
+        return CNWSEffectListHandler__OnApplyDamage_orig(handler, obj,effect,arg);
     }
 	
 
@@ -437,7 +439,7 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CGameObject *ob, CGameEffect *
 		}
 	
 	free(cData);
-	return CNWSEffectListHandler__OnApplyDamage_orig(handler, ob,effect,arg);
+	return CNWSEffectListHandler__OnApplyDamage_orig(handler, obj,effect,arg);
 }
 
 
