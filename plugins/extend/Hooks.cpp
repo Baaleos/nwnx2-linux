@@ -363,6 +363,26 @@ int Hook_CheckUseMagicDeviceSkill(CNWSCreature *pCreature, CNWSItem *pItem, int 
 	return 0;
 }
 
+void Hook_OnPlayerLeave(CNWSPlayer *player){
+	CGameObject *pPlayerGameObject = CNWSPlayer__GetGameObject(player);
+	CNWSObject *pPlayerObject;
+
+	if(pPlayerGameObject != NULL && pPlayerGameObject->vtable != NULL) {
+		pPlayerObject = pPlayerGameObject->vtable->AsNWSObject(pPlayerGameObject);
+	}
+	nwn_objid_t *objectId = pPlayerObject->obj_id;
+	
+	char * script = malloc(14 * sizeof(char));
+	script = "onplayer_leave";
+        if(script != NULL) {
+                nwn_ExecuteScript(script->text, pCreatureStats->cs_original->obj.obj_id);
+		}
+	free(script);
+	
+}
+	
+
+
 
 int InitHooks() {
 	*(unsigned long*)&CNWMessage__WriteSHORT = 0x80c3ddc;
@@ -373,6 +393,9 @@ int InitHooks() {
 
 	*(unsigned long*)&CNWSItem__GetPropertyByTypeExists = 0x081a2a6c;
 
+	*(unsigned long*)&CServerExoAppInternal__RemovePCFromWorld = 0x080a4c94;
+	
+	nx_hook_function((void *)CServerExoAppInternal__RemovePCFromWorld, (void *)Hook_OnPlayerLeave, 6, NX_HOOK_DIRECT);
 	
 	//nx_hook_function((int *) 0x0816C7E4,(int *)Hook_DamageEffectListHandler, 5, NX_HOOK_DIRECT);
 	
