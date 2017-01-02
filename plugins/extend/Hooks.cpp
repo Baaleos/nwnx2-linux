@@ -371,11 +371,7 @@ int Hook_OnPlayerLeave(CServerExoAppInternal *app,  CNWSPlayer *player){
 		pPlayerObject = pPlayerGameObject->vtable->AsNWSObject(pPlayerGameObject);
 	}
 		
-	char * script = (char*)malloc(14 * sizeof(char));
-	script = (char*)"onplayer_leave";
-        if(script != NULL) {
-                nwn_ExecuteScript(script, pPlayerObject->obj_id);
-		}
+	nwn_ExecuteScript((char*)"onplayer_leave", pPlayerObject->obj_id);
 	//free(script);
 	
 }
