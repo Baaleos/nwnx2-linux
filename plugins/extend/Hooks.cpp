@@ -363,7 +363,7 @@ int Hook_CheckUseMagicDeviceSkill(CNWSCreature *pCreature, CNWSItem *pItem, int 
 	return 0;
 }
 
-
+int (*CServerExoAppInternal__RemovePCFromWorld_orig)(CServerExoAppInternal *app,  CNWSPlayer *player) = NULL;
 
 
 int Hook_OnPlayerLeave(CServerExoAppInternal *app,  CNWSPlayer *player){
@@ -379,7 +379,7 @@ int Hook_OnPlayerLeave(CServerExoAppInternal *app,  CNWSPlayer *player){
 	return CServerExoAppInternal__RemovePCFromWorld_orig(app,player);
 }
 	
-int (*CServerExoAppInternal__RemovePCFromWorld_orig)(CServerExoAppInternal *app,  CNWSPlayer *player) = NULL;
+
 
 
 int InitHooks() {
