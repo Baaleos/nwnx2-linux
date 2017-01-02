@@ -364,9 +364,9 @@ int Hook_CheckUseMagicDeviceSkill(CNWSCreature *pCreature, CNWSItem *pItem, int 
 }
 
 
-int hookRunning = 0;
 
-void Hook_OnPlayerLeave(CServerExoAppInternal *app,  CNWSPlayer *player){
+
+int Hook_OnPlayerLeave(CServerExoAppInternal *app,  CNWSPlayer *player){
 	CGameObject *pPlayerGameObject = CNWSPlayer__GetGameObject(player);
 	CNWSObject *pPlayerObject;
 
@@ -376,7 +376,7 @@ void Hook_OnPlayerLeave(CServerExoAppInternal *app,  CNWSPlayer *player){
 		
 	nwn_ExecuteScript((char*)"onplayer_leave", pPlayerObject->obj_id);
 	//free(script);
-	CServerExoAppInternal__RemovePCFromWorld_orig(app,player);
+	return CServerExoAppInternal__RemovePCFromWorld_orig(app,player);
 }
 	
 int (*CServerExoAppInternal__RemovePCFromWorld_orig)(CServerExoAppInternal *app,  CNWSPlayer *player) = NULL;
@@ -393,7 +393,7 @@ int InitHooks() {
 
 	*(unsigned long*)&CServerExoAppInternal__RemovePCFromWorld = 0x080a4c94;
 	
-	*(void**)&CServerExoAppInternal__RemovePCFromWorld_orig = nx_hook_function((void *)CServerExoAppInternal__RemovePCFromWorld, (void *)Hook_OnPlayerLeave, 6, NX_HOOK_DIRECT);
+	*(int**)&CServerExoAppInternal__RemovePCFromWorld_orig = nx_hook_function((int *)CServerExoAppInternal__RemovePCFromWorld, (int *)Hook_OnPlayerLeave, 6, NX_HOOK_DIRECT);
 	extend.Log(0,"Hooked on player Leave world: Script: onplayer_leave\n");
 	//nx_hook_function((int *) 0x0816C7E4,(int *)Hook_DamageEffectListHandler, 5, NX_HOOK_DIRECT);
 	
