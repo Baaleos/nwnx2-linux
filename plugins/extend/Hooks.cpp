@@ -397,7 +397,7 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *
 	CNWSCreature *cre;
 	//CGameObject *ob = CServerExoAppInternal__GetGameObject(obj.obj_id);
 	
-	if (obj == NULL || (cre = obj->obj_vartable->AsNWSCreature(obj)) == NULL || cre->cre_stats == NULL) {
+	if (obj == NULL || (cre = obj.obj_vartable->AsNWSCreature(obj)) == NULL || cre->cre_stats == NULL) {
 	//if (ob == NULL || (cre = ob->vtable->AsNWSCreature(ob)) == NULL || cre->cre_stats == NULL) {
         return CNWSEffectListHandler__OnApplyDamage_orig(handler, obj,effect,arg);
     }
