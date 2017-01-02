@@ -363,7 +363,7 @@ int Hook_CheckUseMagicDeviceSkill(CNWSCreature *pCreature, CNWSItem *pItem, int 
 	return 0;
 }
 
-void Hook_OnPlayerLeave(CNWSPlayer *player){
+void Hook_OnPlayerLeave(CServerExoAppInternal *app,  CNWSPlayer *player){
 	CGameObject *pPlayerGameObject = CNWSPlayer__GetGameObject(player);
 	CNWSObject *pPlayerObject;
 
@@ -377,7 +377,7 @@ void Hook_OnPlayerLeave(CNWSPlayer *player){
                 nwn_ExecuteScript(script, pPlayerObject->obj_id);
 		}
 	free(script);
-	
+	CServerExoAppInternal__RemovePCFromWorld(app, player);
 }
 	
 
