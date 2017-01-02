@@ -126,6 +126,23 @@ public class TestRunner {
 
 						Scheduler.flushQueues();
 					}
+					if(event.equals("HasEnoughEnergyForGeneCast")){
+						NWObject.setObjectInvalidIsNull(true);
+						NWObject module = NWObject.MODULE;
+						NWObject user = NWScript.getLocalObject(module, "GENE_USER");
+						int GeneId = NWScript.getLocalInt(user, "GENE_BEING_CAST");
+						Gene g = Gene.getGeneByID(GeneId);
+						
+						boolean bCanCast = Include.getHasEnergyForCast(oPC, g);
+						if(bCanCast){
+							NWScript.setLocalInt(user, "RESULT",1);	
+						}else{
+							NWScript.setLocalInt(user, "RESULT",0);	
+						}
+						NWScript.deleteLocalInt(user, "GENE_BEING_CAST");
+						NWScript.deleteLocalObject(module, "GENE_USER");
+						Scheduler.flushQueues();
+					}
 					if(event.startsWith("GetGeneEnergyCostString_")){
 						NWObject.setObjectInvalidIsNull(true);
 						String geneId = event.replace("GetGeneEnergyCostString_", "");

@@ -44,6 +44,8 @@ private static final  String INHUMAN_POWER_APPEARANCE_CHANGE = "INHUMAN_POWER_AP
 private static final  String INHUMAN_POWER_APPEARANCE_HAIR_COLOR = "INHUMAN_POWER_APPEARANCE_HAIR_";
 private static final  String INHUMAN_POWER_APPEARANCE_SKIN_COLOR = "INHUMAN_POWER_APPEARANCE_SKIN_";
 
+private static final  String INHUMAN_POWER_BINDABLE = "INHUMAN_POWER_BINDABLE_";
+private static final  String INHUMAN_POWER_BIND_SCRIPT = "INHUMAN_POWER_BIND_SCRIPT_";
 
 
 	private int SkinColor;
@@ -72,6 +74,8 @@ private static final  String INHUMAN_POWER_APPEARANCE_SKIN_COLOR = "INHUMAN_POWE
 		int AppearanceChange = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_APPEARANCE_CHANGE+GeneID);
 		int AppearanceChangeHair = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_APPEARANCE_HAIR_COLOR+GeneID);
 		int AppearanceChangeSkin = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_APPEARANCE_SKIN_COLOR+GeneID);
+		boolean isBindable = NWScript.getLocalInt(NWObject.MODULE, INHUMAN_POWER_BINDABLE+GeneID) == 1;
+		String scriptIfAny = NWScript.getLocalString(NWObject.MODULE, INHUMAN_POWER_BIND_SCRIPT+GeneID);
 		setGeneName(sName);
 		setFeatID(Feat);
 		setIsPassive(IsPassive);
@@ -89,6 +93,8 @@ private static final  String INHUMAN_POWER_APPEARANCE_SKIN_COLOR = "INHUMAN_POWE
 		setVisualEffect(Visual);
 		setAlwaysActive(AlwaysActive);
 		setCombatOnly(InCombatOnly);
+		setIsBindable(isBindable);
+		setBindingScript(scriptIfAny);
 		setAppearance(AppearanceChange);
 		setHairColor(AppearanceChangeHair);
 		setSkinColor(AppearanceChangeSkin);
@@ -505,6 +511,24 @@ private static final  String INHUMAN_POWER_APPEARANCE_SKIN_COLOR = "INHUMAN_POWE
 	}
 	
 	
+	public void setIsBindable(boolean b) {
+		IsBindable = b;
+	}
+	public void setBindingScript(String script) {
+		if(script.length()> 1){
+			BindingScript = script;
+		}
+	}
+	
+	public boolean getIsBindable() {
+		return IsBindable;
+	}
+	
+	public String getBindingScript() {
+		return BindingScript;
+	}
+	
+	
 	/**
 	 * What appearance does the player have when the gene is active
 	 * @return
@@ -529,6 +553,8 @@ private static final  String INHUMAN_POWER_APPEARANCE_SKIN_COLOR = "INHUMAN_POWE
 	private int LevelOfPower;
 	private int VisualEffect;
 	private boolean CombatOnly;
+	private boolean IsBindable;
+	private String BindingScript;
 	private ArrayList<EnergyCostBinding> CostPerHeartbeat = new ArrayList<EnergyCostBinding>();
 	
 }

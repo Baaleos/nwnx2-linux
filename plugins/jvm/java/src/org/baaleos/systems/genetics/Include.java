@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.baaleos.systems.energy.Energy;
 import org.nwnx.nwnx2.jvm.*;
+import org.nwnx.nwnx2.jvm.Color;
 import org.nwnx.nwnx2.jvm.constants.ColorChannel;
 import org.nwnx.nwnx2.jvm.constants.DurationType;
 import org.nwnx.nwnx2.jvm.constants.Effect;
@@ -283,6 +284,35 @@ public class Include {
 	//private static final int  GENE_TIME_BOTH = 0;
 	//
 	
+	
+	
+	public static boolean getHasEnergyForCast(final NWObject oPC, final Gene theGene){
+		boolean bReturn = false;
+		ArrayList<EnergyCostBinding> costBindingList = theGene.getCostPerHeartbeat();
+		String strError = "";
+		for(EnergyCostBinding energyCost : costBindingList){
+			Energy e = energyCost.getEnergyToCharge();
+			int AmountToCharge = energyCost.getAmountToCharge();
+			int CurrentEnergy = e.getCurrentAmount(oPC);
+			int AfterSub = CurrentEnergy - AmountToCharge;
+			if(AfterSub >= 0){
+				e.setCurrentAmount(oPC, AfterSub);
+				iSuccess++;
+			}else{
+				Color col = e.getColor();
+				strError += "Insufficient "+col.color(e.getName())+"."+System.getProperty("line.separator");
+			}
+		}
+		if(iSuccess == costBindingList.size()){
+			//NWScript.printString("Energy Condition Passed!");
+			bReturn = true;
+		}else{
+			NWScript.sendMessageToPC(oPC, strError);
+		}
+		
+		return bReturn; 
+	}
+	
 	/**
 	 * For every gene in the genome, we process it individually.
 	 * This allows for certain genes to be active and others inactive.
@@ -556,7 +586,9 @@ public class Include {
 		int Interior = NWScript.getIsAreaInterior(oArea) ==true ? 1:0;
 		int Natural = NWScript.getIsAreaNatural(oArea) ==true ? 1:0;
 		for(Gene g : genome){
-			HeartbeatProcessGene(player,g, TimeOfDayCurrent,oArea,iIsInWater,AreaLocation,Interior,Natural, combat);
+			if(g.getIsPassive()){
+				HeartbeatProcessGene(player,g, TimeOfDayCurrent,oArea,iIsInWater,AreaLocation,Interior,Natural, combat);
+			}
 		}
 	}
 	public static final String CREATURES_AS_SIMULATED_PC_COUNT = "creature_simulated_pc";
