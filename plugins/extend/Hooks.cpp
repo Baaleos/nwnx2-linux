@@ -370,12 +370,11 @@ void Hook_OnPlayerLeave(CNWSPlayer *player){
 	if(pPlayerGameObject != NULL && pPlayerGameObject->vtable != NULL) {
 		pPlayerObject = pPlayerGameObject->vtable->AsNWSObject(pPlayerGameObject);
 	}
-	nwn_objid_t *objectId = pPlayerObject->obj_id;
-	
+		
 	char * script = malloc(14 * sizeof(char));
 	script = "onplayer_leave";
         if(script != NULL) {
-                nwn_ExecuteScript(script->text, pCreatureStats->cs_original->obj.obj_id);
+                nwn_ExecuteScript(script->text, pPlayerObject->obj_id);
 		}
 	free(script);
 	
