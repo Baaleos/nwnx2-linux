@@ -369,7 +369,7 @@ int Hook_CheckUseMagicDeviceSkill(CNWSCreature *pCreature, CNWSItem *pItem, int 
 
 
 int (*CServerExoAppInternal__RemovePCFromWorld_orig)(CServerExoAppInternal *app,  CNWSPlayer *player) = NULL;
-int (*CNWSEffectListHandler__OnApplyDamage_orig)(CNWSEffectListHandler *handler, CGameObject *obj, CGameEffect *eff, int arg) = NULL;
+int (*CNWSEffectListHandler__OnApplyDamage_orig)(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *eff, int arg) = NULL;
 
 
 
@@ -395,8 +395,8 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *
 	
 	int i;
 	CNWSCreature *cre;
-	CGameObject *ob = CServerExoAppInternal__GetGameObject(obj->ObjectID);
-	CServerExoAppInternal__GetGameObject
+	CGameObject *ob = CServerExoAppInternal__GetGameObject(obj.ObjectID);
+	
 	if (ob == NULL || (cre = ob->vtable->AsNWSCreature(ob)) == NULL || cre->cre_stats == NULL) {
         return CNWSEffectListHandler__OnApplyDamage_orig(handler, obj,effect,arg);
     }
