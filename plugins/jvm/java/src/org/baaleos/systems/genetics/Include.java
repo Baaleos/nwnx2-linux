@@ -288,6 +288,7 @@ public class Include {
 	
 	public static boolean getHasEnergyForCast(final NWObject oPC, final Gene theGene){
 		boolean bReturn = false;
+		int iSuccess = 0;
 		ArrayList<EnergyCostBinding> costBindingList = theGene.getCostPerHeartbeat();
 		String strError = "";
 		for(EnergyCostBinding energyCost : costBindingList){

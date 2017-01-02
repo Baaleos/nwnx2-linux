@@ -133,7 +133,7 @@ public class TestRunner {
 						int GeneId = NWScript.getLocalInt(user, "GENE_BEING_CAST");
 						Gene g = Gene.getGeneByID(GeneId);
 						
-						boolean bCanCast = Include.getHasEnergyForCast(oPC, g);
+						boolean bCanCast = Include.getHasEnergyForCast(user, g);
 						if(bCanCast){
 							NWScript.setLocalInt(user, "RESULT",1);	
 						}else{
