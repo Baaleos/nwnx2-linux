@@ -421,7 +421,7 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CGameObject *ob, CGameEffect *
 	for (i=0; i< 12; i++) 
 		{
 			sprintf( cData, "damage_%d", i );
-			name = NewCExoString(char*)cData);
+			name = NewCExoString((char*)cData);
 				
 			int iNum = effect->eff_integers[i];
 			CNWSScriptVarTable__SetInt(vt, &name, iNum,0);			
@@ -431,7 +431,7 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CGameObject *ob, CGameEffect *
 	for (i=0; i< 12; i++) 
 		{
 			sprintf( cData, "damage_%d", i );
-			name = NewCExoString(char*)cData);
+			name = NewCExoString((char*)cData);
 			int nDamAmount = CNWSScriptVarTable__GetInt(vt,&name);
 			effect->eff_integers[i] = nDamAmount;
 		}
