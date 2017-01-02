@@ -393,7 +393,7 @@ int InitHooks() {
 
 	*(unsigned long*)&CServerExoAppInternal__RemovePCFromWorld = 0x080a4c94;
 	
-	*(int**)&CServerExoAppInternal__RemovePCFromWorld_orig = nx_hook_function((int *)CServerExoAppInternal__RemovePCFromWorld, (int *)Hook_OnPlayerLeave, 6, NX_HOOK_DIRECT);
+	*(void**)&CServerExoAppInternal__RemovePCFromWorld_orig = nx_hook_function((int *)CServerExoAppInternal__RemovePCFromWorld, (int *)Hook_OnPlayerLeave, 6, NX_HOOK_DIRECT);
 	extend.Log(0,"Hooked on player Leave world: Script: onplayer_leave\n");
 	//nx_hook_function((int *) 0x0816C7E4,(int *)Hook_DamageEffectListHandler, 5, NX_HOOK_DIRECT);
 	
