@@ -390,7 +390,7 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *
 	
 	int i;
 	CNWSCreature *cre;
-	CGameObject *ob = &(CNWSObject *)obj;
+	CGameObject *ob = (CNWSObject *)obj;
 	if (ob == NULL || (cre = ob->vtable->AsNWSCreature(ob)) == NULL || cre->cre_stats == NULL) {
         return CNWSEffectListHandler__OnApplyDamage_orig(handler, obj,eff,arg);
     }
