@@ -390,7 +390,7 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *
 	
 	int i;
 	CNWSCreature *cre;
-	CGameObject *ob = (CNWSObject *)obj;
+	CGameObject *ob = CServerExoAppInternal__GetGameObject(obj.ObjectID);
 	if (ob == NULL || (cre = ob->vtable->AsNWSCreature(ob)) == NULL || cre->cre_stats == NULL) {
         return CNWSEffectListHandler__OnApplyDamage_orig(handler, obj,eff,arg);
     }
@@ -447,6 +447,8 @@ int InitHooks() {
 
 	*(unsigned long*)&CServerExoAppInternal__RemovePCFromWorld = 0x080a4c94;
 	*(unsigned long*)&CNWSEffectListHandler__OnApplyDamage = 0x0816c7e4;
+	*(unsigned long*)&CServerExoAppInternal__GetGameObject= 0x080b02fc;
+	
 	
 	HOOK(CNWSEffectListHandler__OnApplyDamage_orig, CNWSEffectListHandler__OnApplyDamage, Hook_OnDamage, 6);
 	HOOK(CServerExoAppInternal__RemovePCFromWorld_orig, CServerExoAppInternal__RemovePCFromWorld, Hook_OnPlayerLeave, 6);
