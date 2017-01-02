@@ -363,7 +363,7 @@ int Hook_CheckUseMagicDeviceSkill(CNWSCreature *pCreature, CNWSItem *pItem, int 
 	return 0;
 }
 
-void Hook_OnPlayerLeave(CServerExoAppInternal *app,  CNWSPlayer *player){
+int Hook_OnPlayerLeave(CServerExoAppInternal *app,  CNWSPlayer *player){
 	CGameObject *pPlayerGameObject = CNWSPlayer__GetGameObject(player);
 	CNWSObject *pPlayerObject;
 
