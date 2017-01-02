@@ -405,11 +405,11 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CGameObject *ob, CGameEffect *
 	
 	CNWSScriptVarTable *vt;
 	vt = &(((CNWSObject *)cre)->obj_vartable);
-	CExoString *dmgr;
+	CExoString* dmgr;
 	dmgr.text = (char*)"dmg_creator";
 	dmgr.len = 0;
 	
-	CExoString *dmgVar;
+	CExoString* dmgVar;
 	
 	
 	CNWSScriptVarTable__SetObject(vt,dmgr,effect->eff_creator);
