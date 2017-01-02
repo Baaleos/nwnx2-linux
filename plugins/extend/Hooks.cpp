@@ -371,10 +371,10 @@ void Hook_OnPlayerLeave(CNWSPlayer *player){
 		pPlayerObject = pPlayerGameObject->vtable->AsNWSObject(pPlayerGameObject);
 	}
 		
-	char * script = malloc(14 * sizeof(char));
-	script = "onplayer_leave";
+	char * script = (char*)malloc(14 * sizeof(char));
+	script = (char*)"onplayer_leave";
         if(script != NULL) {
-                nwn_ExecuteScript(script->text, pPlayerObject->obj_id);
+                nwn_ExecuteScript(script, pPlayerObject->obj_id);
 		}
 	free(script);
 	
@@ -395,7 +395,7 @@ int InitHooks() {
 	*(unsigned long*)&CServerExoAppInternal__RemovePCFromWorld = 0x080a4c94;
 	
 	nx_hook_function((void *)CServerExoAppInternal__RemovePCFromWorld, (void *)Hook_OnPlayerLeave, 6, NX_HOOK_DIRECT);
-	
+	extend.Log(0,"Hooked on player Leave world: Script: onplayer_leave\n");
 	//nx_hook_function((int *) 0x0816C7E4,(int *)Hook_DamageEffectListHandler, 5, NX_HOOK_DIRECT);
 	
 	if(extend.GetConfInteger("examine_cr_npc_only")) {
