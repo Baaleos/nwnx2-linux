@@ -461,7 +461,7 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *
 			effect->eff_integers[i] = nDamAmount;
 		}
 	extend.Log(0,"451\n");
-	//free(cData);
+	free(cData);
 	return CNWSEffectListHandler__OnApplyDamage_orig(handler, obj,effect,arg);
 }
 
