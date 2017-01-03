@@ -419,9 +419,9 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *
 	extend.Log(0,"420\n");
 	
 	//CExoString dmgr((char*)"dmg_creator");
-	CExoString *dmgr;// = (CExoString *) malloc(sizeof(CExoString));
-    dmgr->text = (char*)"dmg_creator";
-    dmgr->len = strlen(dmgr->text);
+	CExoString *dmgr((char*)"dmg_creator");// = (CExoString *) malloc(sizeof(CExoString));
+    //dmgr->text = (char*)"dmg_creator";
+    //dmgr->len = strlen(dmgr->text);
 	
 	//CExoString *dmgVar;
 	
@@ -435,9 +435,9 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *
 		{
 			//sprintf( cData, "damage_%d", i );
 			//CExoString dmgVar((char*)"damage_"+i);
-			CExoString *dmgVar;// = (CExoString *) malloc(sizeof(CExoString));
-			dmgVar->text = (char*)"damage_"+i;
-			dmgVar->len = strlen(dmgVar->text);
+			CExoString *dmgVar((char*)"damage_"+i);// = (CExoString *) malloc(sizeof(CExoString));
+			//dmgVar->text = (char*)"damage_"+i;
+			//dmgVar->len = strlen(dmgVar->text);
 			
 			
 			//dmgVar->text = (char*)"damage_"+i;
@@ -453,9 +453,9 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *
 	for (i=0; i< 12; i++) 
 		{
 			//sprintf( cData, "damage_%d", i );
-			CExoString *dmgVar = (CExoString *) malloc(sizeof(CExoString));
-			dmgVar->text = (char*)"damage_"+i;
-			dmgVar->len = strlen(dmgVar->text);
+			CExoString *dmgVar((char*)"damage_"+i);;//(CExoString *) malloc(sizeof(CExoString));
+			//dmgVar->text = (char*)"damage_"+i;
+			//->len = strlen(dmgVar->text);
 			int nDamAmount = CNWSScriptVarTable__GetInt(vt,(CExoString *)dmgVar);
 			effect->eff_integers[i] = nDamAmount;
 		}
