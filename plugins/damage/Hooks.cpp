@@ -17,7 +17,7 @@
 #include "NWNXDamage.h"
 #include "Hooks.h"
 
-extern CNWNXdamage damage;
+extern CNWNXDamage damage;
 
 
 #define HOOK(orig, addr, hook, bytes) \
