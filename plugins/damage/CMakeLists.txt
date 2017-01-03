@@ -1,1 +1,1 @@
-add_module(damage Hooks NWNXdamage plugin-damage)
+add_module(damage Hooks NWNXDamage plugin-damage)

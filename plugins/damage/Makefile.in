@@ -9,7 +9,7 @@ LFLAGS   = @LDFLAGS@ -w -fPIC -shared -rdynamic
 
 all: nwnx_damage.so
 
-nwnx_damage.so: Hooks.o NWNXdamage.o plugin-damage.o
+nwnx_damage.so: Hooks.o NWNXDamage.o plugin-damage.o
 	$(CXX) $(LFLAGS) -o $@ $^ $(LIBS)
 
 clean:
