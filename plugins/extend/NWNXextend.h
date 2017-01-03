@@ -41,7 +41,7 @@ private:
 	StringMap pluginConfig;
 };
 
-extern void nwn_ExecuteScript(const char *scr, nwn_objid_t oid);
+//extern void nwn_ExecuteScript(const char *scr, nwn_objid_t oid);
 //extern void             nwn_DeleteLocalInt(CNWSScriptVarTable *vt, const char *var_name);
 //extern void             nwn_DeleteLocalObject(CNWSScriptVarTable *vt, const char *var_name);
 //extern void             nwn_DeleteLocalString(CNWSScriptVarTable *vt, const char *var_name);
