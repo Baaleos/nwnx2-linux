@@ -447,8 +447,8 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *
 			CNWSScriptVarTable__SetInt(vt, (CExoString *)dmgVar, iNum,0);			
 		}
 	extend.Log(0,"440\n");
-	nwn_ExecuteScript((char*)"nwnx_damages",cre->obj.obj_id);
-	//vt->DestroyObject(dmgr);
+	nwn_ExecuteScript((char*)"nwnx_damages",obj->obj_id);
+	extend.Log(0,"445\n");
 	CNWSScriptVarTable__DestroyObject(vt, (CExoString *)dmgr);
 	extend.Log(0,"450\n");
 	for (i=0; i< 12; i++) 
