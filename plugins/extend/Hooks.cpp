@@ -419,7 +419,7 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *
 	extend.Log(0,"420\n");
 	
 	//CExoString dmgr((char*)"dmg_creator");
-	CExoString *dmgr("dmg_creator");// = (CExoString *) malloc(sizeof(CExoString));
+	CExoString *dmgr = new CExoString("dmg_creator");// = (CExoString *) malloc(sizeof(CExoString));
     //dmgr->text = (char*)"dmg_creator";
     //dmgr->len = strlen(dmgr->text);
 	
