@@ -479,7 +479,7 @@ int InitHooks() {
 	*(unsigned long*)&CNWSEffectListHandler__OnApplyDamage = 0x0816c7e4;
 	*(unsigned long*)&CServerExoAppInternal__GetGameObject= 0x080b02fc;
 	*(unsigned long*)&CNWSScriptVarTable__SetObject=0x081f41e0;
-	
+	*(unsigned long*)&CNWSScriptVarTable__DestroyObject=0x081f43f0;
 	*(unsigned long*)&CNWSScriptVarTable__SetInt=0x081f3454;
 	*(unsigned long*)&CNWSScriptVarTable__GetInt=0x081f3fc8;
 	
