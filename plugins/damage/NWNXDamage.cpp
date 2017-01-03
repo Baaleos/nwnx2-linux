@@ -1,8 +1,4 @@
-
 /***************************************************************************
-    NWNXStructs.cpp - Implementation of the CNWNXStructs class.
-    Copyright (C) 2007 Doug Swarin (zac@intertex.net)
-
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation; either version 2 of the License, or
@@ -18,61 +14,74 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  ***************************************************************************/
 
-#include "NWNXDamage.h"
+#include <string.h>
+#include <string>
+#include <stdlib.h>
 
-
-
-//////////////////////////////////////////////////////////////////////
-// Function Signatures
-//////////////////////////////////////////////////////////////////////
-
-#define NWNX_DAMAGE_SIG(NAME, SIG) { #NAME, &NAME, SIG }
-
+#include "NWNXdamage.h"
+#include "Hooks.h"
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CNWNXDamage::CNWNXDamage() {
+CNWNXextend::CNWNXdamage()
+{
     confKey = strdup("DAMAGE");
 }
 
-
-CNWNXDamage::~CNWNXDamage() {
+CNWNXextend::~CNWNXextend()
+{
 }
 
+bool CNWNXextend::OnCreate(gline *config, const char *LogDir)
+{
+	char log[128];
+	sprintf (log, "%s/nwnx_damage.txt", LogDir);
 
-char *CNWNXDamage::OnRequest (char *gameObject, char *Request, char *Parameters) {
-    
+	// call the base class function
+	if (!CNWNXBase::OnCreate(config,log))
+		return false;
+	Log(0,"NWNX damage v0.0.1 by Baaleos!, 2017\n");
+	Log(0,"Visit http://www.nwnx.org\n\n");
 
-    return NULL;
+	pluginConfig = (*nwnxConfig)[confKey];
+
+	if(!InitHooks()) {
+		Log(0,"* Failed to initialize hooks.\n");
+		return false;
+	}
+
+	Log(0,"* Module loaded successfully.\n");
+
+	return true;
 }
 
+char* CNWNXextend::OnRequest (char *gameObject, char* Request, char* Parameters)
+{
+	this->pGameObject = gameObject+4;
 
-unsigned long CNWNXDamage::OnRequestObject (char *gameObject, char *Request) {
-    unsigned long ret = OBJECT_INVALID;
+	Log(2,"(S) Request: \"%s\"\n",Request);
+	Log(3,"(S) Params:  \"%s\"\n",Parameters);
 
-    return ret;
+    //if (strncmp(Request, "RESULT", 6) == 0) {
+    //    this->ScriptResult = atoi(Parameters);
+    //    return NULL;
+    //}
+
+	return NULL;
 }
 
+unsigned long CNWNXextend::OnRequestObject (char *gameObject, char* Request)
+{
+	this->pGameObject = gameObject+4;
 
-bool CNWNXDamage::OnCreate (gline *config, const char *LogDir) {
-    char log[128];
+	Log(2,"(O) Request: \"%s\"\n",Request);
 
-    sprintf(log, "%s/nwnx_damage.txt", LogDir);
-
-    /* call the base class create function */
-    if (!CNWNXBase::OnCreate(config, log))
-        return false;
-
-    
-
-    
-		nx_hook_function((int *) 0x0816C7E4,(int *)Hook_DamageEffectListHandler, 5, NX_HOOK_DIRECT);
-        
-    
-	
-    return true;
+	return OBJECT_INVALID;
 }
 
-/* vim: set sw=4: */
+int CNWNXextend::GetConfInteger(const char *key)
+{
+	return atoi(pluginConfig[key].c_str());
+}

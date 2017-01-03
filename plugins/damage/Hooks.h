@@ -1,8 +1,4 @@
-
 /***************************************************************************
-    plugin-structs.cpp - Defines the entry point for the DLL application.
-    Copyright (C) 2007 Doug Swarin (zac@intertex.net)
-
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation; either version 2 of the License, or
@@ -18,10 +14,13 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  ***************************************************************************/
 
-#include "NWNXStructs.h"
+#ifndef Hooks_h_
+#define Hooks_h_
 
-CNWNXStructs structs;
 
-extern "C" CNWNXBase *GetClassObject() {
-    return &structs;
-}
+extern int (*CServerExoAppInternal__RemovePCFromWorld_orig)(CServerExoAppInternal *app,  CNWSPlayer *player);
+extern int (*CNWSEffectListHandler__OnApplyDamage_orig)(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *eff, int arg);
+
+int InitHooks();
+
+#endif
