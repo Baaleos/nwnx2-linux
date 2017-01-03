@@ -25,16 +25,16 @@
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CNWNXextend::CNWNXdamage()
+CNWNXDamage::CNWNXDamage()
 {
     confKey = strdup("DAMAGE");
 }
 
-CNWNXextend::~CNWNXextend()
+CNWNXDamage::~CNWNXDamage()
 {
 }
 
-bool CNWNXextend::OnCreate(gline *config, const char *LogDir)
+bool CNWNXDamage::OnCreate(gline *config, const char *LogDir)
 {
 	char log[128];
 	sprintf (log, "%s/nwnx_damage.txt", LogDir);
@@ -57,7 +57,7 @@ bool CNWNXextend::OnCreate(gline *config, const char *LogDir)
 	return true;
 }
 
-char* CNWNXextend::OnRequest (char *gameObject, char* Request, char* Parameters)
+char* CNWNXDamage::OnRequest (char *gameObject, char* Request, char* Parameters)
 {
 	this->pGameObject = gameObject+4;
 
@@ -72,7 +72,7 @@ char* CNWNXextend::OnRequest (char *gameObject, char* Request, char* Parameters)
 	return NULL;
 }
 
-unsigned long CNWNXextend::OnRequestObject (char *gameObject, char* Request)
+unsigned long CNWNXDamage::OnRequestObject (char *gameObject, char* Request)
 {
 	this->pGameObject = gameObject+4;
 
@@ -81,7 +81,7 @@ unsigned long CNWNXextend::OnRequestObject (char *gameObject, char* Request)
 	return OBJECT_INVALID;
 }
 
-int CNWNXextend::GetConfInteger(const char *key)
+int CNWNXDamage::GetConfInteger(const char *key)
 {
 	return atoi(pluginConfig[key].c_str());
 }
