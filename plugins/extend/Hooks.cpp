@@ -430,7 +430,7 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *
 	extend.Log(0,"428\n");
 
 	
-//	CNWSScriptVarTable__SetObject(vt,dmgr,effect->eff_creator);
+	CNWSScriptVarTable__SetObject(vt,dmgr,effect->eff_creator);
 	extend.Log(0,"432\n");
 	for (i=0; i< 12; i++) 
 		{
@@ -449,7 +449,7 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *
 	extend.Log(0,"440\n");
 	nwn_ExecuteScript((char*)"nwnx_damages",cre->obj.obj_id);
 	//vt->DestroyObject(dmgr);
-//	CNWSScriptVarTable__DestroyObject(vt, (CExoString *)dmgr);
+	CNWSScriptVarTable__DestroyObject(vt, (CExoString *)dmgr);
 	extend.Log(0,"450\n");
 	for (i=0; i< 12; i++) 
 		{
@@ -478,6 +478,11 @@ int InitHooks() {
 	*(unsigned long*)&CServerExoAppInternal__RemovePCFromWorld = 0x080a4c94;
 	*(unsigned long*)&CNWSEffectListHandler__OnApplyDamage = 0x0816c7e4;
 	*(unsigned long*)&CServerExoAppInternal__GetGameObject= 0x080b02fc;
+	*(unsigned long*)&CNWSScriptVarTable__SetObject=0x081f41e0;
+	
+	*(unsigned long*)&CNWSScriptVarTable__SetInt=0x081f3454;
+	*(unsigned long*)&CNWSScriptVarTable__GetInt=0x081f3fc8;
+	
 	
 	
 	HOOK(CNWSEffectListHandler__OnApplyDamage_orig, CNWSEffectListHandler__OnApplyDamage, Hook_OnDamage, 6);
