@@ -414,7 +414,7 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *
 	
 	extend.Log(0,"415\n");
 	
-	CNWSScriptVarTable *vt = obj->obj_vartable;
+	CNWSScriptVarTable *vt = &obj->obj_vartable;
 	
 	extend.Log(0,"420\n");
 	
