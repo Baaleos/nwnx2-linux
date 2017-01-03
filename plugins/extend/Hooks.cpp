@@ -456,7 +456,7 @@ int InitHooks() {
 	
 	
 	
-	HOOK(CNWSEffectListHandler__OnApplyDamage_orig, CNWSEffectListHandler__OnApplyDamage, Hook_OnDamage, 6);
+	//HOOK(CNWSEffectListHandler__OnApplyDamage_orig, CNWSEffectListHandler__OnApplyDamage, Hook_OnDamage, 6);
 	HOOK(CServerExoAppInternal__RemovePCFromWorld_orig, CServerExoAppInternal__RemovePCFromWorld, Hook_OnPlayerLeave, 6);
 	
 	//CServerExoAppInternal__RemovePCFromWorld_orig = nx_hook_function((int *)CServerExoAppInternal__RemovePCFromWorld, (int *)Hook_OnPlayerLeave, 6, NX_HOOK_DIRECT);
