@@ -70,7 +70,7 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *
     dmgr->len = strlen(dmgr->text)+1;
 		
 	CNWSScriptVarTable__SetObject(vt,dmgr,effect->eff_creator);
-	extend.Log(0,"432\n");
+	
 	for (i=0; i< 12; i++) 
 		{
 			sprintf( cData, "damage_%d", i );
@@ -99,8 +99,6 @@ int InitHooks() {
 	*(unsigned long*)&CNWMessage__WriteSHORT = 0x80c3ddc;
 	*(unsigned long*)&CNWSMessage__WriteOBJECTIDServer = 0x8052434;
 	*(unsigned long*)&CNWSPlayer__GetGameObject = 0x0805e8b8;
-	*(unsigned long*)&C2DA__GetINTEntry = 0x082bd77c;
-	*(unsigned long*)&C2DA__GetCExoStringEntry = 0x082bedbc;
 
 	*(unsigned long*)&CNWSItem__GetPropertyByTypeExists = 0x081a2a6c;
 
