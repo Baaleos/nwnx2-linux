@@ -23,11 +23,11 @@
 #include "NWNXLib.h"
 #include "typedefs.h"
 
-class CNWNXdamage : public CNWNXBase
+class CNWNXDamage : public CNWNXBase
 {
 public:
-	CNWNXdamage();
-	virtual ~CNWNXdamage();
+	CNWNXDamage();
+	virtual ~CNWNXDamage();
 
 	bool OnCreate(gline *nwnxConfig, const char *LogDir=NULL);
 	char* OnRequest (char* gameObject, char* Request, char* Parameters);
