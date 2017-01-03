@@ -18,7 +18,7 @@
 #include <string>
 #include <stdlib.h>
 
-#include "NWNXdamage.h"
+#include "NWNXDamage.h"
 #include "Hooks.h"
 
 //////////////////////////////////////////////////////////////////////
