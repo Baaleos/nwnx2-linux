@@ -426,10 +426,10 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *
 	//CExoString *dmgVar;
 	
 	extend.Log(0,"428\n");
+	extend.Log(0,"Vt is "+&vt);
+	//vt->SetObject(dmgr,effect->eff_creator);
 	
-	vt->SetObject(dmgr,effect->eff_creator);
-	
-	//CNWSScriptVarTable__SetObject(vt,dmgr,effect->eff_creator);
+	CNWSScriptVarTable__SetObject(&vt,dmgr,effect->eff_creator);
 	extend.Log(0,"432\n");
 	for (i=0; i< 12; i++) 
 		{
@@ -443,12 +443,12 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *
 			//dmgVar->text = (char*)"damage_"+i;
 			//dmgVar->len = 0;
 			int iNum = effect->eff_integers[i];
-			CNWSScriptVarTable__SetInt(vt, (CExoString *)dmgVar, iNum,0);			
+			CNWSScriptVarTable__SetInt(&vt, (CExoString *)dmgVar, iNum,0);			
 		}
 	extend.Log(0,"440\n");
 	nwn_ExecuteScript((char*)"nwnx_damages",cre->obj.obj_id);
-	vt->DestroyObject(dmgr);
-	//CNWSScriptVarTable__DestroyObject(vt, (CExoString *)dmgr);
+	//vt->DestroyObject(dmgr);
+	CNWSScriptVarTable__DestroyObject(&vt, (CExoString *)dmgr);
 	extend.Log(0,"450\n");
 	for (i=0; i< 12; i++) 
 		{
