@@ -429,7 +429,7 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *
 	extend.Log(0,"428\n");
 	
 	CNWSScriptVarTable__SetObject(vt,(CExoString *)dmgr,effect->eff_creator);
-	
+	extend.Log(0,"432\n");
 	for (i=0; i< 12; i++) 
 		{
 			//sprintf( cData, "damage_%d", i );
@@ -447,6 +447,7 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *
 	extend.Log(0,"440\n");
 	nwn_ExecuteScript((char*)"nwnx_damages",cre->obj.obj_id);
 	CNWSScriptVarTable__DestroyObject(vt, (CExoString *)dmgr);
+	extend.Log(0,"450\n");
 	for (i=0; i< 12; i++) 
 		{
 			//sprintf( cData, "damage_%d", i );
