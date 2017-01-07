@@ -369,7 +369,7 @@ int Hook_CheckUseMagicDeviceSkill(CNWSCreature *pCreature, CNWSItem *pItem, int 
 
 
 int (*CServerExoAppInternal__RemovePCFromWorld_orig)(CServerExoAppInternal *app,  CNWSPlayer *player) = NULL;
-int (*CNWSEffectListHandler__OnApplyDamage_orig)(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *eff, int arg) = NULL;
+
 
 
 
@@ -380,8 +380,9 @@ int Hook_OnPlayerLeave(CServerExoAppInternal *app,  CNWSPlayer *player){
 	if(pPlayerGameObject != NULL && pPlayerGameObject->vtable != NULL) {
 		pPlayerObject = pPlayerGameObject->vtable->AsNWSObject(pPlayerGameObject);
 	}
-		
+	extend.Log(0,"Executing OnPlayer_Leave script\n");	
 	nwn_ExecuteScript((char*)"onplayer_leave", pPlayerObject->obj_id);
+	extend.Log(0,"Examine CR on Finished onPlayerLeave script\n");
 	//free(script);
 	return CServerExoAppInternal__RemovePCFromWorld_orig(app,player);
 }
@@ -389,52 +390,6 @@ int Hook_OnPlayerLeave(CServerExoAppInternal *app,  CNWSPlayer *player){
 
 
 
-
-// Damage hook 
-int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *effect, int arg){
-	
-	int i;
-	CNWSCreature *cre;
-	CGameObject *ob = (CGameObject *)CServerExoAppInternal__GetGameObject((*NWN_AppManager)->app_server->srv_internal,obj->obj_id);
-	
-	if (ob == NULL || (cre = ob->vtable->AsNWSCreature(ob)) == NULL || cre->cre_stats == NULL) {
-        return CNWSEffectListHandler__OnApplyDamage_orig(handler, obj,effect,arg);
-    }
-	
-
-	char * cData = (char*)malloc(10 * sizeof(char));
-
-	CNWSScriptVarTable *vt;
-	vt = &(((CNWSObject *)ob)->obj_vartable);
-	
-	CExoString *dmgr = (CExoString *) malloc(sizeof(CExoString));
-    dmgr->text = (char*)"dmg_creator";
-    dmgr->len = strlen(dmgr->text)+1;
-		
-	CNWSScriptVarTable__SetObject(vt,dmgr,effect->eff_creator);
-	extend.Log(0,"432\n");
-	for (i=0; i< 12; i++) 
-		{
-			sprintf( cData, "damage_%d", i );
-			CExoString *dmgVar = (CExoString *) malloc(sizeof(CExoString));
-			dmgVar->text = cData;//(char*)"damage_"+i;
-			dmgVar->len = strlen(dmgVar->text);
-			CNWSScriptVarTable__SetInt(vt, (CExoString *)dmgVar, effect->eff_integers[i],0);			
-		}
-	nwn_ExecuteScript("nwnx_damages",obj->obj_id);
-	CNWSScriptVarTable__DestroyObject(vt, (CExoString *)dmgr);
-	for (i=0; i< 12; i++) 
-		{
-			sprintf( cData, "damage_%d", i );
-			CExoString *dmgVar = (CExoString *) malloc(sizeof(CExoString));
-			dmgVar->text = cData;//(char*)"damage_"+i;
-			dmgVar->len = strlen(dmgVar->text);
-			int nDamAmount = CNWSScriptVarTable__GetInt(vt,(CExoString *)dmgVar);
-			effect->eff_integers[i] = nDamAmount;
-		}
-	free(cData);
-	return CNWSEffectListHandler__OnApplyDamage_orig(handler, obj,effect,arg);
-}
 
 
 int InitHooks() {
@@ -455,13 +410,11 @@ int InitHooks() {
 	*(unsigned long*)&CNWSScriptVarTable__GetInt=0x081f3fc8;
 	
 	
-	
-	//HOOK(CNWSEffectListHandler__OnApplyDamage_orig, CNWSEffectListHandler__OnApplyDamage, Hook_OnDamage, 6);
 	HOOK(CServerExoAppInternal__RemovePCFromWorld_orig, CServerExoAppInternal__RemovePCFromWorld, Hook_OnPlayerLeave, 6);
 	
-	//CServerExoAppInternal__RemovePCFromWorld_orig = nx_hook_function((int *)CServerExoAppInternal__RemovePCFromWorld, (int *)Hook_OnPlayerLeave, 6, NX_HOOK_DIRECT);
+	
 	extend.Log(0,"Hooked on player Leave world: Script: onplayer_leave\n");
-	//nx_hook_function((int *) 0x0816C7E4,(int *)Hook_DamageEffectListHandler, 5, NX_HOOK_DIRECT);
+	
 	
 	if(extend.GetConfInteger("examine_cr_npc_only")) {
 		/* EXAMINE CR ON NPC ONLY */
