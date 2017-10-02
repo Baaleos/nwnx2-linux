@@ -21,8 +21,7 @@
 #include "NWNXFuncs.h"
 
 
-void Func_GetConversation(CGameObject *ob, char *value)
-{
+void Func_GetConversation (CGameObject *ob, char *value) {
     size_t len = strlen(value);
     const CNWSCreature *cre;
 

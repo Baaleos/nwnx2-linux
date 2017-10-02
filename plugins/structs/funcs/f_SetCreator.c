@@ -23,8 +23,7 @@
 extern volatile CGameEffect *Hook_Struct_Last;
 
 
-void Func_SetCreator(CGameObject *ob, char *value)
-{
+void Func_SetCreator (CGameObject *ob, char *value) {
     CGameEffect *eff = (CGameEffect *)Hook_Struct_Last;
 
     eff->eff_creator = strtol(value, NULL, 16);

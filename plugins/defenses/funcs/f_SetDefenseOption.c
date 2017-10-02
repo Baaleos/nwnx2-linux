@@ -21,14 +21,13 @@
 #include "NWNXDefenses.h"
 
 
-void Func_SetDefenseOption(CGameObject *ob, char *value)
-{
+void Func_SetDefenseOption (CGameObject *ob, char *value) {
     int opt, val;
 
     if (sscanf(value, "%d %d", &opt, &val) != 2 ||
-            val > UINT16_MAX                        ||
-            opt < 0                                 ||
-            opt >= NWNX_DEFENSES_OPTIONS_TABLE_SIZE) {
+        val > UINT16_MAX                        ||
+        opt < 0                                 ||
+        opt >= NWNX_DEFENSES_OPTIONS_TABLE_SIZE) {
 
         snprintf(value, strlen(value), "-1");
         return;
@@ -38,7 +37,7 @@ void Func_SetDefenseOption(CGameObject *ob, char *value)
         val = 0;
 
     Table_DefenseOptions[opt] = val;
-    snprintf(value, strlen(value), "%d", val);
+    snprintf(value, sizeof(value), "%d", val);
 }
 
 

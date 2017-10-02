@@ -21,8 +21,7 @@
 #include "NWNXDefenses.h"
 
 
-int Hook_GetACClassAdjustment(CNWSCreatureStats *stats, int touch)
-{
+int Hook_GetACClassAdjustment (CNWSCreatureStats *stats, int touch) {
     int adj = 0;
 
 #ifndef NWNX_DEFENSES_HG
@@ -58,8 +57,7 @@ int Hook_GetACClassAdjustment(CNWSCreatureStats *stats, int touch)
 }
 
 
-int Hook_GetACFeatAdjustment(CNWSCreatureStats *stats, int touch)
-{
+int Hook_GetACFeatAdjustment (CNWSCreatureStats *stats, int touch) {
     int adj = 0;
 
     if (!touch && CNWSCreatureStats__HasFeat(stats, FEAT_EPIC_ARMOR_SKIN))
@@ -69,14 +67,13 @@ int Hook_GetACFeatAdjustment(CNWSCreatureStats *stats, int touch)
 }
 
 
-int Hook_GetACWisAdjustment(CNWSCreatureStats *stats, int touch)
-{
+int Hook_GetACWisAdjustment (CNWSCreatureStats *stats, int touch) {
     int adj = 0;
 
 #ifndef NWNX_DEFENSES_HG
     if (stats->cs_ac_armour_base == 0 &&
-            stats->cs_ac_shield_base == 0 &&
-            CNWSCreatureStats__HasFeat(stats, FEAT_MONK_AC_BONUS)) {
+        stats->cs_ac_shield_base == 0 &&
+        CNWSCreatureStats__HasFeat(stats, FEAT_MONK_AC_BONUS)) {
 
         int monk = nwn_GetLevelByClass(stats, CLASS_TYPE_MONK);
 
@@ -88,8 +85,7 @@ int Hook_GetACWisAdjustment(CNWSCreatureStats *stats, int touch)
 }
 
 
-int Hook_GetACNaturalBase(CNWSCreatureStats *stats, int touch)
-{
+int Hook_GetACNaturalBase (CNWSCreatureStats *stats, int touch) {
     int bonus = 0;
 
     if (stats == NULL)

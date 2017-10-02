@@ -22,7 +22,6 @@
 
 CNWNXSpells spells;
 
-extern "C" CNWNXBase *GetClassObject()
-{
+extern "C" CNWNXBase *GetClassObject() {
     return &spells;
 }

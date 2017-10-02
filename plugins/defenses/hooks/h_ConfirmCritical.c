@@ -21,8 +21,7 @@
 #include "NWNXDefenses.h"
 
 
-int Hook_ConfirmCritical(CNWSCreatureStats *target, CNWSCreature *attacker)
-{
+int Hook_ConfirmCritical (CNWSCreatureStats *target, CNWSCreature *attacker) {
     int ret;
 
     if (target == NULL)

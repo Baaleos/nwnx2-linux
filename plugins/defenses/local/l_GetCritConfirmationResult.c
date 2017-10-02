@@ -21,8 +21,7 @@
 #include "NWNXDefenses.h"
 
 
-int Local_GetCritConfirmationResult(CNWSCreature *attacker, CNWSCreatureStats *target)
-{
+int Local_GetCritConfirmationResult (CNWSCreature *attacker, CNWSCreatureStats *target) {
 #ifdef NWNX_DEFENSES_HG
     int pm, pct = 0;
 
@@ -35,8 +34,8 @@ int Local_GetCritConfirmationResult(CNWSCreature *attacker, CNWSCreatureStats *t
         pct = (pm - 10) * 10;
 
     if (target->cs_race == RACIAL_TYPE_HALFORC &&
-            target->cs_appearance >= 1498 &&
-            (target->cs_appearance <= 1500 || target->cs_appearance == 1504)) {
+        target->cs_appearance >= 1498 &&
+        (target->cs_appearance <= 1500 || target->cs_appearance == 1504)) {
 
         int str = target->cs_str_mod * 2;
 

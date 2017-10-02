@@ -10,10 +10,11 @@
 0000000C CGameObjectArrayElement ends
 */
 
-struct CGameObjectArrayElement {
-    dword ObjectID;
-    char *Object;
-    dword field_8;
+struct CGameObjectArrayElement
+{
+	dword ObjectID;
+	char *Object;
+	dword field_8;
 };
 
 /*
@@ -27,13 +28,14 @@ struct CGameObjectArrayElement {
 00000018 CGameObjectArray ends
 */
 
-struct CGameObjectArray {
-    CGameObjectArrayElement **Objects;
-    dword ObjectPointer;
-    dword field_8;
-    dword PlayerPointer;
-    dword field_10;
-    dword field_14;
+struct CGameObjectArray
+{
+	CGameObjectArrayElement **Objects;
+	dword ObjectPointer;
+	dword field_8;
+	dword PlayerPointer;
+	dword field_10;
+	dword field_14;
 };
 
 

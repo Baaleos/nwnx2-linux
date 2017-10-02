@@ -30,8 +30,7 @@
     } while (0)
 
 
-void Func_GetAllRemainingFeatUses(CGameObject *ob, char *value)
-{
+void Func_GetAllRemainingFeatUses (CGameObject *ob, char *value) {
     int i, ret;
     char *p = value;
     size_t len = strlen(value);

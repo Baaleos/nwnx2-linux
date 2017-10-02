@@ -21,12 +21,11 @@
 #include "NWNXFuncs.h"
 
 
-void Func_GetIsStatic(CGameObject *ob, char *value)
-{
+void Func_GetIsStatic (CGameObject *ob, char *value) {
     CNWSPlaceable *plc;
 
     if (ob == NULL                                     ||
-            (plc = ob->vtable->AsNWSPlaceable(ob)) == NULL) {
+        (plc = ob->vtable->AsNWSPlaceable(ob)) == NULL) {
 
         snprintf(value, strlen(value), "-1");
         return;

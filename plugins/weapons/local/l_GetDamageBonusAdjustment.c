@@ -21,8 +21,7 @@
 #include "NWNXWeapons.h"
 
 
-int Local_GetDamageBonusAdjustment(CNWSCreatureStats *attacker, CNWSItem *weapon, int adj)
-{
+int Local_GetDamageBonusAdjustment (CNWSCreatureStats *attacker, CNWSItem *weapon, int adj) {
 #ifdef NWNX_WEAPONS_HG
     if (attacker->cs_original != NULL && attacker->cs_original->cre_is_pc) {
         int i, j, bit_bonus = 0, dice_bonus = 0;
@@ -74,7 +73,7 @@ int Local_GetDamageBonusAdjustment(CNWSCreatureStats *attacker, CNWSItem *weapon
             } else if (eff->eff_integers[0] == 749 && eff->eff_integers[1] > 0 && eff->eff_integers[2] > 0) {
                 dice_bonus = eff->eff_integers[1];
 
-                for (j = 0; j < eff->eff_integers[1]; j++)
+                for (j = 0; j < eff->eff_integers[1]; j++) 
                     dice_bonus += random() % eff->eff_integers[2];
             } else if (eff->eff_integers[0] == 750 && eff->eff_integers[2] >= 0 && eff->eff_integers[2] <= 7) {
                 if (eff->eff_integers[1] > misc_bonus[eff->eff_integers[2]])

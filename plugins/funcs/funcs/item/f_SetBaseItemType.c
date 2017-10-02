@@ -21,8 +21,7 @@
 #include "NWNXFuncs.h"
 
 
-void Func_SetBaseItemType(CGameObject *ob, char *value)
-{
+void Func_SetBaseItemType (CGameObject *ob, char *value) {
     CNWSItem *item;
 
     if (ob == NULL || (item = ob->vtable->AsNWSItem(ob)) == NULL) {

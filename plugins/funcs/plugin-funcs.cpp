@@ -22,7 +22,6 @@
 
 CNWNXFuncs funcs;
 
-extern "C" CNWNXBase *GetClassObject()
-{
+extern "C" CNWNXBase *GetClassObject() {
     return &funcs;
 }

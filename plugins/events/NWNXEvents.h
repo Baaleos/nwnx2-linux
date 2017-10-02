@@ -40,41 +40,39 @@
 #define EVENT_TYPE_POSSESS_FAMILIAR     12
 #define EVENT_TYPE_VALIDATE_CHARACTER   13
 #define EVENT_TYPE_DESTROY_OBJECT       14
-#define EVENT_TYPE_CREATE_OBJECT        15
-#define NUM_EVENT_TYPES                 16
+#define NUM_EVENT_TYPES                 15
 
 enum eNodeType {StartingNode, EntryNode, ReplyNode};
 
 class CNWNXEvents : public CNWNXBase
 {
-    HANDLE hEvent;
+
 public:
-    CNWNXEvents();
-    ~CNWNXEvents();
-    bool OnCreate(gline *config, const char* LogDir);
-    char* OnRequest(char* gameObject, char* Request, char* Parameters);
-    unsigned long OnRequestObject(char *gameObject, char* Request);
-    bool OnRelease();
-    int FireEvent(const int pObj, int nEvID);
+	CNWNXEvents();
+	~CNWNXEvents();
+	bool OnCreate(gline *config, const char* LogDir);
+	char* OnRequest(char* gameObject, char* Request, char* Parameters);
+	unsigned long OnRequestObject (char *gameObject, char* Request);
+	bool OnRelease();
+	int FireEvent(const int pObj, int nEvID);
 
     char *eventScripts[NUM_EVENT_TYPES];
 
-    char *pGameObject;
-    dword nGameObjectID;
-    bool bBypass;
-    bool scriptRun;
-    int nReturnValue;
-    int nEventID;
-    int nEventSubID;
-    dword oTarget;
-    dword oItem;
-    CNWSDialog *pConversation;
-    unsigned int nSelectedNodeID;
-    int nSelectedAbsoluteNodeID;
-    int nCurrentAbsoluteNodeID;
-    int nCurrentNodeID;
-    int nNodeType;
-    Vector vPosition;
+	char *pGameObject;
+	dword nGameObjectID;
+	bool bBypass;
+	int nReturnValue;
+	int nEventID;
+	int nEventSubID;
+	dword oTarget;
+	dword oItem;
+	CNWSDialogClass *pConversation;
+	int nSelectedNodeID;
+	int nSelectedAbsoluteNodeID;
+	int nCurrentAbsoluteNodeID;
+	int nCurrentNodeID;	
+	int nNodeType;
+	CNWSVector vPosition;
 };
 
 #endif

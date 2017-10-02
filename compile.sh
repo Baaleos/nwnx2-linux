@@ -16,7 +16,7 @@ This script compiles nwnx2 for linux.
 
 You will need the following packages installed to compile the core:
 
-  cmake, build-essential (including gcc, make, bintools ..), zlib1g-dev
+  cmake, build-essential (including gcc, make, bintools ..), gzlib1-dev
 
 A lot of plugins depend on 'gperf' to generate lookup tables, but it is not
 strictly required to compile the core.
@@ -41,8 +41,26 @@ Press enter to begin.
 
 read x
 
+rm -r compiled || true
+
 cmake .
 make all
+
+mkdir -vp compiled/
+
+cp -v ./nwnstartup.sh ./compiled/
+cp -v ./nwnx2.ini ./compiled/
+for p in plugins/*/; do
+	if [ -f $p/*.so ]; then
+		if [ -f $p/nwnx2.ini ]; then
+			echo ""  >> ./compiled/nwnx2.ini
+			echo ""  >> ./compiled/nwnx2.ini
+			cat $p/nwnx2.ini >> ./compiled/nwnx2.ini
+		fi
+	fi
+done
+mv -v ./plugins/*/*.so ./compiled/
+mv -v ./nwnx2.so ./compiled/
 
 echo "
 =====

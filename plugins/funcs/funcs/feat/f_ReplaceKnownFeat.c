@@ -21,8 +21,7 @@
 #include "NWNXFuncs.h"
 
 
-void Func_ReplaceKnownFeat(CGameObject *ob, char *value)
-{
+void Func_ReplaceKnownFeat (CGameObject *ob, char *value) {
     /* TODO */
 }
 

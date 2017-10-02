@@ -21,8 +21,7 @@
 #include "NWNXWeapons.h"
 
 
-void Func_GetWeaponFinesseSize(CGameObject *ob, char *value)
-{
+void Func_GetWeaponFinesseSize (CGameObject *ob, char *value) {
     int baseitem, size = -1;
 
     baseitem = atoi(value);

@@ -25,8 +25,7 @@ volatile uintptr_t Hook_Struct_Return;
 volatile CGameEffect *Hook_Struct_Last;
 
 
-void Hook_PushStruct(void)
-{
+void Hook_PushStruct (void) {
     asm("leave");
 
     /* duplicate the work originally done */

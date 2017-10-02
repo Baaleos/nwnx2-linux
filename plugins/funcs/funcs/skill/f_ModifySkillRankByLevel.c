@@ -21,18 +21,17 @@
 #include "NWNXFuncs.h"
 
 
-void Func_ModifySkillRankByLevel(CGameObject *ob, char *value)
-{
+void Func_ModifySkillRankByLevel (CGameObject *ob, char *value) {
     int level, skill, val;
     CNWSCreature *cre;
-    CNWLevelStats *ls;
+    CNWSStats_Level *ls;
 
     if (ob == NULL                                              ||
-            (cre = ob->vtable->AsNWSCreature(ob)) == NULL           ||
-            cre->cre_stats == NULL                                  ||
-            sscanf(value, "%d %d %d", &level, &skill, &val) != 3    ||
-            skill < 0 || skill > SKILL_LAST                         ||
-            (ls = nwn_GetLevelStats(cre->cre_stats, level)) == NULL) {
+        (cre = ob->vtable->AsNWSCreature(ob)) == NULL           ||
+        cre->cre_stats == NULL                                  ||
+        sscanf(value, "%d %d %d", &level, &skill, &val) != 3    ||
+        skill < 0 || skill > SKILL_LAST                         ||
+        (ls = nwn_GetLevelStats(cre->cre_stats, level)) == NULL) {
 
         snprintf(value, strlen(value), "-1");
         return;

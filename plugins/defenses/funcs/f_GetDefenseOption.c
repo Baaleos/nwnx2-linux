@@ -21,15 +21,14 @@
 #include "NWNXDefenses.h"
 
 
-void Func_GetDefenseOption(CGameObject *ob, char *value)
-{
+void Func_GetDefenseOption (CGameObject *ob, char *value) {
     int opt, val = -1;
 
     opt = atoi(value);
     if (opt >= 0 && opt < NWNX_DEFENSES_OPTIONS_TABLE_SIZE)
         val = Table_DefenseOptions[opt];
 
-    snprintf(value, strlen(value), "%d", val);
+    snprintf(value, sizeof(value), "%d", val);
 }
 
 

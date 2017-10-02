@@ -23,8 +23,7 @@
 extern volatile CGameEffect *Hook_Struct_Last;
 
 
-void Func_SetTrueType(CGameObject *ob, char *value)
-{
+void Func_SetTrueType (CGameObject *ob, char *value) {
     CGameEffect *eff = (CGameEffect *)Hook_Struct_Last;
 
     eff->eff_type = atoi(value);

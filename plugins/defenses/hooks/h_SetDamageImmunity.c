@@ -21,8 +21,7 @@
 #include "NWNXDefenses.h"
 
 
-void Hook_SetDamageImmunity(CNWSCreature *cre, int damtype, int percent)
-{
+void Hook_SetDamageImmunity (CNWSCreature *cre, int damtype, int percent) {
     int idx = 0;
 
     if (cre->obj.obj_damage_immunities == NULL)

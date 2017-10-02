@@ -21,8 +21,7 @@
 #include "NWNXWeapons.h"
 
 
-int Hook_GetWeaponFocus(CNWSCreatureStats *info, CNWSItem *weapon)
-{
+int Hook_GetWeaponFocus (CNWSCreatureStats *info, CNWSItem *weapon) {
     int feat = 0;
 
     if (weapon == NULL)
@@ -31,7 +30,7 @@ int Hook_GetWeaponFocus(CNWSCreatureStats *info, CNWSItem *weapon)
         feat = Table_WeaponFocus[weapon->it_baseitem];
 
     if (feat == FEAT_WEAPON_FOCUS_CREATURE &&
-            CNWSCreatureStats__HasFeat(info, FEAT_WEAPON_FOCUS_UNARMED_STRIKE))
+        CNWSCreatureStats__HasFeat(info, FEAT_WEAPON_FOCUS_UNARMED_STRIKE))
         return 1;
 
     return (feat ? CNWSCreatureStats__HasFeat(info, feat) : 0);

@@ -1,7 +1,6 @@
 #include "NWNXFuncs.h"
 
-void Func_USleep(CGameObject *ob, char *value)
-{
+void Func_USleep (CGameObject *ob, char *value) {
     int usec = atoi(value);
     struct timeval tv;
 

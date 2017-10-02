@@ -10,8 +10,6 @@ if (PostgreSQL_FOUND)
 	add_module(odmbc_pgsql pgsql ${all_deps})
 	target_link_libraries(odmbc_pgsql ${PostgreSQL_LIBRARIES})
 
-    set_target_properties(odmbc_pgsql PROPERTIES COMPILE_FLAGS "-O0")
-
 	set_target_properties(odmbc_pgsql
 		PROPERTIES COMPILE_FLAGS "-DPGSQL_SUPPORT=1")
 else (PostgreSQL_FOUND)
@@ -28,8 +26,6 @@ if (SQLITE3_FOUND)
 	add_module(odmbc_sqlite sqlite ${all_deps})
 	target_link_libraries(odmbc_sqlite ${SQLITE3_LIBRARIES})
 
-    set_target_properties(odmbc_sqlite PROPERTIES COMPILE_FLAGS "-O0")
-
 	set_target_properties(odmbc_sqlite
 		PROPERTIES COMPILE_FLAGS "-DSQLITE_SUPPORT=1")
 else (SQLITE3_FOUND)
@@ -45,8 +41,6 @@ if (MYSQL_FOUND)
 
 	add_module(odmbc_mysql mysql ${all_deps})
 	target_link_libraries(odmbc_mysql ${MYSQL_LIBRARY})
-
-    set_target_properties(odmbc_mysql PROPERTIES COMPILE_FLAGS "-O0")
 
 	#add_module(odmbc_mysql_static mysql ${all_deps})
 	#target_link_libraries(odmbc_mysql_static mysqlclient.a)

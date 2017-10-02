@@ -27,8 +27,7 @@ volatile uintptr_t Hook_OHCM3_Return;
 volatile uintptr_t Hook_OHCM4_Return;
 volatile int Hook_OHCM3_Offhand = 0;
 
-void Hook_OffhandCritMult1(void)
-{
+void Hook_OffhandCritMult1 (void) {
     asm("leave");
 
     /* push the correct offhand value on the stack */
@@ -42,8 +41,7 @@ void Hook_OffhandCritMult1(void)
     asm("ret");
 }
 
-void Hook_OffhandCritMult2(void)
-{
+void Hook_OffhandCritMult2 (void) {
     asm("leave");
 
     /* push the correct offhand value on the stack */
@@ -57,8 +55,7 @@ void Hook_OffhandCritMult2(void)
     asm("ret");
 }
 
-void Hook_OffhandCritMult3(void)
-{
+void Hook_OffhandCritMult3 (void) {
     asm("leave");
 
     /* push the correct offhand value on the stack */
@@ -73,8 +70,7 @@ void Hook_OffhandCritMult3(void)
     asm("ret");
 }
 
-void Hook_OffhandCritMult4(void)
-{
+void Hook_OffhandCritMult4 (void) {
     asm("leave");
 
     /* push the correct offhand value on the stack */

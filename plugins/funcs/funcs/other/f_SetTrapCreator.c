@@ -21,8 +21,7 @@
 #include "NWNXFuncs.h"
 
 
-void Func_SetTrapCreator(CGameObject *ob, char *value)
-{
+void Func_SetTrapCreator (CGameObject *ob, char *value) {
     CNWSTrigger *tr;
 
     if (ob == NULL || (tr = ob->vtable->AsNWSTrigger(ob)) == NULL) {
