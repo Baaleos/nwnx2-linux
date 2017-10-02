@@ -238,6 +238,15 @@ const int EFFECT_TRUETYPE_CUTSCENEIMMOBILE                      =  94;
 const int EFFECT_TRUETYPE_DEFENSIVESTANCE                       =  95;
 
 
+//////////////////////////////////////////////////////////////////////////////
+//                               PROTOTYPES                                 //
+//////////////////////////////////////////////////////////////////////////////
+
+/* Returns the class level of the caster who created the effect, in the class
+ * used to cast the spell.  0 is returned if the effect wasn't creatcd by a
+ * creature or if it was created by a special ability rather than a spell. */
+int GetEffectCasterLevel(effect eEffect);
+
 /* Returns the duration specified at ApplyEffectToObject() time for
  * the effect. The value of this is undefined for effects which are
  * not of DURATION_TYPE_TEMPORARY. */
@@ -248,9 +257,15 @@ float GetEffectDuration (effect eEffect);
  * DURATION_TYPE_TEMPORARY. */
 float GetEffectDurationRemaining (effect eEffect);
 
+/* Returns the number of effect integers the given effect has.
+ * This number is entirely dependant on the given effect type.
+ * By default, new CGameEffects have 8; but you need to check anyways.
+ */
+int GetEffectNumIntegers (effect eEffect);
+
 /* Returns the internal effect integer at the index specified. The index
- * is limited to being between 0 and 15, and which index contains what
- * value depends entirely on the type of effect. */
+ * is limited to being between 0 and GetEffectNumIntegers(), and which index
+ * contains what value depends entirely on the type of effect. */
 int GetEffectInteger (effect eEffect, int nIndex);
 
 /* Sets the internal effect integer at the specified index to the
@@ -288,6 +303,15 @@ int GetItemPropertySpellId (itemproperty ipProp);
 void SetItemPropertySpellId (itemproperty ipProp, int nSpellId);
 
 
+//////////////////////////////////////////////////////////////////////////////
+//                             IMPLEMENTATION                               //
+//////////////////////////////////////////////////////////////////////////////
+
+int GetEffectCasterLevel(effect eEffect) {
+    SetLocalString(GetModule(), "NWNX!STRUCTS!GETLEVEL", "          ");
+    return StringToInt(GetLocalString(GetModule(), "NWNX!STRUCTS!GETLEVEL"));
+}
+
 float GetEffectDuration (effect eEffect) {
     SetLocalString(GetModule(), "NWNX!STRUCTS!GETDURATION", "          ");
     return StringToFloat(GetLocalString(GetModule(), "NWNX!STRUCTS!GETDURATION"));
@@ -296,6 +320,11 @@ float GetEffectDuration (effect eEffect) {
 float GetEffectDurationRemaining (effect eEffect) {
     SetLocalString(GetModule(), "NWNX!STRUCTS!GETDURATIONREMAINING", "          ");
     return StringToFloat(GetLocalString(GetModule(), "NWNX!STRUCTS!GETDURATIONREMAINING"));
+}
+
+int GetEffectNumIntegers (effect eEffect) {
+    SetLocalString(GetModule(), "NWNX!STRUCTS!GETNUMINTEGERS", "          ");
+    return StringToInt(GetLocalString(GetModule(), "NWNX!STRUCTS!GETNUMINTEGERS"));
 }
 
 int GetEffectInteger (effect eEffect, int nIndex) {
@@ -395,5 +424,3 @@ effect EffectIcon (int nIcon) {
     SetEffectTrueType(eEff, EFFECT_TRUETYPE_ICON);
     return eEff;
 }
-
-

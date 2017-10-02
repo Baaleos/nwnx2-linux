@@ -17,10 +17,6 @@
 #ifndef Hooks_h_
 #define Hooks_h_
 
-
-extern int (*CServerExoAppInternal__RemovePCFromWorld_orig)(CServerExoAppInternal *app,  CNWSPlayer *player);
-extern int (*CNWSEffectListHandler__OnApplyDamage_orig)(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *eff, int arg);
-
 int InitHooks();
 
 #endif

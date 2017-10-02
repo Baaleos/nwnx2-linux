@@ -46,7 +46,7 @@ static struct SpellSignatureTable {
     void               *ref;
     const char         *sig;
 } Table_SpellSignatures[] = {
-    { NULL,                                     NULL },
+    { NULL, NULL,                              NULL },
 
     NWNX_SPELLS_SIG(Ref_CasterAbility1,        "8A 55 E5 31 C0 3A ** ** ** ** ** 74 08 3A ** ** ** ** ** 75 13 83 EC 0C 0F B6 B7 03"),
     NWNX_SPELLS_SIG(Ref_CasterMemorize1,       "C1 E0 02 29 D0 8B 5D 08 8A 94 C3 B2 01 00 00 3A 15 ** ** ** ** 74 20 3A 15"),
@@ -58,19 +58,21 @@ static struct SpellSignatureTable {
     NWNX_SPELLS_SIG(Ref_IdentifySpell,         "8B 85 78 FF FF FF 0F B6 58 47 56 6A 14 6A 01 FF"),
     NWNX_SPELLS_SIG(Ref_SpellSlotLoop,         "C6 85 E2 FE FF FF 00 8B BB B8 04 00 00 83 C4 10"),
 
-    { NULL,                                     NULL },
+    { NULL, NULL,                              NULL },
 };
 
 
-static void SpellsSearchCallback (int id, void *addr) {
+static void SpellsSearchCallback(int id, void *addr)
+{
     nx_log(NX_LOG_NOTICE, 0, "%s (%d) found at %p%s",
-        Table_SpellSignatures[id].name, id, addr,
-        (*(void **)Table_SpellSignatures[id].ref == NULL ? "" : " (duplicate)"));
+           Table_SpellSignatures[id].name, id, addr,
+           (*(void **)Table_SpellSignatures[id].ref == NULL ? "" : " (duplicate)"));
 
     *(void **)(Table_SpellSignatures[id].ref) = addr;
 }
 
-static void SpellsSearchSignatures (void) {
+static void SpellsSearchSignatures(void)
+{
     int i;
 
     nx_sig_search_t *sig = nx_sig_search_create(SpellsSearchCallback);
@@ -92,16 +94,19 @@ static void SpellsSearchSignatures (void) {
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CNWNXSpells::CNWNXSpells() {
+CNWNXSpells::CNWNXSpells()
+{
     confKey = strdup("SPELLS");
 }
 
 
-CNWNXSpells::~CNWNXSpells() {
+CNWNXSpells::~CNWNXSpells()
+{
 }
 
 
-char *CNWNXSpells::OnRequest (char *gameObject, char *Request, char *Parameters) {
+char *CNWNXSpells::OnRequest(char *gameObject, char *Request, char *Parameters)
+{
     const struct SpellsStrCommand_s *cmd;
 
     Log(1, "StrReq: \"%s\"\nParams: \"%s\"\n", Request, Parameters);
@@ -117,7 +122,8 @@ char *CNWNXSpells::OnRequest (char *gameObject, char *Request, char *Parameters)
 }
 
 
-unsigned long CNWNXSpells::OnRequestObject (char *gameObject, char *Request) {
+unsigned long CNWNXSpells::OnRequestObject(char *gameObject, char *Request)
+{
     unsigned long ret = OBJECT_INVALID;
     const struct SpellsObjCommand_s *cmd;
 
@@ -134,7 +140,8 @@ unsigned long CNWNXSpells::OnRequestObject (char *gameObject, char *Request) {
 }
 
 
-bool CNWNXSpells::OnCreate (gline *config, const char *LogDir) {
+bool CNWNXSpells::OnCreate(gline *config, const char *LogDir)
+{
     char log[128];
 
     sprintf(log, "%s/nwnx_spells.txt", LogDir);
@@ -148,7 +155,7 @@ bool CNWNXSpells::OnCreate (gline *config, const char *LogDir) {
 
 
     nx_hook_function((void *)CNWSCreatureStats__GetSpellMinAbilityMet,
-        (void *)Hook_GetSpellMinAbilityMet, 5, NX_HOOK_DIRECT);
+                     (void *)Hook_GetSpellMinAbilityMet, 5, NX_HOOK_DIRECT);
 
 #if 0
     /* always have Spellcraft fail for extended spells */
@@ -158,7 +165,7 @@ bool CNWNXSpells::OnCreate (gline *config, const char *LogDir) {
         nx_hook_enable_write(Ref_IdentifySpell, 48);
 
         nx_hook_function((void *)(Ref_IdentifySpell + 29),
-            (void *)Hook_IdentifySpell, 5, NX_HOOK_DIRECT);
+                         (void *)Hook_IdentifySpell, 5, NX_HOOK_DIRECT);
 
         *(Ref_IdentifySpell + 34) = 0x90;
         Hook_SPID_Return          = (uintptr_t)(Ref_IdentifySpell + 35);

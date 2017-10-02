@@ -36,23 +36,25 @@ static struct StructSignatureTable {
     void               *ref;
     const char         *sig;
 } Table_StructSignatures[] = {
-    { NULL,                                     NULL },
+    { NULL, NULL,                               NULL },
 
     NWNX_STRUCTS_SIG(Ref_PushStruct,            "8B 46 10 8B 7D 0C 8B 4A 08 FF 34 B8 0F BE 04 1F"),
 
-    { NULL,                                     NULL },
+    { NULL, NULL,                               NULL },
 };
 
 
-static void StructsSearchCallback (int id, void *addr) {
+static void StructsSearchCallback(int id, void *addr)
+{
     nx_log(NX_LOG_NOTICE, 0, "%s (%d) found at %p%s",
-        Table_StructSignatures[id].name, id, addr,
-        (*(void **)Table_StructSignatures[id].ref == NULL ? "" : " (duplicate)"));
+           Table_StructSignatures[id].name, id, addr,
+           (*(void **)Table_StructSignatures[id].ref == NULL ? "" : " (duplicate)"));
 
     *(void **)(Table_StructSignatures[id].ref) = addr;
 }
 
-static void StructsSearchSignatures (void) {
+static void StructsSearchSignatures(void)
+{
     int i;
 
     nx_sig_search_t *sig = nx_sig_search_create(StructsSearchCallback);
@@ -74,16 +76,19 @@ static void StructsSearchSignatures (void) {
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CNWNXStructs::CNWNXStructs() {
+CNWNXStructs::CNWNXStructs()
+{
     confKey = strdup("STRUCTS");
 }
 
 
-CNWNXStructs::~CNWNXStructs() {
+CNWNXStructs::~CNWNXStructs()
+{
 }
 
 
-char *CNWNXStructs::OnRequest (char *gameObject, char *Request, char *Parameters) {
+char *CNWNXStructs::OnRequest(char *gameObject, char *Request, char *Parameters)
+{
     const struct StructsStrCommand_s *cmd;
 
     Log(1, "StrReq: \"%s\"\nParams: \"%s\"\n", Request, Parameters);
@@ -99,7 +104,8 @@ char *CNWNXStructs::OnRequest (char *gameObject, char *Request, char *Parameters
 }
 
 
-unsigned long CNWNXStructs::OnRequestObject (char *gameObject, char *Request) {
+unsigned long CNWNXStructs::OnRequestObject(char *gameObject, char *Request)
+{
     unsigned long ret = OBJECT_INVALID;
     const struct StructsObjCommand_s *cmd;
 
@@ -116,7 +122,8 @@ unsigned long CNWNXStructs::OnRequestObject (char *gameObject, char *Request) {
 }
 
 
-bool CNWNXStructs::OnCreate (gline *config, const char *LogDir) {
+bool CNWNXStructs::OnCreate(gline *config, const char *LogDir)
+{
     char log[128];
 
     sprintf(log, "%s/nwnx_structs.txt", LogDir);

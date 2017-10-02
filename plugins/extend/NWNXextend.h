@@ -21,36 +21,23 @@
 #include <string>
 #include "NWNXBase.h"
 #include "NWNXLib.h"
-#include "typedefs.h"
 
 class CNWNXextend : public CNWNXBase
 {
 public:
-	CNWNXextend();
-	virtual ~CNWNXextend();
+    CNWNXextend();
+    virtual ~CNWNXextend();
 
-	bool OnCreate(gline *nwnxConfig, const char *LogDir=NULL);
-	char* OnRequest (char* gameObject, char* Request, char* Parameters);
-	unsigned long OnRequestObject (char *gameObject, char* Request);
-	int GetConfInteger(const char *key);
+    bool OnCreate(gline *nwnxConfig, const char *LogDir = NULL);
+    char* OnRequest(char* gameObject, char* Request, char* Parameters);
+    unsigned long OnRequestObject(char *gameObject, char* Request);
+    int GetConfInteger(const char *key);
 
-	int ScriptResult;
+    int ScriptResult;
 
 private:
-	char* pGameObject;
-	StringMap pluginConfig;
+    char* pGameObject;
+    StringMap pluginConfig;
 };
-
-//extern void nwn_ExecuteScript(const char *scr, nwn_objid_t oid);
-//extern void             nwn_DeleteLocalInt(CNWSScriptVarTable *vt, const char *var_name);
-//extern void             nwn_DeleteLocalObject(CNWSScriptVarTable *vt, const char *var_name);
-//extern void             nwn_DeleteLocalString(CNWSScriptVarTable *vt, const char *var_name);
-
-//extern void             nwn_SetLocalInt(CNWSScriptVarTable *vt, const char *var_name, int32_t value);
-//extern void             nwn_SetLocalObject(CNWSScriptVarTable *vt, const char *var_name, uint32_t id);
-//extern void             nwn_SetLocalString(CNWSScriptVarTable *vt, const char *var_name, const char *value);
-//extern int32_t          nwn_GetLocalInt(CNWSScriptVarTable *vt, const char *var_name);
-//extern uint32_t         nwn_GetLocalObject(CNWSScriptVarTable *vt, const char *var_name);
-//extern const char      *nwn_GetLocalString(CNWSScriptVarTable *vt, const char *var_name);
 
 #endif

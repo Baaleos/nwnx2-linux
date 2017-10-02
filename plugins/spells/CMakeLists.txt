@@ -1,7 +1,7 @@
 if (gperf)
 
-add_gperf_target(SpellsStrCmds SpellsStr SPELLS STR)
-add_gperf_target(SpellsObjCmds SpellsObj SPELLS OBJ)
+add_gperf_target(spells SpellsStrCmds SpellsStr SPELLS STR)
+add_gperf_target(spells SpellsObjCmds SpellsObj SPELLS OBJ)
 
 include_directories(.)
 add_module(spells NWNXSpells plugin-spells
@@ -25,5 +25,7 @@ add_module(spells NWNXSpells plugin-spells
 	tables/t_SpellAbilities
 	tables/t_SpellOptions
 )
+
+set_target_properties(spells PROPERTIES COMPILE_FLAGS "-O0")
 
 endif (gperf)

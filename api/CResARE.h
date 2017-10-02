@@ -1,11 +1,12 @@
 #ifndef _CRESARE_H_
 #define _CRESARE_H_
 #include "nwndef.h"
+#include "CRes.h"
 
-class CResARE
+class CResARE : CRes
 {
 public:
-	~CResARE();
+    ~CResARE();
 
 };
 #endif
