@@ -71,7 +71,7 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *
 		
 	CNWSScriptVarTable__SetObject(vt,dmgr,effect->eff_creator);
 	
-	for (i=0; i< 12; i++) 
+	for (i=0; i<= 12; i++) 
 		{
 			sprintf( cData, "damage_%d", i );
 			CExoString *dmgVar = (CExoString *) malloc(sizeof(CExoString));
@@ -81,7 +81,7 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *
 		}
 	nwn_ExecuteScript("nwnx_damages",obj->obj_id);
 	CNWSScriptVarTable__DestroyObject(vt, (CExoString *)dmgr);
-	for (i=0; i< 12; i++) 
+	for (i=0; i<= 12; i++) 
 		{
 			sprintf( cData, "damage_%d", i );
 			CExoString *dmgVar = (CExoString *) malloc(sizeof(CExoString));
