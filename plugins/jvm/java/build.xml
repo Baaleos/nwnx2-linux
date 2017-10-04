@@ -13,6 +13,8 @@
 			srcdir="${src}"
 			destdir="${build}"
 			debug="true"
+			target="1.7"
+			source="1.7"
 			includeantruntime="false"
 			encoding="utf-8">
 			<classpath>
