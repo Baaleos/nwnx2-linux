@@ -77,7 +77,8 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *
 			CExoString *dmgVar = (CExoString *) malloc(sizeof(CExoString));
 			dmgVar->text = cData;//(char*)"damage_"+i;
 			dmgVar->len = strlen(dmgVar->text);
-			CNWSScriptVarTable__SetInt(vt, (CExoString *)dmgVar, effect->eff_integers[i],0);			
+			CNWSScriptVarTable__SetInt(vt, (CExoString *)dmgVar, effect->eff_integers[i],0);
+			free(dmgVar);			
 		}
 	nwn_ExecuteScript("nwnx_damages",obj->obj_id);
 	CNWSScriptVarTable__DestroyObject(vt, (CExoString *)dmgr);
@@ -88,6 +89,7 @@ int Hook_OnDamage(CNWSEffectListHandler *handler, CNWSObject *obj, CGameEffect *
 			dmgVar->text = cData;//(char*)"damage_"+i;
 			dmgVar->len = strlen(dmgVar->text);
 			int nDamAmount = CNWSScriptVarTable__GetInt(vt,(CExoString *)dmgVar);
+			free(dmgVar);
 			effect->eff_integers[i] = nDamAmount;
 		}
 	free(cData);
