@@ -42,7 +42,7 @@ bool CNWNXDamage::OnCreate(gline *config, const char *LogDir)
 	// call the base class function
 	if (!CNWNXBase::OnCreate(config,log))
 		return false;
-	Log(0,"NWNX damage v0.0.1 by Baaleos!, 2017\n");
+	Log(0,"NWNX damage v0.0.2 by Baaleos!, 2017\n");
 	Log(0,"Visit http://www.nwnx.org\n\n");
 
 	pluginConfig = (*nwnxConfig)[confKey];
